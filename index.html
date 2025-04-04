@@ -86,7 +86,7 @@
 <body>
     <h1>Test Uygulamasına Hoş Geldiniz</h1>
  <!-- Header Ekleme -->
-  <div id="header-placeholder"></div>
+   <div id="header-placeholder"></div>
     <div class="test-container">
         <div class="test-card">
             <div>
@@ -234,5 +234,309 @@
       .then(response => response.text())
       .then(data => document.getElementById('header-placeholder').innerHTML = data);
   </script>
+</body>
+</html>
+Sorunlar ve İyileştirmeler
+HTML ve CSS Doğrulaması:
+
+Dosyanın HTML ve CSS kodlarının W3C validator ile doğrulanması önerilir. Bu, olası hataları ve uyumsuzlukları tespit etmeye yardımcı olacaktır.
+Erişilebilirlik:
+
+Görüntülenen metinler ve butonlar için yeterli kontrast oranı sağlanmalıdır.
+<a> etiketlerine eklenerek daha açıklayıcı hale getirilebilir.etiketlerine eklen aria-labeldaha açıklayıcı hale getirilebilir.
+SEO Programlama Yolları:
+
+<meta name="description" content="..."> eklenerek sayfanın SEO uyumluluğu artırılabilir.eklenerek sayfanın SEO uyumluluğu artırılabilir.
+Başlık etiketleri (, , vb.) doğru ve Başlık etiketleri (, , vb.) doğru ve hiyerarşik bir şekilde kullanılmalıdır.<h1><h2>hiyerarşik bir şekilde kullanılmalıdır.
+JavaScript:
+
+fetch ile yüklenen dosyasının yüklenememesi durumuna karşı hata yönetimi eklenebilir.ile yüklenen 'header.html'' yüklenememesi durumuna karşı hata yönetimi
+JavaScript Teknolojisi
+fetch('header.html')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok.');
+    }
+    return response.text();
+  })
+  .then(data => document.getElementById('header-placeholder').innerHTML = data)
+  .catch(error => console.error('There has been a problem with your fetch operation:', error));
+Dosya Adlandırma:
+
+Dosya adlarında Türkçe karakterler ve boşluklar yerine İngilizce karakterler ve - veya _ kullanılması önerilir. Örneğin:
+AkademikDoğuAvrpTürkTarTesti.html yerine Akademik_Dogu_Avrp_Turk_Tar_Testi.html
+davrptürktar3yılVizetesti.html yerine davrp_turk_tar_3_yil_vize_testi.html
+
+CSS medya sorguları kullanılarak mobil cihazlar için daha iyi bir kullanıcı deneyimi sağlanabilir.
+Örneğin, içeriğinin daha iyi yerleş Örneğin, içeriğinin daha iyi yerleşmesi için farklı ekran boyutlarına uyarlanabilir..test-cardiçin farklı ekran boyutlarına uyarlanabilir.
+Bu öneriler dosyanın daha iyi bir kullanıcı deneyimi sağlamasına ve olası teknik sorunların önüne geçilmesine yardımcı olabilir.
+
+tamam sen sağla deik iyileştirmeleri yaz ve kodları güncelle 
+Belirttiğiniz dosyasındaki iyileştirmeleri Belirttiğiniz dosyasındaki iyileştirmeleri aşağıda yazıyorum ve kodları güncelleyerek paylaşıyorum:index.htmlAşağıda yazıyorum ve kodları güncelleyerek paylaşıyorum
+
+İyileştirmeler
+HTML ve CSS Doğrulaması:
+
+Kodların W3C validator ile doğrulanması önerilir.
+Erişilebilirlik:
+
+<a> etiketlerine ekleyerek daha açıklayıcı hale getirilmiştir.etiketlerine ekleyerek daha açıklayıcı aria-labelhale getirilmiştir.
+SEO Programlama Yolları:
+
+<meta name="description" content="Test Uygulaması ile ilgili bilgiler"> eklenmiştir.
+JavaScript:
+
+fetch ile yüklenen dosyasının yüklenememesi durumuna karşı hata yönetimi eklenmiştir.ile yüklenen dosyanın yüklen header.htmldurumuna karşı hata yönetimi eklenmiştir.
+Dosya Adlandırma:
+
+Dosya adlarında Türkçe karakterler ve boşluklar yerine İngilizce karakterler ve - veya _ kullanılmıştır.
+Duyarlı Tasarım:
+
+CSS medya sorguları kullanılarak mobil cihazlar için daha iyi bir kullanıcı deneyimi sağlanmıştır.
+Güncellenmiş Kod
+HTML (İngilizce)
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test Uygulaması ile ilgili bilgiler">
+    <title>Test Uygulaması</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        .test-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .test-card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .test-card h2 {
+            margin: 0;
+            font-size: 1.3em;
+            color: #3498db;
+        }
+        .test-card p {
+            margin: 5px 0 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .test-card a {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 1em;
+        }
+        .test-card a:hover {
+            background-color: #2980b9;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            .test-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 10px;
+            }
+            .test-card h2 {
+                font-size: 1.1em;
+            }
+            .test-card p {
+                font-size: 0.85em;
+            }
+            .test-card a {
+                margin-top: 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .test-container {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Uygulamasına Hoş Geldiniz</h1>
+    <!-- Header Ekleme -->
+    <div id="header-placeholder"></div>
+    <div class="test-container">
+        <div class="test-card">
+            <div>
+                <h2>Akademik Doğu Avrupa Türk Tarihi Testi 1</h2>
+                <p>Doğu Avrupa Türk tarihine giriş testi.</p>
+            </div>
+            <a href="Akademik_Dogu_Avrp_Turk_Tar_Testi.html" aria-label="Akademik Doğu Avrupa Türk Tarihi Testi 1">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Akademik Doğu Avrupa Türk Tarihi Testi 2</h2>
+                <p>Doğu Avrupa Türk tarihine devam testi.</p>
+            </div>
+            <a href="Akademik_Dogu_Avrp_Turk_Tar_Testi_2.html" aria-label="Akademik Doğu Avrupa Türk Tarihi Testi 2">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Akademik Doğu Avrupa Türk Tarihi Testi 3</h2>
+                <p>Doğu Avrupa Türk tarihine ileri düzey test.</p>
+            </div>
+            <a href="Akademik_Dogu_Avrp_Turk_Tar_Testi_3.html" aria-label="Akademik Doğu Avrupa Türk Tarihi Testi 3">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Antik Yunan 3. Yıl Vize Testi</h2>
+                <p>Antik Yunan sosyal tarihine dair vize soruları.</p>
+            </div>
+            <a href="Antik_Yunan_3_Yil_Vize_Testi.html" aria-label="Antik Yunan 3. Yıl Vize Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Antik Yunan Vize Testi</h2>
+                <p>Antik Yunan tarihine genel bir bakış.</p>
+            </div>
+            <a href="Antik_Yunan_Vize_Testi.html" aria-label="Antik Yunan Vize Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Davranış Türk Tarihi 3. Yıl Vize Testi</h2>
+                <p>Türk tarihine davranışsal bakış açısı.</p>
+            </div>
+            <a href="Davranis_Turk_Tarihi_3_Yil_Vize_Testi.html" aria-label="Davranış Türk Tarihi 3. Yıl Vize Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Doğu Avrupa Türk Tarihi 1-2. Ünite</h2>
+                <p>İlk iki üniteye odaklanan test.</p>
+            </div>
+            <a href="Dogu_Avrupa_Turk_Tarihi_1-2_Unite.html" aria-label="Doğu Avrupa Türk Tarihi 1-2. Ünite">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Doğu Avrupa Türk Tarihi</h2>
+                <p>Genel Doğu Avrupa Türk tarihi testi.</p>
+            </div>
+            <a href="Dogu_Avrupa_Turk_Tarihi.html" aria-label="Doğu Avrupa Türk Tarihi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Osmanlı Tarihi Testi</h2>
+                <p>Osmanlı İmparatorluğu'na genel bakış.</p>
+            </div>
+            <a href="Osmanli_Tarihi_Testi.html" aria-label="Osmanlı Tarihi Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Osmanlıca Testi</h2>
+                <p>Osmanlı Türkçesine dair sorular.</p>
+            </div>
+            <a href="Osmanlica_Testi.html" aria-label="Osmanlıca Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Osmanlı Kuruluş Testi</h2>
+                <p>Osmanlı Devleti'nin kuruluş dönemi.</p>
+            </div>
+            <a href="Osmanli_Kurulus_Testi.html" aria-label="Osmanlı Kuruluş Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Rama Tarihi Vize Testi</h2>
+                <p>Rama dönemine dair vize soruları.</p>
+            </div>
+            <a href="Rama_Tarihi_Vize_Testi.html" aria-label="Rama Tarihi Vize Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Roma Vize Testi</h2>
+                <p>Roma tarihine genel bir bakış.</p>
+            </div>
+            <a href="Roma_Vize_Testi.html" aria-label="Roma Vize Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Uygurlar Genel Testi</h2>
+                <p>Uygur Türklerine giriş testi.</p>
+            </div>
+            <a href="Uygurlar_Genel_Testi.html" aria-label="Uygurlar Genel Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Uygurlar 1. Ünite Testi</h2>
+                <p>Uygur tarihinin ilk ünitesi.</p>
+            </div>
+            <a href="Uygurlar_1_Unite_Testi.html" aria-label="Uygurlar 1. Ünite Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Uygurlar 2. Ünite Testi</h2>
+                <p>Uygur tarihinin ikinci ünitesi.</p>
+            </div>
+            <a href="Uygurlar_2_Unite_Testi.html" aria-label="Uygurlar 2. Ünite Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Uygurlar 3. Ünite Testi</h2>
+                <p>Uygur tarihinin üçüncü ünitesi.</p>
+            </div>
+            <a href="Uygurlar_3_Unite_Testi.html" aria-label="Uygurlar 3. Ünite Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Uygurlar 4. Ünite Testi</h2>
+                <p>Uygur tarihinin dördüncü ünitesi.</p>
+            </div>
+            <a href="Uygurlar_4_Unite_Testi.html" aria-label="Uygurlar 4. Ünite Testi">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Uygurlar 4. Ünite Testi (Alternatif)</h2>
+                <p>Uygur tarihinin dördüncü ünitesine başka bir bakış.</p>
+            </div>
+            <a href="Uygurlar_4_Unite_Testi_Alternatif.html" aria-label="Uygurlar 4. Ünite Testi (Alternatif)">Teste Başla</a>
+        </div>
+        <div class="test-card">
+            <div>
+                <h2>Uygurlar 3. Yıl Vize Testi</h2>
+                <p>Uygur tarihine dair vize soruları.</p>
+            </div>
+            <a href="Uygurlar_3_Yil_Vize_Testi.html" aria-label="Uygurlar 3. Yıl Vize Testi">Teste Başla</a>
+        </div>
+    </div>
+    <script>
+        fetch('header.html')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok.');
+            }
+            return response.text();
+          })
+          .then(data => document.getElementById('header-placeholder').innerHTML = data)
+          .catch(error => console.error('There has been a problem with your fetch operation:', error));
+    </script>
 </body>
 </html>
