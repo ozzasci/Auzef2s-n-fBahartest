@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İleri Düzey Türk Tarihçiliği Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #result h2 {
+            color: #27ae60;
+        }
+        .explanation {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <h1>İleri Düzey Türk Tarihçiliği Testi</h1>
+    <form id="quizForm">
+        <!-- Soru 1 -->
+        <div class="question">
+            <h3>1. İslamiyet öncesi Türk tarihçiliğinde "mekân birliği" kavramı, Türk tarihinin hangi özelliğini vurgular?</h3>
+            <label><input type="radio" name="q1" value="A"> A) Devletlerin kesintisiz siyasi devamlılığını</label>
+            <label><input type="radio" name="q1" value="B"> B) Çok geniş bir coğrafi sahada varlık göstermesini</label>
+            <label><input type="radio" name="q1" value="C"> C) Tarih yazımında kaynakların dil birliğini</label>
+            <label><input type="radio" name="q1" value="D"> D) Göçebelikten yerleşik hayata geçiş sürecini</label>
+        </div>
+
+        <!-- Soru 2 -->
+        <div class="question">
+            <h3>2. Barthold’un Türk tarihini araştırmak için birden fazla uzmanlık alanı gerektirdiğini söylemesinin temel nedeni nedir?</h3>
+            <label><input type="radio" name="q2" value="A"> A) Türk tarihinin kronolojik olarak kesintisiz olması</label>
+            <label><input type="radio" name="q2" value="B"> B) Türklerin farklı coğrafyalarda çok sayıda devlet kurması</label>
+            <label><input type="radio" name="q2" value="C"> C) Türk tarihinin 19 farklı dilde yazılmış kaynaklara dayanması</label>
+            <label><input type="radio" name="q2" value="D"> D) Türklerin göçebe yaşam tarzının karmaşıklığı</label>
+        </div>
+
+        <!-- Soru 3 -->
+        <div class="question">
+            <h3>3. Zeki Velidi Togan’ın çağ sistemine karşı çıkışı ve Umumi Türk Tarihi Enstitüsü kurulmasını talep etmesi hangi eksikliği gidermeyi amaçlamıştır?</h3>
+            <label><input type="radio" name="q3" value="A"> A) Türk tarihinin başlangıç noktasının belirlenememesi</label>
+            <label><input type="radio" name="q3" value="B"> B) Disiplinler arası iş birliğinin yetersizliği</label>
+            <label><input type="radio" name="q3" value="C"> C) Yazılı kaynakların arkeolojik verilerle desteklenmemesi</label>
+            <label><input type="radio" name="q3" value="D"> D) Türk tarihinin dünya tarihi içindeki yerinin göz ardı edilmesi</label>
+        </div>
+
+        <!-- Soru 4 -->
+        <div class="question">
+            <h3>4. Günümüzde Türk tarihçiliğinde karşılaşılan problemlerden biri olan “Sovyetler ve Çin’in görüşleri” hangi şekilde Türk tarihini etkilemiştir?</h3>
+            <label><input type="radio" name="q4" value="A"> A) Türk boylarının kökenini farklı halklara bağlayarak kargaşa yaratmıştır</label>
+            <label><input type="radio" name="q4" value="B"> B) Türk tarihinin başlangıcını arkeolojik buluntularla sınırlamıştır</label>
+            <label><input type="radio" name="q4" value="C"> C) Türklerin siyasi birliğini sorgulayan teoriler üretmiştir</label>
+            <label><input type="radio" name="q4" value="D"> D) Türk destanlarının edebi değerini küçümsemiştir</label>
+        </div>
+
+        <!-- Soru 5 -->
+        <div class="question">
+            <h3>5. Türk tarihçiliğinde “transkripsiyon meselesi”nin araştırmacıları farklı hükümlere ulaştırmasının temel sebebi nedir?</h3>
+            <label><input type="radio" name="q5" value="A"> A) Yazılı kaynakların yetersizliği</label>
+            <label><input type="radio" name="q5" value="B"> B) Farklı dillerdeki isimlerin imla ve okunuş farklılıkları</label>
+            <label><input type="radio" name="q5" value="C"> C) Tarihçilerin ideolojik yaklaşımları</label>
+            <label><input type="radio" name="q5" value="D"> D) Arkeolojik verilerin eksikliği</label>
+        </div>
+
+        <!-- Soru 6 -->
+        <div class="question">
+            <h3>6. Tez Yazıtı’nın keşfi ve yayımlanmasıyla ilgili aşağıdakilerden hangisi doğrudur?</h3>
+            <label><input type="radio" name="q6" value="A"> A) 1915’te keşfedilmiş ancak neşrine izin verilmemiştir</label>
+            <label><input type="radio" name="q6" value="B"> B) 1976’da keşfedilmiş ve hemen yayımlanmıştır</label>
+            <label><input type="radio" name="q6" value="C"> C) B.Y. Vladimirtsov tarafından bulunmuş ve 22 satırlık bir metindir</label>
+            <label><input type="radio" name="q6" value="D"> D) Moyen-çor’un askeri teşkilatından bahseder</label>
+        </div>
+
+        <!-- Soru 7 -->
+        <div class="question">
+            <h3>7. Terhin (Taryat) Yazıtı’nın diğer Uygur yazıtlarından farkı nedir?</h3>
+            <label><input type="radio" name="q7" value="A"> A) Üç dilde yazılmış olması</label>
+            <label><input type="radio" name="q7" value="B"> B) Kaplumbağa kaide üzerinde bulunması ve askeri teşkilat bilgisi vermesi</label>
+            <label><input type="radio" name="q7" value="C"> C) Oğuz seferlerinden bahsetmesi</label>
+            <label><input type="radio" name="q7" value="D"> D) Mani Dini’ne geçişi anlatması</label>
+        </div>
+
+        <!-- Soru 8 -->
+        <div class="question">
+            <h3>8. Şine-usu Yazıtı’nın “On-Uygur ve Dokuz-Oğuz” hitabı, Uygur siyasi tarihinde hangi unsuru vurgular?</h3>
+            <label><input type="radio" name="q8" value="A"> A) Göktürklerle olan bağını</label>
+            <label><input type="radio" name="q8" value="B"> B) Boylar arasındaki birliği</label>
+            <label><input type="radio" name="q8" value="C"> C) Mani Dini’nin etkisini</label>
+            <label><input type="radio" name="q8" value="D"> D) Askeri teşkilatın gücünü</label>
+        </div>
+
+        <!-- Soru 9 -->
+        <div class="question">
+            <h3>9. Karabalsagun Yazıtı’nın Türkçe kısmının tahrip olması, hangi bilgiye ulaşmayı zorlaştırmıştır?</h3>
+            <label><input type="radio" name="q9" value="A"> A) Uygur askeri teşkilatının yapısı</label>
+            <label><input type="radio" name="q9" value="B"> B) Moyen-çor’un seferleri</label>
+            <label><input type="radio" name="q9" value="C"> C) Mani Dini’ne geçiş süreci</label>
+            <label><input type="radio" name="q9" value="D"> D) Göktürk-Uygur bağlantısı</label>
+        </div>
+
+        <!-- Soru 10 -->
+        <div class="question">
+            <h3>10. Suci Yazıtı’nın Kırgızlara ait olması, Uygur tarihçiliğinde hangi dönemi aydınlatır?</h3>
+            <label><input type="radio" name="q10" value="A"> A) Uygur Kaganlığı’nın kuruluşunu</label>
+            <label><input type="radio" name="q10" value="B"> B) Uygur Kaganlığı’nın yıkılışını</label>
+            <label><input type="radio" name="q10" value="C"> C) Mani Dini’nin yayılışını</label>
+            <label><input type="radio" name="q10" value="D"> D) Budist etkilerin başlangıcını</label>
+        </div>
+
+        <!-- Soru 11 -->
+        <div class="question">
+            <h3>11. Maniheist Uygur Edebiyatı’nın nazım şekillerinin dünyevi aşk şiirlerini içermesi, hangi kültürel etkileşimi yansıtır?</h3>
+            <label><input type="radio" name="q11" value="A"> A) Göçebe yaşamın romantik unsurları</label>
+            <label><input type="radio" name="q11" value="B"> B) Mani Dini’nin duygusal anlatım tarzı</label>
+            <label><input type="radio" name="q11" value="C"> C) Budist edebiyatın etkisi</label>
+            <label><input type="radio" name="q11" value="D"> D) İslamiyet öncesi Türk şiir geleneği</label>
+        </div>
+
+        <!-- Soru 12 -->
+        <div class="question">
+            <h3>12. Hristiyan Uygur Edebiyatı’nın sınırlı örneklerle temsil edilmesi, hangi tarihsel gerçekle ilişkilendirilebilir?</h3>
+            <label><input type="radio" name="q12" value="A"> A) Hristiyanlığın Uygurlar arasında az yayılması</label>
+            <label><input type="radio" name="q12" value="B"> B) Yazılı kaynakların tahrip olması</label>
+            <label><input type="radio" name="q12" value="C"> C) Mani Dini’nin baskınlığı</label>
+            <label><input type="radio" name="q12" value="D"> D) Budist edebiyatın gelişmişliği</label>
+        </div>
+
+        <!-- Soru 13 -->
+        <div class="question">
+            <h3>13. Budist Uygur Edebiyatı’nda “Altun Yaruk”un Çince’den tercüme edilmesi, Uygur Türkçesi’nin hangi özelliğini gösterir?</h3>
+            <label><input type="radio" name="q13" value="A"> A) Edebi bir dil olarak gelişmişliği</label>
+            <label><input type="radio" name="q13" value="B"> B) Göktürk alfabesine bağlılığı</label>
+            <label><input type="radio" name="q13" value="C"> C) Mani Dini’ne uyumu</label>
+            <label><input type="radio" name="q13" value="D"> D) Sözlü gelenekle sınırlı kalması</label>
+        </div>
+
+        <!-- Soru 14 -->
+        <div class="question">
+            <h3>14. İslam Dini çevresinde gelişen Uygur Edebiyatı’nda “Irg Bitig” hangi türe aittir?</h3>
+            <label><input type="radio" name="q14" value="A"> A) Atasözü</label>
+            <label><input type="radio" name="q14" value="B"> B) Fal kitabı</label>
+            <label><input type="radio" name="q14" value="C"> C) Türkü</label>
+            <label><input type="radio" name="q14" value="D"> D) Destan</label>
+        </div>
+
+        <!-- Soru 15 -->
+        <div class="question">
+            <h3>15. Uygur destanlarında “kurt” motifinin “ışık ve ağaç” motifine dönüşmesi, hangi dini etkinin sonucudur?</h3>
+            <label><input type="radio" name="q15" value="A"> A) Şamanizm</label>
+            <label><input type="radio" name="q15" value="B"> B) Budizm</label>
+            <label><input type="radio" name="q15" value="C"> C) Mani Dini</label>
+            <label><input type="radio" name="q15" value="D"> D) Hristiyanlık</label>
+        </div>
+
+        <!-- Soru 16 -->
+        <div class="question">
+            <h3>16. Uygurların türeyiş destanında iki ağacın arasına gökten inen ışığın anlamı nedir?</h3>
+            <label><input type="radio" name="q16" value="A"> A) Uygurların göçebe yaşamdan yerleşik hayata geçişi</label>
+            <label><input type="radio" name="q16" value="B"> B) Tanrısal bir başlangıç ve kutsal bir köken</label>
+            <label><input type="radio" name="q16" value="C"> C) Bögü Han’ın hükümdarlığının ilahi onayı</label>
+            <label><input type="radio" name="q16" value="D"> D) Askeri zaferlerin sembolü</label>
+        </div>
+
+        <!-- Soru 17 -->
+        <div class="question">
+            <h3>17. Bögü Han’ın akınlarında üç karga motifinin kullanılması, hangi eski Türk inancını yansıtır?</h3>
+            <label><input type="radio" name="q17" value="A"> A) Şamanist doğa ruhlarıyla iletişim</label>
+            <label><input type="radio" name="q17" value="B"> B) Mani Dini’nin ışık sembolizmi</label>
+            <label><input type="radio" name="q17" value="C"> C) Budist yeniden doğuş inancı</label>
+            <label><input type="radio" name="q17" value="D"> D) Göktürklerin askeri stratejisi</label>
+        </div>
+
+        <!-- Soru 18 -->
+        <div class="question">
+            <h3>18. Göç Destanı’nda “Göç! Göç! Göç!” seslerinin duyulması, Uygur tarihindeki hangi olayı simgeler?</h3>
+            <label><input type="radio" name="q18" value="A"> A) Beş Balıg şehrinin kuruluşunu</label>
+            <label><input type="radio" name="q18" value="B"> B) Göçebe yaşamın sona ermesini</label>
+            <label><input type="radio" name="q18" value="C"> C) Yeni bir yurt arayışını ve hareketliliği</label>
+            <label><input type="radio" name="q18" value="D"> D) Mani Dini’nin kabulünü</label>
+        </div>
+
+        <!-- Soru 19 -->
+        <div class="question">
+            <h3>19. Oğuz Kagan Destanı’nın Uygur rivayetinin İslam öncesi dönemi daha çok yansıtması, hangi rivayetle çelişir?</h3>
+            <label><input type="radio" name="q19" value="A"> A) Reşüdiddin’in Farsça metni</label>
+            <label><input type="radio" name="q19" value="B"> B) Ebü’l Gazi Bahadır Han’ın Şecere-i Türk’ü</label>
+            <label><input type="radio" name="q19" value="C"> C) Uygur destanlarının sözlü geleneği</label>
+            <label><input type="radio" name="q19" value="D"> D) Göç Destanı’nın yazılı metni</label>
+        </div>
+
+        <!-- Soru 20 -->
+        <div class="question">
+            <h3>20. Oğuz Kagan Destanı’nda “Bozkurt, geyik ve ışık” unsurlarının bir arada yer alması, hangi tarihsel döneme işaret eder?</h3>
+            <label><input type="radio" name="q20" value="A"> A) İslamiyet sonrası Türk birliği</label>
+            <label><input type="radio" name="q20" value="B"> B) Göktürklerin yükselişi</label>
+            <label><input type="radio" name="q20" value="C"> C) Eski Türk inançlarının birleşimi</label>
+            <label><input type="radio" name="q20" value="D"> D) Mani Dini’nin etkisi</label>
+        </div>
+
+        <!-- Soru 21 -->
+        <div class="question">
+            <h3>21. Kutadgu Bilig’in dört temel kavramı (kanun, kut, akıl, akıbet) hangi amacı vurgular?</h3>
+            <label><input type="radio" name="q21" value="A"> A) İdeal bir bireyin yetişmesi</label>
+            <label><input type="radio" name="q21" value="B"> B) Devlet teşkilatının düzenlenmesi</label>
+            <label><input type="radio" name="q21" value="C"> C) Toplumun manevi gelişimi</label>
+            <label><input type="radio" name="q21" value="D"> D) Hükümdarın kişisel erdemleri</label>
+        </div>
+
+        <!-- Soru 22 -->
+        <div class="question">
+            <h3>22. Divanü Lügati’t-Türk’ün ilk Türk Cihan Haritası’nı içermesi, eserin hangi yönünü öne çıkarır?</h3>
+            <label><input type="radio" name="q22" value="A"> A) Dilbilimsel değerini</label>
+            <label><input type="radio" name="q22" value="B"> B) Coğrafi ve kültürel zenginliğini</label>
+            <label><input type="radio" name="q22" value="C"> C) Edebi niteliğini</label>
+            <label><input type="radio" name="q22" value="D"> D) Tarihi kronolojisini</label>
+        </div>
+
+        <!-- Soru 23 -->
+        <div class="question">
+            <h3>23. Türk tarihçiliğinde “ideolojik yaklaşımlar”ın meselelere etkisi nasıl tanımlanır?</h3>
+            <label><input type="radio" name="q23" value="A"> A) Tarihsel olayların kronolojik sıralamasını bozar</label>
+            <label><input type="radio" name="q23" value="B"> B) Batı veya doğu telakkilerinin tesiriyle tartışmalara yol açar</label>
+            <label><input type="radio" name="q23" value="C"> C) Arkeolojik verilerin yorumlanmasını engeller</label>
+            <label><input type="radio" name="q23" value="D"> D) Yazılı kaynakların güvenilirliğini artırır</label>
+        </div>
+
+        <!-- Soru 24 -->
+        <div class="question">
+            <h3>24. Uygur yazıtlarının Göktürk alfabesiyle yazılması, hangi tarihsel sürekliliği gösterir?</h3>
+            <label><input type="radio" name="q24" value="A"> A) Göktürk-Uygur kültürel bağı</label>
+            <label><input type="radio" name="q24" value="B"> B) Mani Dini’nin dil üzerindeki etkisi</label>
+            <label><input type="radio" name="q24" value="C"> C) Budist edebiyatın gelişimi</label>
+            <label><input type="radio" name="q24" value="D"> D) Türk boylarının siyasi ayrışması</label>
+        </div>
+
+        <!-- Soru 25 -->
+        <div class="question">
+            <h3>25. Türk tarihinin “birlikte cereyan ettiği kavimlerin” yeterince bilinmemesi, hangi sorunu doğurur?</h3>
+            <label><input type="radio" name="q25" value="A"> A) Tarihler arasında mukayese yapılamaması</label>
+            <label><input type="radio" name="q25" value="B"> B) Türk dilinin gelişiminin izlenememesi</label>
+            <label><input type="radio" name="q25" value="C"> C) Arkeolojik buluntuların sınıflandırılamaması</label>
+            <label><input type="radio" name="q25" value="D"> D) Göç yollarının belirlenememesi</label>
+        </div>
+
+        <!-- Soru 26 -->
+        <div class="question">
+            <h3>26. Terhin ve Şine-usu yazıtlarının ortak noktası nedir?</h3>
+            <label><input type="radio" name="q26" value="A"> A) Üç dilde yazılmış olmaları</label>
+            <label><input type="radio" name="q26" value="B"> B) Moyen-çor ile ilgili olmaları</label>
+            <label><input type="radio" name="q26" value="C"> C) Mani Dini’nden bahsetmeleri</label>
+            <label><input type="radio" name="q26" value="D"> D) Kaplumbağa kaide üzerinde bulunmaları</label>
+        </div>
+
+        <!-- Soru 27 -->
+        <div class="question">
+            <h3>27. Karabalsagun Yazıtı ile Suci Yazıtı arasındaki temel fark nedir?</h3>
+            <label><input type="radio" name="q27" value="A"> A) Karabalsagun’un Göktürk alfabesiyle yazılması, Suci’nin Sogdça olması</label>
+            <label><input type="radio" name="q27" value="B"> B) Karabalsagun’un Mani Dini’ni, Suci’nin Kırgızları konu alması</label>
+            <label><input type="radio" name="q27" value="C"> C) Karabalsagun’un siyasi tarih, Suci’nin askeri teşkilat bilgisi vermesi</label>
+            <label><input type="radio" name="q27" value="D"> D) Karabalsagun’un tahrip olması, Suci’nin okunaklı kalması</label>
+        </div>
+
+        <!-- Soru 28 -->
+        <div class="question">
+            <h3>28. Maniheist ve Budist Uygur Edebiyatı’nın ortak yönü nedir?</h3>
+            <label><input type="radio" name="q28" value="A"> A) Dini temaların baskınlığı</label>
+            <label><input type="radio" name="q28" value="B"> B) Göktürk alfabesinin kullanımı</label>
+            <label><input type="radio" name="q28" value="C"> C) Kahramanlık destanlarının varlığı</label>
+            <label><input type="radio" name="q28" value="D"> D) Sözlü gelenekle sınırlı kalması</label>
+        </div>
+
+        <!-- Soru 29 -->
+        <div class="question">
+            <h3>29. Oğuz Kagan Destanı ile Göç Destanı’nı karşılaştırdığımızda, hangi tema her ikisinde de öne çıkar?</h3>
+            <label><input type="radio" name="q29" value="A"> A) Tanrısal köken ve kutsal başlangıç</label>
+            <label><input type="radio" name="q29" value="B"> B) Askeri zaferlerin kutlanması</label>
+            <label><input type="radio" name="q29" value="C"> C) Göçebe yaşamın sona ermesi</label>
+            <label><input type="radio" name="q29" value="D"> D) Mani Dini’nin etkisi</label>
+        </div>
+
+        <!-- Soru 30 -->
+        <div class="question">
+            <h3>30. Kutadgu Bilig ile Divanü Lügati’t-Türk’ün amaçları arasındaki temel fark nedir?</h3>
+            <label><input type="radio" name="q30" value="A"> A) Kutadgu Bilig’in edebi, Divanü Lügati’t-Türk’ün dilbilimsel olması</label>
+            <label><input type="radio" name="q30" value="B"> B) Kutadgu Bilig’in devlet teşkilatını, Divanü Lügati’t-Türk’ün Türkçeyi öğretmeyi amaçlaması</label>
+            <label><input type="radio" name="q30" value="C"> C) Kutadgu Bilig’in destanları, Divanü Lügati’t-Türk’ün haritayı içermesi</label>
+            <label><input type="radio" name="q30" value="D"> D) Kutadgu Bilig’in İslamiyet sonrası, Divanü Lügati’t-Türk’ün İslamiyet öncesi dönemi ele alması</label>
+        </div>
+
+        <button type="button" onclick="calculateScore()">Sonuçları Göster</button>
+    </form>
+
+    <div id="result">
+        <h2>Puanınız: <span id="score"></span> / 100</h2>
+        <div id="explanations"></div>
+    </div>
+
+    <script>
+        function calculateScore() {
+            const form = document.getElementById('quizForm');
+            const correctAnswers = {
+                q1: 'B', q2: 'C', q3: 'B', q4: 'A', q5: 'B', q6: 'A', q7: 'B', q8: 'B', q9: 'C', q10: 'B',
+                q11: 'B', q12: 'A', q13: 'A', q14: 'B', q15: 'C', q16: 'B', q17: 'A', q18: 'C', q19: 'A', q20: 'C',
+                q21: 'B', q22: 'B', q23: 'B', q24: 'A', q25: 'A', q26: 'B', q27: 'B', q28: 'A', q29: 'A', q30: 'B'
+            };
+            const explanations = {
+                q1: 'Doğru cevap B: Mekân birliği, Türk tarihinin doğuda Çin’den batıda Orta Avrupa’ya kadar geniş bir coğrafyada varlık göstermesini ifade eder.',
+                q2: 'Doğru cevap C: Barthold, Türk tarihinin 19 farklı dilde yazılmış kaynaklara dayandığını belirtir.',
+                q3: 'Doğru cevap B: Zeki Velidi Togan, disiplinler arası iş birliğinin eksikliğini gidermek için enstitü kurulmasını istemiştir.',
+                q4: 'Doğru cevap A: Sovyetler ve Çin, Türk boylarının kökenini farklı halklara bağlayarak kargaşa yaratmıştır.',
+                q5: 'Doğru cevap B: Transkripsiyon meselesi, farklı dillerdeki isimlerin imla ve okunuş farklılıklarından kaynaklanır.',
+                q6: 'Doğru cevap A: Tez Yazıtı 1915’te keşfedilmiş ancak neşrine izin verilmemiştir.',
+                q7: 'Doğru cevap B: Terhin Yazıtı, kaplumbağa kaide üzerinde bulunur ve askeri teşkilat bilgisi verir.',
+                q8: 'Doğru cevap B: “On-Uygur ve Dokuz-Oğuz” hitabı, boylar arasındaki birliği vurgular.',
+                q9: 'Doğru cevap C: Karabalsagun’un Türkçe kısmı tahrip olduğundan Mani Dini’ne geçiş bilgisi zorlaşmıştır.',
+                q10: 'Doğru cevap B: Suci Yazıtı, Kırgızlara aittir ve Uygur Kaganlığı’nın yıkılışını aydınlatır.',
+                q11: 'Doğru cevap B: Dünyevî aşk şiirleri, Mani Dini’nin duygusal anlatım tarzını yansıtır.',
+                q12: 'Doğru cevap A: Hristiyanlık, Uygurlar arasında az yayıldığı için edebiyatı sınırlıdır.',
+                q13: 'Doğru cevap A: Altun Yaruk’un tercümesi, Uygur Türkçesi’nin edebi bir dil olarak gelişmişliğini gösterir.',
+                q14: 'Doğru cevap B: “Irg Bitig” bir fal kitabıdır.',
+                q15: 'Doğru cevap C: Kurt motifinin dönüşümü, Mani Dini’nin etkisidir.',
+                q16: 'Doğru cevap B: Işık, tanrısal bir başlangıç ve kutsal kökeni simgeler.',
+                q17: 'Doğru cevap A: Üç karga, Şamanist doğa ruhlarıyla iletişimi yansıtır.',
+                q18: 'Doğru cevap C: “Göç!” sesleri, yeni bir yurt arayışını simgeler.',
+                q19: 'Doğru cevap A: Uygur rivayeti, Reşüdiddin’in İslamlaştırılmış Farsça metniyle çelişir.',
+                q20: 'Doğru cevap C: Bu unsurlar, eski Türk inançlarının birleşimini gösterir.',
+                q21: 'Doğru cevap B: Dört kavram, devlet teşkilatının düzenlenmesini vurgular.',
+                q22: 'Doğru cevap B: Harita, eserin coğrafi ve kültürel zenginliğini öne çıkarır.',
+                q23: 'Doğru cevap B: İdeolojik yaklaşımlar, batı veya doğu telakkileriyle tartışmalara yol açar.',
+                q24: 'Doğru cevap A: Göktürk alfabesi, Göktürk-Uygur kültürel bağını gösterir.',
+                q25: 'Doğru cevap A: Bilinmeyen kavimler, tarihler arası mukayeseyi zorlaştırır.',
+                q26: 'Doğru cevap B: Her iki yazıt da Moyen-çor ile ilgilidir.',
+                q27: 'Doğru cevap B: Karabalsagun Mani Dini’ni, Suci Kırgızları konu alır.',
+                q28: 'Doğru cevap A: Her iki edebiyat türünde dini temalar baskındır.',
+                q29: 'Doğru cevap A: Her iki destanda tanrısal köken teması öne çıkar.',
+                q30: 'Doğru cevap B: Kutadgu Bilig devlet teşkilatını, Divanü Lügati’t-Türk Türkçeyi öğretmeyi amaçlar.'
+            };
+
+            let score = 0;
+            for (let i = 1; i <= 30; i++) {
+                const userAnswer = form.querySelector(`input[name="q${i}"]:checked`);
+                if (userAnswer && userAnswer.value === correctAnswers[`q${i}`]) {
+                    score += 3.33; // Her doğru cevap 3.33 puan (100/30)
+                }
+            }
+
+            document.getElementById('score').textContent = Math.round(score);
+            document.getElementById('result').style.display = 'block';
+
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+            for (let i = 1; i <= 30; i++) {
+                const explanation = document.createElement('div');
+                explanation.className = 'explanation';
+                explanation.textContent = `${i}. Soru: ${explanations[`q${i}`]}`;
+                explanationsDiv.appendChild(explanation);
+            }
+        }
+    </script>
+</body>
+</html>

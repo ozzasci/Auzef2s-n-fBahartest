@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uygur Kaganlığı ve Sonrası Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #result h2 {
+            color: #27ae60;
+        }
+        .explanation {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-left: 4px solid #3498db;
+        }
+        .correct {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Uygur Kaganlığı ve Sonrası Testi</h1>
+    <form id="quizForm">
+        <!-- Soru 1 -->
+        <div class="question">
+            <h3>1. Tun Baga Tarkan’ın unvanı nedir?</h3>
+            <label><input type="radio" name="q1" value="A"> A) Alp Kutlug Bilge Kagan</label>
+            <label><input type="radio" name="q1" value="B"> B) Ay Tengride Kut Bulmış</label>
+            <label><input type="radio" name="q1" value="C"> C) Külüg Bilge Kagan</label>
+            <label><input type="radio" name="q1" value="D"> D) Ülüg Bulmış Alp</label>
+        </div>
+
+        <!-- Soru 2 -->
+        <div class="question">
+            <h3>2. Kutlug Bilge Kagan tahta çıktıktan sonra hangi sorunlarla uğraşmıştır?</h3>
+            <label><input type="radio" name="q2" value="A"> A) Karluk isyanını bastırmış, Tibetlileri uzaklaştırmıştır</label>
+            <label><input type="radio" name="q2" value="B"> B) Çinlilerle barış yapmış, Kırgızları yenmiştir</label>
+            <label><input type="radio" name="q2" value="C"> C) Sha-t’o Türklerini yenmiş, Tibetlileri desteklemiştir</label>
+            <label><input type="radio" name="q2" value="D"> D) Beşbalık’ı işgal etmiş, Karluklarla ittifak kurmuştur</label>
+        </div>
+
+        <!-- Soru 3 -->
+        <div class="question">
+            <h3>3. 795 senesinde “Ay Tengride Ülüg Bulmuş Alp Uluğ Bilge” unvanı ile tahta geçen kagan kimdir?</h3>
+            <label><input type="radio" name="q3" value="A"> A) Kutlug Bilge</label>
+            <label><input type="radio" name="q3" value="B"> B) Tun Baga Tarkan</label>
+            <label><input type="radio" name="q3" value="C"> C) To-lo-ssu</label>
+            <label><input type="radio" name="q3" value="D"> D) Feng-Ch’eng</label>
+        </div>
+
+        <!-- Soru 4 -->
+        <div class="question">
+            <h3>4. Ay Tengride Kut Bulmış Alp Bilge Kagan ile ilgili hangi bilgi doğrudur?</h3>
+            <label><input type="radio" name="q4" value="A"> A) Diğer kaganlara göre daha uzun süre tahtta kalmıştır</label>
+            <label><input type="radio" name="q4" value="B"> B) Tibetlilerle ittifak kurmuştur</label>
+            <label><input type="radio" name="q4" value="C"> C) Çin prensesiyle evlenmeyi reddetmiştir</label>
+            <label><input type="radio" name="q4" value="D"> D) Karabalsagun’u terk etmiştir</label>
+        </div>
+
+        <!-- Soru 5 -->
+        <div class="question">
+            <h3>5. Uygurların yıkılış sebepleri arasında hangisi yer almaz?</h3>
+            <label><input type="radio" name="q5" value="A"> A) Arapların teşvikiyle Türk boylarının isyanı</label>
+            <label><input type="radio" name="q5" value="B"> B) Çinlilerin iç karışıklık politikası</label>
+            <label><input type="radio" name="q5" value="C"> C) Maniheizm’in savaşçılığı zayıflatması</label>
+            <label><input type="radio" name="q5" value="D"> D) Kırgızların başkenti basması</label>
+        </div>
+
+        <!-- Soru 6 -->
+        <div class="question">
+            <h3>6. Uygurlar devletleri dağıldıktan sonra hangi topluluklara katılmışlardır?</h3>
+            <label><input type="radio" name="q6" value="A"> A) Karluk, Tibet, Moğol</label>
+            <label><input type="radio" name="q6" value="B"> B) Kırgız, Sha-t’o, Çin</label>
+            <label><input type="radio" name="q6" value="C"> C) Oğuz, Kitan, Tatar</label>
+            <label><input type="radio" name="q6" value="D"> D) Sogdlu, Arap, Hint</label>
+        </div>
+
+        <!-- Soru 7 -->
+        <div class="question">
+            <h3>7. Kansu Uygurlarının göç ettiği bölgenin önemli özelliği nedir?</h3>
+            <label><input type="radio" name="q7" value="A"> A) Budistlerin bu bölgede az olması</label>
+            <label><input type="radio" name="q7" value="B"> B) Maniheizm’in yaygın olması</label>
+            <label><input type="radio" name="q7" value="C"> C) Tibetlilerin hâkimiyeti</label>
+            <label><input type="radio" name="q7" value="D"> D) Kırgızların ticaret merkezi olması</label>
+        </div>
+
+        <!-- Soru 8 -->
+        <div class="question">
+            <h3>8. Çin imparatoru Ming Tsung’un “Medeniyetler Şekil Verdiren Kagan” unvanını verdiği kagan kimdir?</h3>
+            <label><input type="radio" name="q8" value="A"> A) Jen-yü Kagan</label>
+            <label><input type="radio" name="q8" value="B"> B) Jen-mei Kagan</label>
+            <label><input type="radio" name="q8" value="C"> C) A-to-yü</label>
+            <label><input type="radio" name="q8" value="D"> D) Tigin</label>
+        </div>
+
+        <!-- Soru 9 -->
+        <div class="question">
+            <h3>9. Sha-chou Uygurları’nın önemi nedir?</h3>
+            <label><input type="radio" name="q9" value="A"> A) Çin ile Orta Asya arasındaki ticaret yolunda hâkimiyet</label>
+            <label><input type="radio" name="q9" value="B"> B) Kırgızlarla ittifak kurmaları</label>
+            <label><input type="radio" name="q9" value="C"> C) Tibetlilere karşı savaşmaları</label>
+            <label><input type="radio" name="q9" value="D"> D) Budizm’i yaymaları</label>
+        </div>
+
+        <!-- Soru 10 -->
+        <div class="question">
+            <h3>10. Yarkend Hanlığı kurucusu Said Han ile ilgili hangi bilgiler yanlıştır?</h3>
+            <label><input type="radio" name="q10" value="A"> A) Belh ve Horasan’a sefer düzenledi, Çağatay Hanlığı’na son verdi</label>
+            <label><input type="radio" name="q10" value="B"> B) Sarı Uygurlara ve Kırgızlara sefer düzenledi</label>
+            <label><input type="radio" name="q10" value="C"> C) Keşmir’i ele geçirdi</label>
+            <label><input type="radio" name="q10" value="D"> D) Oğlu Abdurreşid’i Kalmuklar üzerine gönderdi</label>
+        </div>
+
+        <!-- Soru 11 -->
+        <div class="question">
+            <h3>11. Tun Baga Tarkan döneminde hangi Türk boyu Beşbalık’ı işgal etmiştir?</h3>
+            <label><input type="radio" name="q11" value="A"> A) Sha-t’o Türkleri</label>
+            <label><input type="radio" name="q11" value="B"> B) Karluklar</label>
+            <label><input type="radio" name="q11" value="C"> C) Kırgızlar</label>
+            <label><input type="radio" name="q11" value="D"> D) Tibetliler</label>
+        </div>
+
+        <!-- Soru 12 -->
+        <div class="question">
+            <h3>12. Kutluk Bilge Kagan’ın Kırgızlarla galibiyeti neye neden olmuştur?</h3>
+            <label><input type="radio" name="q12" value="A"> A) Orta Asya tarihinde efsaneleşmesine</label>
+            <label><input type="radio" name="q12" value="B"> B) Çin ile ittifak kurmasına</label>
+            <label><input type="radio" name="q12" value="C"> C) Tibetlilerin başkenti işgal etmesine</label>
+            <label><input type="radio" name="q12" value="D"> D) Karlukların bağımsızlığına</label>
+        </div>
+
+        <!-- Soru 13 -->
+        <div class="question">
+            <h3>13. Uygur Kaganlığı’nın çöküşünde Kırgızların başkenti basması hangi bölgeyle ilişkilidir?</h3>
+            <label><input type="radio" name="q13" value="A"> A) Orhun Bölgesi</label>
+            <label><input type="radio" name="q13" value="B"> B) Turfan Bölgesi</label>
+            <label><input type="radio" name="q13" value="C"> C) Beşbalık Bölgesi</label>
+            <label><input type="radio" name="q13" value="D"> D) Kansu Bölgesi</label>
+        </div>
+
+        <!-- Soru 14 -->
+        <div class="question">
+            <h3>14. Hazar Tegin’in unvanı nedir?</h3>
+            <label><input type="radio" name="q14" value="A"> A) Ay Tengri’de Kut Bulmış Bilge Kagan</label>
+            <label><input type="radio" name="q14" value="B"> B) Alp Külüg Bilge Kagan</label>
+            <label><input type="radio" name="q14" value="C"> C) Ülüg Bulmış Alp</label>
+            <label><input type="radio" name="q14" value="D"> D) Kün Tengri’de Kut Bulmış</label>
+        </div>
+
+        <!-- Soru 15 -->
+        <div class="question">
+            <h3>15. Hu Tegin’in ismi hangi topluluğun etkisiyle ilişkilendirilmiştir?</h3>
+            <label><input type="radio" name="q15" value="A"> A) Sogdlular</label>
+            <label><input type="radio" name="q15" value="B"> B) Çinliler</label>
+            <label><input type="radio" name="q15" value="C"> C) Tibetliler</label>
+            <label><input type="radio" name="q15" value="D"> D) Kırgızlar</label>
+        </div>
+
+        <!-- Soru 16 -->
+        <div class="question">
+            <h3>16. Turfan Uygurları’nın ilk kaganı kimdir?</h3>
+            <label><input type="radio" name="q16" value="A"> A) Mengli</label>
+            <label><input type="radio" name="q16" value="B"> B) Barçuk İdikut</label>
+            <label><input type="radio" name="q16" value="C"> C) Tatar Tonga</label>
+            <label><input type="radio" name="q16" value="D"> D) But/Bodun Sarı</label>
+        </div>
+
+        <!-- Soru 17 -->
+        <div class="question">
+            <h3>17. Kan-chou Uygurları hangi şehirde ilk askeri harekete geçmiştir?</h3>
+            <label><input type="radio" name="q17" value="A"> A) Tun-huang</label>
+            <label><input type="radio" name="q17" value="B"> B) Beşbalık</label>
+            <label><input type="radio" name="q17" value="C"> C) Turfan</label>
+            <label><input type="radio" name="q17" value="D"> D) Kansu</label>
+        </div>
+
+        <!-- Soru 18 -->
+        <div class="question">
+            <h3>18. Sha-chou Uygurları’na Çinliler neden “Beyaz giymiş göğün oğulları” demiştir?</h3>
+            <label><input type="radio" name="q18" value="A"> A) Maniheizm’i benimsemeleri ve beyaz elbise giymeleri</label>
+            <label><input type="radio" name="q18" value="B"> B) Budizm’i yaymaları</label>
+            <label><input type="radio" name="q18" value="C"> C) Ticaret yollarını kontrol etmeleri</label>
+            <label><input type="radio" name="q18" value="D"> D) Kırgızlarla ittifak kurmaları</label>
+        </div>
+
+        <!-- Soru 19 -->
+        <div class="question">
+            <h3>19. Yarkend Hanlığı’nın kurucusu kimdir?</h3>
+            <label><input type="radio" name="q19" value="A"> A) Said Han</label>
+            <label><input type="radio" name="q19" value="B"> B) Abdurreşid Han</label>
+            <label><input type="radio" name="q19" value="C"> C) Abdülkerim Han</label>
+            <label><input type="radio" name="q19" value="D"> D) Muhammed Han</label>
+        </div>
+
+        <!-- Soru 20 -->
+        <div class="question">
+            <h3>20. Barçuk İdikut kiminle evlenerek Cengiz Han’a damat olmuştur?</h3>
+            <label><input type="radio" name="q20" value="A"> A) Al-Hatun</label>
+            <label><input type="radio" name="q20" value="B"> B) T’ai-ho Prensesi</label>
+            <label><input type="radio" name="q20" value="C"> C) Jen-mei</label>
+            <label><input type="radio" name="q20" value="D"> D) Sha-chou</label>
+        </div>
+
+        <!-- Soru 21 -->
+        <div class="question">
+            <h3>21. Uygur Kaganlığı’nın çöküşünde hangi olay kırılma noktasıdır?</h3>
+            <label><input type="radio" name="q21" value="A"> A) 821 yılındaki entrikalar ve suikastlar</label>
+            <label><input type="radio" name="q21" value="B"> B) 839’daki Kırgız taarruzu</label>
+            <label><input type="radio" name="q21" value="C"> C) 795’teki Karluk isyanı</label>
+            <label><input type="radio" name="q21" value="D"> D) 911’deki Tun-huang işgali</label>
+        </div>
+
+        <!-- Soru 22 -->
+        <div class="question">
+            <h3>22. Kan-chou Uygurları hangi devletin nüfuz sahasına girmiştir?</h3>
+            <label><input type="radio" name="q22" value="A"> A) Hıtay (Kitan)</label>
+            <label><input type="radio" name="q22" value="B"> B) Tibet</label>
+            <label><input type="radio" name="q22" value="C"> C) Kırgız</label>
+            <label><input type="radio" name="q22" value="D"> D) Karluk</label>
+        </div>
+
+        <!-- Soru 23 -->
+        <div class="question">
+            <h3>23. Turfan Uygurları hangi devlete tâbi olmuştur?</h3>
+            <label><input type="radio" name="q23" value="A"> A) Kara Kıtay</label>
+            <label><input type="radio" name="q23" value="B"> B) Çin</label>
+            <label><input type="radio" name="q23" value="C"> C) Tibet</label>
+            <label><input type="radio" name="q23" value="D"> D) Sha-t’o</label>
+        </div>
+
+        <!-- Soru 24 -->
+        <div class="question">
+            <h3>24. Sha-chou Uygurları’nı hangi lider güneye götürmüştür?</h3>
+            <label><input type="radio" name="q24" value="A"> A) Hürmüzd Tekin</label>
+            <label><input type="radio" name="q24" value="B"> B) Üge Tekin</label>
+            <label><input type="radio" name="q24" value="C"> C) İnan Tekin</label>
+            <label><input type="radio" name="q24" value="D"> D) Jen-yü</label>
+        </div>
+
+        <!-- Soru 25 -->
+        <div class="question">
+            <h3>25. Abdurreşid Han hangi toplulukla ittifak kurarak Kazakları yenmiştir?</h3>
+            <label><input type="radio" name="q25" value="A"> A) Özbekler</label>
+            <label><input type="radio" name="q25" value="B"> B) Kırgızlar</label>
+            <label><input type="radio" name="q25" value="C"> C) Kalmuklar</label>
+            <label><input type="radio" name="q25" value="D"> D) Tibetliler</label>
+        </div>
+
+        <!-- Soru 26 -->
+        <div class="question">
+            <h3>26. Yarkend Hanlığı’nda hangi tarikat kolu Akdağlı olarak anılmıştır?</h3>
+            <label><input type="radio" name="q26" value="A"> A) Muhammed Emin (Afakiyye)</label>
+            <label><input type="radio" name="q26" value="B"> B) Muhammed İshak Veli (İshakiye)</label>
+            <label><input type="radio" name="q26" value="C"> C) Şadi Hoca</label>
+            <label><input type="radio" name="q26" value="D"> D) Şutur</label>
+        </div>
+
+        <!-- Soru 27 -->
+        <div class="question">
+            <h3>27. Uygur Kaganlığı’nın çöküşünde hangi kagan döneminde Kırgız taarruzu gerçekleşmiştir?</h3>
+            <label><input type="radio" name="q27" value="A"> A) Ho-sa (Hazar) Tegin</label>
+            <label><input type="radio" name="q27" value="B"> B) Hu Tegin</label>
+            <label><input type="radio" name="q27" value="C"> C) Hazar Tegin</label>
+            <label><input type="radio" name="q27" value="D"> D) Kün Tengri’de Ülüg Bulmış</label>
+        </div>
+
+        <!-- Soru 28 -->
+        <div class="question">
+            <h3>28. Kan-chou Uygurları hangi yüzyıla kadar Çin’in “Vazifeye Koyuluş Ordusu”na bağlıydı?</h3>
+            <label><input type="radio" name="q28" value="A"> A) X. yüzyıl</label>
+            <label><input type="radio" name="q28" value="B"> B) IX. yüzyıl</label>
+            <label><input type="radio" name="q28" value="C"> C) XI. yüzyıl</label>
+            <label><input type="radio" name="q28" value="D"> D) VIII. yüzyıl</label>
+        </div>
+
+        <!-- Soru 29 -->
+        <div class="question">
+            <h3>29. Turfan Uygurları’ndan Moğollara hizmet eden ilk kişi kimdir?</h3>
+            <label><input type="radio" name="q29" value="A"> A) Tatar Tonga</label>
+            <label><input type="radio" name="q29" value="B"> B) Barçuk İdikut</label>
+            <label><input type="radio" name="q29" value="C"> C) Mengli</label>
+            <label><input type="radio" name="q29" value="D"> D) But/Bodun Sarı</label>
+        </div>
+
+        <!-- Soru 30 -->
+        <div class="question">
+            <h3>30. Yarkend Hanlığı’nı Cungarlar hangi şehirleri işgal ederek ele geçirmiştir?</h3>
+            <label><input type="radio" name="q30" value="A"> A) Kumul ve Turfan</label>
+            <label><input type="radio" name="q30" value="B"> B) Kaşgar ve Yarkend</label>
+            <label><input type="radio" name="q30" value="C"> C) Aksu ve Hoten</label>
+            <label><input type="radio" name="q30" value="D"> D) Beşbalık ve Kansu</label>
+        </div>
+
+        <button type="button" onclick="calculateScore()">Sonuçları Göster</button>
+    </form>
+
+    <div id="result">
+        <h2>Puanınız: <span id="score"></span> / 100</h2>
+        <div id="explanations"></div>
+    </div>
+
+    <script>
+        function calculateScore() {
+            const form = document.getElementById('quizForm');
+            const correctAnswers = {
+                q1: 'A', q2: 'A', q3: 'A', q4: 'A', q5: 'A', q6: 'A', q7: 'A', q8: 'A', q9: 'A', q10: 'A',
+                q11: 'A', q12: 'A', q13: 'A', q14: 'A', q15: 'A', q16: 'A', q17: 'A', q18: 'A', q19: 'A', q20: 'A',
+                q21: 'A', q22: 'A', q23: 'A', q24: 'A', q25: 'A', q26: 'A', q27: 'A', q28: 'A', q29: 'A', q30: 'B'
+            };
+            const explanations = {
+                q1: 'Doğru cevap A: Tun Baga Tarkan’ın unvanı “Alp Kutlug Bilge Kagan”dır.',
+                q2: 'Doğru cevap A: Kutlug Bilge Kagan, Karluk isyanını bastırmış ve Tibetlileri uzaklaştırmıştır.',
+                q3: 'Doğru cevap A: 795’te “Ay Tengride Ülüg Bulmuş Alp Uluğ Bilge” unvanıyla Kutlug Bilge tahta geçti.',
+                q4: 'Doğru cevap A: Ay Tengride Kut Bulmış Alp Bilge Kagan diğer kaganlara göre daha uzun süre tahtta kaldı.',
+                q5: 'Doğru cevap A: Arapların teşvikiyle isyan, Uygurların yıkılış sebepleri arasında yer almaz.',
+                q6: 'Doğru cevap A: Uygurlar Karluk, Tibet ve Moğol topluluklarına katılmışlardır.',
+                q7: 'Doğru cevap A: Kansu Uygurları’nın göç ettiği bölgede Budistler azdır.',
+                q8: 'Doğru cevap A: Jen-yü Kagan’a “Medeniyetler Şekil Verdiren Kagan” unvanı verilmiştir.',
+                q9: 'Doğru cevap A: Sha-chou Uygurları, Çin ile Orta Asya arasındaki ticaret yolunda hâkimiyet kurmuştur.',
+                q10: 'Doğru cevap A: Said Han Belh ve Horasan’a sefer düzenlememiş, Çağatay Hanlığı’na son vermemiştir.',
+                q11: 'Doğru cevap A: Sha-t’o Türkleri, Tibetlilerle iş birliği yaparak Beşbalık’ı işgal etmiştir.',
+                q12: 'Doğru cevap A: Kutlug Bilge Kagan’ın Kırgızlarla galibiyeti onu efsaneleştirmiştir.',
+                q13: 'Doğru cevap A: Kırgızların başkenti basması Orhun Bölgesi’nde Uygur hâkimiyetini sona erdirmiştir.',
+                q14: 'Doğru cevap A: Hazar Tegin’in unvanı “Ay Tengri’de Kut Bulmış Bilge Kagan”dır.',
+                q15: 'Doğru cevap A: Hu Tegin’in ismi Sogdluların etkisiyle ilişkilendirilmiştir.',
+                q16: 'Doğru cevap A: Turfan Uygurları’nın ilk kaganı Mengli’dir.',
+                q17: 'Doğru cevap A: Kan-chou Uygurları Tun-huang’da ilk askeri harekete geçmiştir.',
+                q18: 'Doğru cevap A: Sha-chou Uygurları Maniheizm ve beyaz elbise nedeniyle “Beyaz giymiş göğün oğulları” denmiştir.',
+                q19: 'Doğru cevap A: Yarkend Hanlığı’nı Said Han kurmuştur.',
+                q20: 'Doğru cevap A: Barçuk İdikut, Cengiz Han’ın kızı Al-Hatun ile evlenmiştir.',
+                q21: 'Doğru cevap A: 821 yılındaki entrikalar ve suikastlar Uygur Kaganlığı’nın çöküşünde kırılma noktasıdır.',
+                q22: 'Doğru cevap A: Kan-chou Uygurları Hıtay (Kitan) nüfuz sahasına girmiştir.',
+                q23: 'Doğru cevap A: Turfan Uygurları Kara Kıtay Devleti’ne tâbi olmuştur.',
+                q24: 'Doğru cevap A: Hürmüzd Tekin, Sha-chou Uygurları’nı güneye götürmüştür.',
+                q25: 'Doğru cevap A: Abdurreşid Han, Özbeklerle ittifak kurarak Kazakları yenmiştir.',
+                q26: 'Doğru cevap A: Akdağlı tarikat kolu Muhammed Emin (Afakiyye) olarak anılmıştır.',
+                q27: 'Doğru cevap A: Kırgız taarruzu Ho-sa (Hazar) Tegin döneminde gerçekleşmiştir.',
+                q28: 'Doğru cevap A: Kan-chou Uygurları X. yüzyıla kadar Çin’in “Vazifeye Koyuluş Ordusu”na bağlıydı.',
+                q29: 'Doğru cevap A: Moğollara hizmet eden ilk Uygur Tatar Tonga’dır.',
+                q30: 'Doğru cevap B: Cungarlar, Yarkend Hanlığı’nı Kaşgar ve Yarkend’i işgal ederek ele geçirmiştir.'
+            };
+
+            let score = 0;
+            const userAnswers = {};
+            for (let i = 1; i <= 30; i++) {
+                const userAnswer = form.querySelector(`input[name="q${i}"]:checked`);
+                userAnswers[`q${i}`] = userAnswer ? userAnswer.value : 'Seçilmedi';
+                if (userAnswer && userAnswer.value === correctAnswers[`q${i}`]) {
+                    score += 3.33; // Her doğru cevap 3.33 puan
+                }
+            }
+
+            document.getElementById('score').textContent = Math.round(score);
+            document.getElementById('result').style.display = 'block';
+
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+            for (let i = 1; i <= 30; i++) {
+                const userAnswer = userAnswers[`q${i}`];
+                const correctAnswer = correctAnswers[`q${i}`];
+                const isCorrect = userAnswer === correctAnswer;
+                const explanation = document.createElement('div');
+                explanation.className = 'explanation';
+                explanation.innerHTML = `${i}. Soru: ${explanations[`q${i}`]}<br>` +
+                    `Sizin cevabınız: <span class="${isCorrect ? 'correct' : 'incorrect'}">${userAnswer}</span> ` +
+                    `(${isCorrect ? 'Doğru' : 'Yanlış'})`;
+                explanationsDiv.appendChild(explanation);
+            }
+        }
+    </script>
+</body>
+</html>

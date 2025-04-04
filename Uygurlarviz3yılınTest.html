@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uygur Tarihi Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .welcome, .quiz, .results {
+            display: none;
+        }
+        .welcome.active, .quiz.active, .results.active {
+            display: block;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            padding: 10px;
+            background: #f9f9f9;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .result-item {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            button { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div class="welcome active">
+            <h1>Uygur Tarihi Testine Hoş Geldiniz!</h1>
+            <p>60 soruluk bu test, Uygur tarihi hakkında bilgi seviyenizi ölçer. Sorular her testte rastgele seçilir. Başarılar!</p>
+            <button onclick="startQuiz()">Testi Başlat</button>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz">
+            <h2>Test</h2>
+            <div id="questions"></div>
+            <button onclick="submitQuiz()">Testi Bitir</button>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results">
+            <h2>Sonuçlar</h2>
+            <p>Skorunuz: <span id="score"></span></p>
+            <div id="answerKey"></div>
+            <button onclick="restartQuiz()">Yeniden Başla</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "487-546 yılları arasında faaliyet gösteren Uygur Hanlığı ile alakalı aşağıda verilen bilgilerden hangisi yanlıştır?",
+                options: ["A) Kırgızlar ile şiddetli mücadelelere girişmişlerdir.", "B) Yüksek Arabalılar Hanlığı olarak da bilinirlerdi.", "C) Juan-juan’lar ile şiddetli mücadelelere girişmişlerdir.", "D) Göktürklerden sonra bağımsızlıklarını kazanmışlardı.", "E) Ak Hunlar ile şiddetli mücadelelere girişmişlerdir."],
+                correct: "B",
+                explanation: "Uygur Hanlığı 'Yüksek Arabalılar Hanlığı' olarak bilinmez; bu ifade tarihsel bir hata içerir. Uygurlar, Göktürklerin zayıflamasından sonra bağımsızlığını kazanmıştır."
+            },
+            {
+                question: "Bögü Kağan’ın isminin anlamı aşağıdakilerden hangisidir?",
+                options: ["A) Âlim ve sihirbaz", "B) Kuvvetli ve hükümdar", "C) Cahil, korkak", "D) Alp, bilgili", "E) Korkusuz, güçlü"],
+                correct: "A",
+                explanation: "Bögü, 'âlim ve sihirbaz' anlamına gelir ve bu isim onun bilge ve manevi yönünü vurgular."
+            },
+            {
+                question: "Göktürk Devleti kurulduktan sonra Uygurların durumu ile alakalı verilen bilgilerden hangileri doğrudur? I. Doğu Uygurları Orhun, Tola, Selenga nehri civarında yaşamaktaydılar. II. Doğu Uygurları Mukan Kağan tarafından hâkimiyet altına alındı. III. Batı Uygurları İstemi Yabgu tarafından hâkimiyet altına alındı. IV. Tarım Vadisi’ndeki Uygurlar Mukan Kağan tarafından itaat altına alındı.",
+                options: ["A) I, II ve IV", "B) I ve III", "C) I, III ve IV", "D) I, II ve III", "E) III ve IV"],
+                correct: "B",
+                explanation: "I ve III doğrudur; ancak II ve IV’te Mukan Kağan ile ilişkilendirme yanlıştır. Doğu ve Batı Uygurların Göktürk hakimiyetine girişi farklı liderler tarafından gerçekleşmiştir."
+            },
+            {
+                question: "Lo-yang seferinin sebebi aşağıdakilerden hangisidir?",
+                options: ["A) Çin’in Uygur hakimiyetindeki boyları kışkırtması", "B) Tibetlilerin Çin’e hücum etmesi", "C) Çin’in Töles boylarını kışkırtması", "D) Arapların Çin’e hücum etmesi", "E) Çin’in yıllık vergisini ödememesi"],
+                correct: "B",
+                explanation: "Lo-yang seferi, Tibetlilerin Çin’e saldırması üzerine Uygurların bu durumu fırsat bilerek gerçekleştirdiği bir harekettir."
+            },
+            {
+                question: "I. İkinci Uygur Kağanı 'Tengride Bolmış İl İtmiş Bilge Kağan' adına dikilmiştir. II. 1976 yılında bulunmuştur. III. Göktürk alfabesi ile yazılmış olup, yirmi iki satırdan oluşmaktadır. IV. Kağan damgası bulunmaktadır. Yukarıda özellikleri verilen Uygur yazıtı aşağıdakilerden hangisidir?",
+                options: ["A) Tez Yazıtı", "B) Terhin (Taryat) Yazıtı", "C) Şine-usu Yazıtı", "D) Karabalsagun Yazıtı", "E) Hoytu Tamir Yazıtı"],
+                correct: "C",
+                explanation: "Şine-usu Yazıtı, bu özelliklere sahiptir ve Moyen Çor adına dikilmiştir."
+            },
+            {
+                question: "Uygurların ilk hükümdarı Kutlug Bilge Kül Kağan dönemi ile alakalı olmayan hangisidir? I. Her tarafa elçilerle fetihnameler gönderildi. II. Batıda Altay Dağları ile doğuda Mançurya arasındaki saha Uygurların faaliyet alanı haline geldi. III. Karluklar sol yabguluğu görevine getirildi. IV. Doğu Göktürk Devleti’nin eski toprakları hâkimiyet altına alındı. V. Uygur Devleti’nin ilk dönemleri için önemli bilgiler veren Şine-Usu Yazıtı diktirildi.",
+                options: ["A) I ve III", "B) II ve IV", "C) Yalnız V", "D) Yalnız III", "E) IV ve V"],
+                correct: "C",
+                explanation: "Şine-Usu Yazıtı, Moyen Çor döneminde dikilmiştir, bu nedenle Kutlug Bilge Kül Kağan ile ilgisi yoktur."
+            },
+            {
+                question: "Talas Savaşı’nın Uygurlar açısından önemi aşağıdakilerden hangisidir?",
+                options: ["A) Çin’in yenilerek Tarım Havzası’nın Uygurların eline geçmesi", "B) Bizans’la ittifak kurularak Orta Asya’daki Çin topraklarının bölüşülmesi", "C) Göktürklere anlaşarak Sasanileri yıkmaları", "D) Müslümanların yenilerek Türk bölgelerinden ellerini çekmeleri", "E) Müslümanların Çin’i istila etmeleri"],
+                correct: "A",
+                explanation: "Talas Savaşı’nda Çin’in yenilmesi, Tarım Havzası’nın Uygurların kontrolüne geçmesine yol açmıştır."
+            },
+            {
+                question: "Kutadgu Bilig ile alakalı aşağıda verilen bilgilerden hangileri yanlıştır? I. Kutadgu Bilig siyasi hâkimiyet bilgisidir. II. Kutadgu Bilig bir siyasetnamedir. III. Hükümdarlık bilgisidir. IV. Kutadgu Bilig devletli olma kitabıdır. V. Kutadgu Bilig mesut olma yollarını gösteren bir kitaptır.",
+                options: ["A) II ve V", "B) II ve III", "C) I ve III", "D) I ve V", "E) IV ve V"],
+                correct: "C",
+                explanation: "I ve III yanlıştır; Kutadgu Bilig siyasi hâkimiyet veya hükümdarlık bilgisi değil, daha çok ahlaki ve yönetimle ilgili bir eserdir."
+            },
+            {
+                question: "Uygur Kağanlığı kurulduktan sonra Oğuzlarla ilgili aşağıda verilen bilgilerden hangisi yanlıştır?",
+                options: ["A) Oğuzlar mağlubiyet üzerine Selenge’yi geçerek çekilmişlerdir.", "B) Moyen Çor, Oğuzları Burgu’da ve Selenge kıyısında mağlup etmiştir.", "C) Moyen Çor, Sekiz Oğuz birliğini oluşturan boylarla savaşmıştır.", "D) VIII. yüzyıl sonlarında Oğuz Yabgu Devleti’ni kurmuşlardır.", "E) Moyen Çor (Bayan Çor), tegin iken Dokuz Oğuzları toplamıştır."],
+                correct: "D",
+                explanation: "Oğuz Yabgu Devleti VIII. yüzyıl sonlarında değil, X. yüzyılda kurulmuştur."
+            },
+            {
+                question: "Yarkend (Saidiye) Hanlığı kurucusu Said Han’la alakalı aşağıda verilen bilgilerden hangileri yanlıştır? I. 1517 yılında San Uygurlar ve Kırgızlar üzerine sefer düzenledi. II. 1524 yılında oğlu Abdurreşid Sultanı Kalmuklar üzerinde sefere yolladı. III. Birçok Kırgız ve Kazak kabilesini idaresi altına alan Tahir Han karşısında zor durumda kaldı. IV. 1538 yılında Belh ve Horasan üzerine sefer düzenledi. V. Keşmir’i ele geçirdi ve gelirinin yarısını Yarkend’e göndermesi karşılığında barış yaptı. VI. Çağatay Hanlığı’na son verdi ve Doğu Türkistan’da siyasi birliği sağladı.",
+                options: ["A) I ve II", "B) IV ve VI", "C) II ve IV", "D) IV ve V", "E) I ve III"],
+                correct: "B",
+                explanation: "IV ve VI, Said Han dönemiyle ilişkilendirilemez; bu olaylar daha sonraki dönemlere aittir."
+            },
+            {
+                question: "Aşağıdakilerden hangisi Kutluk Bilge Kağan’ın faaliyetlerinden biri değildir?",
+                options: ["A) Kırgızlar üzerine sefer tertip etti", "B) Ortaya çıkan Karluk isyanını bastırdı", "C) Turfan bölgesine ve Doğu Türkistan şehirlerine önem verdi", "D) Tibetlilerin ellerini Doğu Türkistan’dan çektirdi", "E) Çin’e sefer düzenledi ve Çin’i mağlup etti"],
+                correct: "E",
+                explanation: "Çin’e sefer düzenleyip mağlup etme, Kutluk Bilge Kağan’a değil, başka kağanlara aittir."
+            },
+            {
+                question: "Ebulgazi Bahadır Han’a göre Uygur isminin manası aşağıdakilerden hangisidir?",
+                options: ["A) Kendi kendine yeter", "B) Şahin gibi hızla hücum eden", "C) Uymak, yapışmak", "D) Orman halkı", "E) Akraba, müttefik"],
+                correct: "C",
+                explanation: "Ebulgazi’ye göre 'Uygur', 'uymak, yapışmak' anlamına gelir ve dayanışmayı ifade eder."
+            },
+            {
+                question: "Tun Baga Tarkan’ın Çin’e karşı dengeli bir politika izlemesinin sebebi aşağıdakilerden hangisidir?",
+                options: ["A) Uygurların savaşlarda nüfuslarının azalması", "B) T’ang hanedanlığının güçlenmesi", "C) Oğuzların Uygurlara saldırarak zayıflatması", "D) Arapların Uygurları vergiye bağlamaları", "E) Uygurların Talas Savaşı’nda Çinlilere yenilmesi"],
+                correct: "B",
+                explanation: "T’ang hanedanlığının güçlenmesi, Tun Baga Tarkan’ın temkinli bir politika izlemesine neden olmuştur."
+            },
+            {
+                question: "Sha-chou Uygurları’nın önemi aşağıdakilerden hangisidir?",
+                options: ["A) Çin ile Orta Asya arasındaki ticaret yolu üzerinde hâkimiyet kurmaları", "B) Kara Kitaylarla münasebet kurmaya başlamaları", "C) Moğollara tabi olmadan ve Moğolistan’a göç etmeleri", "D) Tarımla uğraşmaları ve ziraat aletleri yapmaları", "E) Maniheizm’i Türkistan’ın bazı şehirlerinde yaymaları"],
+                correct: "A",
+                explanation: "Sha-chou Uygurları, ticaret yollarındaki stratejik konumlarıyla önem kazanmıştır."
+            },
+            {
+                question: "Aşağıdakilerden hangisi Uygurlar ile alakalı akademik çalışma yapan ilim adamları arasında değildir?",
+                options: ["A) Özkan İzgi", "B) Turgun Almas", "C) Gülçin Çandarlıoğlu", "D) Bahattin Ögel", "E) Mustafa Kafalı"],
+                correct: "E",
+                explanation: "Mustafa Kafalı, genel Türk tarihiyle uğraşmış, ancak Uygurlarla özel bir çalışma yapmamıştır."
+            },
+            {
+                question: "Oğuz Kağan Destanı’nda dikkati çeken üç temel unsur aşağıdakilerden hangisidir?",
+                options: ["A) Işık, hava, deniz", "B) Bozkurt, geyik, ışık", "C) Gün, ay, yıldız", "D) Bozkurt, gün, ay", "E) Bozkurt, deniz, gök"],
+                correct: "B",
+                explanation: "Destanda bozkurt, geyik ve ışık sembolleri temel unsurlardır."
+            },
+            {
+                question: "Aşağıdakilerden hangisi Moyen-çor’un yaptığı seferler arasında yer almamaktadır?",
+                options: ["A) Hindistan Seferleri", "B) Batı Seferleri", "C) Oğuz Seferleri", "D) Çin Seferi", "E) Kuzey Seferi"],
+                correct: "A",
+                explanation: "Moyen-çor Hindistan’a sefer düzenlememiştir; diğer seferler onun dönemine aittir."
+            },
+            {
+                question: "I. Türkçe, Çince ve Soğdca olmak üzere üç dilde yazılmıştır. II. ‘Ay Tengride Kut Bulmuş Alp Bilge Tengri’ adına dikilmiştir. III. Göktürk alfabesi ile yazılmıştır. Yukarıda özellikleri verilen Uygur yazıtı aşağıdakilerden hangisidir?",
+                options: ["A) Karabalsagun Yazıtı", "B) Terhin (Taryat) Yazıtı", "C) Suci Yazıtı", "D) Şine-usu Yazıtı", "E) Tez Yazıtı"],
+                correct: "A",
+                explanation: "Karabalsagun Yazıtı, bu özelliklere sahiptir ve Mani dinine geçişi de içerir."
+            },
+            {
+                question: "I. 839 yılında Uygur kağanının öldürülmesiyle Türk devletinin başına geçmişlerdir. II. VI. yüzyılda Sayan Dağları’nın kuzeyi ve Yenisey Nehri mecrasında yaşamaktadırlar. III. 752 senesinde Tokuz Oğuz, Çikler, Üç Karluk boyları ile Uygurlara karşı ittifak kurmuşlardır. IV. Çin kaynaklarında açık renkli ve mavi gözlü oldukları belirtilir. Yukarıda verilen bilgiler hangi Türk boyu ile alakalıdır?",
+                options: ["A) Kıpçaklar", "B) Kırgızlar", "C) On Uygurlar", "D) Türgişler", "E) Oğuzlar"],
+                correct: "B",
+                explanation: "Bu özellikler Kırgızlara aittir; özellikle 839’daki olay ve fiziksel betimlemeler bunu doğrular."
+            },
+            {
+                question: "Çin imparatoru Ming Tsung’un 'Medeniyetler Şekil Veren Kağan' unvanını verdiği Kan-chou Uygur kağanı kimdir?",
+                options: ["A) Bögü Kağan", "B) Pu-sa Kağan", "C) Jen-yü Kağan", "D) Alp Bilge Kağan", "E) Moyen-çor"],
+                correct: "C",
+                explanation: "Jen-yü Kağan, bu unvanı alan Kan-chou Uygur kağanıdır."
+            },
+            {
+                question: "Uygur Devleti kurulmadan önce Uygurların şöhretinin artmasına neden olan hadise aşağıdakilerden hangisidir?",
+                options: ["A) Tekin Erkin liderliğinde Juan-juan ordusunu yok etmeleri", "B) P’u-sa önderliğinde 627’de yüz bin kişilik Göktürk ordusunu yenmeleri", "C) P’u-sa önderliğinde 600’lü yılların başında Çin ordusunu mağlup etmeleri", "D) P’u-sa’nın Karlukları ve Tölesleri mağlup etmesi", "E) Tekin Erkin ve P’u-sa idaresinde Hindistan tarafına sefer yapmaları"],
+                correct: "A",
+                explanation: "Tekin Erkin’in Juan-juan ordusunu yok etmesi, Uygurların Göktürk öncesi şöhretini artırmıştır."
+            },
+            {
+                question: "Uygurlar devletleri dağıldıktan sonra hangi topluluklara katılmışlardır?",
+                options: ["A) Oğuz, Kırgız, Karluk", "B) Moğol, Tibet, Oğuz", "C) Karluk, Tibet, Moğol", "D) Türgiş, Basmıl, Tibet", "E) Karluk, Kırgız, Oğuz"],
+                correct: "C",
+                explanation: "Uygurlar dağıldıktan sonra Karluk, Tibet ve Moğol topluluklarına karışmıştır."
+            },
+            {
+                question: "Diğer kağanlara göre daha uzun süre tahtta kalmış ve huzurlu bir devir geçirmiştir. Bu kağan kimdir?",
+                options: ["A) Ay Tengride Kut Bulmış Alp Bilge Kağan", "B) Kün Tengri’de Ülüg Bulmış Alp Küçlüg Bilge Kağan", "C) Küllüg Boga", "D) Hazar Tegin", "E) Hu Tegin"],
+                correct: "A",
+                explanation: "Ay Tengride Kut Bulmış Alp Bilge Kağan, uzun ve huzurlu bir yönetim sürmüştür."
+            },
+            {
+                question: "Büyük Hun Devleti’nin kurulduğu dönemde Çin kaynaklarına göre aşağıdakilerden hangileri doğrudur? I. Yenisey’in yukarısında Kırgız Hanlığı vardı. II. Altaylarda Oğuz Hanlığı vardı. III. Baykal Gölü civarında Doğu Uygur Hanlığı vardı. IV. Tarım Havzasında Moğol şehir devletleri vardı. V. Orta Asya’nın doğusunda Fergana Hanlığı vardı.",
+                options: ["A) I, II ve IV", "B) I, II ve V", "C) II, III ve IV", "D) I, II ve III", "E) II, III ve V"],
+                correct: "D",
+                explanation: "I, II ve III Büyük Hun Devleti döneminde doğrudur; IV ve V daha sonraki dönemlere aittir."
+            },
+            {
+                question: "Uygurların destanlardaki inançlarına göre ilk türedikleri yer aşağıdakilerden hangisidir?",
+                options: ["A) Kuz Balıg", "B) Arkan Nehir", "C) Kara-korum", "D) Sarı Nehir", "E) Ordu Balıg"],
+                correct: "B",
+                explanation: "Uygur destanlarına göre ilk türeme yeri Arkan Nehir’dir."
+            },
+            {
+                question: "Çin hanedan tarihleri için aşağıda verilen bilgilerden hangisi yanlıştır?",
+                options: ["A) Türk tarihi için en kıymetli sözlü kaynaklardır", "B) Hükümdarların uyrukları hakkında bilgi kaynağıdır", "C) Uygurların günlük yaşamlarına dair bilgi vermektedir", "D) Türk boyları hakkında önemli bilgiler vermektedir", "E) Uygurların menşei hakkında bilgi içermektedir"],
+                correct: "A",
+                explanation: "Çin hanedan tarihleri yazılı kaynaklardır, sözlü kaynaklar değildir."
+            },
+            {
+                question: "Bögü Kağan ile alakalı aşağıda verilen bilgilerden hangileri doğrudur? I. Çin’e karşı Uygur devlet politikasında değişikliğe gitti. II. Çin başkentinde pek çok Uygur serbestçe ticaret yapmaya başladı. III. Şehirli ve tüccar dini olan Maniheizm’i kabul etti. IV. Tun Baga Tarkan tarafından 789 yılında öldürüldü.",
+                options: ["A) I, II ve IV", "B) I, III ve IV", "C) I, II ve III", "D) II, III ve IV", "E) II ve III"],
+                correct: "C",
+                explanation: "I, II ve III doğrudur; IV yanlıştır, çünkü Bögü Kağan Tun Baga Tarkan tarafından öldürülmemiştir."
+            },
+            {
+                question: "Uygur Devleti hangi boy üzerinde gelişmeye başlamıştır?",
+                options: ["A) Dokuz Oğuz", "B) Karluk", "C) Basmıl", "D) Kıpçak", "E) Dokuz Tatar"],
+                correct: "A",
+                explanation: "Uygur Devleti, Dokuz Oğuz boyu temelinde kurulmuştur."
+            },
+            {
+                question: "İkinci Uygur kağanı Moyençor adına dikilen yazıtlar aşağıdakilerden hangisinde bir arada verilmiştir?",
+                options: ["A) Suci, Ulaan Gom, Tez Abidesi", "B) Karabalsagun, Şine Usu, Terhin", "C) Şine Usu, Terhin, Tez Abidesi", "D) Suci, Ulaan Gom, Hoytu Tamir", "E) Şine Usu, Terhin, Suci"],
+                correct: "C",
+                explanation: "Moyençor adına Şine Usu, Terhin ve Tez yazıtları dikilmiştir."
+            },
+            {
+                question: "1909 yılında Mogoitu ırmağı çevresinde bulunan yazıt aşağıdakilerden hangisidir?",
+                options: ["A) Ulaan Gom Yazıtı", "B) Gurbaicin Yazıtı", "C) Tez Abidesi", "D) Şine Usu Yazıtı", "E) Karabalsagun Yazıtı"],
+                correct: "D",
+                explanation: "Şine Usu Yazıtı, 1909’da Mogoitu ırmağı çevresinde bulunmuştur."
+            },
+            {
+                question: "Uygur ülkesinin coğrafyası ve askeri teşkilatı hakkında bilgi veren yazıt hangisidir?",
+                options: ["A) Şine Usu Yazıtı", "B) Suci Yazıtı", "C) Tez Abidesi", "D) Ulaan Gom Yazıtı", "E) Terhin Abidesi"],
+                correct: "A",
+                explanation: "Şine Usu Yazıtı, bu bilgileri içerir ve Moyen Çor adına dikilmiştir."
+            },
+            {
+                question: "Moyen Çor’un yaptığı seferler arasında aşağıdakilerden hangisi yoktur?",
+                options: ["A) İran Seferi", "B) Oğuz Seferi", "C) Batı Seferi", "D) Kuzey Seferi", "E) Çin Seferi"],
+                correct: "A",
+                explanation: "Moyen Çor İran’a sefer yapmamıştır; diğer seferler onun dönemine aittir."
+            },
+            {
+                question: "Aşağıdakilerden hangisi Uygur edebiyatı çeşitlerinden biri değildir?",
+                options: ["A) Bozkır Kağanlığı Dönemi Edebiyatı", "B) Mani Dini Tesirinde Gelişen Edebiyat", "C) Buda Dini Tesirinde Gelişen Edebiyat", "D) Yazılı ve Sözlü Edebiyat", "E) Göktürk Edebiyatı"],
+                correct: "E",
+                explanation: "Göktürk Edebiyatı, Uygur edebiyatından ayrı bir kategoridir."
+            },
+            {
+                question: "Tun Baga Tarkan’dan sonra Uygur tahtına kim geçmiştir?",
+                options: ["A) Pu-sa", "B) Kutluğ Bilge Kaan", "C) Moyen Çor", "D) Hsiyeh-yü Chia-ssu", "E) To-lo-ssu Kaan"],
+                correct: "D",
+                explanation: "Hsiyeh-yü Chia-ssu, Tun Baga Tarkan’dan sonra tahta geçmiştir."
+            },
+            {
+                question: "Talas Savaşı’nda Müslümanlara destek veren Türk boyu hangisidir?",
+                options: ["A) Basmıllar", "B) Oğuzlar", "C) Kırgızlar", "D) Türgişler", "E) Karluklar"],
+                correct: "E",
+                explanation: "Karluklar, 751’deki Talas Savaşı’nda Müslümanlara destek vermiştir."
+            },
+            {
+                question: "Hangisi Uygurların yıkılış sebepleri arasında gösterilemez?",
+                options: ["A) Türk boylarının isyanı", "B) Mani Dini", "C) Çin’in entrikaları", "D) Coğrafi bölge zorluğu", "E) İç çekişmeler"],
+                correct: "B",
+                explanation: "Mani Dini bir yıkılış sebebi değil, kültürel bir etkendir."
+            },
+            {
+                question: "Türk kültür tarihi bakımından büyük neticeler doğuran Lo-yang seferinin tarihi hangisidir?",
+                options: ["A) 762", "B) 763", "C) 759", "D) 761", "E) 760"],
+                correct: "B",
+                explanation: "Lo-yang seferi 763 yılında gerçekleşmiş ve önemli kültürel etkiler bırakmıştır."
+            },
+            {
+                question: "Kutluk Bilge Kül Kağan’dan sonra tahta kim geçmiştir?",
+                options: ["A) Bögü Kağan", "B) Tun Baga Tarkan", "C) Moyen Çor", "D) Alp Bilge Kağan", "E) Pu-sa"],
+                correct: "A",
+                explanation: "Bögü Kağan, Kutluk Bilge Kül Kağan’dan sonra tahta geçmiştir."
+            },
+            {
+                question: "Koa-ch’ang Uygurları hangi tarihte ilk elçilik heyetini göndermiştir?",
+                options: ["A) 964", "B) 961", "C) 962", "D) 960", "E) 963"],
+                correct: "D",
+                explanation: "Koa-ch’ang Uygurları ilk elçilik heyetini 960’da göndermiştir."
+            },
+            {
+                question: "795 senesinde 'Ay Tengride Ulug Bulmuş Alp Uluğ Bilge' unvanı ile tahta geçen kağan hangisidir?",
+                options: ["A) Kutluğ Bilge", "B) To-lo-ssu Kağan", "C) Ch’eng (A-Ch’o) Kağan", "D) Tun Baga Tarkan", "E) Bögü"],
+                correct: "D",
+                explanation: "Tun Baga Tarkan, 795’te bu unvanla tahta geçmiştir."
+            },
+            {
+                question: "Koa-ch’ang Uygurları Çin’e ilk ticaret heyetini hangi yılda yollamıştır?",
+                options: ["A) 960", "B) 963", "C) 961", "D) 962", "E) 964"],
+                correct: "A",
+                explanation: "İlk ticaret heyeti 960 yılında gönderilmiştir."
+            },
+            {
+                question: "Bögü Kağan’ı Çin üzerine sefer yapması için ikna edenler kimlerdi?",
+                options: ["A) Dokuz Oğuzlar ve Soğdular", "B) Tun Baga Tarkan - Kutluk Bilge", "C) Oğuz ve Kırgızlar", "D) Göktürkler - Basmıllar", "E) Jen-yü - Arslan Han"],
+                correct: "A",
+                explanation: "Dokuz Oğuzlar ve Soğdular, Bögü Kağan’ı Çin seferine ikna etmiştir."
+            },
+            {
+                question: "Uygurların hüküm sürdüğü tarih hangisidir?",
+                options: ["A) 644-751", "B) 744-840", "C) 661-745", "D) 617-744", "E) 578-810"],
+                correct: "B",
+                explanation: "Uygur Devleti, 744-840 yılları arasında varlığını sürdürmüştür."
+            },
+            {
+                question: "Uygurlar Tibetliler ile hangi bölge için mücadele etmiştir?",
+                options: ["A) Ötüken", "B) Beşbalık", "C) Selenge", "D) Ordubalık", "E) Fergana Vadisi"],
+                correct: "B",
+                explanation: "Uygurlar ve Tibetliler, Beşbalık bölgesi için mücadele etmiştir."
+            },
+            {
+                question: "Dokuz Oğuz tabiri Çin kaynaklarında ilk defa hangi tarihte geçmiştir?",
+                options: ["A) 625", "B) 626", "C) 627", "D) 628", "E) 629"],
+                correct: "C",
+                explanation: "Dokuz Oğuz tabiri, Çin kaynaklarında ilk kez 627’de kullanılmıştır."
+            }
+        ];
+
+        let selectedQuestions = [];
+        let userAnswers = {};
+
+        function startQuiz() {
+            document.querySelector('.welcome').classList.remove('active');
+            document.querySelector('.quiz').classList.add('active');
+            selectedQuestions = shuffle(questions).slice(0, 60); // Randomize and select 60
+            displayQuestions();
+        }
+
+        function displayQuestions() {
+            const questionsDiv = document.getElementById('questions');
+            questionsDiv.innerHTML = '';
+            selectedQuestions.forEach((q, index) => {
+                const div = document.createElement('div');
+                div.classList.add('question');
+                div.innerHTML = `
+                    <p>${index + 1}. ${q.question}</p>
+                    <div class="options">
+                        ${q.options.map(opt => `
+                            <label><input type="radio" name="q${index}" value="${opt[0]}"> ${opt}</label>
+                        `).join('')}
+                    </div>
+                `;
+                questionsDiv.appendChild(div);
+            });
+        }
+
+        function submitQuiz() {
+            document.querySelector('.quiz').classList.remove('active');
+            document.querySelector('.results').classList.add('active');
+            let score = 0;
+            selectedQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                userAnswers[index] = selected ? selected.value : null;
+                if (selected && selected.value === q.correct) score++;
+            });
+            document.getElementById('score').textContent = `${score} / 60`;
+            displayAnswerKey();
+        }
+
+        function displayAnswerKey() {
+            const answerKeyDiv = document.getElementById('answerKey');
+            answerKeyDiv.innerHTML = '';
+            selectedQuestions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === q.correct;
+                const div = document.createElement('div');
+                div.classList.add('result-item');
+                div.innerHTML = `
+                    <p><strong>Soru ${index + 1}:</strong> ${q.question}</p>
+                    <p>Doğru Cevap: ${q.options.find(opt => opt.startsWith(q.correct))}</p>
+                    <p>Senin Cevabın: ${userAnswer ? q.options.find(opt => opt.startsWith(userAnswer)) : 'Seçilmedi'}</p>
+                    <p class="${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? 'Doğru!' : 'Yanlış'}</p>
+                    <p><strong>Açıklama:</strong> ${q.explanation}</p>
+                `;
+                answerKeyDiv.appendChild(div);
+            });
+        }
+
+        function restartQuiz() {
+            document.querySelector('.results').classList.remove('active');
+            document.querySelector('.welcome').classList.add('active');
+            userAnswers = {};
+        }
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+    </script>
+</body>
+</html>

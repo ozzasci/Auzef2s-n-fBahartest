@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roma Tarihi Vize Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .welcome, .test-form, .result {
+            display: none;
+        }
+        .welcome.active, .test-form.active, .result.active {
+            display: block;
+        }
+        .welcome {
+            text-align: center;
+            padding: 20px;
+        }
+        .welcome button {
+            background-color: #3498db;
+        }
+        .welcome button:hover {
+            background-color: #2980b9;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .question label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #timer {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #e74c3c;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            height: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .result {
+            padding: 20px;
+        }
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .result-table th, .result-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .result-table th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .correct {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .unit-stats {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #ecf0f1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .unit-stats h3 {
+            margin: 0 0 10px;
+            color: #34495e;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            button {
+                padding: 10px;
+            }
+            .result-table th, .result-table td {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Roma Tarihi Vize Testi</h1>
+
+        <!-- Karşılama Ekranı -->
+        <div class="welcome active" id="welcome">
+            <p>Hoş geldiniz! Bu test, Roma Tarihi vize sorularından oluşmaktadır. Toplam 60 soru, 30 dakikalık süre. Başarılar!</p>
+            <button onclick="startTest()">Teste Başla</button>
+        </div>
+
+        <!-- Test Formu -->
+        <div class="test-form" id="testForm">
+            <div id="timer">Kalan Süre: 30:00</div>
+            <div class="progress-bar"><div class="progress" id="progress"></div></div>
+            <form id="quizForm">
+                <h2>Roma Tarihi Test Soruları</h2>
+                <div class="question">
+                    <p>1. Senato tarafından alınan lanetleme kararı için kullanılan Latince kavram aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q1" value="a"> Prevocatio</label>
+                    <label><input type="radio" name="q1" value="b"> Memoriae</label>
+                    <label><input type="radio" name="q1" value="c"> Damnatio memoriae</label>
+                    <label><input type="radio" name="q1" value="d"> Adlectio</label>
+                    <label><input type="radio" name="q1" value="e"> Condamnio</label>
+                </div>
+                <div class="question">
+                    <p>2. Roma'da krallık rejiminin sonlandırılmasının ardından uygulamaya konulan cumhuriyet rejiminde en yüksek yetkilinin unvanı aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q2" value="a"> Praetor</label>
+                    <label><input type="radio" name="q2" value="b"> Consul</label>
+                    <label><input type="radio" name="q2" value="c"> Aedil</label>
+                    <label><input type="radio" name="q2" value="d"> Senator</label>
+                    <label><input type="radio" name="q2" value="e"> Quaestor</label>
+                </div>
+                <div class="question">
+                    <p>3. Döneminde Roma İmparatorluğu’nun hemen hiç dış savaş ve büyük askeri sefer yapmak zorunda kalmadığı, eyaletlerdeki şehirlerin imar ve diğer sorunlarıyla ilgilenen imparator kimdir?</p>
+                    <label><input type="radio" name="q3" value="a"> Lucius Verus</label>
+                    <label><input type="radio" name="q3" value="b"> Pertinax</label>
+                    <label><input type="radio" name="q3" value="c"> Marcus Aurelius</label>
+                    <label><input type="radio" name="q3" value="d"> Antoninus Pius</label>
+                    <label><input type="radio" name="q3" value="e"> Hadrian</label>
+                </div>
+                <div class="question">
+                    <p>4. Aşağıdaki imparatorlardan hangisi Iulius Claudius hanedanı mensubudur?</p>
+                    <label><input type="radio" name="q4" value="a"> Nerva</label>
+                    <label><input type="radio" name="q4" value="b"> Domitian</label>
+                    <label><input type="radio" name="q4" value="c"> Vespasian</label>
+                    <label><input type="radio" name="q4" value="d"> Nero</label>
+                    <label><input type="radio" name="q4" value="e"> Titus</label>
+                </div>
+                <div class="question">
+                    <p>5. Roma şehrinin elle tutulabilir gerçek tarihi için veri teşkil eden en eski buluntuların gün yüzüne çıktığı tepe hangisidir?</p>
+                    <label><input type="radio" name="q5" value="a"> Palatinus Tepesi</label>
+                    <label><input type="radio" name="q5" value="b"> Aventinus Tepesi</label>
+                    <label><input type="radio" name="q5" value="c"> Quirinalis Tepesi</label>
+                    <label><input type="radio" name="q5" value="d"> Esquilinus Tepesi</label>
+                    <label><input type="radio" name="q5" value="e"> Viminalis Tepesi</label>
+                </div>
+                <div class="question">
+                    <p>6. M.Ö. 1. yy. ikinci yarısında hangi yıl, hangi savaş sonrası, kim tarafından Roma Ordusu’ndan 140.000’den fazla asker emekli edilerek lejyon sayısı 28’e düşürülmüştür?</p>
+                    <label><input type="radio" name="q6" value="a"> Pharsalos-Teselya-M.Ö. 43-Iulius Caesar</label>
+                    <label><input type="radio" name="q6" value="b"> Actium-Preveze-M.Ö. 31-Octavianus</label>
+                    <label><input type="radio" name="q6" value="c"> Thapsus-Kuzey Afrika-M.Ö. 46-Cato</label>
+                    <label><input type="radio" name="q6" value="d"> Munda-İspanya-M.Ö. 45-Sextus Pompeius</label>
+                    <label><input type="radio" name="q6" value="e"> Perusina-İtalya-M.Ö. 41-Lucius Antonius</label>
+                </div>
+                <div class="question">
+                    <p>7. M.S. 1. yy. ikinci yarısına “4 İmparatorlar Yılı” olarak geçen dönem hangisidir ve kimler imparator ilan edilmiştir?</p>
+                    <label><input type="radio" name="q7" value="a"> 66-67: Licinius-Seianus-Tiberius-Ahenobarbus</label>
+                    <label><input type="radio" name="q7" value="b"> 72-73: Maximinus-Lucius-Gaius-Drusus</label>
+                    <label><input type="radio" name="q7" value="c"> 68-69: Galba-Otho-Vitellius-Vespasianus</label>
+                    <label><input type="radio" name="q7" value="d"> 70-71: Traianus-Hadrianus-Marcus-Commodus</label>
+                    <label><input type="radio" name="q7" value="e"> 64-65: Severus-Carus-Claudius-Antonianus</label>
+                </div>
+                <div class="question">
+                    <p>8. M. Licinius Crassus hangi olayın ardından hayatını kaybetmiştir?</p>
+                    <label><input type="radio" name="q8" value="a"> Parth Seferi’nde aldığı yaralarla Roma’ya götürülürken yolda öldü</label>
+                    <label><input type="radio" name="q8" value="b"> Parth sefer hazırlıkları sırasında Antiocheia’da suikasta uğradı</label>
+                    <label><input type="radio" name="q8" value="c"> Pompeius Magnus tarafından M.Ö. 63’te idam edildi</label>
+                    <label><input type="radio" name="q8" value="d"> Parthlara karşı başarısız olunca intihar etti</label>
+                    <label><input type="radio" name="q8" value="e"> M.Ö. 53’te Carrhae’de Parthlar tarafından esir alınarak öldürüldü</label>
+                </div>
+                <div class="question">
+                    <p>9. Etrüsklerin kökenlerinin dayandırıldığı Villanova kültürü hangi coğrafyada geliştiği öngörülmektedir?</p>
+                    <label><input type="radio" name="q9" value="a"> Sicilia</label>
+                    <label><input type="radio" name="q9" value="b"> Aemilia Romana ve Toscana</label>
+                    <label><input type="radio" name="q9" value="c"> Veneto</label>
+                    <label><input type="radio" name="q9" value="d"> Calabria</label>
+                    <label><input type="radio" name="q9" value="e"> Sardinia</label>
+                </div>
+                <div class="question">
+                    <p>10. “Sella curulis” kavramı aşağıdakilerden hangisini açıklar?</p>
+                    <label><input type="radio" name="q10" value="a"> Senato başkanlığı makamı</label>
+                    <label><input type="radio" name="q10" value="b"> Yüksek mahkeme başkanlığı makamı</label>
+                    <label><input type="radio" name="q10" value="c"> Kurul başkanlığı makamı</label>
+                    <label><input type="radio" name="q10" value="d"> En yüksek devlet memurlarının oturduğu koltuk</label>
+                    <label><input type="radio" name="q10" value="e"> Sayıştay başkanının makamı</label>
+                </div>
+                <div class="question">
+                    <p>11. Orvieto bölgesindeki Voltumna korusu neden İtalya ve Roma Eski Çağ tarihi bakımından büyük önem taşır?</p>
+                    <label><input type="radio" name="q11" value="a"> Etrüsklerin ağır ceza mahkemesinin toplandığı yer</label>
+                    <label><input type="radio" name="q11" value="b"> Etrüsk kabilelerinin Latium’daki kabileleri yendiği yer</label>
+                    <label><input type="radio" name="q11" value="c"> En erken Etrüsk yazıtlarının bulunduğu yer</label>
+                    <label><input type="radio" name="q11" value="d"> Etrüsk kabilelerinin ortak yönetim meclisinin toplandığı yer</label>
+                    <label><input type="radio" name="q11" value="e"> Etrüsklerin en önemli dini merkezi</label>
+                </div>
+                <div class="question">
+                    <p>12. “Magistratus” sözü Roma’da neyi tanımlar?</p>
+                    <label><input type="radio" name="q12" value="a"> Devlet memurlarının meslek başındaki zorunlu görevi</label>
+                    <label><input type="radio" name="q12" value="b"> Başka bölgelere gönderilen elçilerin unvanı</label>
+                    <label><input type="radio" name="q12" value="c"> Yönetici sınıfının doktorluk görevi</label>
+                    <label><input type="radio" name="q12" value="d"> Askerlik hizmeti</label>
+                    <label><input type="radio" name="q12" value="e"> En yüksek devlet memurluklarının tümünü tanımlayan kavram</label>
+                </div>
+                <div class="question">
+                    <p>13. Roma vatandaşlarının sayımını yapmak kimin görev alanındadır?</p>
+                    <label><input type="radio" name="q13" value="a"> Censor</label>
+                    <label><input type="radio" name="q13" value="b"> Quaestor</label>
+                    <label><input type="radio" name="q13" value="c"> Prorogator</label>
+                    <label><input type="radio" name="q13" value="d"> Lictor</label>
+                    <label><input type="radio" name="q13" value="e"> Viator</label>
+                </div>
+                <div class="question">
+                    <p>14. “Optimus Princeps” unvanı hangi imparator için kullanılmıştır ve anlamı nedir?</p>
+                    <label><input type="radio" name="q14" value="a"> Augustus - en kutsal</label>
+                    <label><input type="radio" name="q14" value="b"> Traianus - en iyi</label>
+                    <label><input type="radio" name="q14" value="c"> Claudius - en üstün</label>
+                    <label><input type="radio" name="q14" value="d"> Tiberius - en yenilmez</label>
+                    <label><input type="radio" name="q14" value="e"> Vespasian - en mükemmel</label>
+                </div>
+                <div class="question">
+                    <p>15. İmparator Augustus zamanında hangi yıl, nerede, kimler tarafından 3 Roma lejyonu imha edilmiştir ve bu olayın adı nedir?</p>
+                    <label><input type="radio" name="q15" value="a"> M.S. 12: Karaormanlar-Allemanlar-Drusus Savaşı</label>
+                    <label><input type="radio" name="q15" value="b"> M.S. 9: Teutoburg Ormanı-Germenler-Varus Savaşı</label>
+                    <label><input type="radio" name="q15" value="c"> M.S. 5: Pirene Ormanı-Keltler-Arminius Savaşı</label>
+                    <label><input type="radio" name="q15" value="d"> M.S. 3: Eisias Ormanı-Berberler-Faminus Savaşı</label>
+                    <label><input type="radio" name="q15" value="e"> M.S. 7: Arden Ormanı-Biturigler-Rutus Savaşı</label>
+                </div>
+                <div class="question">
+                    <p>16. Cumhuriyet Döneminde consul’lerin Roma dışında olduğu zamanlarda yönetimi üstlenen görevli kimdir?</p>
+                    <label><input type="radio" name="q16" value="a"> Tribunus</label>
+                    <label><input type="radio" name="q16" value="b"> Quaestor</label>
+                    <label><input type="radio" name="q16" value="c"> Censor</label>
+                    <label><input type="radio" name="q16" value="d"> Legatus</label>
+                    <label><input type="radio" name="q16" value="e"> Praetor</label>
+                </div>
+                <div class="question">
+                    <p>17. İmparator Octavianus’a tanrılar ve insanlar arasında bağlantıyı sağlayan statü olarak verilen unvan hangisidir?</p>
+                    <label><input type="radio" name="q17" value="a"> Pontifex Maximus</label>
+                    <label><input type="radio" name="q17" value="b"> Divi Filius</label>
+                    <label><input type="radio" name="q17" value="c"> Augustus</label>
+                    <label><input type="radio" name="q17" value="d"> Caesar</label>
+                    <label><input type="radio" name="q17" value="e"> Africanus</label>
+                </div>
+                <div class="question">
+                    <p>18. Roma tarihinde patrici ve plebler arasında sosyal çatışmalar dönemi hangi yüzyıllara denk gelir?</p>
+                    <label><input type="radio" name="q18" value="a"> M.Ö. III-II YY</label>
+                    <label><input type="radio" name="q18" value="b"> M.Ö. V-IV YY</label>
+                    <label><input type="radio" name="q18" value="c"> M.S. I-II YY</label>
+                    <label><input type="radio" name="q18" value="d"> M.S. II YY</label>
+                    <label><input type="radio" name="q18" value="e"> M.Ö. I YY</label>
+                </div>
+                <div class="question">
+                    <p>19. M.Ö. 1. yy. ikinci yarısında kurulan I. Üçlü Yönetimin mensupları kimlerdir ve hangi tarihte kurulmuştur?</p>
+                    <label><input type="radio" name="q19" value="a"> M.Ö. 25: Paprius Carbo, Lucius Optimius, Marcus Coriolanus</label>
+                    <label><input type="radio" name="q19" value="b"> M.Ö. 46: Cornelius Fronto, Quintus Ennius, Iunius Brutus</label>
+                    <label><input type="radio" name="q19" value="c"> M.Ö. 49: Caecilius Metellus, Caelius Rufus, Aulus Gabinius</label>
+                    <label><input type="radio" name="q19" value="d"> M.Ö. 27: Gaius Norbanus, Marcus Octavius, Numerius Rufus</label>
+                    <label><input type="radio" name="q19" value="e"> M.Ö. 43: Marcus Antonius, Gaius Octavianus, Marcus Aemilianus Lepidus</label>
+                </div>
+                <div class="question">
+                    <p>20. “Genç boğa insanları” diyen kabileyle ilgili doğru ifade hangisidir?</p>
+                    <label><input type="radio" name="q20" value="a"> Avrupa kavramı bu kabileden gelir</label>
+                    <label><input type="radio" name="q20" value="b"> İtalya kavramı bu kabileden gelir</label>
+                    <label><input type="radio" name="q20" value="c"> Venedik şehrinin kökeni bu kabileden gelir</label>
+                    <label><input type="radio" name="q20" value="d"> İtalya kelimesi Hint-Avrupa kabilelerinden gelir</label>
+                    <label><input type="radio" name="q20" value="e"> Atlantis kavramı bu kabileden gelir</label>
+                </div>
+                <div class="question">
+                    <p>21. İmparator Titus zamanında gerçekleşen siyasal olaylardan biri hangisidir?</p>
+                    <label><input type="radio" name="q21" value="a"> Kuzey Afrika’da vassal krallıklar kurulması</label>
+                    <label><input type="radio" name="q21" value="b"> Dakia bölgesinin Roma egemenliğine dâhil edilmesi</label>
+                    <label><input type="radio" name="q21" value="c"> Judea eyaletinde çıkan isyanın bastırılması</label>
+                    <label><input type="radio" name="q21" value="d"> Roma’da kamuya açık temizlik birimlerinin ücretli yapılması</label>
+                    <label><input type="radio" name="q21" value="e"> Germen kabileleriyle savaş</label>
+                </div>
+                <div class="question">
+                    <p>22. Roma’nın hangi müttefiki, hangi yılda, hangi anlaşmayla Anadolu’da en güçlü yerel güç haline gelmiştir?</p>
+                    <label><input type="radio" name="q22" value="a"> Frigya, M.Ö. 194, Gordion Anlaşması</label>
+                    <label><input type="radio" name="q22" value="b"> Bergama, M.Ö. 188, Apameia Antlaşması</label>
+                    <label><input type="radio" name="q22" value="c"> Galatia, M.Ö. 192, Ankyra Anlaşması</label>
+                    <label><input type="radio" name="q22" value="d"> Karia, M.Ö. 198, Mylasa Anlaşması</label>
+                    <label><input type="radio" name="q22" value="e"> Lykia, M.Ö. 186, Antifellos Anlaşması</label>
+                </div>
+                <div class="question">
+                    <p>23. Roma’nın kuruluş efsanesiyle doğrudan ilişkili olduğuna inanılan Anadolu şehri hangisidir?</p>
+                    <label><input type="radio" name="q23" value="a"> Pessinos</label>
+                    <label><input type="radio" name="q23" value="b"> Troia</label>
+                    <label><input type="radio" name="q23" value="c"> Daskyleion</label>
+                    <label><input type="radio" name="q23" value="d"> Gordion</label>
+                    <label><input type="radio" name="q23" value="e"> Sardes</label>
+                </div>
+                <div class="question">
+                    <p>24. İtalya yarımadasında Eski Çağ’da çıkan en büyük köle isyanının adı, ne zaman ve kim tarafından bastırılmıştır?</p>
+                    <label><input type="radio" name="q24" value="a"> Catilina, M.Ö. 88-86, Marcus Livius Drusus</label>
+                    <label><input type="radio" name="q24" value="b"> Spartacus, M.Ö. 72-71, Marcus Licinius Crassus</label>
+                    <label><input type="radio" name="q24" value="c"> Ahenobarbus, M.Ö. 67-65, Lucius Cornelius Sulla</label>
+                    <label><input type="radio" name="q24" value="d"> Aper, M.Ö. 64-62, Quintus Sertorius</label>
+                    <label><input type="radio" name="q24" value="e"> Pulcher, M.Ö. 61-58, Publius Quietus</label>
+                </div>
+                <div class="question">
+                    <p>25. 12 Levha Kanunları’nı hazırlayan kurumun adı nedir?</p>
+                    <label><input type="radio" name="q25" value="a"> Septemviri</label>
+                    <label><input type="radio" name="q25" value="b"> Arvales</label>
+                    <label><input type="radio" name="q25" value="c"> Pontificat</label>
+                    <label><input type="radio" name="q25" value="d"> Decemviri</label>
+                    <label><input type="radio" name="q25" value="e"> Quindecemviri</label>
+                </div>
+                <div class="question">
+                    <p>26. Cumhuriyet döneminde tüm halkın temsil edildiği en eski meclis hangisidir?</p>
+                    <label><input type="radio" name="q26" value="a"> Consilium Plebis</label>
+                    <label><input type="radio" name="q26" value="b"> Comitia Iudicandis</label>
+                    <label><input type="radio" name="q26" value="c"> Comitia Tributa</label>
+                    <label><input type="radio" name="q26" value="d"> Comitia Centuriata</label>
+                    <label><input type="radio" name="q26" value="e"> Comitia Peregrina</label>
+                </div>
+                <div class="question">
+                    <p>27. M.S. 96 ile 180 yılları arasında Roma Devleti’ni yöneten imparatorların dönemine ne ad verilir?</p>
+                    <label><input type="radio" name="q27" value="a"> Babadan oğula geçen hanedan mensubu dönemi</label>
+                    <label><input type="radio" name="q27" value="b"> Silah zoruyla imparator olanlar dönemi</label>
+                    <label><input type="radio" name="q27" value="c"> Evlat edinilen imparatorlar dönemi</label>
+                    <label><input type="radio" name="q27" value="d"> Senato tarafından imparator ilan edilenler dönemi</label>
+                    <label><input type="radio" name="q27" value="e"> Muhafızlar tarafından imparator ilan edilenler dönemi</label>
+                </div>
+                <div class="question">
+                    <p>28. M.Ö. 1. yüzyıl ortasında (M.Ö. 60-49) kurulan I. Üçlü Yönetimin mensupları kimlerdir?</p>
+                    <label><input type="radio" name="q28" value="a"> Paprius Carbo, Lucius Optimius, Marcus Coriolanus</label>
+                    <label><input type="radio" name="q28" value="b"> Gaius Norbanus, Marcus Octavius, Numerius Rufus</label>
+                    <label><input type="radio" name="q28" value="c"> Cornelius Fronto, Quintus Ennius, Iunius Brutus</label>
+                    <label><input type="radio" name="q28" value="d"> Iullius Caesar, Gnaeus Pompeius, Marcus Licinius Crassus</label>
+                    <label><input type="radio" name="q28" value="e"> Caecilius Metellus, Caelius Rufus, Aulus Gabinius</label>
+                </div>
+                <div class="question">
+                    <p>29. VI. Mithridates, M.Ö. 88-85 yıllarında Romalıları Anadolu’dan çıkarmak için hangi eyaleti ele geçirmiştir?</p>
+                    <label><input type="radio" name="q29" value="a"> Macedonia</label>
+                    <label><input type="radio" name="q29" value="b"> Asia</label>
+                    <label><input type="radio" name="q29" value="c"> Akhaia</label>
+                    <label><input type="radio" name="q29" value="d"> Dalmatia</label>
+                    <label><input type="radio" name="q29" value="e"> Illyria</label>
+                </div>
+                <div class="question">
+                    <p>30. “Pomerium” sözcüğü neyi ifade eder?</p>
+                    <label><input type="radio" name="q30" value="a"> Roma şehri suyollarının bakımını yöneten kurum</label>
+                    <label><input type="radio" name="q30" value="b"> Roma şehri itfaiye teşkilatı</label>
+                    <label><input type="radio" name="q30" value="c"> Roma şehri kutsal alanlarının bakımından sorumlu kurum</label>
+                    <label><input type="radio" name="q30" value="d"> Roma şehrinin kutsal sınırı</label>
+                    <label><input type="radio" name="q30" value="e"> Roma şehri yapı faaliyetinden sorumlu kurum</label>
+                </div>
+                <div class="question">
+                    <p>31. Roma siyasi hayatında önemli rol oynayan din görevlilerini tanımlayan sözcük hangisidir?</p>
+                    <label><input type="radio" name="q31" value="a"> Ludiones</label>
+                    <label><input type="radio" name="q31" value="b"> Augur</label>
+                    <label><input type="radio" name="q31" value="c"> Tresviri Epulonum</label>
+                    <label><input type="radio" name="q31" value="d"> Spatarii</label>
+                    <label><input type="radio" name="q31" value="e"> Supplicationes</label>
+                </div>
+                <div class="question">
+                    <p>32. Cumhuriyet döneminde aristokrat kesime verilen isim hangisidir?</p>
+                    <label><input type="radio" name="q32" value="a"> Patriciler</label>
+                    <label><input type="radio" name="q32" value="b"> Populari</label>
+                    <label><input type="radio" name="q32" value="c"> Optimatlar</label>
+                    <label><input type="radio" name="q32" value="d"> Plebler</label>
+                    <label><input type="radio" name="q32" value="e"> Peregrini</label>
+                </div>
+                <div class="question">
+                    <p>33. Roma İmparatorluk döneminin ikinci hanedanlığını kuran kişi, vali olarak görev yaptığı yer ve hanedanlık hangisidir?</p>
+                    <label><input type="radio" name="q33" value="a"> Vespasian-Palestina/Syria-Flavius Hanedanı</label>
+                    <label><input type="radio" name="q33" value="b"> Gaius-Asta-Severus Hanedanı</label>
+                    <label><input type="radio" name="q33" value="c"> Claudius-Macedonia-Iulius-Claudius Hanedanı</label>
+                    <label><input type="radio" name="q33" value="d"> Tiberius-Akhaia-Antonin Hanedanı</label>
+                    <label><input type="radio" name="q33" value="e"> Nero-Sicilia-Aurelian Hanedanı</label>
+                </div>
+                <div class="question">
+                    <p>34. Zama Savaşı hangi yıl ve kimler arasında yapılmıştır?</p>
+                    <label><input type="radio" name="q34" value="a"> M.Ö. 220: Illyria’lılar-Roma</label>
+                    <label><input type="radio" name="q34" value="b"> M.Ö. 200: Ptolemaios Krallığı-Roma</label>
+                    <label><input type="radio" name="q34" value="c"> M.Ö. 202: Kartaca’lılar-Roma</label>
+                    <label><input type="radio" name="q34" value="d"> M.Ö. 198: Seleukos Krallığı-Roma</label>
+                    <label><input type="radio" name="q34" value="e"> M.Ö. 197: Makedonya Krallığı-Roma</label>
+                </div>
+                <div class="question">
+                    <p>35. İmparator Augustus tarafından M.Ö. 19 yılında ziyaret edilen eyalet hangisidir?</p>
+                    <label><input type="radio" name="q35" value="a"> Sardinia</label>
+                    <label><input type="radio" name="q35" value="b"> Galatia</label>
+                    <label><input type="radio" name="q35" value="c"> Bithynia</label>
+                    <label><input type="radio" name="q35" value="d"> Cilicia</label>
+                    <label><input type="radio" name="q35" value="e"> Sicilia</label>
+                </div>
+                <div class="question">
+                    <p>36. İmparator Commodus hangi oyunları desteklemiştir?</p>
+                    <label><input type="radio" name="q36" value="a"> Temsili deniz savaşı oyunları</label>
+                    <label><input type="radio" name="q36" value="b"> Gladyatör oyunları</label>
+                    <label><input type="radio" name="q36" value="c"> Atlı araba yarışları</label>
+                    <label><input type="radio" name="q36" value="d"> Şiir ve müzik yarışmaları</label>
+                    <label><input type="radio" name="q36" value="e"> Vahşi hayvan dövüşleri</label>
+                </div>
+                <div class="question">
+                    <p>37. Roma şehrinin adı hangi dilden türetilmiştir?</p>
+                    <label><input type="radio" name="q37" value="a"> Umbrice</label>
+                    <label><input type="radio" name="q37" value="b"> Ligurca</label>
+                    <label><input type="radio" name="q37" value="c"> Eski Yunanca</label>
+                    <label><input type="radio" name="q37" value="d"> Etrüskçe</label>
+                    <label><input type="radio" name="q37" value="e"> Latince</label>
+                </div>
+                <div class="question">
+                    <p>38. Eski Çağ’da Roma’da pazar yerlerinden, temizlik ve imar işlerinden sorumlu memurların unvanı nedir?</p>
+                    <label><input type="radio" name="q38" value="a"> Finitores</label>
+                    <label><input type="radio" name="q38" value="b"> Haruspices</label>
+                    <label><input type="radio" name="q38" value="c"> Viatores</label>
+                    <label><input type="radio" name="q38" value="d"> Quaestores</label>
+                    <label><input type="radio" name="q38" value="e"> Aedilis</label>
+                </div>
+                <div class="question">
+                    <p>39. M.Ö. 36’dan itibaren Parthlarla savaşta ağır yenilgiler alan ve yetkileri elinden alınan Romalı kimdir?</p>
+                    <label><input type="radio" name="q39" value="a"> Marcus Aemilianus Lepidus</label>
+                    <label><input type="radio" name="q39" value="b"> Gaius Octavianus</label>
+                    <label><input type="radio" name="q39" value="c"> Marcus Antonius</label>
+                    <label><input type="radio" name="q39" value="d"> Lucius Cornelius Cinna</label>
+                    <label><input type="radio" name="q39" value="e"> Marcus Livius Drusus</label>
+                </div>
+                <div class="question">
+                    <p>40. Roma’daki Colosseum hangi imparator tarafından başlatılmış ve hangi imparator döneminde tamamlanmıştır?</p>
+                    <label><input type="radio" name="q40" value="a"> Iulianus-Vespasianus</label>
+                    <label><input type="radio" name="q40" value="b"> Aleksandros-Leon</label>
+                    <label><input type="radio" name="q40" value="c"> Valens-Titus</label>
+                    <label><input type="radio" name="q40" value="d"> Vespasianus-Titus</label>
+                    <label><input type="radio" name="q40" value="e"> Domitianus-Vitellius</label>
+                </div>
+                <div class="question">
+                    <p>41. M.Ö. 2. yüzyılın ikinci yarısında bir vasiyetname ile topraklarını Roma’ya bırakmak zorunda kalan krallık hangisidir?</p>
+                    <label><input type="radio" name="q41" value="a"> Rodos</label>
+                    <label><input type="radio" name="q41" value="b"> Bergama</label>
+                    <label><input type="radio" name="q41" value="c"> Seleukos</label>
+                    <label><input type="radio" name="q41" value="d"> Makedonya</label>
+                    <label><input type="radio" name="q41" value="e"> Ptolemaios</label>
+                </div>
+                <div class="question">
+                    <p>42. M.S. 1. yüzyılda Roma Devleti’nin doğu sınırını hangi nehir belirlemektedir?</p>
+                    <label><input type="radio" name="q42" value="a"> Halys (Kızılırmak)</label>
+                    <label><input type="radio" name="q42" value="b"> Euphrat (Fırat)</label>
+                    <label><input type="radio" name="q42" value="c"> Tigris (Dicle)</label>
+                    <label><input type="radio" name="q42" value="d"> Orontes (Asi)</label>
+                    <label><input type="radio" name="q42" value="e"> Pyramos (Ceyhan)</label>
+                </div>
+                <div class="question">
+                    <p>43. M.S. 96 yılında uğradığı bir suikastle hayatını kaybeden ve anısı lanetlenen Roma imparatoru hangisidir?</p>
+                    <label><input type="radio" name="q43" value="a"> Titus</label>
+                    <label><input type="radio" name="q43" value="b"> Vespasianus</label>
+                    <label><input type="radio" name="q43" value="c"> Galba</label>
+                    <label><input type="radio" name="q43" value="d"> Domitianus</label>
+                    <label><input type="radio" name="q43" value="e"> Vitellius</label>
+                </div>
+                <div class="question">
+                    <p>44. Sulla’nın reformlarından biri hangisidir?</p>
+                    <label><input type="radio" name="q44" value="a"> Profesyonel bir ordunun kurulması</label>
+                    <label><input type="radio" name="q44" value="b"> Eyaletlerin tümüne alt sınıf mensubu valiler atanması</label>
+                    <label><input type="radio" name="q44" value="c"> Consul makamının ortadan kaldırılması</label>
+                    <label><input type="radio" name="q44" value="d"> Senato üye sayısının 300’den 600’e çıkarılması</label>
+                    <label><input type="radio" name="q44" value="e"> Comitia Centuriata meclisinin meydana getirilmesi</label>
+                </div>
+                <div class="question">
+                    <p>45. M.Ö. 2. yüzyılın ikinci yarısında bir vasiyetname ile topraklarını Roma’ya bırakmak zorunda kalan krallık hangisidir?</p>
+                    <label><input type="radio" name="q45" value="a"> Rodos</label>
+                    <label><input type="radio" name="q45" value="b"> Bergama</label>
+                    <label><input type="radio" name="q45" value="c"> Seleukos</label>
+                    <label><input type="radio" name="q45" value="d"> Makedonya</label>
+                    <label><input type="radio" name="q45" value="e"> Ptolemaios</label>
+                </div>
+                <div class="question">
+                    <p>46. M.S. 1. yüzyılda Roma Devleti’nin doğu sınırını hangi nehir belirlemektedir?</p>
+                    <label><input type="radio" name="q46" value="a"> Halys (Kızılırmak)</label>
+                    <label><input type="radio" name="q46" value="b"> Euphrat (Fırat)</label>
+                    <label><input type="radio" name="q46" value="c"> Tigris (Dicle)</label>
+                    <label><input type="radio" name="q46" value="d"> Orontes (Asi)</label>
+                    <label><input type="radio" name="q46" value="e"> Pyramos (Ceyhan)</label>
+                </div>
+                <div class="question">
+                    <p>47. Roma şehrinin adı hangi dilden türetilmiştir?</p>
+                    <label><input type="radio" name="q47" value="a"> Latince</label>
+                    <label><input type="radio" name="q47" value="b"> Ligurca</label>
+                    <label><input type="radio" name="q47" value="c"> Eski Yunanca</label>
+                    <label><input type="radio" name="q47" value="d"> Umbrice</label>
+                    <label><input type="radio" name="q47" value="e"> Etrüskçe</label>
+                </div>
+                <div class="question">
+                    <p>48. İmparator Titus zamanında gerçekleşen önemli siyasal olaylardan biri hangisidir?</p>
+                    <label><input type="radio" name="q48" value="a"> Judea eyaletinde çıkan ve çevresindeki coğrafyaya yayılan isyanın bastırılması</label>
+                    <label><input type="radio" name="q48" value="b"> Germen kabilelerinden Hatten ve Batava ile onların topraklarında savaş</label>
+                    <label><input type="radio" name="q48" value="c"> Kuzey Afrika’da vassal krallıklar kurulması</label>
+                    <label><input type="radio" name="q48" value="d"> Roma’da kamuya açık temizlik birimlerinden yararlanmanın ücretli yapılması</label>
+                    <label><input type="radio" name="q48" value="e"> Dakia bölgesinin Roma egemenlik alanına dâhil edilmesi</label>
+                </div>
+                <div class="question">
+                    <p>49. İtalya yarımadasında Eski Çağ’da çıkan en büyük köle isyanının adı, ne zaman ve kim tarafından bastırıldığı aşağıdakilerden hangisinde sırasıyla doğru verilmiştir?</p>
+                    <label><input type="radio" name="q49" value="a"> Catilina; M.Ö. 88-86; Marcus Livius Drusus</label>
+                    <label><input type="radio" name="q49" value="b"> Ahenobarbus; M.Ö. 67-65; Lucius Cornelius Sulla</label>
+                    <label><input type="radio" name="q49" value="c"> Pulcher; M.Ö. 61-58; Publius Quietus</label>
+                    <label><input type="radio" name="q49" value="d"> Aper; M.Ö. 64-62; Quintus Sertorius</label>
+                    <label><input type="radio" name="q49" value="e"> Spartacus; M.Ö. 72-71; Marcus Licinius Crassus</label>
+                </div>
+                <div class="question">
+                    <p>50. Zama Savaşı hangi yıl ve kimler arasında yapılmıştır?</p>
+                    <label><input type="radio" name="q50" value="a"> M.Ö. 202 yılında Kartaca’lılar ile Roma arasında</label>
+                    <label><input type="radio" name="q50" value="b"> M.Ö. 200 yılında Ptolemaios Krallığı ile Roma arasında</label>
+                    <label><input type="radio" name="q50" value="c"> M.Ö. 197 yılında Makedonya Krallığı ile Roma arasında</label>
+                    <label><input type="radio" name="q50" value="d"> M.Ö. 220 yılında Illyria’lılar ile Roma arasında</label>
+                    <label><input type="radio" name="q50" value="e"> M.Ö. 198 yılında Seleukos Krallığı ile Roma arasında</label>
+                </div>
+                <div class="question">
+                    <p>51. Cumhuriyet döneminde aristokrat kesime verilen isim aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q51" value="a"> Plebler</label>
+                    <label><input type="radio" name="q51" value="b"> Peregrini</label>
+                    <label><input type="radio" name="q51" value="c"> Patriciler</label>
+                    <label><input type="radio" name="q51" value="d"> Populari</label>
+                    <label><input type="radio" name="q51" value="e"> Optimatlar</label>
+                </div>
+                <div class="question">
+                    <p>52. M.S. 96 yılında uğradığı bir suikastle hayatını kaybeden ve anısı lanetlenen Roma imparatoru hangisidir?</p>
+                    <label><input type="radio" name="q52" value="a"> Titus</label>
+                    <label><input type="radio" name="q52" value="b"> Vespasianus</label>
+                    <label><input type="radio" name="q52" value="c"> Galba</label>
+                    <label><input type="radio" name="q52" value="d"> Domitianus</label>
+                    <label><input type="radio" name="q52" value="e"> Vitellius</label>
+                </div>
+                <div class="question">
+                    <p>53. Roma’nın kuruluş efsanesiyle doğrudan ilişkili olduğuna inanılan Anadolu şehri hangisidir?</p>
+                    <label><input type="radio" name="q53" value="a"> Daskyleion</label>
+                    <label><input type="radio" name="q53" value="b"> Sardes</label>
+                    <label><input type="radio" name="q53" value="c"> Pessinos</label>
+                    <label><input type="radio" name="q53" value="d"> Gordion</label>
+                    <label><input type="radio" name="q53" value="e"> Troia</label>
+                </div>
+                <div class="question">
+                    <p>54. Eski Çağ’da Roma’da pazar yerlerinden, temizlik ve imar işlerinden sorumlu memurların unvanı aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q54" value="a"> Viatores</label>
+                    <label><input type="radio" name="q54" value="b"> Aedilis</label>
+                    <label><input type="radio" name="q54" value="c"> Finitores</label>
+                    <label><input type="radio" name="q54" value="d"> Quaestores</label>
+                    <label><input type="radio" name="q54" value="e"> Haruspices</label>
+                </div>
+                <div class="question">
+                    <p>55. Roma İmparatorluk döneminin ikinci hanedanlığını kuran kişinin adı, vali olarak görev yaptığı yer ve hanedanlık aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q55" value="a"> Vespasian; Palestina/Syria; Flavius Hanedanı</label>
+                    <label><input type="radio" name="q55" value="b"> Gaius; Asia; Severus Hanedanı</label>
+                    <label><input type="radio" name="q55" value="c"> Claudius; Macedonia; Iulius-Claudius Hanedanı</label>
+                    <label><input type="radio" name="q55" value="d"> Tiberius; Akhaia; Antonin Hanedanı</label>
+                    <label><input type="radio" name="q55" value="e"> Nero; Sicilya; Aurelian Hanedanı</label>
+                </div>
+                <div class="question">
+                    <p>56. M.S. 96 ile 180 yılları arasında Roma Devleti’ni yöneten imparatorların dönemine ne ad verilir?</p>
+                    <label><input type="radio" name="q56" value="a"> Muhafızlar tarafından imparator ilan edilenler dönemi</label>
+                    <label><input type="radio" name="q56" value="b"> Silah zoruyla imparator olanlar dönemi</label>
+                    <label><input type="radio" name="q56" value="c"> Senato tarafından imparator ilan edilenler dönemi</label>
+                    <label><input type="radio" name="q56" value="d"> Babadan oğula geçen hanedan mensubu dönemi</label>
+                    <label><input type="radio" name="q56" value="e"> Evlat edinilen imparatorlar dönemi</label>
+                </div>
+                <div class="question">
+                    <p>57. İmparator Augustus zamanında hangi yıl, nerede, kimler tarafından 3 Roma lejyonu imha edilmiştir ve bu olayın tarih yazımındaki adı nedir?</p>
+                    <label><input type="radio" name="q57" value="a"> M.S. 5: Pirene Ormanı-Keltler-Arminius Savaşı</label>
+                    <label><input type="radio" name="q57" value="b"> M.S. 9: Teutoburg Ormanı-Germenler-Varus Savaşı</label>
+                    <label><input type="radio" name="q57" value="c"> M.S. 3: Eisias Ormanı-İberler-Flaminius Savaşı</label>
+                    <label><input type="radio" name="q57" value="d"> M.S. 7: Arden Ormanı-Biturigler-Rufus Savaşı</label>
+                    <label><input type="radio" name="q57" value="e"> M.S. 12: Karaormanlar-Allemanlar-Drusus Savaşı</label>
+                </div>
+                <div class="question">
+                    <p>58. “Pomerium” sözcüğü aşağıdakilerden hangisini ifade eder?</p>
+                    <label><input type="radio" name="q58" value="a"> Roma şehrinin kutsal sınırı</label>
+                    <label><input type="radio" name="q58" value="b"> Roma şehri suyollarının bakımını yöneten kurum</label>
+                    <label><input type="radio" name="q58" value="c"> Roma şehri itfaiye teşkilatı</label>
+                    <label><input type="radio" name="q58" value="d"> Roma şehri kutsal alanlarının bakımından sorumlu kurum</label>
+                    <label><input type="radio" name="q58" value="e"> Roma şehri yapı faaliyetinden sorumlu kurum</label>
+                </div>
+                <div class="question">
+                    <p>59. VI. Mithridates, M.Ö. 88-85 yılları arasında Anadolu’dan Romalıları çıkarmak için hangi eyaleti ele geçirmiştir?</p>
+                    <label><input type="radio" name="q59" value="a"> Illyria</label>
+                    <label><input type="radio" name="q59" value="b"> Dalmatia</label>
+                    <label><input type="radio" name="q59" value="c"> Akhaia</label>
+                    <label><input type="radio" name="q59" value="d"> Macedonia</label>
+                    <label><input type="radio" name="q59" value="e"> Asia</label>
+                </div>
+                <div class="question">
+                    <p>60. 12 Levha Kanunları olarak bilinen kanunları hazırlayan kurumun adı aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q60" value="a"> Decemviri</label>
+                    <label><input type="radio" name="q60" value="b"> Pontificat</label>
+                    <label><input type="radio" name="q60" value="c"> Arvales</label>
+                    <label><input type="radio" name="q60" value="d"> Quindecemviri</label>
+                    <label><input type="radio" name="q60" value="e"> Septemviri</label>
+                </div>
+                <button type="button" onclick="submitTest()">Testi Gönder</button>
+            </form>
+        </div>
+
+        <!-- Sonuç Ekranı -->
+        <div class="result" id="result">
+            <h2>Test Sonuçları</h2>
+            <p id="score" style="text-align: center; font-size: 24px; color: #2c3e50;"></p>
+            <table class="result-table">
+                <thead>
+                    <tr>
+                        <th>Soru No</th>
+                        <th>Soru</th>
+                        <th>Sizin Cevabınız</th>
+                        <th>Doğru Cevap</th>
+                        <th>Sonuç</th>
+                    </tr>
+                </thead>
+                <tbody id="resultDetails"></tbody>
+            </table>
+            <div class="stats-container" id="statsContainer"></div>
+            <button onclick="restart()">Testi Yeniden Başlat</button>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "c", q2: "b", q3: "d", q4: "d", q5: "a", q6: "b", q7: "c", q8: "e", q9: "b", q10: "d",
+            q11: "d", q12: "e", q13: "a", q14: "b", q15: "b", q16: "e", q17: "b", q18: "b", q19: "e", q20: "b",
+            q21: "c", q22: "b", q23: "b", q24: "b", q25: "d", q26: "d", q27: "c", q28: "d", q29: "b", q30: "d",
+            q31: "b", q32: "a", q33: "a", q34: "c", q35: "b", q36: "b", q37: "e", q38: "e", q39: "c", q40: "d",
+            q41: "b", q42: "b", q43: "d", q44: "d", q45: "b", q46: "b", q47: "a", q48: "a", q49: "e", q50: "a",
+            q51: "c", q52: "d", q53: "e", q54: "b", q55: "a", q56: "e", q57: "b", q58: "a", q59: "e", q60: "a"
+        };
+
+        const unitRanges = [
+            { name: "Roma Cumhuriyet Dönemi ve Kurumları", start: 1, end: 30 },
+            { name: "Roma İmparatorluk Dönemi ve Olaylar", start: 31, end: 60 }
+        ];
+
+        let timeLeft = 1800; // 30 dakika (saniye cinsinden)
+        let timerInterval;
+        let answeredQuestions = 0;
+
+        function startTest() {
+            document.getElementById("welcome").classList.remove("active");
+            document.getElementById("testForm").classList.add("active");
+            startTimer();
+            updateProgress();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById("timer").textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const totalQuestions = 60;
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById("progress").style.width = `${progress}%`;
+        }
+
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener("change", () => {
+                const questionName = input.name;
+                if (!document.querySelectorAll(`input[name="${questionName}"]:checked`).length > 1) {
+                    answeredQuestions++;
+                    updateProgress();
+                }
+            });
+        });
+
+        function submitTest() {
+            clearInterval(timerInterval);
+            const form = document.getElementById("quizForm");
+            const userAnswers = {};
+            for (let i = 1; i <= 60; i++) {
+                userAnswers[`q${i}`] = form.elements[`q${i}`]?.value || "Cevaplanmadı";
+            }
+
+            let totalScore = 0;
+            let details = "";
+            const unitStats = unitRanges.map(unit => ({
+                name: unit.name,
+                correct: 0,
+                incorrect: 0
+            }));
+
+            for (let i = 1; i <= 60; i++) {
+                const q = `q${i}`;
+                const questionText = document.querySelector(`input[name="q${i}"]`).closest(".question").querySelector("p").textContent;
+                const userAnswer = userAnswers[q];
+                const correctAnswer = correctAnswers[q];
+                const correctText = document.querySelector(`input[name="q${i}"][value="${correctAnswer}"]`).nextSibling.textContent.trim();
+                const userText = userAnswer === "Cevaplanmadı" ? "Cevaplanmadı" : document.querySelector(`input[name="q${i}"][value="${userAnswer}"]`)?.nextSibling.textContent.trim() || "Cevaplanmadı";
+
+                let unitIndex = unitRanges.findIndex(unit => i >= unit.start && i <= unit.end);
+                if (userAnswer === correctAnswer) {
+                    totalScore++;
+                    unitStats[unitIndex].correct++;
+                    details += `<tr><td>${i}</td><td>${questionText}</td><td>${userText}</td><td>${correctText}</td><td class="correct">Doğru</td></tr>`;
+                } else {
+                    unitStats[unitIndex].incorrect++;
+                    details += `<tr><td>${i}</td><td>${questionText}</td><td>${userText}</td><td>${correctText}</td><td class="incorrect">Yanlış</td></tr>`;
+                }
+            }
+
+            let statsHtml = "";
+            unitStats.forEach(unit => {
+                const total = unit.correct + unit.incorrect;
+                const percentage = total > 0 ? Math.round((unit.correct / total) * 100) : 0;
+                statsHtml += `<div class="unit-stats">` +
+                             `<h3>${unit.name}</h3>` +
+                             `<p>Doğru: ${unit.correct}</p>` +
+                             `<p>Yanlış: ${unit.incorrect}</p>` +
+                             `<p>Başarı: %${percentage}</p>` +
+                             `</div>`;
+            });
+
+            document.getElementById("testForm").classList.remove("active");
+            document.getElementById("result").classList.add("active");
+            document.getElementById("score").innerHTML = `Toplam Puanınız: ${totalScore} / 60 (%${Math.round((totalScore / 60) * 100)})`;
+            document.getElementById("resultDetails").innerHTML = details;
+            document.getElementById("statsContainer").innerHTML = statsHtml;
+        }
+
+        function restart() {
+            document.getElementById("result").classList.remove("active");
+            document.getElementById("welcome").classList.add("active");
+            document.getElementById("quizForm").reset();
+            timeLeft = 1800;
+            answeredQuestions = 0;
+            document.getElementById("progress").style.width = "0%";
+        }
+    </script>
+</body>
+</html>

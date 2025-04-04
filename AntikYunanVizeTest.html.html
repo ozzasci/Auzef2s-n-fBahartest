@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antik Yunan Sosyal Tarihi Flash Kart Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        #quizContainer {
+            width: 700px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #welcomeScreen, #startScreen, #quizScreen {
+            text-align: center;
+        }
+        #welcomeScreen {
+            display: block;
+        }
+        #startScreen, #quizScreen {
+            display: none;
+        }
+        #timer {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #d9534f;
+        }
+        .flashcard {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: none;
+        }
+        .flashcard.active {
+            display: block;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .options label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        #result h2 {
+            color: #333;
+        }
+        #result p {
+            font-size: 16px;
+        }
+        #answerKey {
+            margin-top: 20px;
+            text-align: left;
+        }
+        #answerKey table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #answerKey th, #answerKey td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #answerKey th {
+            background-color: #f2f2f2;
+        }
+        .correct {
+            color: #28a745;
+        }
+        .incorrect {
+            color: #d9534f;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+        input[type="text"], input[type="email"] {
+            padding: 8px;
+            margin: 10px 0;
+            width: 80%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="quizContainer">
+        <h1>Antik Yunan Sosyal Tarihi Testi</h1>
+        <div id="welcomeScreen">
+            <p>Hoş Geldiniz! Lütfen teste başlamadan önce bilgilerinizi girin.</p>
+            <input type="text" id="userName" placeholder="Adınız" required><br>
+            <input type="email" id="userEmail" placeholder="E-posta adresiniz" required><br>
+            <button id="submitInfo">Bilgileri Gönder</button>
+        </div>
+        <div id="startScreen">
+            <p>Testi başlatmak için aşağıdaki butona tıklayın.</p>
+            <button id="startBtn">Testi Başlat</button>
+        </div>
+        <div id="quizScreen">
+            <div id="timer">Kalan Süre: 30:00</div>
+            <div id="flashcards"></div>
+            <div class="navigation">
+                <button id="prevBtn" disabled>Önceki</button>
+                <button id="nextBtn">Sonraki</button>
+                <button id="endBtn">Testi Bitir</button>
+            </div>
+            <div id="result"></div>
+            <div id="answerKey"></div>
+        </div>
+    </div>
+    <footer>Telif Hakkı © OZZASCİ'ye aittir.</footer>
+
+    <script>
+        const questions = [
+            // 1. Ekoloji ve Çevre (10 soru)
+            { category: "Ekoloji ve Çevre", question: "Yunanistan’ın en yoğun yağış aldığı zamanlar hangi dönemdir?", options: ["Mayıs - Ağustos", "Eylül ortası - Nisan", "Aralık - Şubat", "Haziran - Eylül"], answer: "b" },
+            { category: "Ekoloji ve Çevre", question: "Yunanistan’ın en önemli iki akarsuyu hangileridir?", options: ["Axios - Peneios", "Eurotas - Strymon", "Alpheios - Nestos", "Kephisos - Spercheios"], answer: "b" },
+            { category: "Ekoloji ve Çevre", question: "Atina’nın en büyük gümüş madenleri nerede bulunur?", options: ["Thasos", "Laurion", "Sifnos", "Euboia"], answer: "b" },
+            { category: "Ekoloji ve Çevre", question: "Doğanın korunması hangi felsefe akımında özellikle vurgulanır?", options: ["Stoacılar", "Epikurosçular", "Pythagorasçılar", "Sofistler"], answer: "c" },
+            { category: "Ekoloji ve Çevre", question: "Atina’da ormansızlaşmayla ilgili en açık bilgiyi hangi yazar ve eseri verir?", options: ["Aristoteles - Politika", "Platon - Kritias", "Thukydides - Peloponnesos Savaşı", "Herodotos - Tarih"], answer: "b" },
+            { category: "Ekoloji ve Çevre", question: "Yunanistan’ın başlıca tahıl ürünü hangisidir?", options: ["Buğday", "Arpa", "Mısır", "Pirinç"], answer: "b" },
+            { category: "Ekoloji ve Çevre", question: "Şarap üzümü ve bağcılık Yunanistan’a kimlerle birlikte tam olarak yerleşmiştir?", options: ["Mikenler", "Dorlar", "İyonlar", "Aioller"], answer: "a" },
+            { category: "Ekoloji ve Çevre", question: "Yunanistan’ın en büyük sulama projesi nerede gerçekleştirilmiştir?", options: ["Atina", "Eretria", "Sparta", "Korinth"], answer: "b" },
+            { category: "Ekoloji ve Çevre", question: "Yunan şehir planı ve çevre ilişkisi hangi Yunanca kaynakta ayrıntılı anlatılır?", options: ["Platon", "Hippokrates", "Aristoteles", "Herodotos"], answer: "b" },
+            { category: "Ekoloji ve Çevre", question: "Yunanistan’da yaylacılıkla ilgili kesin bilgi veren mimari buluntu hangisidir?", options: ["Dema Evi", "Vari Evi", "Andron", "Oikos"], answer: "b" },
+
+            // 2. Yerleşim Dokusu ve Demografi (10 soru)
+            { category: "Yerleşim Dokusu ve Demografi", question: "İlk Yunan kolonisi nerede ve hangi tarihte kurulmuştur?", options: ["Kyme - MÖ 800", "Pithekoussai - MÖ 750", "Massalia - MÖ 600", "Syracuse - MÖ 734"], answer: "b" },
+            { category: "Yerleşim Dokusu ve Demografi", question: "Mısır’daki Yunan kolonileri hangileridir?", options: ["Naukratis ve Kyrene", "Alexandria ve Memphis", "Heliopolis ve Thebes", "Naukratis ve Elephantine"], answer: "a" },
+            { category: "Yerleşim Dokusu ve Demografi", question: "Antik kaynaklara göre ızgara planının mucidi kimdir?", options: ["Hippokrates", "Hippodamos", "Aristoteles", "Perikles"], answer: "b" },
+            { category: "Yerleşim Dokusu ve Demografi", question: "Atina için kaydedilmiş tek nüfus sayımını kim, ne zaman yaptırmıştır?", options: ["Solon - MÖ 6. yüzyıl", "Kleisthenes - MÖ 5. yüzyıl", "Demetrios - MÖ 4. yüzyıl", "Perikles - MÖ 5. yüzyıl"], answer: "c" },
+            { category: "Yerleşim Dokusu ve Demografi", question: "Yunanistan’da doğum anında tahminî ömür kaç yıldır?", options: ["20", "25", "30", "35"], answer: "b" },
+            { category: "Yerleşim Dokusu ve Demografi", question: "Doğuda Helen etkisinin görüldüğü en önemli yerleşim hangisidir?", options: ["Ai Khanoum", "Persepolis", "Sardes", "Miletos"], answer: "a" },
+            { category: "Yerleşim Dokusu ve Demografi", question: "Attika’da arazi dağılımına dair en önemli belge hangisidir?", options: ["Attika Stelleri", "Solon Kanunları", "Arkhon Listeleri", "Deme Kayıtları"], answer: "a" },
+            { category: "Yerleşim Dokusu ve Demografi", question: "Yunan çiftlik evlerine hangisi örnek verilebilir?", options: ["Agora", "Vari ve Dema evleri", "Andron", "Gymnasion"], answer: "b" },
+            { category: "Yerleşim Dokusu ve Demografi", question: "Karanlık Çağ’da doğu mallarının Yunanistan’da bulunduğu başlıca yer neresidir?", options: ["Knossos", "Lefkandi", "Pylos", "Miken"], answer: "b" },
+            { category: "Yerleşim Dokusu ve Demografi", question: "Klasik Yunanistan’ın nüfus hesaplamalarında hangisi kullanılmaz?", options: ["Doğum ve ölüm belgeleri", "Vergi kayıtları", "Askeri listeler", "Tapınak kayıtları"], answer: "a" },
+
+            // 3. Polis ve Toplum (10 soru)
+            { category: "Polis ve Toplum", question: "Şehir devletinin yönettiği topraklara ne isim verilir?", options: ["Polis", "Khora", "Demos", "Agora"], answer: "b" },
+            { category: "Polis ve Toplum", question: "Solon reformlarının asıl amacı nedir?", options: ["Vatandaşlık haklarını genişletmek", "Borçların silinmesi", "Orduyu güçlendirmek", "Ticaret yollarını açmak"], answer: "b" },
+            { category: "Polis ve Toplum", question: "Atina’da rejime tehdit görülen kişilerin oylamayla sürgün edilmesine ne ad verilir?", options: ["Synoikismos", "Ostrakismos", "Heliaia", "Arkhonluk"], answer: "b" },
+            { category: "Polis ve Toplum", question: "Atina’da savaş ve barış kararlarını hangi meclis alırdı?", options: ["Areopagos", "Boule", "Halk Meclisi", "Gerousia"], answer: "c" },
+            { category: "Polis ve Toplum", question: "Atina’da kimler vatandaşlık hakkına sahipti?", options: ["Yalnızca erkekler", "Babası ve annesi özgür Atina vatandaşı olan kadınlar ve erkekler", "Tüm özgür insanlar", "Yabancı tüccarlar"], answer: "b" },
+            { category: "Polis ve Toplum", question: "Farklı yerleşmelerin birleştirilerek bir şehir haline getirilmesine ne isim verilir?", options: ["Ostrakismos", "Synoikismos", "Khora", "Phratres"], answer: "b" },
+            { category: "Polis ve Toplum", question: "Atina vatandaşlarını gelirlerine göre dört gruba ayıran kişi kimdir?", options: ["Kleisthenes", "Solon", "Peisistratos", "Perikles"], answer: "b" },
+            { category: "Polis ve Toplum", question: "Yüksek memurlara ne isim verilir?", options: ["Arkhon", "Strategos", "Bouleutes", "Demiourgos"], answer: "a" },
+            { category: "Polis ve Toplum", question: "Şehir - tiran eşleşmelerinden hangisi doğrudur?", options: ["Atina - Solon", "Samos - Polykrates", "Korinth - Kleisthenes", "Teb - Perikles"], answer: "b" },
+            { category: "Polis ve Toplum", question: "Şehir devletlerinde nüfus sosyal açıdan hangi sırayla sınıflara ayrılmıştır?", options: ["Deme - Phyle - Phratres", "Phyle - Phratres - Deme", "Khora - Polis - Demos", "Agora - Boule - Ecclesia"], answer: "b" },
+
+            // 4. Aile (10 soru)
+            { category: "Aile", question: "Oikos neyi ifade eder?", options: ["Köy topluluğunu", "Hane halkını ve taşınmaz mülkü", "Tapınak alanını", "Ticaret merkezini"], answer: "b" },
+            { category: "Aile", question: "Yunan evinde erkeklere ayrılan mekâna ne isim verilir?", options: ["Gynaikonitis", "Andron", "Oikos", "Peristylion"], answer: "b" },
+            { category: "Aile", question: "Erkeğin meşru eşine ne isim verilir?", options: ["Damar", "Hetaira", "Pallake", "Gnesios"], answer: "a" },
+            { category: "Aile", question: "Evlilik için tercih edilen ay hangisidir?", options: ["Hekatombaion", "Gamelion", "Anthesterion", "Mounikhion"], answer: "b" },
+            { category: "Aile", question: "Gynaikonomos neyi ifade eder?", options: ["Kadınların eğitimi", "Kadınlar için ahlak polisi", "Evlilik töreni yöneticisi", "Kadın hakları savunucusu"], answer: "b" },
+            { category: "Aile", question: "Meşru çocuğu ifade eden terim hangisidir?", options: ["Moikhos", "Gnesios", "Notheia", "Pallake"], answer: "b" },
+            { category: "Aile", question: "Boşanmayı gerçekleştiren merci hangisidir?", options: ["Boule", "Arkhon", "Halk Meclisi", "Areopagos"], answer: "b" },
+            { category: "Aile", question: "Evlilik töreninde kullanılan kutsal kap hangisidir?", options: ["Krater", "Loutrophoros", "Hydria", "Amphora"], answer: "b" },
+            { category: "Aile", question: "Zina yasasını ifade eden terim hangisidir?", options: ["Paiderastia", "Moikheia", "Gnesios", "Synoikismos"], answer: "b" },
+            { category: "Aile", question: "Kadınların atletizmle uğraşmasını savunan yasa koyucu kimdir?", options: ["Solon", "Lykurgos", "Drakon", "Peisistratos"], answer: "b" },
+
+            // 5. Eşcinsellik ve Eğitim (10 soru)
+            { category: "Eşcinsellik ve Eğitim", question: "Yunan toplumunda homoseksüel ilişki hangi terimle karşılanır?", options: ["Agoge", "Paiderastia", "Moikheia", "Eros"], answer: "b" },
+            { category: "Eşcinsellik ve Eğitim", question: "Eş cinselliği kurumsal bir ilişki haline getiren şehir hangisidir?", options: ["Atina", "Teb", "Sparta", "Korinth"], answer: "c" },
+            { category: "Eşcinsellik ve Eğitim", question: "Homoseksüellik ve lezbiyenlik hakkında yazmış şairler kimlerdir?", options: ["Homeros - Hesiodos", "Alkman - Sappho", "Pindaros - Simonides", "Anakreon - Ibykos"], answer: "b" },
+            { category: "Eşcinsellik ve Eğitim", question: "Sappho okulunu hangi şehirde kurmuştur?", options: ["Lesbos", "Samos", "Khios", "Miletos"], answer: "a" },
+            { category: "Eşcinsellik ve Eğitim", question: "Mesleki eğitimle alınan zanaatlara ne isim verilir?", options: ["Paideia", "Tekhne", "Agoge", "Didaskaleion"], answer: "b" },
+            { category: "Eşcinsellik ve Eğitim", question: "Sparta’da askerî eğitimin verildiği gruplara ne ad verilir?", options: ["Phratres", "Syssition", "Andreon", "Kryptoi"], answer: "b" },
+            { category: "Eşcinsellik ve Eğitim", question: "Yunanlara göre müzik eğitimi neye yöneliktir?", options: ["Fiziksel gelişim", "Zihinsel disiplin", "Duygular", "Matematiksel yetenek"], answer: "c" },
+            { category: "Eşcinsellik ve Eğitim", question: "Sofistlerin öğretim uzmanlığı nedir?", options: ["Matematik", "Siyasi erdem", "Astronomi", "Doğa felsefesi"], answer: "b" },
+            { category: "Eşcinsellik ve Eğitim", question: "Aristoteles’in kurduğu okulun adı nedir?", options: ["Akademia", "Lykeion", "Stoa", "Gymnasion"], answer: "b" },
+            { category: "Eşcinsellik ve Eğitim", question: "Sparta’nın erkek çocukları yetiştirmek için kurduğu sisteme ne ad verilir?", options: ["Paideia", "Agoge", "Tekhne", "Syssition"], answer: "b" },
+
+            // 6. Zaman Kavramı, Ölçümü ve Takvimler (10 soru)
+            { category: "Zaman Kavramı, Ölçümü ve Takvimler", question: "Yunan takvimine dair en erken kanıtlar kaynaklardan hangisinde yer almaktadır?", options: ["Homeros’un eserleri", "Linear B tabletleri", "Arkhon Listeleri", "Hesiodos’un şiirleri"], answer: "b" },
+            { category: "Zaman Kavramı, Ölçümü ve Takvimler", question: "Atina’da ilk resmî tarih kayıtları nedir, ne zaman başlar?", options: ["Arkhon Eponymos Listeleri, MÖ 683", "Olimpiyat Kayıtları, MÖ 776", "Solon Kanunları, MÖ 594", "Kleisthenes Reformları, MÖ 508"], answer: "a" },
+            { category: "Zaman Kavramı, Ölçümü ve Takvimler", question: "Homeros ve Hesiodos’da zaman neye göre ölçülür?", options: ["Güneş hareketleri", "Tarımsal faaliyetler ve mevsimler", "Ay döngüleri", "Yıldız pozisyonları"], answer: "b" },
+            { category: "Zaman Kavramı, Ölçümü ve Takvimler", question: "Yunan dünyasında Ay takviminin tercih edilmesinin nedeni hangisidir?", options: ["Daha kısa olması", "Ay hareketlerinin kolay izlenebilir olması", "Tarımsal döngülere uygunluğu", "Dini ritüellerin gereği"], answer: "b" },
+            { category: "Zaman Kavramı, Ölçümü ve Takvimler", question: "Yunanlar güneş takvimini nerede kullanmışlardır?", options: ["Dini törenlerde", "Prytaneis toplantılarında", "Askeri planlamada", "Ticaret hesaplarında"], answer: "b" },
+            { category: "Zaman Kavramı, Ölçümü ve Takvimler", question: "Yunanların güneş ve ay takvimlerini senkronize etmek için kullandıkları yöntem hangisidir?", options: ["Oktateris döngüsü", "Meton döngüsü", "Babil döngüsü", "Solon takvimi"], answer: "b" },
+            { category: "Zaman Kavramı, Ölçümü ve Takvimler", question: "Yeni yıl ne zaman başlar?", options: ["Kış gündönümünden sonra", "Yaz gündönümünden sonraki ilk yeni ay", "İlkbahar ekinoksunda", "Sonbahar ekinoksunda"], answer: "b" },
+            { category: "Zaman Kavramı, Ölçümü ve Takvimler", question: "Gündüz ve gecenin 12’şer saate bölünmesinin kaynağı kavimlerden hangisidir?", options: ["Mısırlılar", "Persler", "Babil", "Romalılar"], answer: "c" },
+            { category: "Zaman Kavramı, Ölçümü ve Takvimler", question: "Gündüz ve gece zamanını ölçen alet hangisidir?", options: ["Gnomon", "Horologion", "Astrolab", "Klepsydra"], answer: "b" },
+            { category: "Zaman Kavramı, Ölçümü ve Takvimler", question: "Gnomon hangisini ifade etmektedir?", options: ["Ay saati", "Güneş saati", "Kum saati", "Su saati"], answer: "b" }
+        ];
+
+        let currentCard = 0;
+        const userAnswers = new Array(questions.length).fill(null);
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const startScreen = document.getElementById('startScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const flashcardsDiv = document.getElementById('flashcards');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const endBtn = document.getElementById('endBtn');
+        const resultDiv = document.getElementById('result');
+        const answerKeyDiv = document.getElementById('answerKey');
+        const timerDiv = document.getElementById('timer');
+        let timeLeft = 30 * 60; // 30 dakika (saniye cinsinden)
+        let timerInterval;
+        let userName, userEmail;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const shuffledQuestions = shuffle([...questions]);
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDiv.textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitQuiz();
+            } else {
+                timeLeft--;
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function renderCard(index) {
+            flashcardsDiv.innerHTML = '';
+            const question = shuffledQuestions[index];
+            const card = document.createElement('div');
+            card.classList.add('flashcard', 'active');
+            card.innerHTML = `
+                <p class="question">${index + 1}. (${question.category}) ${question.question}</p>
+                <div class="options">
+                    ${question.options.map((opt, i) => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${String.fromCharCode(97 + i)}" ${userAnswers[index] === String.fromCharCode(97 + i) ? 'checked' : ''}>
+                            ${opt}
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+            flashcardsDiv.appendChild(card);
+
+            prevBtn.disabled = index === 0;
+            nextBtn.style.display = index === shuffledQuestions.length - 1 ? 'none' : 'inline-block';
+        }
+
+        function saveAnswer(index) {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            userAnswers[index] = selected ? selected.value : null;
+        }
+
+        function submitQuiz() {
+            saveAnswer(currentCard);
+            clearInterval(timerInterval);
+            let score = 0;
+            const categoryScores = {};
+            questions.forEach(q => categoryScores[q.category] = { correct: 0, total: 0 });
+
+            userAnswers.forEach((answer, i) => {
+                const question = shuffledQuestions[i];
+                if (answer === question.answer) {
+                    score++;
+                    categoryScores[question.category].correct++;
+                }
+                categoryScores[question.category].total++;
+            });
+
+            const percentage = (score / questions.length) * 100;
+            let resultHTML = `
+                <h2>Test Sonuçları</h2>
+                <p>Ad: ${userName}</p>
+                <p>E-posta: ${userEmail}</p>
+                <p>Toplam Doğru: ${score}/${questions.length}</p>
+                <p>Yüzde: %${percentage.toFixed(2)}</p>
+                <h3>Konulara Göre Performans:</h3>
+                <ul>
+                    ${Object.entries(categoryScores).map(([cat, { correct, total }]) => `
+                        <li>${cat}: ${correct}/${total} (%${((correct / total) * 100).toFixed(2)})</li>
+                    `).join('')}
+                </ul>
+            `;
+            resultDiv.innerHTML = resultHTML;
+            resultDiv.style.display = 'block';
+
+            let answerKeyHTML = `
+                <h3>Cevap Anahtarı</h3>
+                <table>
+                    <tr>
+                        <th>Soru No</th>
+                        <th>Soru</th>
+                        <th>Doğru Cevap</th>
+                        <th>Senin Cevabın</th>
+                        <th>Durum</th>
+                    </tr>
+                    ${shuffledQuestions.map((q, i) => `
+                        <tr>
+                            <td>${i + 1}</td>
+                            <td>${q.question}</td>
+                            <td>${q.options[q.answer.charCodeAt(0) - 97]}</td>
+                            <td>${userAnswers[i] ? q.options[userAnswers[i].charCodeAt(0) - 97] : 'Cevap verilmedi'}</td>
+                            <td class="${userAnswers[i] === q.answer ? 'correct' : 'incorrect'}">${userAnswers[i] === q.answer ? 'Doğru' : 'Yanlış'}</td>
+                        </tr>
+                    `).join('')}
+                </table>
+            `;
+            answerKeyDiv.innerHTML = answerKeyHTML;
+
+            flashcardsDiv.style.display = 'none';
+            timerDiv.style.display = 'none';
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            endBtn.style.display = 'none';
+        }
+
+        document.getElementById('submitInfo').addEventListener('click', () => {
+            userName = document.getElementById('userName').value.trim();
+            userEmail = document.getElementById('userEmail').value.trim();
+            if (userName && userEmail) {
+                welcomeScreen.style.display = 'none';
+                startScreen.style.display = 'block';
+            } else {
+                alert("Lütfen adınızı ve e-posta adresinizi girin!");
+            }
+        });
+
+        document.getElementById('startBtn').addEventListener('click', () => {
+            startScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+            renderCard(currentCard);
+            startTimer();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            saveAnswer(currentCard);
+            currentCard--;
+            renderCard(currentCard);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            saveAnswer(currentCard);
+            currentCard++;
+            renderCard(currentCard);
+        });
+
+        endBtn.addEventListener('click', submitQuiz);
+    </script>
+</body>
+</html>

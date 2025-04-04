@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osmanlı Tarihi Metinleri Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .login-form, .test-form, .result {
+            display: none;
+        }
+        .login-form.active, .test-form.active, .result.active {
+            display: block;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .question label {
+            display: block;
+            margin: 5px 0;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #timer {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            height: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .progress {
+            height: 100%;
+            background-color: #28a745;
+            width: 0%;
+            border-radius: 5px;
+        }
+        .result-details {
+            margin-top: 20px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .unit-stats {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            button {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Osmanlı Tarihi Metinleri Testi</h1>
+
+        <!-- Kullanıcı Giriş Formu -->
+        <div class="login-form active" id="loginForm">
+            <h2>Kullanıcı Girişi</h2>
+            <label for="username">Kullanıcı Adı:</label>
+            <input type="text" id="username" required>
+            <label for="password">Şifre:</label>
+            <input type="password" id="password" required>
+            <button onclick="login()">Giriş Yap</button>
+        </div>
+
+        <!-- Test Formu -->
+        <div class="test-form" id="testForm">
+            <div id="timer">Kalan Süre: 30:00</div>
+            <div class="progress-bar"><div class="progress" id="progress"></div></div>
+            <form id="quizForm">
+                <!-- Ünite 1: Hızlı Metin Okuma Çalışmaları -->
+                <h2>Ünite 1: Hızlı Metin Okuma Çalışmaları</h2>
+                <div class="question">
+                    <p>1. Peçuylu İbrahim Efendi tarafından hazırlanan eserin adı?</p>
+                    <label><input type="radio" name="q1" value="a"> Tarih-i Peçuylu</label>
+                    <label><input type="radio" name="q1" value="b"> Eserin belirli bir ismi yoktur</label>
+                    <label><input type="radio" name="q1" value="c"> Osmanlı Tarihi</label>
+                    <label><input type="radio" name="q1" value="d"> Menakıbname</label>
+                </div>
+                <div class="question">
+                    <p>2. Peçuylu İbrahim Efendi eserini yaklaşık olarak hangi tarihte yazmıştır?</p>
+                    <label><input type="radio" name="q2" value="a"> 1600</label>
+                    <label><input type="radio" name="q2" value="b"> 1648</label>
+                    <label><input type="radio" name="q2" value="c"> 1700</label>
+                    <label><input type="radio" name="q2" value="d"> 1550</label>
+                </div>
+                <div class="question">
+                    <p>3. “Terakki” kelimesinin günümüz Türkçesinde karşılığı hangisidir?</p>
+                    <label><input type="radio" name="q3" value="a"> Geri çekilme</label>
+                    <label><input type="radio" name="q3" value="b"> İlerletme</label>
+                    <label><input type="radio" name="q3" value="c"> Durdurma</label>
+                    <label><input type="radio" name="q3" value="d"> Yavaşlatma</label>
+                </div>
+                <div class="question">
+                    <p>4. “İhdâs etmek” kelimesinin günümüz Türkçesinde karşılığı hangisidir?</p>
+                    <label><input type="radio" name="q4" value="a"> Ortaya çıkmak</label>
+                    <label><input type="radio" name="q4" value="b"> Kaybolmak</label>
+                    <label><input type="radio" name="q4" value="c"> Saklamak</label>
+                    <label><input type="radio" name="q4" value="d"> Yok etmek</label>
+                </div>
+                <div class="question">
+                    <p>5. Kapıkulu ve yaya askerlerinin maaş ve künye işleri ile ilgilenen büroya verilen ad?</p>
+                    <label><input type="radio" name="q5" value="a"> Defterdarlık</label>
+                    <label><input type="radio" name="q5" value="b"> Piyale mukâbelecisi</label>
+                    <label><input type="radio" name="q5" value="c"> Kapı kethüdası</label>
+                    <label><input type="radio" name="q5" value="d"> Çavuşbaşı</label>
+                </div>
+                <div class="question">
+                    <p>6. ال ق لب صم يم عن ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q6" value="a"> An-samîmi’l-kalb</label>
+                    <label><input type="radio" name="q6" value="b"> Al-kalb al-samîm</label>
+                    <label><input type="radio" name="q6" value="c"> An-samîm al-kalb</label>
+                    <label><input type="radio" name="q6" value="d"> Al-samîm an-kalb</label>
+                </div>
+                <div class="question">
+                    <p>7. ى ال د االب ifadesinin anlamı hangisidir?</p>
+                    <label><input type="radio" name="q7" value="a"> Sonsuza dek</label>
+                    <label><input type="radio" name="q7" value="b"> Ebediyete kadar</label>
+                    <label><input type="radio" name="q7" value="c"> Bir süre için</label>
+                    <label><input type="radio" name="q7" value="d"> Geçici olarak</label>
+                </div>
+                <div class="question">
+                    <p>8. ام اقsakكاه ت kelime grubunun okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q8" value="a"> İkāmet-gâh</label>
+                    <label><input type="radio" name="q8" value="b"> İkāmet-kāh</label>
+                    <label><input type="radio" name="q8" value="c"> Kāh-ikāmet</label>
+                    <label><input type="radio" name="q8" value="d"> Gāh-ikāmet</label>
+                </div>
+                <div class="question">
+                    <p>9. عال ى دركاه خواج كان ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q9" value="a"> Hâcegân-ı dergâh-ı âlî</label>
+                    <label><input type="radio" name="q9" value="b"> Dergâh-ı âlî hâcegân</label>
+                    <label><input type="radio" name="q9" value="c"> Hâcegân-ı âlî dergâh</label>
+                    <label><input type="radio" name="q9" value="d"> Âlî dergâh-ı hâcegân</label>
+                </div>
+                <div class="question">
+                    <p>10. Estergon Kalesi günümüzde hangi ülke toprakları içerisinde yer almaktadır?</p>
+                    <label><input type="radio" name="q10" value="a"> Slovakya</label>
+                    <label><input type="radio" name="q10" value="b"> Macaristan</label>
+                    <label><input type="radio" name="q10" value="c"> Avusturya</label>
+                    <label><input type="radio" name="q10" value="d"> Romanya</label>
+                </div>
+
+                <!-- Ünite 2: Metin Anlama Çalışmaları: Sözcük ve Terim Bulma - 1 -->
+                <h2>Ünite 2: Metin Anlama Çalışmaları: Sözcük ve Terim Bulma - 1</h2>
+                <div class="question">
+                    <p>11. سر معماران جهان ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q11" value="a"> Ser-miʻmârân-ı cihân</label>
+                    <label><input type="radio" name="q11" value="b"> Cihân-ı ser-miʻmârân</label>
+                    <label><input type="radio" name="q11" value="c"> Miʻmârân-ı ser-cihân</label>
+                    <label><input type="radio" name="q11" value="d"> Ser-cihân miʻmârân</label>
+                </div>
+                <div class="question">
+                    <p>12. Tehlîl kelimesinin anlamı hangisidir?</p>
+                    <label><input type="radio" name="q12" value="a"> Dua etmek</label>
+                    <label><input type="radio" name="q12" value="b"> Lâ-ilâhe illallah demek</label>
+                    <label><input type="radio" name="q12" value="c"> Şükretmek</label>
+                    <label><input type="radio" name="q12" value="d"> Zikir çekmek</label>
+                </div>
+                <div class="question">
+                    <p>13. Vüzerâ-i ʻizâm’ın anlamı hangisidir?</p>
+                    <label><input type="radio" name="q13" value="a"> Küçük vezirler</label>
+                    <label><input type="radio" name="q13" value="b"> Büyük vezirler</label>
+                    <label><input type="radio" name="q13" value="c"> Askeri yöneticiler</label>
+                    <label><input type="radio" name="q13" value="d"> Saray görevlileri</label>
+                </div>
+                <div class="question">
+                    <p>14. Muhâfaza masdarının vezni hangisidir?</p>
+                    <label><input type="radio" name="q14" value="a"> Mufâʻale</label>
+                    <label><input type="radio" name="q14" value="b"> Tefʼîl</label>
+                    <label><input type="radio" name="q14" value="c"> Tefeʻʻül</label>
+                    <label><input type="radio" name="q14" value="d"> İfʻâl</label>
+                </div>
+                <div class="question">
+                    <p>15. “Padişah buyruğuna aykırı” anlamına gelen deyim hangisidir?</p>
+                    <label><input type="radio" name="q15" value="a"> Hükm-i şerîf</label>
+                    <label><input type="radio" name="q15" value="b"> Hilâf-ı hükkâm-ı şerîf</label>
+                    <label><input type="radio" name="q15" value="c"> Ferman-ı âlî</label>
+                    <label><input type="radio" name="q15" value="d"> Şerʻî hüküm</label>
+                </div>
+                <div class="question">
+                    <p>16. Osmanlı ordusu içerisinde “Yeniçeri ocağı zabiti” olarak adlandırılan görevli hangisidir?</p>
+                    <label><input type="radio" name="q16" value="a"> Çorbacı</label>
+                    <label><input type="radio" name="q16" value="b"> Bölükbaşı</label>
+                    <label><input type="radio" name="q16" value="c"> Yayabaşı</label>
+                    <label><input type="radio" name="q16" value="d"> Kethüda</label>
+                </div>
+                <div class="question">
+                    <p>17. ر وي زم ين و زمان ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q17" value="a"> Zemîn ü zemân rû-yı</label>
+                    <label><input type="radio" name="q17" value="b"> Rû-yı zemîn ü zemân</label>
+                    <label><input type="radio" name="q17" value="c"> Zemân ü zemîn rû-yı</label>
+                    <label><input type="radio" name="q17" value="d"> Rû-yı zemân ü zemîn</label>
+                </div>
+                <div class="question">
+                    <p>18. ا ع لما مج لس ك وي ندكان ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q18" value="a"> Gûyende-gân-ı meclis-i ulemâ</label>
+                    <label><input type="radio" name="q18" value="b"> Meclis-i ulemâ gûyende-gân</label>
+                    <label><input type="radio" name="q18" value="c"> Ulemâ meclis-i gûyende-gân</label>
+                    <label><input type="radio" name="q18" value="d"> Gûyende-gân-ı ulemâ meclis</label>
+                </div>
+                <div class="question">
+                    <p>19. ب ك لرى روم دي ار ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q19" value="a"> Diyâr-ı Rûm beyleri</label>
+                    <label><input type="radio" name="q19" value="b"> Beyleri diyâr-ı Rûm</label>
+                    <label><input type="radio" name="q19" value="c"> Rûm diyâr-ı beyleri</label>
+                    <label><input type="radio" name="q19" value="d"> Diyâr beyleri Rûm</label>
+                </div>
+
+                <!-- Ünite 3: Metin Anlama Çalışmaları: Arapça Kelime Yapıları Tespit - 1 -->
+                <h2>Ünite 3: Metin Anlama Çalışmaları: Arapça Kelime Yapıları Tespit - 1</h2>
+                <div class="question">
+                    <p>20. Aşağıdaki kelimelerden hangisi mücerred bir masdarın ism-i fâili değildir?</p>
+                    <label><input type="radio" name="q20" value="a"> مرحمت</label>
+                    <label><input type="radio" name="q20" value="b"> كاتب</label>
+                    <label><input type="radio" name="q20" value="c"> عالم</label>
+                    <label><input type="radio" name="q20" value="d"> قارئ</label>
+                </div>
+                <div class="question">
+                    <p>21. İfʻâl vezninin ism-i mefʻûlü ع م kalıbına göre yazılır ve okunur. Aşağıdaki ism-i mefʻûl olan kelimelerden hangisi bu yazılış ve okunuşa uymamaktadır?</p>
+                    <label><input type="radio" name="q21" value="a"> معلم</label>
+                    <label><input type="radio" name="q21" value="b"> مكتب</label>
+                    <label><input type="radio" name="q21" value="c"> مخابر</label>
+                    <label><input type="radio" name="q21" value="d"> مدخل</label>
+                </div>
+                <div class="question">
+                    <p>22. İstifʻâl vezninin ism-i mefʻûlü ûlü bazı masdarlarda ا س م kalıbına göre yazılır ve okunur. Aşağıdaki ism-i mefʻûl olan kelimelerden hangisi bu yazılış ve okunuşa uymamaktadır?</p>
+                    <label><input type="radio" name="q22" value="a"> مستخرج</label>
+                    <label><input type="radio" name="q22" value="b"> مستعمل</label>
+                    <label><input type="radio" name="q22" value="c"> ركشم</label>
+                    <label><input type="radio" name="q22" value="d"> مستفيد</label>
+                </div>
+                <div class="question">
+                    <p>23. İftiʻâl vezninin ism-i mefʻûlü ع م kalıbına göre yazılır ve okunur. Aşağıdaki ism-i mefʻûl olan kelimelerden hangisi bu yazılış ve okunuşa uymamaktadır?</p>
+                    <label><input type="radio" name="q23" value="a"> مفتعل</label>
+                    <label><input type="radio" name="q23" value="b"> مستقبل</label>
+                    <label><input type="radio" name="q23" value="c"> مفتخر</label>
+                    <label><input type="radio" name="q23" value="d"> مفتعل</label>
+                </div>
+                <div class="question">
+                    <p>24. Temessük masdarının vezni hangisidir?</p>
+                    <label><input type="radio" name="q24" value="a"> Tefeʻʻül</label>
+                    <label><input type="radio" name="q24" value="b"> Mufâʻale</label>
+                    <label><input type="radio" name="q24" value="c"> Tefʼîl</label>
+                    <label><input type="radio" name="q24" value="d"> İfʻâl</label>
+                </div>
+                <div class="question">
+                    <p>25. Mübâşeret masdarının vezni hangisidir?</p>
+                    <label><input type="radio" name="q25" value="a"> Tefʼîl</label>
+                    <label><input type="radio" name="q25" value="b"> Mufâʻale</label>
+                    <label><input type="radio" name="q25" value="c"> Tefeʻʻül</label>
+                    <label><input type="radio" name="q25" value="d"> İfʻâl</label>
+                </div>
+                <div class="question">
+                    <p>26. ام ل ك kelimesinin anlamı hangisidir?</p>
+                    <label><input type="radio" name="q26" value="a"> Gül renkli</label>
+                    <label><input type="radio" name="q26" value="b"> Beyaz</label>
+                    <label><input type="radio" name="q26" value="c"> Kırmızı</label>
+                    <label><input type="radio" name="q26" value="d"> Siyah</label>
+                </div>
+                <div class="question">
+                    <p>27. Memâlik kelimesinin tekili hangisidir?</p>
+                    <label><input type="radio" name="q27" value="a"> Mülk</label>
+                    <label><input type="radio" name="q27" value="b"> Memleket</label>
+                    <label><input type="radio" name="q27" value="c"> Malik</label>
+                    <label><input type="radio" name="q27" value="d"> Mülakat</label>
+                </div>
+                <div class="question">
+                    <p>28. Menâzil kelimesinin tekili hangisidir?</p>
+                    <label><input type="radio" name="q28" value="a"> Menzil</label>
+                    <label><input type="radio" name="q28" value="b"> Mevzi</label>
+                    <label><input type="radio" name="q28" value="c"> Mahal</label>
+                    <label><input type="radio" name="q28" value="d"> Mekân</label>
+                </div>
+
+                <!-- Ünite 4: Metin Anlama Çalışmaları: Farsça Kelime Yapıları Tespit - 1 -->
+                <h2>Ünite 4: Metin Anlama Çalışmaları: Farsça Kelime Yapıları Tespit - 1</h2>
+                <div class="question">
+                    <p>29. م شروح ب روجه ifadesinin anlamı hangisidir?</p>
+                    <label><input type="radio" name="q29" value="a"> Kapalı bir şekilde</label>
+                    <label><input type="radio" name="q29" value="b"> Açıklandığı şekilde</label>
+                    <label><input type="radio" name="q29" value="c"> Gizlice</label>
+                    <label><input type="radio" name="q29" value="d"> Anlaşılmaz bir şekilde</label>
+                </div>
+                <div class="question">
+                    <p>30. از هر جهت ifadesinin anlamı hangisidir?</p>
+                    <label><input type="radio" name="q30" value="a"> Tek yönden</label>
+                    <label><input type="radio" name="q30" value="b"> Her yönden</label>
+                    <label><input type="radio" name="q30" value="c"> Yalnızca bir açıdan</label>
+                    <label><input type="radio" name="q30" value="d"> Kısmen</label>
+                </div>
+                <div class="question">
+                    <p>31. اد رمع ب ifadesinin anlamı hangisidir?</p>
+                    <label><input type="radio" name="q31" value="a"> Adet olduğu üzere</label>
+                    <label><input type="radio" name="q31" value="b"> Geleneksel değil</label>
+                    <label><input type="radio" name="q31" value="c"> Yeni bir şekilde</label>
+                    <label><input type="radio" name="q31" value="d"> Alışılmadık olarak</label>
+                </div>
+                <div class="question">
+                    <p>32. كاه ام اق kelime grubunun okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q32" value="a"> İkāmet-gâh</label>
+                    <label><input type="radio" name="q32" value="b"> İkāmet-kāh</label>
+                    <label><input type="radio" name="q32" value="c"> Kāh-ikāmet</label>
+                    <label><input type="radio" name="q32" value="d"> Gāh-ikāmet</label>
+                </div>
+                <div class="question">
+                    <p>33. ند امان دري kelime grubunun okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q33" value="a"> Deryâ-mânend</label>
+                    <label><input type="radio" name="q33" value="b"> Mânend-deryâ</label>
+                    <label><input type="radio" name="q33" value="c"> Deryâ-mând</label>
+                    <label><input type="radio" name="q33" value="d"> Mând-deryâ</label>
+                </div>
+                <div class="question">
+                    <p>34. دكار داون kelime grubunun okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q34" value="a"> Hudâvend-gâr</label>
+                    <label><input type="radio" name="q34" value="b"> Gâr-hudâvend</label>
+                    <label><input type="radio" name="q34" value="c"> Hudâ-gâr</label>
+                    <label><input type="radio" name="q34" value="d"> Vend-gâr</label>
+                </div>
+                <div class="question">
+                    <p>35. ندكان هب خا ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q35" value="a"> Hâssa-bendegân</label>
+                    <label><input type="radio" name="q35" value="b"> Bendegân-ı hâssa</label>
+                    <label><input type="radio" name="q35" value="c"> Hâssa-gân-bende</label>
+                    <label><input type="radio" name="q35" value="d"> Bendegân-hâssa</label>
+                </div>
+                <div class="question">
+                    <p>36. سى طائ ه زادك ان ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q36" value="a"> Zâdegân tâifesi</label>
+                    <label><input type="radio" name="q36" value="b"> Tâifesi zâdegân</label>
+                    <label><input type="radio" name="q36" value="c"> Zâde-tâifesi</label>
+                    <label><input type="radio" name="q36" value="d"> Tâife-zâdegân</label>
+                </div>
+                <div class="question">
+                    <p>37. سر معماران جهان ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q37" value="a"> Cihân-ı ser-miʻmârân</label>
+                    <label><input type="radio" name="q37" value="b"> Ser-miʻmârân-ı cihân</label>
+                    <label><input type="radio" name="q37" value="c"> Miʻmârân-ı ser-cihân</label>
+                    <label><input type="radio" name="q37" value="d"> Ser-cihân miʻmârân</label>
+                </div>
+
+                <!-- Ünite 5: Tarihî Metinleri Günlük Dile Çevirme Çalışmaları - 1 -->
+                <h2>Ünite 5: Tarihî Metinleri Günlük Dile Çevirme Çalışmaları - 1</h2>
+                <div class="question">
+                    <p>38. Sebʻîn ve elf tarih grubunun karşılığı hangisidir?</p>
+                    <label><input type="radio" name="q38" value="a"> Bin yetmiş</label>
+                    <label><input type="radio" name="q38" value="b"> Yedi yüz</label>
+                    <label><input type="radio" name="q38" value="c"> Bin yedi</label>
+                    <label><input type="radio" name="q38" value="d"> Yetmiş bin</label>
+                </div>
+                <div class="question">
+                    <p>39. Âsâr kelimesinin tekili hangisidir?</p>
+                    <label><input type="radio" name="q39" value="a"> Eser</label>
+                    <label><input type="radio" name="q39" value="b"> Asar</label>
+                    <label><input type="radio" name="q39" value="c"> Âsır</label>
+                    <label><input type="radio" name="q39" value="d"> Esir</label>
+                </div>
+                <div class="question">
+                    <p>40. Vüzerâ-i ʻizâm ne anlama gelmektedir?</p>
+                    <label><input type="radio" name="q40" value="a"> Küçük vezirler</label>
+                    <label><input type="radio" name="q40" value="b"> Büyük vezirler</label>
+                    <label><input type="radio" name="q40" value="c"> Askeri yöneticiler</label>
+                    <label><input type="radio" name="q40" value="d"> Saray görevlileri</label>
+                </div>
+                <div class="question">
+                    <p>41. Teskîn masdarının vezni hangisidir?</p>
+                    <label><input type="radio" name="q41" value="a"> Tefʼîl</label>
+                    <label><input type="radio" name="q41" value="b"> Mufâʻale</label>
+                    <label><input type="radio" name="q41" value="c"> Tefeʻʻül</label>
+                    <label><input type="radio" name="q41" value="d"> İfʻâl</label>
+                </div>
+                <div class="question">
+                    <p>42. Tekayyüd masdarının vezni hangisidir?</p>
+                    <label><input type="radio" name="q42" value="a"> Mufâʻale</label>
+                    <label><input type="radio" name="q42" value="b"> Tefeʻʻül</label>
+                    <label><input type="radio" name="q42" value="c"> Tefʼîl</label>
+                    <label><input type="radio" name="q42" value="d"> İfʻâl</label>
+                </div>
+                <div class="question">
+                    <p>43. Muhâfaza masdarının vezni hangisidir?</p>
+                    <label><input type="radio" name="q43" value="a"> Tefʼîl</label>
+                    <label><input type="radio" name="q43" value="b"> Mufâʻale</label>
+                    <label><input type="radio" name="q43" value="c"> Tefeʻʻül</label>
+                    <label><input type="radio" name="q43" value="d"> İfʻâl</label>
+                </div>
+                <div class="question">
+                    <p>44. Arapçada sıfat-ı müşebbehe olan kelime bazen (faʻî) gibi yazılır ve okunur. Aşağıdaki kelimelerden hangisi bu yazılış ve okunuşa uymamaktadır?</p>
+                    <label><input type="radio" name="q44" value="a"> غريب</label>
+                    <label><input type="radio" name="q44" value="b"> كبير</label>
+                    <label><input type="radio" name="q44" value="c"> صغير</label>
+                    <label><input type="radio" name="q44" value="d"> قديم</label>
+                </div>
+                <div class="question">
+                    <p>45. الع ق بعه س (kılâ‘-ı seb‘a) ibaresinin anlamı hangisidir?</p>
+                    <label><input type="radio" name="q45" value="a"> Yedi kale</label>
+                    <label><input type="radio" name="q45" value="b"> Yedi şehir</label>
+                    <label><input type="radio" name="q45" value="c"> Yedi dağ</label>
+                    <label><input type="radio" name="q45" value="d"> Yedi nehir</label>
+                </div>
+                <div class="question">
+                    <p>46. “Evâsıt-ı Ramazân” ibaresinin anlamı hangisidir?</p>
+                    <label><input type="radio" name="q46" value="a"> Ramazan ayının başı</label>
+                    <label><input type="radio" name="q46" value="b"> Ramazan ayının ortası</label>
+                    <label><input type="radio" name="q46" value="c"> Ramazan ayının sonu</label>
+                    <label><input type="radio" name="q46" value="d"> Ramazan bayramı</label>
+                </div>
+
+                <!-- Ünite 6: Hızlı Metin Okuma Çalışmaları - 2 -->
+                <h2>Ünite 6: Hızlı Metin Okuma Çalışmaları - 2</h2>
+                <div class="question">
+                    <p>47. شاه عجم ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q47" value="a"> Şâh-ı Âcem</label>
+                    <label><input type="radio" name="q47" value="b"> Âcem-ı Şâh</label>
+                    <label><input type="radio" name="q47" value="c"> Şâh-Âcem</label>
+                    <label><input type="radio" name="q47" value="d"> Âcem-Şâh</label>
+                </div>
+                <div class="question">
+                    <p>48. ف زل ار ي ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q48" value="a"> Zülf-i yâr</label>
+                    <label><input type="radio" name="q48" value="b"> Yâr-ı zülf</label>
+                    <label><input type="radio" name="q48" value="c"> Zülf-yâr</label>
+                    <label><input type="radio" name="q48" value="d"> Yâr-zülf</label>
+                </div>
+                <div class="question">
+                    <p>49. زمان و زم ين روي ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q49" value="a"> Zemîn ü zemân rû-yı</label>
+                    <label><input type="radio" name="q49" value="b"> Rû-yı zemîn ü zemân</label>
+                    <label><input type="radio" name="q49" value="c"> Zemân ü zemîn rû-yı</label>
+                    <label><input type="radio" name="q49" value="d"> Rû-yı zemân ü zemîn</label>
+                </div>
+                <div class="question">
+                    <p>50. ث ان ى م يراخور kelime grubunun okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q50" value="a"> Mîr-ahûr-ı sânî</label>
+                    <label><input type="radio" name="q50" value="b"> Sânî-mîr-ahûr</label>
+                    <label><input type="radio" name="q50" value="c"> Mîr-sânî-ahûr</label>
+                    <label><input type="radio" name="q50" value="d"> Ahûr-ı sânî-mîr</label>
+                </div>
+                <div class="question">
+                    <p>51. پ ناه عال م پ اد شاه kelime grubunun okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q51" value="a"> Pâdişâh-ı âlem-penâh</label>
+                    <label><input type="radio" name="q51" value="b"> Âlem-penâh pâdişâh</label>
+                    <label><input type="radio" name="q51" value="c"> Pâdişâh-penâh âlem</label>
+                    <label><input type="radio" name="q51" value="d"> Âlem-pâdişâh penâh</label>
+                </div>
+                <div class="question">
+                    <p>52. مم ل كت آ سا دي و kelime grubunun okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q52" value="a"> Dev-âsâ memleket</label>
+                    <label><input type="radio" name="q52" value="b"> Memleket dev-âsâ</label>
+                    <label><input type="radio" name="q52" value="c"> Âsâ-dev memleket</label>
+                    <label><input type="radio" name="q52" value="d"> Memleket-âsâ dev</label>
+                </div>
+                <div class="question">
+                    <p>53. ب ك لرى روم دي ار ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q53" value="a"> Beyleri diyâr-ı Rûm</label>
+                    <label><input type="radio" name="q53" value="b"> Diyâr-ı Rûm beyleri</label>
+                    <label><input type="radio" name="q53" value="c"> Rûm diyâr-ı beyleri</label>
+                    <label><input type="radio" name="q53" value="d"> Diyâr beyleri Rûm</label>
+                </div>
+                <div class="question">
+                    <p>54. ع لما مج لس ك وي ندك ان ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q54" value="a"> Meclis-i ulemâ gûyende-gân</label>
+                    <label><input type="radio" name="q54" value="b"> Gûyende-gân-ı meclis-i ulemâ</label>
+                    <label><input type="radio" name="q54" value="c"> Ulemâ meclis-i gûyende-gân</label>
+                    <label><input type="radio" name="q54" value="d"> Gûyende-gân-ı ulemâ meclis</label>
+                </div>
+                <div class="question">
+                    <p>55. اك رام ي ه رون ده و آي نده ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q55" value="a"> Yende vü revendeye ikrâm</label>
+                    <label><input type="radio" name="q55" value="b"> İkrâm yende vü revendeye</label>
+                    <label><input type="radio" name="q55" value="c"> Revendeye ikrâm yende</label>
+                    <label><input type="radio" name="q55" value="d"> Yende ikrâm revendeye</label>
+                </div>
+                <div class="question">
+                    <p>56. خدم ى دعاك وي لق ك رك ى وق يه ifadesinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q56" value="a"> Vakfiye gereği duâ-gûyluk hidmet</label>
+                    <label><input type="radio" name="q56" value="b"> Duâ-gûyluk hidmet vakfiye</label>
+                    <label><input type="radio" name="q56" value="c"> Hidmet vakfiye duâ-gûyluk</label>
+                    <label><input type="radio" name="q56" value="d"> Vakfiye hidmet duâ-gûyluk</label>
+                </div>
+
+                <!-- Ünite 7: Metin Anlama Çalışmaları: Sözcük ve Terim Bulma - 2 -->
+                <h2>Ünite 7: Metin Anlama Çalışmaları: Sözcük ve Terim Bulma - 2</h2>
+                <div class="question">
+                    <p>57. Sabah vakti anlamına gelen deyim hangisidir?</p>
+                    <label><input type="radio" name="q57" value="a"> Ale’s-seher</label>
+                    <label><input type="radio" name="q57" value="b"> Seher-i âlem</label>
+                    <label><input type="radio" name="q57" value="c"> Sabah-ı şerîf</label>
+                    <label><input type="radio" name="q57" value="d"> Seher-i sâf</label>
+                </div>
+                <div class="question">
+                    <p>58. Tasdîk masdarının vezni hangisidir?</p>
+                    <label><input type="radio" name="q58" value="a"> Mufâʻale</label>
+                    <label><input type="radio" name="q58" value="b"> Tefʼîl</label>
+                    <label><input type="radio" name="q58" value="c"> Tefeʻʻül</label>
+                    <label><input type="radio" name="q58" value="d"> İstifʻâl</label>
+                </div>
+                <div class="question">
+                    <p>59. Tegallüb masdarının vezni hangisidir?</p>
+                    <label><input type="radio" name="q59" value="a"> Tefʼîl</label>
+                    <label><input type="radio" name="q59" value="b"> Tefeʻʻül</label>
+                    <label><input type="radio" name="q59" value="c"> Mufâʻale</label>
+                    <label><input type="radio" name="q59" value="d"> İfʻâl</label>
+                </div>
+                <div class="question">
+                    <p>60. İstiklâl masdarının vezni hangisidir?</p>
+                    <label><input type="radio" name="q60" value="a"> Tefeʻʻül</label>
+                    <label><input type="radio" name="q60" value="b"> Mufâʻale</label>
+                    <label><input type="radio" name="q60" value="c"> İstifʻâl</label>
+                    <label><input type="radio" name="q60" value="d"> Tefʼîl</label>
+                </div>
+                <div class="question">
+                    <p>61. Sâl be-sâl ne anlama gelmektedir?</p>
+                    <label><input type="radio" name="q61" value="a"> Her ay</label>
+                    <label><input type="radio" name="q61" value="b"> Yıldan yıla</label>
+                    <label><input type="radio" name="q61" value="c"> Gün be gün</label>
+                    <label><input type="radio" name="q61" value="d"> Haftadan haftaya</label>
+                </div>
+                <div class="question">
+                    <p>62. Vazʻ-ı kadem ne anlama gelmektedir?</p>
+                    <label><input type="radio" name="q62" value="a"> El uzatma</label>
+                    <label><input type="radio" name="q62" value="b"> Ayak basma</label>
+                    <label><input type="radio" name="q62" value="c"> Baş eğme</label>
+                    <label><input type="radio" name="q62" value="d"> Yol açma</label>
+                </div>
+                <div class="question">
+                    <p>63. Huzzâr kelimesinin tekili hangisidir?</p>
+                    <label><input type="radio" name="q63" value="a"> Hâzır</label>
+                    <label><input type="radio" name="q63" value="b"> Hazret</label>
+                    <label><input type="radio" name="q63" value="c"> Huzur</label>
+                    <label><input type="radio" name="q63" value="d"> Hızır</label>
+                </div>
+                <div class="question">
+                    <p>64. Anâsır kelimesinin tekili hangisidir?</p>
+                    <label><input type="radio" name="q64" value="a"> Nâsır</label>
+                    <label><input type="radio" name="q64" value="b"> Unsur</label>
+                    <label><input type="radio" name="q64" value="c"> Ansar</label>
+                    <label><input type="radio" name="q64" value="d"> Nasıra</label>
+                </div>
+                <div class="question">
+                    <p>65. ماعدا ibaresinin okunuşu hangisidir?</p>
+                    <label><input type="radio" name="q65" value="a"> Mâʻadâ</label>
+                    <label><input type="radio" name="q65" value="b"> Maʻdâ</label>
+                    <label><input type="radio" name="q65" value="c"> Mâʻdâ</label>
+                    <label><input type="radio" name="q65" value="d"> Maʻadâ</label>
+                </div>
+                <div class="question">
+                    <p>66. “Şahit olunan şey” anlamındaki kelime hangisidir?</p>
+                    <label><input type="radio" name="q66" value="a"> Meşhûd</label>
+                    <label><input type="radio" name="q66" value="b"> Şâhid</label>
+                    <label><input type="radio" name="q66" value="c"> Mashûd</label>
+                    <label><input type="radio" name="q66" value="d"> Meşhed</label>
+                </div>
+
+                <button type="button" onclick="submitTest()">Testi Gönder</button>
+            </form>
+        </div>
+
+        <!-- Sonuç Ekranı -->
+        <div class="result" id="result">
+            <h2>Sonuçlar</h2>
+            <p id="score"></p>
+            <div class="result-details" id="resultDetails"></div>
+            <button onclick="restart()">Yeni Test</button>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "b", q2: "b", q3: "b", q4: "a", q5: "b", q6: "a", q7: "b", q8: "a", q9: "a", q10: "b",
+            q11: "a", q12: "b", q13: "b", q14: "a", q15: "b", q16: "a", q17: "b", q18: "a", q19: "a",
+            q20: "a", q21: "c", q22: "c", q23: "b", q24: "a", q25: "b", q26: "a", q27: "b", q28: "a",
+            q29: "b", q30: "b", q31: "a", q32: "a", q33: "a", q34: "a", q35: "b", q36: "a", q37: "b",
+            q38: "a", q39: "a", q40: "b", q41: "a", q42: "b", q43: "b", q44: "a", q45: "a", q46: "b",
+            q47: "a", q48: "a", q49: "b", q50: "a", q51: "a", q52: "a", q53: "b", q54: "b", q55: "a", q56: "a",
+            q57: "a", q58: "b", q59: "b", q60: "c", q61: "b", q62: "b", q63: "a", q64: "b", q65: "a", q66: "a"
+        };
+
+        const unitRanges = [
+            { name: "Ünite 1: Hızlı Metin Okuma Çalışmaları", start: 1, end: 10 },
+            { name: "Ünite 2: Metin Anlama Çalışmaları: Sözcük ve Terim Bulma - 1", start: 11, end: 19 },
+            { name: "Ünite 3: Metin Anlama Çalışmaları: Arapça Kelime Yapıları Tespit - 1", start: 20, end: 28 },
+            { name: "Ünite 4: Metin Anlama Çalışmaları: Farsça Kelime Yapıları Tespit - 1", start: 29, end: 37 },
+            { name: "Ünite 5: Tarihî Metinleri Günlük Dile Çevirme Çalışmaları - 1", start: 38, end: 46 },
+            { name: "Ünite 6: Hızlı Metin Okuma Çalışmaları - 2", start: 47, end: 56 },
+            { name: "Ünite 7: Metin Anlama Çalışmaları: Sözcük ve Terim Bulma - 2", start: 57, end: 66 }
+        ];
+
+        let timeLeft = 1800; // 30 dakika (saniye cinsinden)
+        let timerInterval;
+        let answeredQuestions = 0;
+
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            if (username && password) {
+                document.getElementById("loginForm").classList.remove("active");
+                document.getElementById("testForm").classList.add("active");
+                startTimer();
+                updateProgress();
+            } else {
+                alert("Lütfen kullanıcı adı ve şifreyi doldurun!");
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById("timer").textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const totalQuestions = 66;
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById("progress").style.width = `${progress}%`;
+        }
+
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener("change", () => {
+                const questionName = input.name;
+                if (!document.querySelectorAll(`input[name="${questionName}"]:checked`).length > 1) {
+                    answeredQuestions++;
+                    updateProgress();
+                }
+            });
+        });
+
+        function submitTest() {
+            clearInterval(timerInterval);
+            const form = document.getElementById("quizForm");
+            const userAnswers = {};
+            for (let i = 1; i <= 66; i++) {
+                userAnswers[`q${i}`] = form.elements[`q${i}`]?.value || "Cevaplanmadı";
+            }
+
+            let totalScore = 0;
+            let details = "";
+            const unitStats = unitRanges.map(unit => ({
+                name: unit.name,
+                correct: 0,
+                incorrect: 0
+            }));
+
+            for (let i = 1; i <= 66; i++) {
+                const q = `q${i}`;
+                const questionText = document.querySelector(`input[name="q${i}"]`).closest(".question").querySelector("p").textContent;
+                const userAnswer = userAnswers[q];
+                const correctAnswer = correctAnswers[q];
+                const correctText = document.querySelector(`input[name="q${i}"][value="${correctAnswer}"]`).nextSibling.textContent.trim();
+
+                let unitIndex = unitRanges.findIndex(unit => i >= unit.start && i <= unit.end);
+                if (userAnswer === correctAnswer) {
+                    totalScore++;
+                    unitStats[unitIndex].correct++;
+                    details += `<p class="correct">Soru ${i}: ${questionText}<br>` +
+                              `Sizin cevabınız: ${userAnswer} (${document.querySelector(`input[name="q${i}"][value="${userAnswer}"]`).nextSibling.textContent.trim()})<br>` +
+                              `Doğru cevap: ${correctAnswer} (${correctText})<br>` +
+                              `Sonuç: Doğru</p>`;
+                } else {
+                    unitStats[unitIndex].incorrect++;
+                    details += `<p class="incorrect">Soru ${i}: ${questionText}<br>` +
+                              `Sizin cevabınız: ${userAnswer} (${userAnswer === "Cevaplanmadı" ? "Cevaplanmadı" : document.querySelector(`input[name="q${i}"][value="${userAnswer}"]`).nextSibling.textContent.trim()})<br>` +
+                              `Doğru cevap: ${correctAnswer} (${correctText})<br>` +
+                              `Sonuç: Yanlış</p>`;
+                }
+            }
+
+            let statsHtml = "<h3>Ünite Bazında Performans</h3>";
+            unitStats.forEach(unit => {
+                const total = unit.correct + unit.incorrect;
+                const percentage = total > 0 ? Math.round((unit.correct / total) * 100) : 0;
+                statsHtml += `<div class="unit-stats">` +
+                             `<strong>${unit.name}</strong><br>` +
+                             `Doğru: ${unit.correct}, Yanlış: ${unit.incorrect}, Başarı: %${percentage}` +
+                             `</div>`;
+            });
+
+            document.getElementById("testForm").classList.remove("active");
+            document.getElementById("result").classList.add("active");
+            document.getElementById("score").innerHTML = `Toplam Puanınız: ${totalScore} / 66 (%${Math.round((totalScore / 66) * 100)})`;
+            document.getElementById("resultDetails").innerHTML = details + statsHtml;
+        }
+
+        function restart() {
+            document.getElementById("result").classList.remove("active");
+            document.getElementById("loginForm").classList.add("active");
+            document.getElementById("quizForm").reset();
+            timeLeft = 1800;
+            answeredQuestions = 0;
+            document.getElementById("progress").style.width = "0%";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uygur Devleti Tarihi Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #result h2 {
+            color: #27ae60;
+        }
+        .explanation {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-left: 4px solid #3498db;
+        }
+        .correct {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Uygur Devleti Tarihi Testi</h1>
+    <form id="quizForm">
+        <!-- Soru 1 -->
+        <div class="question">
+            <h3>1. Uygur Devleti’nin ilk hükümdarı kimdir?</h3>
+            <label><input type="radio" name="q1" value="A"> A) Kutlug Bilge Kül Kagan</label>
+            <label><input type="radio" name="q1" value="B"> B) Moyen-çor Kagan</label>
+            <label><input type="radio" name="q1" value="C"> C) Bögü Kagan</label>
+            <label><input type="radio" name="q1" value="D"> D) Tengride Bolmiş</label>
+        </div>
+
+        <!-- Soru 2 -->
+        <div class="question">
+            <h3>2. Kutlug Bilge Kül Kagan’ın ilk icraatı nedir?</h3>
+            <label><input type="radio" name="q2" value="A"> A) Her tarafa elçilerle fetihnameler göndermek</label>
+            <label><input type="radio" name="q2" value="B"> B) Karlukları Sol Yabguluğu’na atamak</label>
+            <label><input type="radio" name="q2" value="C"> C) Çin’e sefer düzenlemek</label>
+            <label><input type="radio" name="q2" value="D"> D) Şine-Usu Yazıtı’nı diktirmek</label>
+        </div>
+
+        <!-- Soru 3 -->
+        <div class="question">
+            <h3>3. Talas Savaşı’nın Uygurlar açısından önemi nedir?</h3>
+            <label><input type="radio" name="q3" value="A"> A) Çin’in yenilerek Tarım Havzası’nın Uygurların eline geçmesi</label>
+            <label><input type="radio" name="q3" value="B"> B) Karlukların bağımsızlığını kazanması</label>
+            <label><input type="radio" name="q3" value="C"> C) Çin’in Uygurlara haraç vermesi</label>
+            <label><input type="radio" name="q3" value="D"> D) Moyen-çor’un Çin imparatoru olması</label>
+        </div>
+
+        <!-- Soru 4 -->
+        <div class="question">
+            <h3>4. Moyen-çor Kagan’ın unvanı nedir?</h3>
+            <label><input type="radio" name="q4" value="A"> A) Tengride Bulmuş İl İtmiş Bilge</label>
+            <label><input type="radio" name="q4" value="B"> B) Alp Külüg Bilge Kagan</label>
+            <label><input type="radio" name="q4" value="C"> C) Kutlug Bilge Kül</label>
+            <label><input type="radio" name="q4" value="D"> D) İl Tutmış Kagan</label>
+        </div>
+
+        <!-- Soru 5 -->
+        <div class="question">
+            <h3>5. Moyen-çor Kagan hangi boylarla batı seferleri düzenlemiştir?</h3>
+            <label><input type="radio" name="q5" value="A"> A) Karluklar ve Türgeşler</label>
+            <label><input type="radio" name="q5" value="B"> B) Kırgızlar ve Oğuzlar</label>
+            <label><input type="radio" name="q5" value="C"> C) Tölesler ve Tatarlar</label>
+            <label><input type="radio" name="q5" value="D"> D) Çinliler ve Tibetliler</label>
+        </div>
+
+        <!-- Soru 6 -->
+        <div class="question">
+            <h3>6. Moyen-çor’un edebi yönünü gösteren yazıt hangisidir?</h3>
+            <label><input type="radio" name="q6" value="A"> A) Şine-Usu Yazıtı</label>
+            <label><input type="radio" name="q6" value="B"> B) Karabalsagun Yazıtı</label>
+            <label><input type="radio" name="q6" value="C"> C) Ordu Örgin Yazıtı</label>
+            <label><input type="radio" name="q6" value="D"> D) Talas Yazıtı</label>
+        </div>
+
+        <!-- Soru 7 -->
+        <div class="question">
+            <h3>7. Bögü Kagan’ın isminin anlamı nedir?</h3>
+            <label><input type="radio" name="q7" value="A"> A) Âlim ve sihirbaz</label>
+            <label><input type="radio" name="q7" value="B"> B) Savaşçı ve bilge</label>
+            <label><input type="radio" name="q7" value="C"> C) Güçlü ve kudretli</label>
+            <label><input type="radio" name="q7" value="D"> D) Hükümdar ve lider</label>
+        </div>
+
+        <!-- Soru 8 -->
+        <div class="question">
+            <h3>8. Lo-yang Seferi’nin sebebi nedir?</h3>
+            <label><input type="radio" name="q8" value="A"> A) Tibetlilerin Çin’e hücum etmesi</label>
+            <label><input type="radio" name="q8" value="B"> B) Çin’in Uygurlara haraç vermemesi</label>
+            <label><input type="radio" name="q8" value="C"> C) Karlukların isyanı</label>
+            <label><input type="radio" name="q8" value="D"> D) Mani Dini’nin yayılması</label>
+        </div>
+
+        <!-- Soru 9 -->
+        <div class="question">
+            <h3>9. Maniheizm din adamlarının hangi vasıfları taşıması beklenirdi?</h3>
+            <label><input type="radio" name="q9" value="A"> A) Evlenmemek, oruç tutmak, et yememek</label>
+            <label><input type="radio" name="q9" value="B"> B) Savaşmak, et yemek, içki içmek</label>
+            <label><input type="radio" name="q9" value="C"> C) Ticaret yapmak, aile kurmak</label>
+            <label><input type="radio" name="q9" value="D"> D) Avcılık yapmak, madencilikle uğraşmak</label>
+        </div>
+
+        <!-- Soru 10 -->
+        <div class="question">
+            <h3>10. Uygur ekonomisinin temelini ne oluşturur?</h3>
+            <label><input type="radio" name="q10" value="A"> A) Hayvancılık</label>
+            <label><input type="radio" name="q10" value="B"> B) Ticaret</label>
+            <label><input type="radio" name="q10" value="C"> C) Ziraat</label>
+            <label><input type="radio" name="q10" value="D"> D) Madencilik</label>
+        </div>
+
+        <!-- Soru 11 -->
+        <div class="question">
+            <h3>11. Uygurlarda vergi toplayan devlet hazinedarına ne denir?</h3>
+            <label><input type="radio" name="q11" value="A"> A) Ağıcı</label>
+            <label><input type="radio" name="q11" value="B"> B) Tudun</label>
+            <label><input type="radio" name="q11" value="C"> C) Satıkçı</label>
+            <label><input type="radio" name="q11" value="D"> D) Amga</label>
+        </div>
+
+        <!-- Soru 12 -->
+        <div class="question">
+            <h3>12. Çin’den başlayarak Turfan ve Kaşgar’dan geçen İpek Yolu güzergâhının adı nedir?</h3>
+            <label><input type="radio" name="q12" value="A"> A) Orta Yol</label>
+            <label><input type="radio" name="q12" value="B"> B) Kuzey Yolu</label>
+            <label><input type="radio" name="q12" value="C"> C) Güney Yolu</label>
+            <label><input type="radio" name="q12" value="D"> D) Batı Yolu</label>
+        </div>
+
+        <!-- Soru 13 -->
+        <div class="question">
+            <h3>13. Moyen-çor’un Çin’e psikolojik üstünlük kurduğunu gösteren davranış nedir?</h3>
+            <label><input type="radio" name="q13" value="A"> A) Çin elçisini sedirde oturarak kabul etmesi</label>
+            <label><input type="radio" name="q13" value="B"> B) Talas Savaşı’nda Çin’i yenmesi</label>
+            <label><input type="radio" name="q13" value="C"> C) Şine-Usu Yazıtı’nı diktirmesi</label>
+            <label><input type="radio" name="q13" value="D"> D) Lo-yang’ı geri alması</label>
+        </div>
+
+        <!-- Soru 14 -->
+        <div class="question">
+            <h3>14. Uygurların hangi hükümdarı Mani Dini’ni resmi din haline getirmiştir?</h3>
+            <label><input type="radio" name="q14" value="A"> A) Kutlug Bilge Kül Kagan</label>
+            <label><input type="radio" name="q14" value="B"> B) Moyen-çor Kagan</label>
+            <label><input type="radio" name="q14" value="C"> C) Bögü Kagan</label>
+            <label><input type="radio" name="q14" value="D"> D) Tengride Bolmiş</label>
+        </div>
+
+        <!-- Soru 15 -->
+        <div class="question">
+            <h3>15. Moyen-çor’un kuzey seferleri hangi boylara karşı düzenlenmiştir?</h3>
+            <label><input type="radio" name="q15" value="A"> A) Kırgızlar</label>
+            <label><input type="radio" name="q15" value="B"> B) Karluklar</label>
+            <label><input type="radio" name="q15" value="C"> C) Oğuzlar</label>
+            <label><input type="radio" name="q15" value="D"> D) Türgeşler</label>
+        </div>
+
+        <!-- Soru 16 -->
+        <div class="question">
+            <h3>16. Uygurlarda demircilik hangi bölgede yoğunlaşmıştır?</h3>
+            <label><input type="radio" name="q16" value="A"> A) Altaylar</label>
+            <label><input type="radio" name="q16" value="B"> B) Tanrı Dağları</label>
+            <label><input type="radio" name="q16" value="C"> C) Kaşgar</label>
+            <label><input type="radio" name="q16" value="D"> D) Turfan</label>
+        </div>
+
+        <!-- Soru 17 -->
+        <div class="question">
+            <h3>17. Uygur ekonomisinde hangi hayvanların kürkleri gelir kaynağıdır?</h3>
+            <label><input type="radio" name="q17" value="A"> A) Samur, sansar, kakım</label>
+            <label><input type="radio" name="q17" value="B"> B) At, deve, koyun</label>
+            <label><input type="radio" name="q17" value="C"> C) İnek, keçi, tavuk</label>
+            <label><input type="radio" name="q17" value="D"> D) Kurt, ayı, tilki</label>
+        </div>
+
+        <!-- Soru 18 -->
+        <div class="question">
+            <h3>18. Uygurlarda ticareti yapanlara ne ad verilir?</h3>
+            <label><input type="radio" name="q18" value="A"> A) Satıkçı</label>
+            <label><input type="radio" name="q18" value="B"> B) Ağıcı</label>
+            <label><input type="radio" name="q18" value="C"> C) Tudun</label>
+            <label><input type="radio" name="q18" value="D"> D) Arkış</label>
+        </div>
+
+        <!-- Soru 19 -->
+        <div class="question">
+            <h3>19. Uygurlarla ilgili hangi bilgiler yanlıştır?</h3>
+            <label><input type="radio" name="q19" value="A"> A) Balkas Gölü ve Beşbalık civarında Türgişler vardı</label>
+            <label><input type="radio" name="q19" value="B"> B) Dokuz Oğuz boyları üzerinde gelişti</label>
+            <label><input type="radio" name="q19" value="C"> C) İlk hanedan Yaglakar ailesindendi</label>
+            <label><input type="radio" name="q19" value="D"> D) Karabalsagun Yazıtı’nda “Dokuz Soyun Kaganı” denir</label>
+        </div>
+
+        <!-- Soru 20 -->
+        <div class="question">
+            <h3>20. Uygur mimarisinde “Balık” ne anlama gelir?</h3>
+            <label><input type="radio" name="q20" value="A"> A) Surlarla çevrili kale-şehir</label>
+            <label><input type="radio" name="q20" value="B"> B) Köy</label>
+            <label><input type="radio" name="q20" value="C"> C) Kule-tapınak</label>
+            <label><input type="radio" name="q20" value="D"> D) Budist türbe</label>
+        </div>
+
+        <!-- Soru 21 -->
+        <div class="question">
+            <h3>21. Uygurlarda şehir kurduran ilk hükümdar kimdir?</h3>
+            <label><input type="radio" name="q21" value="A"> A) Tengride Bolmiş İl İtmiş Bilge Kagan</label>
+            <label><input type="radio" name="q21" value="B"> B) Bögü Kagan</label>
+            <label><input type="radio" name="q21" value="C"> C) Moyen-çor Kagan</label>
+            <label><input type="radio" name="q21" value="D"> D) Kutlug Bilge Kül Kagan</label>
+        </div>
+
+        <!-- Soru 22 -->
+        <div class="question">
+            <h3>22. Moyen-çor’un Oğuz seferleri hangi nehir kenarında gerçekleşmiştir?</h3>
+            <label><input type="radio" name="q22" value="A"> A) Selenga Nehri</label>
+            <label><input type="radio" name="q22" value="B"> B) Kem Nehri</label>
+            <label><input type="radio" name="q22" value="C"> C) Tarım Nehri</label>
+            <label><input type="radio" name="q22" value="D"> D) Şine-Usu Nehri</label>
+        </div>
+
+        <!-- Soru 23 -->
+        <div class="question">
+            <h3>23. Uygur Devleti’nin altın çağı hangi hükümdarla yaşanmıştır?</h3>
+            <label><input type="radio" name="q23" value="A"> A) Kutlug Bilge Kül Kagan</label>
+            <label><input type="radio" name="q23" value="B"> B) Moyen-çor Kagan</label>
+            <label><input type="radio" name="q23" value="C"> C) Bögü Kagan</label>
+            <label><input type="radio" name="q23" value="D"> D) Tengride Bolmiş</label>
+        </div>
+
+        <!-- Soru 24 -->
+        <div class="question">
+            <h3>24. İpek Yolu’nda Türklerin en önemli ihraç malı nedir?</h3>
+            <label><input type="radio" name="q24" value="A"> A) At</label>
+            <label><input type="radio" name="q24" value="B"> B) İpek</label>
+            <label><input type="radio" name="q24" value="C"> C) Porselen</label>
+            <label><input type="radio" name="q24" value="D"> D) Madeni eşya</label>
+        </div>
+
+        <!-- Soru 25 -->
+        <div class="question">
+            <h3>25. Uygur kültüründe Dokuz Oğuz boyları arasında hangi boylar yer alır?</h3>
+            <label><input type="radio" name="q25" value="A"> A) Buhu, Hun, Bayırku</label>
+            <label><input type="radio" name="q25" value="B"> B) Karluklar, Türgeşler</label>
+            <label><input type="radio" name="q25" value="C"> C) Kırgızlar, Tatarlar</label>
+            <label><input type="radio" name="q25" value="D"> D) Tibetliler, Çinliler</label>
+        </div>
+
+        <!-- Soru 26 -->
+        <div class="question">
+            <h3>26. Uygurlarda “Satir” neyi ifade eder?</h3>
+            <label><input type="radio" name="q26" value="A"> A) Gümüşten yapılan para</label>
+            <label><input type="radio" name="q26" value="B"> B) Tüccar kervanı</label>
+            <label><input type="radio" name="q26" value="C"> C) Vergi memuru</label>
+            <label><input type="radio" name="q26" value="D"> D) İpek kumaş</label>
+        </div>
+
+        <!-- Soru 27 -->
+        <div class="question">
+            <h3>27. Uygur mimarisinde “Stupa” ne anlama gelir?</h3>
+            <label><input type="radio" name="q27" value="A"> A) Surlarla çevrili şehir</label>
+            <label><input type="radio" name="q27" value="B"> B) Köy</label>
+            <label><input type="radio" name="q27" value="C"> C) Budist türbe</label>
+            <label><input type="radio" name="q27" value="D"> D) Kule-tapınak</label>
+        </div>
+
+        <!-- Soru 28 -->
+        <div class="question">
+            <h3>28. Uygurların hangi şehirde kışın yaşadıkları belirtilmiştir?</h3>
+            <label><input type="radio" name="q28" value="A"> A) Turfan</label>
+            <label><input type="radio" name="q28" value="B"> B) Beşbalık</label>
+            <label><input type="radio" name="q28" value="C"> C) Karabalsagun</label>
+            <label><input type="radio" name="q28" value="D"> D) Kaşgar</label>
+        </div>
+
+        <!-- Soru 29 -->
+        <div class="question">
+            <h3>29. Çin’in Uygurlara verdiği hediyeler nasıl algılanmıştır?</h3>
+            <label><input type="radio" name="q29" value="A"> A) Haraç</label>
+            <label><input type="radio" name="q29" value="B"> B) Dostluk göstergesi</label>
+            <label><input type="radio" name="q29" value="C"> C) Ticaret anlaşması</label>
+            <label><input type="radio" name="q29" value="D"> D) Bağımlılık sembolü</label>
+        </div>
+
+        <!-- Soru 30 -->
+        <div class="question">
+            <h3>30. Bozkır Kültürü ile yerleşik kültür arasındaki farklardan biri nedir?</h3>
+            <label><input type="radio" name="q30" value="A"> A) Bozkır insanının ufku geniştir</label>
+            <label><input type="radio" name="q30" value="B"> B) Yerleşik kültürde otlaklar önemlidir</label>
+            <label><input type="radio" name="q30" value="C"> C) Bozkırda sakin bir hayat vardır</label>
+            <label><input type="radio" name="q30" value="D"> D) Yerleşik kültürde kanunlar topluma yöneliktir</label>
+        </div>
+
+        <button type="button" onclick="calculateScore()">Sonuçları Göster</button>
+    </form>
+
+    <div id="result">
+        <h2>Puanınız: <span id="score"></span> / 100</h2>
+        <div id="explanations"></div>
+    </div>
+
+    <script>
+        function calculateScore() {
+            const form = document.getElementById('quizForm');
+            const correctAnswers = {
+                q1: 'A', q2: 'A', q3: 'A', q4: 'A', q5: 'A', q6: 'A', q7: 'A', q8: 'A', q9: 'A', q10: 'A',
+                q11: 'A', q12: 'A', q13: 'A', q14: 'C', q15: 'A', q16: 'A', q17: 'A', q18: 'A', q19: 'A', q20: 'A',
+                q21: 'A', q22: 'A', q23: 'B', q24: 'A', q25: 'A', q26: 'A', q27: 'C', q28: 'A', q29: 'A', q30: 'A'
+            };
+            const explanations = {
+                q1: 'Doğru cevap A: Uygur Devleti’nin ilk hükümdarı Kutlug Bilge Kül Kagan’dır.',
+                q2: 'Doğru cevap A: Kutlug Bilge Kül Kagan ilk olarak her tarafa fetihnameler göndermiştir.',
+                q3: 'Doğru cevap A: Talas Savaşı ile Çin yenilmiş ve Tarım Havzası Uygurların eline geçmiştir.',
+                q4: 'Doğru cevap A: Moyen-çor’un unvanı “Tengride Bulmuş İl İtmiş Bilge”dir.',
+                q5: 'Doğru cevap A: Moyen-çor batı seferlerini Karluklar ve Türgeşlere karşı düzenlemiştir.',
+                q6: 'Doğru cevap A: Moyen-çor’un edebi yönünü Şine-Usu Yazıtı gösterir.',
+                q7: 'Doğru cevap A: Bögü Kagan’ın ismi “âlim ve sihirbaz” anlamına gelir.',
+                q8: 'Doğru cevap A: Lo-yang Seferi, Tibetlilerin Çin’e hücum etmesi nedeniyle yapılmıştır.',
+                q9: 'Doğru cevap A: Maniheizm din adamları evlenmez, oruç tutar ve et yemez.',
+                q10: 'Doğru cevap A: Uygur ekonomisinin temelini hayvancılık oluşturur.',
+                q11: 'Doğru cevap A: Uygurlarda vergi toplayan hazinedara “Ağıcı” denir.',
+                q12: 'Doğru cevap A: Turfan ve Kaşgar’dan geçen İpek Yolu güzergâhı Orta Yol’dur.',
+                q13: 'Doğru cevap A: Moyen-çor Çin elçisini sedirde oturarak kabul etmiştir.',
+                q14: 'Doğru cevap C: Bögü Kagan, Mani Dini’ni resmi din haline getirmiştir.',
+                q15: 'Doğru cevap A: Moyen-çor kuzey seferlerini Kırgızlara karşı düzenlemiştir.',
+                q16: 'Doğru cevap A: Demircilik Altaylar bölgesinde yoğunlaşmıştır.',
+                q17: 'Doğru cevap A: Samur, sansar ve kakım kürkleri gelir kaynağıdır.',
+                q18: 'Doğru cevap A: Ticareti yapanlara “Satıkçı” denir.',
+                q19: 'Doğru cevap A: Balkas Gölü ve Beşbalık civarında Türgişlerin olduğu bilgisi yanlıştır.',
+                q20: 'Doğru cevap A: “Balık” surlarla çevrili kale-şehir anlamına gelir.',
+                q21: 'Doğru cevap A: Şehir kurduran ilk hükümdar Tengride Bolmiş İl İtmiş Bilge Kagan’dır.',
+                q22: 'Doğru cevap A: Oğuz seferleri Selenga Nehri kenarında gerçekleşmiştir.',
+                q23: 'Doğru cevap B: Uygur Devleti’nin altın çağı Moyen-çor Kagan ile yaşanmıştır.',
+                q24: 'Doğru cevap A: Türklerin en önemli ihraç malı attır.',
+                q25: 'Doğru cevap A: Dokuz Oğuz boyları arasında Buhu, Hun ve Bayırku yer alır.',
+                q26: 'Doğru cevap A: “Satir” gümüşten yapılan parayı ifade eder.',
+                q27: 'Doğru cevap C: “Stupa” Budist türbe anlamına gelir.',
+                q28: 'Doğru cevap A: Uygurlar kışın Turfan’da yaşamıştır.',
+                q29: 'Doğru cevap A: Çin’in hediyeleri Türkler tarafından haraç olarak algılanmıştır.',
+                q30: 'Doğru cevap A: Bozkır insanının ufku geniştir, yerleşik kültürde ise sınırlıdır.'
+            };
+
+            let score = 0;
+            const userAnswers = {};
+            for (let i = 1; i <= 30; i++) {
+                const userAnswer = form.querySelector(`input[name="q${i}"]:checked`);
+                userAnswers[`q${i}`] = userAnswer ? userAnswer.value : 'Seçilmedi';
+                if (userAnswer && userAnswer.value === correctAnswers[`q${i}`]) {
+                    score += 3.33; // Her doğru cevap 3.33 puan
+                }
+            }
+
+            document.getElementById('score').textContent = Math.round(score);
+            document.getElementById('result').style.display = 'block';
+
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+            for (let i = 1; i <= 30; i++) {
+                const userAnswer = userAnswers[`q${i}`];
+                const correctAnswer = correctAnswers[`q${i}`];
+                const isCorrect = userAnswer === correctAnswer;
+                const explanation = document.createElement('div');
+                explanation.className = 'explanation';
+                explanation.innerHTML = `${i}. Soru: ${explanations[`q${i}`]}<br>` +
+                    `Sizin cevabınız: <span class="${isCorrect ? 'correct' : 'incorrect'}">${userAnswer}</span> ` +
+                    `(${isCorrect ? 'Doğru' : 'Yanlış'})`;
+                explanationsDiv.appendChild(explanation);
+            }
+        }
+    </script>
+</body>
+</html>

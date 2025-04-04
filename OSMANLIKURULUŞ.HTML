@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuruluş ve Yükseliş Devri Osmanlı Tarihi Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .welcome-screen, .test-screen {
+            text-align: center;
+        }
+        .welcome-screen button {
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .welcome-screen button:hover {
+            background-color: #218838;
+        }
+        .question {
+            margin-bottom: 25px;
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        .question h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        .options label {
+            display: block;
+            padding: 12px;
+            background: #f9f9f9;
+            margin: 6px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .options label:hover {
+            background: #e9ecef;
+        }
+        .options input[type="radio"] {
+            margin-right: 12px;
+        }
+        #timer {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #dc3545;
+        }
+        #progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        #progress {
+            height: 100%;
+            background: #28a745;
+            width: 0;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+        #navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        #navigation button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #navigation button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        #submit-btn {
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        #submit-btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        #results {
+            margin-top: 20px;
+            display: none;
+        }
+        #results h2 {
+            color: #28a745;
+        }
+        #results p {
+            font-size: 16px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            .question h3 {
+                font-size: 16px;
+            }
+            .options label {
+                font-size: 14px;
+                padding: 10px;
+            }
+            #navigation button, #submit-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="welcome-screen" class="welcome-screen">
+            <h1>Kuruluş ve Yükseliş Devri Osmanlı Tarihi Testi</h1>
+            <p>AUZEF Tarih 1-2-3-4 Sınıf Vize Soruları</p>
+            <p>Test 60 sorudan oluşmaktadır ve 30 dakikalık süre sınırı vardır.</p>
+            <p>Sorular arasında gezinmek için "Önceki" ve "Sonraki" butonlarını kullanabilirsiniz. Testi bitirmek için "Testi Bitir" butonuna basın.</p>
+            <button onclick="startTest()">Teste Başla</button>
+        </div>
+
+        <div id="test-screen" class="test-screen" style="display: none;">
+            <div id="timer">Kalan Süre: 30:00</div>
+            <div id="progress-bar"><div id="progress"></div></div>
+            <div id="navigation">
+                <button id="prev-btn" onclick="prevQuestion()" disabled>Önceki</button>
+                <span id="question-number">Soru 1 / 60</span>
+                <button id="next-btn" onclick="nextQuestion()">Sonraki</button>
+            </div>
+            <form id="quiz-form">
+                <div class="question active" id="q1">
+                    <h3>1. 1459’da Sırbistan’ın Osmanlı idaresine girişi hangi hadisenin akabindedir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q1" value="A"> A) Semendire’nin fethi</label>
+                        <label><input type="radio" name="q1" value="B"> B) II. Kosova Savaşı</label>
+                        <label><input type="radio" name="q1" value="C"> C) İskender Bey İsyanı</label>
+                        <label><input type="radio" name="q1" value="D"> D) Bosna’nın fethi</label>
+                    </div>
+                </div>
+                <div class="question" id="q2">
+                    <h3>2. Niğbolu Savaşı ile ilgili aşağıdaki bilgilerden hangisi yanlıştır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q2" value="A"> A) Eflak topraklarında Osmanlı egemenliği başlamıştır.</label>
+                        <label><input type="radio" name="q2" value="B"> B) I. Bayezid’in İslam dünyasındaki prestijini pekiştirmiştir.</label>
+                        <label><input type="radio" name="q2" value="C"> C) Klasik öğeler taşıyan son Haçlı Seferi’dir.</label>
+                        <label><input type="radio" name="q2" value="D"> D) Sırp Kinezi Stefan Lazarevic Osmanlıların yanında yer almıştır.</label>
+                    </div>
+                </div>
+                <div class="question" id="q3">
+                    <h3>3. Çirmen Savaşı sırasında Osmanlı ordusuna kim kumandanlık etmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q3" value="A"> A) Çandarlı Halil Paşa</label>
+                        <label><input type="radio" name="q3" value="B"> B) Lala Şahin Paşa</label>
+                        <label><input type="radio" name="q3" value="C"> C) Mihailoğlu Ali Bey</label>
+                        <label><input type="radio" name="q3" value="D"> D) Özdemiroğlu Osman Paşa</label>
+                    </div>
+                </div>
+                <div class="question" id="q4">
+                    <h3>4. Aşağıdakilerden hangisi I. Mehmed’in takip ettiği uzlaşmacı siyasetin bir yansıması olarak değerlendirilmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q4" value="A"> A) Timurlu hükümdarı Şahruh’a bağlılık mektupları sunulması</label>
+                        <label><input type="radio" name="q4" value="B"> B) Hamid-ili topraklarının Memlüklere bırakılması</label>
+                        <label><input type="radio" name="q4" value="C"> C) Çalı Bey’in Kiklad adalarına saldırması</label>
+                        <label><input type="radio" name="q4" value="D"> D) Karamanoğulları üzerine sefer düzenlemesi</label>
+                    </div>
+                </div>
+                <div class="question" id="q5">
+                    <h3>5. Osmanlı Devleti, Mora’da egemenlik kurma sürecinde aşağıdaki devletlerden hangisi ile karşı karşıya gelmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q5" value="A"> A) Macaristan Krallığı</label>
+                        <label><input type="radio" name="q5" value="B"> B) Bizans İmparatorluğu</label>
+                        <label><input type="radio" name="q5" value="C"> C) Sırp Knezliği</label>
+                        <label><input type="radio" name="q5" value="D"> D) Venedik Cumhuriyeti</label>
+                    </div>
+                </div>
+                <div class="question" id="q6">
+                    <h3>6. Aşağıdakilerden hangisi Bapheus Savaşı’nın sonuçları arasında yer alır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q6" value="A"> A) İmparator II. Andronikos tahttan çekilmek zorunda kalmıştır.</label>
+                        <label><input type="radio" name="q6" value="B"> B) Osman Bey, Bizans egemenliğini tehdit eden önemli bir güce dönüşmüştür.</label>
+                        <label><input type="radio" name="q6" value="C"> C) İznik ve İzmit Osmanlı egemenliğine girmiştir.</label>
+                        <label><input type="radio" name="q6" value="D"> D) Bizans İmparatorluğu ile Venedik arasındaki ittifak sona ermiştir.</label>
+                    </div>
+                </div>
+                <div class="question" id="q7">
+                    <h3>7. I. Bayezid ile ilgili olarak aşağıda verilen bilgilerden hangisi yanlıştır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q7" value="A"> A) Ankara Savaşı’nda Timur’a mağlup olmuştur.</label>
+                        <label><input type="radio" name="q7" value="B"> B) Kendisine Halife tarafından “sultan” unvanı verilmiştir.</label>
+                        <label><input type="radio" name="q7" value="C"> C) Anadolu beylikleri topraklarında Osmanlı idaresini başlatmıştır.</label>
+                        <label><input type="radio" name="q7" value="D"> D) Babasının vasallık siyasetinin devamcısı olmuştur.</label>
+                    </div>
+                </div>
+                <div class="question" id="q8">
+                    <h3>8. Aşağıdakilerden hangisi erken dönem Osmanlı kronolojisini oluşturmakta yaşanan güçlüğün nedenidir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q8" value="A"> A) Karamanoğulları’nın Bursa’daki arşivleri yakması</label>
+                        <label><input type="radio" name="q8" value="B"> B) Bizans ve Osmanlı takvim sistemleri arasındaki farklar</label>
+                        <label><input type="radio" name="q8" value="C"> C) Bizans tarih yazarlarının hadiseleri anlatırken çarpıtmaları</label>
+                        <label><input type="radio" name="q8" value="D"> D) Çağdaş Osmanlı kaynaklarının bulunmaması</label>
+                    </div>
+                </div>
+                <div class="question" id="q9">
+                    <h3>9. Aşağıdaki hadiselerden hangisi Osmanlıların Rumeli’ye geçiş sürecinin başlangıcı ile ilintilidir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q9" value="A"> A) Bulgaristan’da yaşanan iç savaş</label>
+                        <label><input type="radio" name="q9" value="B"> B) Sırp ve Bizans kiliselerinin birleştiğinin ilanı</label>
+                        <label><input type="radio" name="q9" value="C"> C) Karesi Beyliği topraklarında kurulan egemenlik</label>
+                        <label><input type="radio" name="q9" value="D"> D) Osmanlıların Cenevizlilerden gemi satın alması</label>
+                    </div>
+                </div>
+                <div class="question" id="q10">
+                    <h3>10. Aşağıdakilerden hangisi Osmanlı tarihinde Ankara Savaşı sonrasında yaşanan iç savaşı nitelendirmek için kullanılan bir tabirdir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q10" value="A"> A) Fetret Devri</label>
+                        <label><input type="radio" name="q10" value="B"> B) Çirmen Devri</label>
+                        <label><input type="radio" name="q10" value="C"> C) Kosova Dönemi</label>
+                        <label><input type="radio" name="q10" value="D"> D) Niğbolu Kargaşası</label>
+                    </div>
+                </div>
+                <!-- Continue adding questions up to 60 -->
+                <div class="question" id="q11">
+                    <h3>11. Aşağıdaki gelişmenin hangisinin ardından Anadolu Selçuklu Devleti Moğol vesayeti altına girmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q11" value="A"> A) Babailer İsyanı</label>
+                        <label><input type="radio" name="q11" value="B"> B) II. İzzeddin Keykavus’un Bizans’a sığınması</label>
+                        <label><input type="radio" name="q11" value="C"> C) Alaeddin Keykubad’ın vefatı</label>
+                        <label><input type="radio" name="q11" value="D"> D) Kösedağ Savaşı</label>
+                    </div>
+                </div>
+                <div class="question" id="q12">
+                    <h3>12. I. Bayezid’in 1393 senesinde Bulgaristan üzerine sefer düzenlemesinin nedeni aşağıdakilerden hangisidir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q12" value="A"> A) Bulgar topraklarına yönelik Macar akınlarına son vermek</label>
+                        <label><input type="radio" name="q12" value="B"> B) Bulgar gemilerinin Karadeniz’deki Osmanlı gemilerine saldırması</label>
+                        <label><input type="radio" name="q12" value="C"> C) Bulgarların Kosova Savaşı’na Osmanlıların yanında katılmamaları</label>
+                        <label><input type="radio" name="q12" value="D"> D) Bulgaristan’ın başkenti Tırnova’nın Osmanlıların elinden çıkması</label>
+                    </div>
+                </div>
+                <div class="question" id="q13">
+                    <h3>13. Aşağıdakilerden hangisi II. Mehmed döneminde ele geçirilen yerler arasında yer almaz?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q13" value="A"> A) Otlukbeli</label>
+                        <label><input type="radio" name="q13" value="B"> B) Mohaç</label>
+                        <label><input type="radio" name="q13" value="C"> C) Trabzon</label>
+                        <label><input type="radio" name="q13" value="D"> D) Rodos</label>
+                    </div>
+                </div>
+                <div class="question" id="q14">
+                    <h3>14. Sırp knezi Lazar’ın Osmanlı vasallığını kabul etmesi hangi gelişme ile olmuştur?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q14" value="A"> A) Niğbolu Savaşı</label>
+                        <label><input type="radio" name="q14" value="B"> B) Çirmen Savaşı</label>
+                        <label><input type="radio" name="q14" value="C"> C) Osmanlı’nın Rumeli’ye geçişi</label>
+                        <label><input type="radio" name="q14" value="D"> D) Niş bölgesinin fethi</label>
+                    </div>
+                </div>
+                <div class="question" id="q15">
+                    <h3>15. Aşağıdakilerden hangisi II. Kosova Savaşı ile ilgili olarak söylenemez?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q15" value="A"> A) Savaş II. Mehmed döneminde yaşanmıştır.</label>
+                        <label><input type="radio" name="q15" value="B"> B) Savaşta tabur cengi taktikleri kullanılmıştır.</label>
+                        <label><input type="radio" name="q15" value="C"> C) Savaşı kazanan Osmanlı devleti Rumeli’de yeniden kök salmaya başladı.</label>
+                        <label><input type="radio" name="q15" value="D"> D) Savaş Macaristan ve Osmanlı arasında yaşandı.</label>
+                    </div>
+                </div>
+                <div class="question" id="q16">
+                    <h3>16. Pelekanon Savaşı sırasında Bizans İmparatorluğu tahtında kim vardı?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q16" value="A"> A) III. Andronikos Paleologos</label>
+                        <label><input type="radio" name="q16" value="B"> B) Aleksios Komnenos</label>
+                        <label><input type="radio" name="q16" value="C"> C) Mihail Palaiologos</label>
+                        <label><input type="radio" name="q16" value="D"> D) Konstantinos</label>
+                    </div>
+                </div>
+                <div class="question" id="q17">
+                    <h3>17. Fatih’in Kilitbahir ve Sultaniye hisarlarını yaptırma sebebi nedir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q17" value="A"> A) Macar devletinin Venedikliler ile temasını kesmek</label>
+                        <label><input type="radio" name="q17" value="B"> B) Mora yarımadasını gelen saldırılara karşı korumak</label>
+                        <label><input type="radio" name="q17" value="C"> C) Venedik gemilerinin İstanbul’a doğru hareketini durdurmak</label>
+                        <label><input type="radio" name="q17" value="D"> D) İstanbul’a gelecek yabancı güçleri önceden tespit etmek</label>
+                    </div>
+                </div>
+                <div class="question" id="q18">
+                    <h3>18. II. Mehmet aşağıdaki isimlerden hangisi ile Arnavutlukta egemenlik tesis etmek için mücadele etmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q18" value="A"> A) İskender Bey</label>
+                        <label><input type="radio" name="q18" value="B"> B) Nasuh Bey</label>
+                        <label><input type="radio" name="q18" value="C"> C) Süleyman Bey</label>
+                        <label><input type="radio" name="q18" value="D"> D) Uzun Hasan</label>
+                    </div>
+                </div>
+                <div class="question" id="q19">
+                    <h3>19. I. Mehmed’in Karamanoğlu beyliği üzerine sefer düzenleme sebebi aşağıdakilerden hangisidir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q19" value="A"> A) Karamanoğulları’nın Bizans’la işbirliği yapması</label>
+                        <label><input type="radio" name="q19" value="B"> B) Mehmed’in Anadolu’da durumu kendi lehine çevirmek istemesi</label>
+                        <label><input type="radio" name="q19" value="C"> C) Anadolu’da hakimiyet tesisi için diğer beyliklerle anlaştığı halde Karamanoğulları’nın anlaşmaya yanaşmaması</label>
+                        <label><input type="radio" name="q19" value="D"> D) Fetret devrinde yaşanan kargaşadan istifade eden Karamanoğulları’nın Bursa’yı kuşatıp etrafa zarar vermesi</label>
+                    </div>
+                </div>
+                <div class="question" id="q20">
+                    <h3>20. Aşağıdakilerden hangisi Haçlıların Niğbolu’ya yönelik seferlerinin sebepleri arasında gösterilmez?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q20" value="A"> A) Osmanlıları Balkanlardan atmak</label>
+                        <label><input type="radio" name="q20" value="B"> B) Batı Avrupa’nın güvenliğini sağlamak</label>
+                        <label><input type="radio" name="q20" value="C"> C) Osmanlı tehdidi altındaki Macaristan’a destek olmak</label>
+                        <label><input type="radio" name="q20" value="D"> D) Osmanlıların Kudüs’te var olan egemenliğine son vermek</label>
+                    </div>
+                </div>
+                <div class="question" id="q21">
+                    <h3>21 21. Bursa kimin döneminde Osmanlı egemenliğine girmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q21" value="A"> A) Osman Bey</label>
+                        <label><input type="radio" name="q21" value="B"> B) Orhan Bey</label>
+                        <label><input type="radio" name="q21" value="C"> C) II. Mehmet</label>
+                        <label><input type="radio" name="q21" value="D"> D) I. Bayezid</label>
+                    </div>
+                </div>
+                <div class="question" id="q22">
+                    <h3>22. 1298-1301 yılları arasında batı Anadolu’daki uç beyliklerinin Bizans devleti üzerindeki baskılarını artırmalarına aşağıdaki hangi gelişme etki etmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q22" value="A"> A) Selçuklu devletinin yapmış olduğu fetihler</label>
+                        <label><input type="radio" name="q22" value="B"> B) Moğollarda yaşanan iç çekişmeler</label>
+                        <label><input type="radio" name="q22" value="C"> C) Pelekanon Savaşı</label>
+                        <label><input type="radio" name="q22" value="D"> D) Osmanlıların Rumeli’ye geçişleri</label>
+                    </div>
+                </div>
+                <div class="question" id="q23">
+                    <h3>23. Beyazid’ın İstanbul kuşatmasını kaldırmasını sebebi ne idi?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q23" value="A"> A) Karamanoğulları’nın faaliyetleri</label>
+                        <label><input type="radio" name="q23" value="B"> B) Sırp prensliğinin Bizans’a verdiği destek</label>
+                        <label><input type="radio" name="q23" value="C"> C) Bizans’ın çok güçlü oluşu</label>
+                        <label><input type="radio" name="q23" value="D"> D) Timur’un Anadolu’daki faaliyetleri</label>
+                    </div>
+                </div>
+                <div class="question" id="q24">
+                    <h3>24. Mesih Paşa idaresindeki Osmanlı ordusu hangi adaya sefer düzenleyip alamadan geri dönmüştür?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q24" value="A"> A) Modon</label>
+                        <label><input type="radio" name="q24" value="B"> B) Kıbrıs</label>
+                        <label><input type="radio" name="q24" value="C"> C) Koron</label>
+                        <label><input type="radio" name="q24" value="D"> D) Rodos</label>
+                    </div>
+                </div>
+                <div class="question" id="q25">
+                    <h3>25. I. Murad’ın Anadolu beylikleri üzerinde uyguladığı vassal siyaset aşağıdaki hangi gelişme ile sona ermiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q25" value="A"> A) Frenk Yazısı Savaşı</label>
+                        <label><input type="radio" name="q25" value="B"> B) Akçay Savaşı</label>
+                        <label><input type="radio" name="q25" value="C"> C) Niğbolu Savaşı</label>
+                        <label><input type="radio" name="q25" value="D"> D) Ankara Savaşı</label>
+                    </div>
+                </div>
+                <div class="question" id="q26">
+                    <h3>26. I. Bayezid döneminde Osmanlı devletinin Karamanoğlu beyliği üzerinde egemenlik tesis etmesi hangi gelişme ile olmuştur?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q26" value="A"> A) Yenişehir Savaşı</label>
+                        <label><input type="radio" name="q26" value="B"> B) Ankara Savaşı</label>
+                        <label><input type="radio" name="q26" value="C"> C) Akçay Savaşı</label>
+                        <label><input type="radio" name="q26" value="D"> D) Frenk Yazısı Savaşı</label>
+                    </div>
+                </div>
+                <div class="question" id="q27">
+                    <h3>27. Timur Anadolu’da ilk olarak hangi bölgeyi ele geçirmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q27" value="A"> A) Konya</label>
+                        <label><input type="radio" name="q27" value="B"> B) Ankara</label>
+                        <label><input type="radio" name="q27" value="C"> C) Malatya</label>
+                        <label><input type="radio" name="q27" value="D"> D) Sivas</label>
+                    </div>
+                </div>
+                <div class="question" id="q28">
+                    <h3>28. Fetret devri mücadelelerinde yer almayan Osmanlı şehzadesi kimdir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q28" value="A"> A) Süleyman Çelebi</label>
+                        <label><input type="radio" name="q28" value="B"> B) Musa Çelebi</label>
+                        <label><input type="radio" name="q28" value="C"> C) Kasım Çelebi</label>
+                        <label><input type="radio" name="q28" value="D"> D) Mehmed Çelebi</label>
+                    </div>
+                </div>
+                <div class="question" id="q29">
+                    <h3>29. Aşağıdaki gelişmelerin hangisinin ardından Bizans İmparatorluğu Osmanlı devletine, Bitinya bölgesindeki kalelere dokunmamak şartıyla yıllık haraç ödemeyi kabul etmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q29" value="A"> A) Rumeli’ye geçiş</label>
+                        <label><input type="radio" name="q29" value="B"> B) Bursa’nın fethi</label>
+                        <label><input type="radio" name="q29" value="C"> C) Edirne’nin fethi</label>
+                        <label><input type="radio" name="q29" value="D"> D) İzmit kuşatması</label>
+                    </div>
+                </div>
+                <div class="question" id="q30">
+                    <h3>30. Aşağıdakilerden hangisi V. Ioannis Palaiologos ile Sırp voyvodası Jovan Uglješa’in aralarında yaptığı ittifakın neticelerinden biridir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q30" value="A"> A) Osmanlı tüm bölgeye hakim olmuştur</label>
+                        <label><input type="radio" name="q30" value="B"> B) Bu ittifak ile Sırplar Osmanlı için tehdit olmaktan çıkmıştır</label>
+                        <label><input type="radio" name="q30" value="C"> C) Sırp ve Bizans kiliselerinin birleştiği ilan edildi</label>
+                        <label><input type="radio" name="q30" value="D"> D) Serez ve Selanik’te Osmanlı egemenliği başlamıştır</label>
+                    </div>
+                </div>
+                <div class="question" id="q31">
+                    <h3>31. Osmanlı’ya karşı saldırgan bir tutumda olan ve beyliği sürekli uğraştıranlar kimlerdi?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q31" value="A"> A) Candaroğulları</label>
+                        <label><input type="radio" name="q31" value="B"> B) Germiyanoğulları</label>
+                        <label><input type="radio" name="q31" value="C"> C) Menteşeoğulları</label>
+                        <label><input type="radio" name="q31" value="D"> D) Karamanoğulları</label>
+                    </div>
+                </div>
+                <div class="question" id="q32">
+                    <h3>32. Aşağıdakilerden hangisi Düzmece Mustafa isyanı ile ilgili söylenemez?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q32" value="A"> A) Mustafa’nın başlattığı isyan bazı kesimlerden destek görmüştür</label>
+                        <label><input type="radio" name="q32" value="B"> B) II. Murad Cenevizliler ile anlaşarak durumunu güçlendirmeye çalışmıştır</label>
+                        <label><input type="radio" name="q32" value="C"> C) Mustafa taht mücadelesine Gelibolu’ya geçerek başlamıştır</label>
+                        <label><input type="radio" name="q32" value="D"> D) Mustafa Anadolu’nun tamamında egemenlik tesis etmeye başlamıştır</label>
+                    </div>
+                </div>
+                <div class="question" id="q33">
+                    <h3>33. Aşağıdakilerden hangisi I. Murad döneminde vasallık yoluyla Osmanlı Devleti’ne bağlanmıştır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q33" value="A"> A) Hamidoğulları Beyliği</label>
+                        <label><input type="radio" name="q33" value="B"> B) Germiyanoğulları Beyliği</label>
+                        <label><input type="radio" name="q33" value="C"> C) Karesi Beyliği</label>
+                        <label><input type="radio" name="q33" value="D"> D) Candaroğulları Beyliği</label>
+                    </div>
+                </div>
+                <div class="question" id="q34">
+                    <h3>34. Aşağıdakilerden hangisi Kosova Savaşı’na ilişkin olarak verilen bilgilerden hangisi doğrudur?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q34" value="A"> A) Macarlar, Sırp ordusuna destek vermemiştir.</label>
+                        <label><input type="radio" name="q34" value="B"> B) Savaş II. Mehmed döneminde yaşanmıştır.</label>
+                        <label><input type="radio" name="q34" value="C"> C) Osmanlı ordusu büyük bir yenilgi almıştır.</label>
+                        <label><input type="radio" name="q34" value="D"> D) Savaş Venedik ile Osmanlı arasında geçmiştir.</label>
+                    </div>
+                </div>
+                <div class="question" id="q35">
+                    <h3>35. Aşağıdakilerden hangisi I. Bayezid’in Anadolu seferi esnasında ele geçirilen Anadolu’daki son Bizans şehridir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q35" value="A"> A) Alaşehir</label>
+                        <label><input type="radio" name="q35" value="B"> B) İznik</label>
+                        <label><input type="radio" name="q35" value="C"> C) Bursa</label>
+                        <label><input type="radio" name="q35" value="D"> D) İzmit</label>
+                    </div>
+                </div>
+                <div class="question" id="q36">
+                    <h3>36. Aşağıdaki bilgilerden hangisi II. Mehmed’in İstanbul’u kuşatma sürecine ilişkin yanlıştır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q36" value="A"> A) Haliç önünde yapılan donanma savaşını Osmanlılar kazandı.</label>
+                        <label><input type="radio" name="q36" value="B"> B) Kuşatma sırasında toplar etkili bir şekilde kullanıldı.</label>
+                        <label><input type="radio" name="q36" value="C"> C) Bizans surları aşılmakta zorluk çekildi.</label>
+                        <label><input type="radio" name="q36" value="D"> D) Kuşatma 1453 yılında gerçekleşti.</label>
+                    </div>
+                </div>
+                <div class="question" id="q37">
+                    <h3>37. Aşağıdakilerden hangisi I. Mehmed devrinde düzenlenen Karaman Seferi’nin sonuçlarından birisidir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q37" value="A"> A) Konya ve Karaman’da Osmanlı egemenliği başlamıştır.</label>
+                        <label><input type="radio" name="q37" value="B"> B) Pir Ahmed Bey öldürülmüş, yerine İshak Bey geçirilmiştir.</label>
+                        <label><input type="radio" name="q37" value="C"> C) Memlüklerin Osmanlı Devleti’ne savaş ilanına yol açmıştır.</label>
+                        <label><input type="radio" name="q37" value="D"> D) Karamanoğulları Osmanlı Devleti’nin vasalı olmayı kabul etmiştir.</label>
+                    </div>
+                </div>
+                <div class="question" id="q38">
+                    <h3>38. Aşağıdaki gelişmelerden hangisi İmparator III. Andronikos’un Pelekanon Savaşı’nda Sultan Orhan’ın karşısına çıkmasına neden olmuştur?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q38" value="A"> A) Bursa’nın düşmesi ve İznik kuşatmasının başlaması</label>
+                        <label><input type="radio" name="q38" value="B"> B) Karesi topraklarının Osmanlı egemenliğine girmesi</label>
+                        <label><input type="radio" name="q38" value="C"> C) İmparatorun İznik’i Osmanlılardan geri almak istemesi</label>
+                        <label><input type="radio" name="q38" value="D"> D) Osmanlıların Rumeli yakasına geçmeleri</label>
+                    </div>
+                </div>
+                <div class="question" id="q39">
+                    <h3>39. Aşağıdakilerden hangisi Şehzade (Düzmece) Mustafa ile Bizans İmparatorluğu arasındaki ittifakın bozulmasına neden olan gelişmedir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q39" value="A"> A) Şehzade Mustafa’nın Gelibolu’yu Bizans’a vermemesi</label>
+                        <label><input type="radio" name="q39" value="B"> B) II. Murad’ın Bizans ile anlaşması</label>
+                        <label><input type="radio" name="q39" value="C"> C) Mustafa’nın Anadolu’da güçlenmesi</label>
+                        <label><input type="radio" name="q39" value="D"> D) Bizans’ın Osmanlı ile barış yapması</label>
+                    </div>
+                </div>
+                <div class="question" id="q40">
+                    <h3>40. Aşağıdakilerden hangisi II. Mehmed’in Karadeniz’de egemenlik kurma sürecinde ele geçirdiği yerlerden biri değildir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q40" value="A"> A) Trabzon</label>
+                        <label><input type="radio" name="q40" value="B"> B) Sinop</label>
+                        <label><input type="radio" name="q40" value="C"> C) Amasra</label>
+                        <label><input type="radio" name="q40" value="D"> D) Varna</label>
+                    </div>
+                </div>
+                <div class="question" id="q41">
+                    <h3>41. Çirmen Savaşı’nın sonuçları ile ilgili aşağıdakilerden hangisi yanlıştır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q41" value="A"> A) Savaş sonunda I. Murad suikasta uğradı</label>
+                        <label><input type="radio" name="q41" value="B"> B) Osmanlıların Balkanlar’daki yayılmasını önü açılmıştır</label>
+                        <label><input type="radio" name="q41" value="C"> C) Kral Vukašin savaşta hayatını kaybetmiştir</label>
+                        <label><input type="radio" name="q41" value="D"> D) Meriç Nehri kıyısında cereyan etmiştir</label>
+                    </div>
+                </div>
+                <div class="question" id="q42">
+                    <h3>42. I. Mehmed’in Timurlu hükümdarı Şahruh’a mektup gönderip tabiyet bildirmesinin gerekçesi nedir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q42" value="A"> A) Şahruh’un olası Batı seferinin önüne geçmek</label>
+                        <label><input type="radio" name="q42" value="B"> B) Kendisinden sonra olabilecek taht kavgalarını önlemek</label>
+                        <label><input type="radio" name="q42" value="C"> C) İstanbul kuşatmasında yaşanan başarısızlığı unutturmak</label>
+                        <label><input type="radio" name="q42" value="D"> D) Venedik Seferi öncesi Şahruh’un desteğini kazanmak</label>
+                    </div>
+                </div>
+                <div class="question" id="q43">
+                    <h3>43. Aşağıdakilerden hangisi I. Murad döneminde Anadolu beylikleri üzerinde yaşanan Osmanlı-Karaman nüfuz mücadelesinde dengeyi Osmanlılar lehine değiştiren hadiseler doğru bir biçimde verilmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q43" value="A"> A) Rumeli’ye geçiş - Süleyman Paşa’nın vefatı</label>
+                        <label><input type="radio" name="q43" value="B"> B) Gorigos Seferi - Frenkyazısı Savaşı</label>
+                        <label><input type="radio" name="q43" value="C"> C) Rumeli’ye geçiş - Timur’un Anadolu’ya gelişi</label>
+                        <label><input type="radio" name="q43" value="D"> D) İznik’in fethi - Pelekanon Savaşı</label>
+                    </div>
+                </div>
+                <div class="question" id="q44">
+                    <h3>44. Aşağıdakilerden hangisinde Osmanlı Beyliği’nin ilk olarak topraklarını ele geçirdiği Türkmen beyliği doğru bir şekilde verilmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q44" value="A"> A) Germiyanoğulları Beyliği</label>
+                        <label><input type="radio" name="q44" value="B"> B) Karesi Beyliği</label>
+                        <label><input type="radio" name="q44" value="C"> C) Menteşeoğulları Beyliği</label>
+                        <label><input type="radio" name="q44" value="D"> D) Karamanoğulları Beyliği</label>
+                    </div>
+                </div>
+                <div class="question" id="q45">
+                    <h3>45. Aşağıdakilerden hangisi I. Mehmed döneminde çıkan dini-siyasi nitelikli bir isyandır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q45" value="A"> A) İskender Bey İsyanı</label>
+                        <label><input type="radio" name="q45" value="B"> B) Babailer İsyanı</label>
+                        <label><input type="radio" name="q45" value="C"> C) Şeyh Bedreddin İsyanı</label>
+                        <label><input type="radio" name="q45" value="D"> D) Patrona Halil İsyanı</label>
+                    </div>
+                </div>
+                <div class="question" id="q46">
+                    <h3>46. Aşağıdakilerden hangisi Niğbolu Savaşı’nda Osmanlı ordusunun karşısına çıkan ordunun bileşenlerinden biri değildir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q46" value="A"> A) Burgonya Düklüğü</label>
+                        <label><input type="radio" name="q46" value="B"> B) Sırp Krallığı</label>
+                        <label><input type="radio" name="q46" value="C"> C) Venedik Cumhuriyeti</label>
+                        <label><input type="radio" name="q46" value="D"> D) Macaristan Krallığı</label>
+                    </div>
+                </div>
+                <div class="question" id="q47">
+                    <h3>47. Aşağıdakilerden hangisi II. Mehmed döneminde ele geçirilen yerler doğru bir biçimde verilmiştir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q47" value="A"> A) Erdel - Sırbistan - Mora</label>
+                        <label><input type="radio" name="q47" value="B"> B) Sırbistan - Bosna - Bulgaristan</label>
+                        <label><input type="radio" name="q47" value="C"> C) Mora - Bosna - Eflak</label>
+                        <label><input type="radio" name="q47" value="D"> D) Erdel - Eflak - Boğdan</label>
+                    </div>
+                </div>
+                <div class="question" id="q48">
+                    <h3>48. 1427 senesinde Osmanlı Devleti ve Macar Krallığı arasında başlayan siyasi çekişmenin nedenlerinden biri aşağıdakilerden hangisidir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q48" value="A"> A) Sırp despotluğu topraklarına hâkim olma arzusu</label>
+                        <label><input type="radio" name="q48" value="B"> B) Venedik ile ticaret yolları üzerindeki rekabet</label>
+                        <label><input type="radio" name="q48" value="C"> C) Macarların İstanbul’u kuşatma girişimi</label>
+                        <label><input type="radio" name="q48" value="D"> D) Osmanlıların Macar topraklarına sefer düzenlemesi</label>
+                    </div>
+                </div>
+                <div class="question" id="q49">
+                    <h3>49. Aşağıdakilerden hangisi II. Mehmed’in İstanbul’u fethetmek için yaptırdığı hisarların amacıdır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q49" value="A"> A) Boğaz’dan geçen gemilerden vergi almak</label>
+                        <label><input type="radio" name="q49" value="B"> B) Venedik gemilerinin İstanbul’a ulaşmasını engellemek</label>
+                        <label><input type="radio" name="q49" value="C"> C) Bizans’a yardım gelmesini önlemek</label>
+                        <label><input type="radio" name="q49" value="D"> D) Karadeniz’deki Osmanlı egemenliğini güçlendirmek</label>
+                    </div>
+                </div>
+                <div class="question" id="q50">
+                    <h3>50. Aşağıdakilerden hangisi Osmanlıların Rumeli’deki ilk kalıcı üssü olarak kabul edilir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q50" value="A"> A) Gelibolu</label>
+                        <label><input type="radio" name="q50" value="B"> B) Edirne</label>
+                        <label><input type="radio" name="q50" value="C"> C) Serez</label>
+                        <label><input type="radio" name="q50" value="D"> D) Selanik</label>
+                    </div>
+                </div>
+                <div class="question" id="q51">
+                    <h3>51. Aşağıdakilerden hangisi I. Bayezid’in “Yıldırım” unvanını almasına neden olan olaydır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q51" value="A"> A) Niğbolu Savaşı’ndaki hızlı zaferi</label>
+                        <label><input type="radio" name="q51" value="B"> B) Ankara Savaşı’ndaki yenilgisi</label>
+                        <label><input type="radio" name="q51" value="C"> C) İstanbul’un hızlı kuşatması</label>
+                        <label><input type="radio" name="q51" value="D"> D) Bulgaristan seferindeki başarısı</label>
+                    </div>
+                </div>
+                <div class="question" id="q52">
+                    <h3>52. Aşağıdakilerden hangisi II. Mehmed’in Otranto Seferi’nin amacıdır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q52" value="A"> A) İtalya’yı fethetmek</label>
+                        <label><input type="radio" name="q52" value="B"> B) Venedik’e karşı bir üs kurmak</label>
+                        <label><input type="radio" name="q52" value="C"> C) Napoli Krallığı ile ittifak yapmak</label>
+                        <label><input type="radio" name="q52" value="D"> D) Roma’yı ele geçirmek</label>
+                    </div>
+                </div>
+                <div class="question" id="q53">
+                    <h3>53. Aşağıdakilerden hangisi Osmanlıların Bizans’a karşı ilk büyük zaferidir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q53" value="A"> A) Bapheus Savaşı</label>
+                        <label><input type="radio" name="q53" value="B"> B) Pelekanon Savaşı</label>
+                        <label><input type="radio" name="q53" value="C"> C) Niğbolu Savaşı</label>
+                        <label><input type="radio" name="q53" value="D"> D) Çirmen Savaşı</label>
+                    </div>
+                </div>
+                <div class="question" id="q54">
+                    <h3>54. Aşağıdakilerden hangisi I. Murad’ın Balkanlar’daki ilk büyük zaferidir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q54" value="A"> A) Çirmen Savaşı</label>
+                        <label><input type="radio" name="q54" value="B"> B) Kosova Savaşı</label>
+                        <label><input type="radio" name="q54" value="C"> C) Niğbolu Savaşı</label>
+                        <label><input type="radio" name="q54" value="D"> D) Sırpsındığı Savaşı</label>
+                    </div>
+                </div>
+                <div class="question" id="q55">
+                    <h3>55. Aşağıdakilerden hangisi II. Mehmed’in Akkoyunlulara karşı kazandığı zaferdir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q55" value="A"> A) Otlukbeli Savaşı</label>
+                        <label><input type="radio" name="k55" value="B"> B) Başkent Savaşı</label>
+                        <label><input type="radio" name="q55" value="C"> C) Çaldıran Savaşı</label>
+                        <label><input type="radio" name="q55" value="D"> D) Mercidabık Savaşı</label>
+                    </div>
+                </div>
+                <div class="question" id="q56">
+                    <h3>56. Aşağıdakilerden hangisi Osmanlıların Karadeniz’deki ilk fetihlerinden biridir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q56" value="A"> A) Sinop</label>
+                        <label><input type="radio" name="q56" value="B"> B) Trabzon</label>
+                        <label><input type="radio" name="q56" value="C"> C) Amasra</label>
+                        <label><input type="radio" name="q56" value="D"> D) Kefe</label>
+                    </div>
+                </div>
+                <div class="question" id="q57">
+                    <h3>57. Aşağıdakilerden hangisi I. Bayezid’in Anadolu’daki beylikleri egemenlik altına almasında etkili olan savaşlardan biridir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q57" value="A"> A) Akçay Savaşı</label>
+                        <label><input type="radio" name="q57" value="B"> B) Frenkyazısı Savaşı</label>
+                        <label><input type="radio" name="q57" value="C"> C) Gorigos Seferi</label>
+                        <label><input type="radio" name="q57" value="D"> D) Konya Savaşı</label>
+                    </div>
+                </div>
+                <div class="question" id="q58">
+                    <h3>58. Aşağıdakilerden hangisi II. Mehmed’in Bosna’yı fethetme sürecinde karşılaştığı direnişin kaynağıdır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q58" value="A"> A) Macar Krallığı</label>
+                        <label><input type="radio" name="q58" value="B"> B) Venedik Cumhuriyeti</label>
+                        <label><input type="radio" name="q58" value="C"> C) Sırp Despotluğu</label>
+                        <label><input type="radio" name="q58" value="D"> D) Bosna Krallığı</label>
+                    </div>
+                </div>
+                <div class="question" id="q59">
+                    <h3>59. Aşağıdakilerden hangisi Osmanlıların Rumeli’ye geçişinde stratejik bir rol oynayan beyliktir?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q59" value="A"> A) Karesi Beyliği</label>
+                        <label><input type="radio" name="q59" value="B"> B) Germiyanoğulları Beyliği</label>
+                        <label><input type="radio" name="q59" value="C"> C) Hamidoğulları Beyliği</label>
+                        <label><input type="radio" name="q59" value="D"> D) Candaroğulları Beyliği</label>
+                    </div>
+                </div>
+                <div class="question" id="q60">
+                    <h3>60. Aşağıdakilerden hangisi II. Mehmed’in İstanbul’un fethinde kullandığı yenilikçi bir silahtır?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q60" value="A"> A) Şahi Topu</label>
+                        <label><input type="radio" name="q60" value="B"> B) Mancınık</label>
+                        <label><input type="radio" name="q60" value="C"> C) Ok ve yay</label>
+                        <label><input type="radio" name="q60" value="D"> D) Kılıç ve kalkan</label>
+                    </div>
+                </div>
+                <button type="button" id="submit-btn" onclick="submitTest()">Testi Bitir</button>
+            </form>
+            <div id="results"></div>
+        </div>
+    </div>
+
+    <script>
+        let timeLeft = 30 * 60; // 30 minutes in seconds
+        let timerId;
+        let currentQuestion = 1;
+        const totalQuestions = 60;
+
+        function startTest() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('test-screen').style.display = 'block';
+            startTimer();
+            updateProgress();
+        }
+
+        function startTimer() {
+            timerId = setInterval(() => {
+                timeLeft--;
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                document.getElementById('timer').textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+            document.getElementById('question-number').textContent = `Soru ${currentQuestion} / ${totalQuestions}`;
+            document.getElementById('prev-btn').disabled = currentQuestion === 1;
+            document.getElementById('next-btn').disabled = currentQuestion === totalQuestions;
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 1) {
+                document.getElementById(`q${currentQuestion}`).classList.remove('active');
+                currentQuestion--;
+                document.getElementById(`q${currentQuestion}`).classList.add('active');
+                updateProgress();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                document.getElementById(`q${currentQuestion}`).classList.remove('active');
+                currentQuestion++;
+                document.getElementById(`q${currentQuestion}`).classList.add('active');
+                updateProgress();
+            }
+        }
+
+        function submitTest() {
+            clearInterval(timerId);
+            const form = document.getElementById('quiz-form');
+            const results = document.getElementById('results');
+            let score = 0;
+
+            const answers = {
+                q1: 'A', q2: 'A', q3: 'B', q4: 'A', q5: 'D', q6: 'B', q7: 'D', q8: 'D', q9: 'C', q10: 'A',
+                q11: 'D', q12: 'C', q13: 'B', q14: 'B', q15: 'A', q16: 'A', q17: 'C', q18: 'A', q19: 'C', q20: 'D',
+                q21: 'B', q22: 'B', q23: 'D', q24: 'D', q25: 'D', q26: 'C', q27: 'D', q28: 'C', q29: 'D', q30: 'A',
+                q31: 'D', q32: 'D', q33: 'A', q34: 'A', q35: 'A', q36: 'A', q37: 'C', q38: 'A', q39: 'A', q40: 'D',
+                q41: 'A', q42: 'A', q43: 'B', q44: 'B', q45: 'C', q46: 'B', q47: 'A', q48: 'A', q49: 'C', q50: 'A',
+                q51: 'A', q52: 'A', q53: 'A', q54: 'A', q55: 'A', q56: 'C', q57: 'B', q58: 'D', q59: 'A', q60: 'A'
+            };
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const userAnswer = form.elements['q' + i] ? form.elements['q' + i].value : null;
+                if (userAnswer === answers['q' + i]) {
+                    score++;
+                }
+            }
+
+            results.style.display = 'block';
+            results.innerHTML = `
+                <h2>Sonuçlar</h2>
+                <p>Doğru Sayısı: ${score}</p>
+                <p>Yanlış Sayısı: ${totalQuestions - score}</p>
+                <p>Puan: ${(score / totalQuestions * 100).toFixed(2)}%</p>
+                <h3>Ayrıntılı Cevap Anahtarı</h3>
+                <p>1. Doğru Cevap: A) Semendire’nin fethi - 1459’da Sırbistan’ın Osmanlı idaresine girişi Semendire’nin fethiyle gerçekleşmiştir.</p>
+                <p>2. Doğru Cevap: A) Eflak topraklarında Osmanlı egemenliği başlamıştır - Niğbolu Savaşı’nda Eflak Osmanlı egemenliğine girmemiştir.</p>
+                <p>3. Doğru Cevap: B) Lala Şahin Paşa - Çirmen Savaşı’nda Osmanlı ordusuna Lala Şahin Paşa komuta etmiştir.</p>
+                <p>4. Doğru Cevap: A) Timurlu hükümdarı Şahruh’a bağlılık mektupları sunulması - I. Mehmed’in uzlaşmacı siyasetinin bir göstergesidir.</p>
+                <p>5. Doğru Cevap: D) Venedik Cumhuriyeti - Osmanlı, Mora’da Venedik ile karşı karşıya gelmiştir.</p>
+                <p>6. Doğru Cevap: B) Osman Bey, Bizans egemenliğini tehdit eden önemli bir güce dönüşmüştür - Bapheus Savaşı Osman Bey’in yükselişini simgeler.</p>
+                <p>7. Doğru Cevap: D) Babasının vasallık siyasetinin devamcısı olmuştur - I. Bayezid, babasının politikalarını sürdürmemiş, daha agresif bir yaklaşım benimsemiştir.</p>
+                <p>8. Doğru Cevap: D) Çağdaş Osmanlı kaynaklarının bulunmaması - Erken dönem kronolojisi için yeterli kaynak yoktur.</p>
+                <p>9. Doğru Cevap: C) Karesi Beyliği topraklarında kurulan egemenlik - Rumeli’ye geçişin ilk adımıdır.</p>
+                <p>10. Doğru Cevap: A) Fetret Devri - Ankara Savaşı sonrası iç savaş dönemi bu isimle anılır.</p>
+                <p>11. Doğru Cevap: D) Kösedağ Savaşı - Anadolu Selçuklu Devleti bu savaşla Moğol vesayetine girmiştir.</p>
+                <p>12. Doğru Cevap: C) Bulgarların Kosova Savaşı’na Osmanlıların yanında katılmamaları - I. Bayezid bu nedenle Bulgaristan’a sefer düzenlemiştir.</p>
+                <p>13. Doğru Cevap: B) Mohaç - II. Mehmed döneminde gerçekleşmemiştir.</p>
+                <p>14. Doğru Cevap: B) Çirmen Savaşı - Sırp knezi Lazar bu savaş sonrası vasallığı kabul etmiştir.</p>
+                <p>15. Doğru Cevap: A) Savaş II. Mehmed döneminde yaşanmıştır - II. Kosova Savaşı II. Murad döneminde olmuştur.</p>
+                <p>16. Doğru Cevap: A) III. Andronikos Paleologos - Pelekanon Savaşı sırasında tahttadır.</p>
+                <p>17. Doğru Cevap: C) Venedik gemilerinin İstanbul’a doğru hareketini durdurmak - Hisarlar bu amaçla inşa edilmiştir.</p>
+                <p>18. Doğru Cevap: A) İskender Bey - II. Mehmet Arnavutluk’ta İskender Bey ile mücadele etmiştir.</p>
+                <p>19. Doğru Cevap: C) Anadolu’da hakimiyet tesisi için diğer beyliklerle anlaştığı halde Karamanoğulları’nın anlaşmaya yanaşmaması - I. Mehmed’in sefer nedeni budur.</p>
+                <p>20. Doğru Cevap: D) Osmanlıların Kudüs’te var olan egemenliğine son vermek - Niğbolu Seferi’nin amacı değildir.</p>
+                <p>21. Doğru Cevap: B) Orhan Bey - Bursa, Orhan Bey döneminde fethedilmiştir.</p>
+                <p>22. Doğru Cevap: B) Moğollarda yaşanan iç çekişmeler - Bu durum uç beyliklerinin güçlenmesine yol açmıştır.</p>
+                <p>23. Doğru Cevap: D) Timur’un Anadolu’daki faaliyetleri - Beyazid kuşatmayı bu nedenle kaldırmıştır.</p>
+                <p>24. Doğru Cevap: D) Rodos - Mesih Paşa Rodos’u alamadan geri dönmüştür.</p>
+                <p>25. Doğru Cevap: D) Ankara Savaşı - I. Murad’ın vassal siyaseti bu savaşla sona ermiştir.</p>
+                <p>26. Doğru Cevap: C) Akçay Savaşı - Karamanoğulları bu savaşla egemenlik altına alınmıştır.</p>
+                <p>27. Doğru Cevap: D) Sivas - Timur ilk olarak Sivas’ı ele geçirmiştir.</p>
+                <p>28. Doğru Cevap: C) Kasım Çelebi - Fetret Devri’nde mücadelede yer almamıştır.</p>
+                <p>29. Doğru Cevap: D) İzmit kuşatması - Bizans bu olaydan sonra haraç ödemeyi kabul etmiştir.</p>
+                <p>30. Doğru Cevap: A) Osmanlı tüm bölgeye hakim olmuştur - İttifakın sonucu budur.</p>
+                <p>31. Doğru Cevap: D) Karamanoğulları - Osmanlı’ya karşı en çok direnen beyliktir.</p>
+                <p>32. Doğru Cevap: D) Mustafa Anadolu’nun tamamında egemenlik tesis etmeye başlamıştır - Bu gerçekleşmemiştir.</p>
+                <p>33. Doğru Cevap: A) Hamidoğulları Beyliği - I. Murad döneminde vasal olmuştur.</p>
+                <p>34. Doğru Cevap: A) Macarlar, Sırp ordusuna destek vermemiştir - Kosova Savaşı’nda Macar desteği yoktur.</p>
+                <p>35. Doğru Cevap: A) Alaşehir - I. Bayezid’in ele geçirdiği son Bizans şehridir.</p>
+                <p>36. Doğru Cevap: A) Haliç önünde yapılan donanma savaşını Osmanlılar kazandı - Bu bilgi yanlıştır, donanma Haliç’e zincir nedeniyle girememiştir.</p>
+                <p>37. Doğru Cevap: C) Memlüklerin Osmanlı Devleti’ne savaş ilanına yol açmıştır - Karaman Seferi bu sonucu doğurmuştur.</p>
+                <p>38. Doğru Cevap: A) Bursa’nın düşmesi ve İznik kuşatmasının başlaması - III. Andronikos bu nedenle Orhan’la savaşmıştır.</p>
+                <p>39. Doğru Cevap: A) Şehzade Mustafa’nın Gelibolu’yu Bizans’a vermemesi - İttifak bu nedenle bozulmuştur.</p>
+                <p>40. Doğru Cevap: D) Varna - II. Mehmed’in Karadeniz’de ele geçirdiği bir yer değildir.</p>
+                <p>41. Doğru Cevap: A) Savaş sonunda I. Murad suikasta uğradı - Bu olay Çirmen’de değil, Kosova’da gerçekleşmiştir.</p>
+                <p>42. Doğru Cevap: A) Şahruh’un olası Batı seferinin önüne geçmek - I. Mehmed bu amaçla mektup göndermiştir.</p>
+                <p>43. Doğru Cevap: B) Gorigos Seferi - Frenkyazısı Savaşı - Bu olaylar Osmanlı lehine dengeyi değiştirmiştir.</p>
+                <p>44. Doğru Cevap: B) Karesi Beyliği - Osmanlı’nın ilk ele geçirdiği Türkmen beyliğidir.</p>
+                <p>45. Doğru Cevap: C) Şeyh Bedreddin İsyanı - I. Mehmed döneminde dini-siyasi bir isyandır.</p>
+                <p>46. Doğru Cevap: B) Sırp Krallığı - Niğbolu Savaşı’nda Osmanlı’ya karşı savaşmamıştır.</p>
+                <p>47. Doğru Cevap: A) Erdel - Sırbistan - Mora - II. Mehmed döneminde ele geçirilen yerlerdir.</p>
+                <p>48. Doğru Cevap: A) Sırp despotluğu topraklarına hâkim olma arzusu - 1427’deki çekişmenin nedenidir.</p>
+                <p>49. Doğru Cevap: C) Bizans’a yardım gelmesini önlemek - Hisarların temel amacı budur.</p>
+                <p>50. Doğru Cevap: A) Gelibolu - Osmanlıların Rumeli’deki ilk kalıcı üssüdür.</p>
+                <p>51. Doğru Cevap: A) Niğbolu Savaşı’ndaki hızlı zaferi - I. Bayezid bu nedenle “Yıldırım” unvanını almıştır.</p>
+                <p>52. Doğru Cevap: A) İtalya’yı fethetmek - Otranto Seferi’nin amacı budur.</p>
+                <p>53. Doğru Cevap: A) Bapheus Savaşı - Osmanlıların Bizans’a karşı ilk büyük zaferidir.</p>
+                <p>54. Doğru Cevap: A) Çirmen Savaşı - I. Murad’ın Balkanlar’daki ilk büyük zaferidir.</p>
+                <p>55. Doğru Cevap: A) Otlukbeli Savaşı - II. Mehmed’in Akkoyunlulara karşı zaferidir.</p>
+                <p>56. Doğru Cevap: C) Amasra - Osmanlıların Karadeniz’deki ilk fetihlerinden biridir.</p>
+                <p>57. Doğru Cevap: B) Frenkyazısı Savaşı - I. Bayezid’in Anadolu beyliklerini egemenlik altına almasında etkili bir savaştır.</p>
+                <p>58. Doğru Cevap: D) Bosna Krallığı - II. Mehmed Bosna’yı fethederken bu krallığın direnişiyle karşılaşmıştır.</p>
+                <p>59. Doğru Cevap: A) Karesi Beyliği - Rumeli’ye geçişte stratejik bir rol oynamıştır.</p>
+                <p>60. Doğru Cevap: A) Şahi Topu - II. Mehmed’in İstanbul’un fethinde kullandığı yenilikçi bir silahtır.</p>
+            `;
+            document.getElementById('submit-btn').disabled = true;
+        }
+    </script>
+</body>
+</html>

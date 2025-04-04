@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğu Avrupa Türk Tarihi Testi</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { text-align: center; }
+        .question { margin-bottom: 20px; }
+        .submit-btn { display: block; margin: 20px auto; padding: 10px 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Doğu Avrupa Türk Tarihi Testi</h1>
+    <form id="quizForm" onsubmit="calculateScore(event)">
+        <div class="question">
+            <p>1. İskit Kağanlığı’nın siyasi ilişki kurduğu devletlerden hangisi değildir?</p>
+            <input type="radio" name="q1" value="a"> a) Kimmer<br>
+            <input type="radio" name="q1" value="b"> b) Urartu<br>
+            <input type="radio" name="q1" value="c"> c) Gotlar<br>
+            <input type="radio" name="q1" value="d"> d) Pers<br>
+        </div>
+        <div class="question">
+            <p>2. İskitlerin yöneticilerinin hangi kökenli olduğu görüşü ağırlık kazanmıştır?</p>
+            <input type="radio" name="q2" value="a"> a) İrani<br>
+            <input type="radio" name="q2" value="b"> b) Slav<br>
+            <input type="radio" name="q2" value="c"> c) Turanî (Türk)<br>
+            <input type="radio" name="q2" value="d"> d) Germen<br>
+        </div>
+        <div class="question">
+            <p>3. İskitlerin devamı kabul edilen Türk boylarından hangisi metinde yer almaz?</p>
+            <input type="radio" name="q3" value="a"> a) Kaşgarlılar<br>
+            <input type="radio" name="q3" value="b"> b) Tarançılar<br>
+            <input type="radio" name="q3" value="c"> c) Yakut Türkleri<br>
+            <input type="radio" name="q3" value="d"> d) Oğuzlar<br>
+        </div>
+        <div class="question">
+            <p>4. İskitlerin en uzun süre ilişki kurduğu millet hangisidir?</p>
+            <input type="radio" name="q4" value="a"> a) Kimmer<br>
+            <input type="radio" name="q4" value="b"> b) Persler<br>
+            <input type="radio" name="q4" value="c"> c) Sarmatlar<br>
+            <input type="radio" name="q4" value="d"> d) Urartu<br>
+        </div>
+        <div class="question">
+            <p>5. Hunlardan önce Doğu Avrupa’da yaşayan milletlerden hangisi metinde yer almaz?</p>
+            <input type="radio" name="q5" value="a"> a) Gotlar<br>
+            <input type="radio" name="q5" value="b"> b) Fin-Ugorlar<br>
+            <input type="radio" name="q5" value="c"> c) Slavlar<br>
+            <input type="radio" name="q5" value="d"> d) Türkler<br>
+        </div>
+        <div class="question">
+            <p>6. İskitlerin hangi savaş taktiği Pers Kralı Kirus’u yenilgiye uğratmıştır?</p>
+            <input type="radio" name="q6" value="a"> a) Turan Taktiği<br>
+            <input type="radio" name="q6" value="b"> b) Kalkan Duvarı<br>
+            <input type="radio" name="q6" value="c"> c) Sahte Geri Çekilme<br>
+            <input type="radio" name="q6" value="d"> d) Phalanx<br>
+        </div>
+        <div class="question">
+            <p>7. İskitlerin sanat anlayışı hangi Türk sanatıyla birebir örtüşür?</p>
+            <input type="radio" name="q7" value="a"> a) Oğuz Sanatı<br>
+            <input type="radio" name="q7" value="b"> b) Hun Sanatı<br>
+            <input type="radio" name="q7" value="c"> c) Göktürk Sanatı<br>
+            <input type="radio" name="q7" value="d"> d) Selçuklu Sanatı<br>
+        </div>
+        <div class="question">
+            <p>8. İskitlerle Greklerin tanışması nasıl gerçekleşmiştir?</p>
+            <input type="radio" name="q8" value="a"> a) Savaş yoluyla<br>
+            <input type="radio" name="q8" value="b"> b) Ticaret kolonileriyle<br>
+            <input type="radio" name="q8" value="c"> c) Diplomasi ile<br>
+            <input type="radio" name="q8" value="d"> d) Göçlerle<br>
+        </div>
+        <div class="question">
+            <p>9. Tomris Hatun’un hangi Pers kralıyla mücadelesi ünlüdür?</p>
+            <input type="radio" name="q9" value="a"> a) I. Darius<br>
+            <input type="radio" name="q9" value="b"> b) Büyük Kirus<br>
+            <input type="radio" name="q9" value="c"> c) Kambises<br>
+            <input type="radio" name="q9" value="d"> d) Xerxes<br>
+        </div>
+        <div class="question">
+            <p>10. İskitler hangi devletin yıkılmasını sağlamıştır?</p>
+            <input type="radio" name="q10" value="a"> a) Asur<br>
+            <input type="radio" name="q10" value="b"> b) Urartu<br>
+            <input type="radio" name="q10" value="c"> c) Pers<br>
+            <input type="radio" name="q10" value="d"> d) Kimmer<br>
+        </div>
+        <div class="question">
+            <p>11. Hunların kökeni ile ilgili hangi görüş Alman bilimci Friedrich Hirt tarafından ispatlanmıştır?</p>
+            <input type="radio" name="q11" value="a"> a) Moğol kökenli<br>
+            <input type="radio" name="q11" value="b"> b) Asya Hunlarının devamı<br>
+            <input type="radio" name="q11" value="c"> c) Slav kökenli<br>
+            <input type="radio" name="q11" value="d"> d) Germen kökenli<br>
+        </div>
+        <div class="question">
+            <p>12. Balamir döneminde Hunlar hangi nehri geçerek Ostrogot topraklarına girmiştir?</p>
+            <input type="radio" name="q12" value="a"> a) Tuna<br>
+            <input type="radio" name="q12" value="b"> b) İtil<br>
+            <input type="radio" name="q12" value="c"> c) Ten<br>
+            <input type="radio" name="q12" value="d"> d) Dinyeper<br>
+        </div>
+        <div class="question">
+            <p>13. Uldız hangi Roma imparatorluğuna saldırmıştır?</p>
+            <input type="radio" name="q13" value="a"> a) Batı Roma<br>
+            <input type="radio" name="q13" value="b"> b) Doğu Roma<br>
+            <input type="radio" name="q13" value="c"> c) Her ikisi<br>
+            <input type="radio" name="q13" value="d"> d) Hiçbiri<br>
+        </div>
+        <div class="question">
+            <p>14. Rua döneminde Hunlar hangi bölgeyi istila etmiştir?</p>
+            <input type="radio" name="q14" value="a"> a) Trakya ve Makedonya<br>
+            <input type="radio" name="q14" value="b"> b) Galya<br>
+            <input type="radio" name="q14" value="c"> c) Anadolu<br>
+            <input type="radio" name="q14" value="d"> d) İtalya<br>
+        </div>
+        <div class="question">
+            <p>15. Attila’nın Margus Barışı’nda Doğu Roma’dan istediği yıllık vergi miktarı ne kadardır?</p>
+            <input type="radio" name="q15" value="a"> a) 300 altın libre<br>
+            <input type="radio" name="q15" value="b"> b) 700 altın libre<br>
+            <input type="radio" name="q15" value="c"> c) 2100 altın libre<br>
+            <input type="radio" name="q15" value="d"> d) 6000 altın libre<br>
+        </div>
+        <div class="question">
+            <p>16. Hunların Anadolu’ya ilk seferinde hangi şehre kadar ilerledikleri belirtilir?</p>
+            <input type="radio" name="q16" value="a"> a) Kudüs<br>
+            <input type="radio" name="q16" value="b"> b) İstanbul<br>
+            <input type="radio" name="q16" value="c"> c) İzmir<br>
+            <input type="radio" name="q16" value="d"> d) Ankara<br>
+        </div>
+        <div class="question">
+            <p>17. Anatolius Barışı hangi şehirde imzalanmıştır?</p>
+            <input type="radio" name="q17" value="a"> a) Margus<br>
+            <input type="radio" name="q17" value="b"> b) Büyükçekmece<br>
+            <input type="radio" name="q17" value="c"> c) İstanbul<br>
+            <input type="radio" name="q17" value="d"> d) Edirne<br>
+        </div>
+        <div class="question">
+            <p>18. Attila’nın ölümüne ne sebep olmuştur?</p>
+            <input type="radio" name="q18" value="a"> a) Savaş yarası<br>
+            <input type="radio" name="q18" value="b"> b) Zehirlenme<br>
+            <input type="radio" name="q18" value="c"> c) Kan boşalması<br>
+            <input type="radio" name="q18" value="d"> d) Hastalık<br>
+        </div>
+        <div class="question">
+            <p>19. Attila’dan sonra Hun tahtına kim geçmiştir?</p>
+            <input type="radio" name="q19" value="a"> a) Dengizik<br>
+            <input type="radio" name="q19" value="b"> b) İlek<br>
+            <input type="radio" name="q19" value="c"> c) İrnek<br>
+            <input type="radio" name="q19" value="d"> d) Bleda<br>
+        </div>
+        <div class="question">
+            <p>20. Hunların Avrupa’daki son lideri kimdir?</p>
+            <input type="radio" name="q20" value="a"> a) Dengizik<br>
+            <input type="radio" name="q20" value="b"> b) İrnek<br>
+            <input type="radio" name="q20" value="c"> c) İlek<br>
+            <input type="radio" name="q20" value="d"> d) Rua<br>
+        </div>
+        <div class="question">
+            <p>21. İskitlerin dilinin hangi dil ile benzerlik gösterdiği belirtilir?</p>
+            <input type="radio" name="q21" value="a"> a) Grekçe<br>
+            <input type="radio" name="q21" value="b"> b) Türkçe<br>
+            <input type="radio" name="q21" value="c"> c) Farsça<br>
+            <input type="radio" name="q21" value="d"> d) Latince<br>
+        </div>
+        <div class="question">
+            <p>22. Hunlardan önce Doğu Avrupa’da hangi Got grubu Özi Nehri’nin doğusunda yaşamıştır?</p>
+            <input type="radio" name="q22" value="a"> a) Vizigotlar<br>
+            <input type="radio" name="q22" value="b"> b) Ostrogotlar<br>
+            <input type="radio" name="q22" value="c"> c) Vandallar<br>
+            <input type="radio" name="q22" value="d"> d) Alanlar<br>
+        </div>
+        <div class="question">
+            <p>23. İskitlerin hangi lideri Urartu’yu işgal etmiştir?</p>
+            <input type="radio" name="q23" value="a"> a) Bartatua<br>
+            <input type="radio" name="q23" value="b"> b) Madyes<br>
+            <input type="radio" name="q23" value="c"> c) Tomris<br>
+            <input type="radio" name="q23" value="d"> d) Scylurus<br>
+        </div>
+        <div class="question">
+            <p>24. Hunların batıya göçüne ne sebep olmuştur?</p>
+            <input type="radio" name="q24" value="a"> a) Doğal afetler<br>
+            <input type="radio" name="q24" value="b"> b) Ticaret yolları<br>
+            <input type="radio" name="q24" value="c"> c) Diplomatik ilişkiler<br>
+            <input type="radio" name="q24" value="d"> d) Dinî nedenler<br>
+        </div>
+        <div class="question">
+            <p>25. Rua’nın kardeşi ve batı kanadı komutanı kimdir?</p>
+            <input type="radio" name="q25" value="a"> a) Oktar<br>
+            <input type="radio" name="q25" value="b"> b) Aybars<br>
+            <input type="radio" name="q25" value="c"> c) Muncuk<br>
+            <input type="radio" name="q25" value="d"> d) Attila<br>
+        </div>
+        <div class="question">
+            <p>26. İskitlerin hangi kültürel özelliği Türklerle benzerlik gösterir?</p>
+            <input type="radio" name="q26" value="a"> a) Domuz yememe<br>
+            <input type="radio" name="q26" value="b"> b) Şehir kurma<br>
+            <input type="radio" name="q26" value="c"> c) Deniz ticareti<br>
+            <input type="radio" name="q26" value="d"> d) Tapınak inşası<br>
+        </div>
+        <div class="question">
+            <p>27. Hunların hangi lideri Batı Roma ile ittifak kurmuştur?</p>
+            <input type="radio" name="q27" value="a"> a) Balamir<br>
+            <input type="radio" name="q27" value="b"> b) Uldız<br>
+            <input type="radio" name="q27" value="c"> c) Rua<br>
+            <input type="radio" name="q27" value="d"> d) Attila<br>
+        </div>
+        <div class="question">
+            <p>28. Attila’nın Batı Roma’dan aldığı unvan nedir?</p>
+            <input type="radio" name="q28" value="a"> a) Magister Militium<br>
+            <input type="radio" name="q28" value="b"> b) Caesar<br>
+            <input type="radio" name="q28" value="c"> c) Imperator<br>
+            <input type="radio" name="q28" value="d"> d) Consul<br>
+        </div>
+        <div class="question">
+            <p>29. İskitler hangi yüzyılda Gotlar tarafından tamamen ortadan kaldırılmıştır?</p>
+            <input type="radio" name="q29" value="a"> a) MÖ 4. yüzyıl<br>
+            <input type="radio" name="q29" value="b"> b) MÖ 3. yüzyıl<br>
+            <input type="radio" name="q29" value="c"> c) MÖ 2. yüzyıl<br>
+            <input type="radio" name="q29" value="d"> d) MS 1. yüzyıl<br>
+        </div>
+        <div class="question">
+            <p>30. Hunların en önemli arkeolojik buluntusu nedir?</p>
+            <input type="radio" name="q30" value="a"> a) Yay ve ok<br>
+            <input type="radio" name="q30" value="b"> b) Kazanlar<br>
+            <input type="radio" name="q30" value="c"> c) Kılıçlar<br>
+            <input type="radio" name="q30" value="d"> d) Zırhlar<br>
+        </div>
+        <div class="question">
+            <p>31. İskitlerin yükselmeleri hangi teknolojiye bağlıdır?</p>
+            <input type="radio" name="q31" value="a"> a) Bronz işleme<br>
+            <input type="radio" name="q31" value="b"> b) Demir işleme<br>
+            <input type="radio" name="q31" value="c"> c) Altın işleme<br>
+            <input type="radio" name="q31" value="d"> d) Çömlekçilik<br>
+        </div>
+        <div class="question">
+            <p>32. Hunların hangi içeceği her daim hazır bulundurulmuştur?</p>
+            <input type="radio" name="q32" value="a"> a) Medus<br>
+            <input type="radio" name="q32" value="b"> b) Camum<br>
+            <input type="radio" name="q32" value="c"> c) Kımız<br>
+            <input type="radio" name="q32" value="d"> d) Şarap<br>
+        </div>
+        <div class="question">
+            <p>33. Attila’nın eşi kimdir?</p>
+            <input type="radio" name="q33" value="a"> a) Arıkan<br>
+            <input type="radio" name="q33" value="b"> b) Honoria<br>
+            <input type="radio" name="q33" value="c"> c) Tomris<br>
+            <input type="radio" name="q33" value="d"> d) Galla Placidia<br>
+        </div>
+        <div class="question">
+            <p>34. İskitlerin hangi lideri Neopolis’i başkent yapmıştır?</p>
+            <input type="radio" name="q34" value="a"> a) Bartatua<br>
+            <input type="radio" name="q34" value="b"> b) Madyes<br>
+            <input type="radio" name="q34" value="c"> c) Scylurus<br>
+            <input type="radio" name="q34" value="d"> d) Tomris<br>
+        </div>
+        <div class="question">
+            <p>35. Hunların hangi destanı Burgund mücadelesinden ilham almıştır?</p>
+            <input type="radio" name="q35" value="a"> a) Nibelungen Destanı<br>
+            <input type="radio" name="q35" value="b"> b) Dietrich Destanı<br>
+            <input type="radio" name="q35" value="c"> c) Hildebrand Destanı<br>
+            <input type="radio" name="q35" value="d"> d) St. Ursula Efsanesi<br>
+        </div>
+        <div class="question">
+            <p>36. Hunların hangi lideri Anadolu’ya ilk seferi düzenlemiştir?</p>
+            <input type="radio" name="q36" value="a"> a) Balamir<br>
+            <input type="radio" name="q36" value="b"> b) Uldız<br>
+            <input type="radio" name="q36" value="c"> c) Rua<br>
+            <input type="radio" name="q36" value="d"> d) Attila<br>
+        </div>
+        <div class="question">
+            <p>37. İskitlerin hangi özelliği Herodot tarafından belirtilmiştir?</p>
+            <input type="radio" name="q37" value="a"> a) Şehir kurmamaları<br>
+            <input type="radio" name="q37" value="b"> b) Denizcilik<br>
+            <input type="radio" name="q37" value="c"> c) Tarım yapmaları<br>
+            <input type="radio" name="q37" value="d"> d) Tapınak inşa etmeleri<br>
+        </div>
+        <div class="question">
+            <p>38. Hunların hangi politikası tabi boylara uygulanmamıştır?</p>
+            <input type="radio" name="q38" value="a"> a) Vergi ödeme<br>
+            <input type="radio" name="q38" value="b"> b) Asker gönderme<br>
+            <input type="radio" name="q38" value="c"> c) Vergiden muafiyet<br>
+            <input type="radio" name="q38" value="d"> d) İç işlerinde serbestlik<br>
+        </div>
+        <div class="question">
+            <p>39. Attila hangi savaşta yenilgiye uğramıştır?</p>
+            <input type="radio" name="q39" value="a"> a) Catalaunum Savaşı<br>
+            <input type="radio" name="q39" value="b"> b) I. Balkan Seferi<br>
+            <input type="radio" name="q39" value="c"> c) II. Balkan Seferi<br>
+            <input type="radio" name="q39" value="d"> d) Aquileia Kuşatması<br>
+        </div>
+        <div class="question">
+            <p>40. İskitlerin hangi lideri Perslere karşı “Sivri Başlıklı Sakalar”ı yenmiştir?</p>
+            <input type="radio" name="q40" value="a"> a) Tomris<br>
+            <input type="radio" name="q40" value="b"> b) Bartatua<br>
+            <input type="radio" name="q40" value="c"> c) I. Darius<br>
+            <input type="radio" name="q40" value="d"> d) Madyes<br>
+        </div>
+        <div class="question">
+            <p>41. Hunların hangi silahı “mucize silah” olarak adlandırılır?</p>
+            <input type="radio" name="q41" value="a"> a) Kılıç<br>
+            <input type="radio" name="q41" value="b"> b) Reflex yay<br>
+            <input type="radio" name="q41" value="c"> c) Mızrak<br>
+            <input type="radio" name="q41" value="d"> d) Kement<br>
+        </div>
+        <div class="question">
+            <p>42. İskitlerin hangi lideri Massagetlerle savaşta yenilmiştir?</p>
+            <input type="radio" name="q42" value="a"> a) Bartatua<br>
+            <input type="radio" name="q42" value="b"> b) Madyes<br>
+            <input type="radio" name="q42" value="c"> c) Tomris<br>
+            <input type="radio" name="q42" value="d"> d) İlk İskitler<br>
+        </div>
+        <div class="question">
+            <p>43. Hunların hangi lideri Gepid Kralı Ardarik tarafından yenilmiştir?</p>
+            <input type="radio" name="q43" value="a"> a) İlek<br>
+            <input type="radio" name="q43" value="b"> b) Dengizik<br>
+            <input type="radio" name="q43" value="c"> c) İrnek<br>
+            <input type="radio" name="q43" value="d"> d) Attila<br>
+        </div>
+        <div class="question">
+            <p>44. İskitlerin hangi bölgede yaşadıkları belirtilir?</p>
+            <input type="radio" name="q44" value="a"> a) Anadolu<br>
+            <input type="radio" name="q44" value="b"> b) Hazar Denizi’nden Tuna’ya<br>
+            <input type="radio" name="q44" value="c"> c) Balkanlar<br>
+            <input type="radio" name="q44" value="d"> d) Orta Asya<br>
+        </div>
+        <div class="question">
+            <p>45. Hunların hangi lideri İstanbul’u ele geçirmeye çalışmıştır?</p>
+            <input type="radio" name="q45" value="a"> a) Balamir<br>
+            <input type="radio" name="q45" value="b"> b) Uldız<br>
+            <input type="radio" name="q45" value="c"> c) Rua<br>
+            <input type="radio" name="q45" value="d"> d) Attila<br>
+        </div>
+        <div class="question">
+            <p>46. İskitlerin hangi lideri Kirus’un ölümüne sebep olmuştur?</p>
+            <input type="radio" name="q46" value="a"> a) Bartatua<br>
+            <input type="radio" name="q46" value="b"> b) Madyes<br>
+            <input type="radio" name="q46" value="c"> c) Tomris<br>
+            <input type="radio" name="q46" value="d"> d) Scylurus<br>
+        </div>
+        <div class="question">
+            <p>47. Hunların hangi lideri Panonya’yı Batı Roma’dan almıştır?</p>
+            <input type="radio" name="q47" value="a"> a) Balamir<br>
+            <input type="radio" name="q47" value="b"> b) Uldız<br>
+            <input type="radio" name="q47" value="c"> c) Rua<br>
+            <input type="radio" name="q47" value="d"> d) Attila<br>
+        </div>
+        <div class="question">
+            <p>48. İskitlerin hangi özelliği Türklerle ortak değildir?</p>
+            <input type="radio" name="q48" value="a"> a) At kurban etme<br>
+            <input type="radio" name="q48" value="b"> b) Gök Tanrı inancı<br>
+            <input type="radio" name="q48" value="c"> c) Deniz ticareti<br>
+            <input type="radio" name="q48" value="d"> d) Kurgan kültürü<br>
+        </div>
+        <div class="question">
+            <p>49. Hunların hangi destanı Ostrogot Kralı Ermanarik’ten ilham almıştır?</p>
+            <input type="radio" name="q49" value="a"> a) Nibelungen Destanı<br>
+            <input type="radio" name="q49" value="b"> b) Dietrich Destanı<br>
+            <input type="radio" name="q49" value="c"> c) Hildebrand Destanı<br>
+            <input type="radio" name="q49" value="d"> d) St. Ursula Efsanesi<br>
+        </div>
+        <div class="question">
+            <p>50. İskitlerin hangi lideri Sakız’ı başkent yapmayı planlamıştır?</p>
+            <input type="radio" name="q50" value="a"> a) Bartatua<br>
+            <input type="radio" name="q50" value="b"> b) Madyes<br>
+            <input type="radio" name="q50" value="c"> c) Tomris<br>
+            <input type="radio" name="q50" value="d"> d) Scylurus<br>
+        </div>
+        <button type="submit" class="submit-btn">Testi Bitir</button>
+    </form>
+    <div id="result"></div>
+
+    <h2>Cevap Anahtarı ve Açıklamalar</h2>
+    <table>
+        <tr>
+            <th>Soru No</th>
+            <th>Doğru Cevap</th>
+            <th>Açıklama</th>
+        </tr>
+        <tr><td>1</td><td>c) Gotlar</td><td>İskitler Kimmer, Urartu, Asur, Pers ve Sarmatlarla ilişki kurmuştur, Gotlar ise İskitlerin sonunu getirmiştir.</td></tr>
+        <tr><td>2</td><td>c) Turanî (Türk)</td><td>Metinde yöneticilerin Turanî (Türk) olduğu görüşü ağırlık kazanmıştır.</td></tr>
+        <tr><td>3</td><td>d) Oğuzlar</td><td>Kaşgarlılar, Tarançılar ve Yakut Türkleri anılır, Oğuzlar yer almaz.</td></tr>
+        <tr><td>4</td><td>b) Persler</td><td>İskitlerin en uzun süre ilişki kurduğu millet Perslerdir.</td></tr>
+        <tr><td>5</td><td>d) Türkler</td><td>Hunlardan önce Gotlar, Fin-Ugorlar ve Slavlar yaşar, Türkler Hunlarla gelir.</td></tr>
+        <tr><td>6</td><td>a) Turan Taktiği</td><td>Tomris, Kirus’u Turan Taktiği ile yenmiştir.</td></tr>
+        <tr><td>7</td><td>b) Hun Sanatı</td><td>İskit sanatı Hun sanatıyla birebir örtüşür.</td></tr>
+        <tr><td>8</td><td>b) Ticaret kolonileriyle</td><td>Grekler, Karadeniz’deki ticaret kolonileriyle İskitlerle tanışmıştır.</td></tr>
+        <tr><td>9</td><td>b) Büyük Kirus</td><td>Tomris, Büyük Kirus ile mücadele etmiştir.</td></tr>
+        <tr><td>10</td><td>b) Urartu</td><td>İskitler Urartu’nun yıkılmasını sağlamıştır.</td></tr>
+        <tr><td>11</td><td>b) Asya Hunlarının devamı</td><td>Friedrich Hirt, Hunların Asya Hunlarının devamı olduğunu ispatlamıştır.</td></tr>
+        <tr><td>12</td><td>c) Ten</td><td>Balamir, Ten Nehri’ni geçerek Ostrogotlara girmiştir.</td></tr>
+        <tr><td>13</td><td>b) Doğu Roma</td><td>Uldız, Doğu Roma’ya saldırmıştır.</td></tr>
+        <tr><td>14</td><td>a) Trakya ve Makedonya</td><td>Rua, Trakya ve Makedonya’yı istila etmiştir.</td></tr>
+        <tr><td>15</td><td>b) 700 altın libre</td><td>Margus Barışı’nda Attila 700 altın libre talep etmiştir.</td></tr>
+        <tr><td>16</td><td>a) Kudüs</td><td>Hunlar Anadolu seferinde Kudüs’e kadar ilerlemiştir.</td></tr>
+        <tr><td>17</td><td>b) Büyükçekmece</td><td>Anatolius Barışı Büyükçekmece’de imzalanmıştır.</td></tr>
+        <tr><td>18</td><td>c) Kan boşalması</td><td>Attila, zifafta kan boşalması sonucu ölmüştür.</td></tr>
+        <tr><td>19</td><td>b) İlek</td><td>Attila’dan sonra tahta İlek geçmiştir.</td></tr>
+        <tr><td>20</td><td>a) Dengizik</td><td>Dengizik, Hunların Avrupa’daki son lideridir.</td></tr>
+        <tr><td>21</td><td>b) Türkçe</td><td>İskit dili Türkçe ile benzerlik gösterir.</td></tr>
+        <tr><td>22</td><td>b) Ostrogotlar</td><td>Özi Nehri’nin doğusunda Ostrogotlar yaşamıştır.</td></tr>
+        <tr><td>23</td><td>a) Bartatua</td><td>Bartatua, Urartu’yu işgal eden liderdir.</td></tr>
+        <tr><td>24</td><td>a) Doğal afetler</td><td>Hunlar doğal afetler nedeniyle batıya göç etmiştir.</td></tr>
+        <tr><td>25</td><td>a) Oktar</td><td>Rua’nın kardeşi ve batı kanadı komutanı Oktar’dır.</td></tr>
+        <tr><td>26</td><td>a) Domuz yememe</td><td>İskitler ve Türkler domuz yememe geleneğine sahiptir.</td></tr>
+        <tr><td>27</td><td>b) Uldız</td><td>Uldız, Batı Roma ile ittifak kurmuştur.</td></tr>
+        <tr><td>28</td><td>a) Magister Militium</td><td>Attila’ya Batı Roma tarafından Magister Militium unvanı verilmiştir.</td></tr>
+        <tr><td>29</td><td>c) MÖ 2. yüzyıl</td><td>İskitler MÖ 2. yüzyılda Gotlar tarafından ortadan kaldırılmıştır.</td></tr>
+        <tr><td>30</td><td>b) Kazanlar</td><td>Hunların en önemli arkeolojik buluntusu kazanlardır.</td></tr>
+        <tr><td>31</td><td>b) Demir işleme</td><td>İskitlerin yükselişi demir işleme teknolojisine bağlıdır.</td></tr>
+        <tr><td>32</td><td>c) Kımız</td><td>Hunlar kımızı her daim hazır bulundurmuştur.</td></tr>
+        <tr><td>33</td><td>a) Arıkan</td><td>Attila’nın eşi Arıkan’dır.</td></tr>
+        <tr><td>34</td><td>c) Scylurus</td><td>Scylurus, Neopolis’i başkent yapmıştır.</td></tr>
+        <tr><td>35</td><td>a) Nibelungen Destanı</td><td>Nibelungen Destanı, Hun-Burgund mücadelesinden ilham almıştır.</td></tr>
+        <tr><td>36</td><td>b) Uldız</td><td>Uldız döneminde Hunlar Anadolu’ya ilk seferi düzenlemiştir.</td></tr>
+        <tr><td>37</td><td>a) Şehir kurmamaları</td><td>Herodot, İskitlerin şehir kurmadığını belirtir.</td></tr>
+        <tr><td>38</td><td>c) Vergiden muafiyet</td><td>Hunlar tabi boyları vergiden muaf tutmamıştır.</td></tr>
+        <tr><td>39</td><td>a) Catalaunum Savaşı</td><td>Attila, Catalaunum Savaşı’nda yenilgiye uğramıştır.</td></tr>
+        <tr><td>40</td><td>c) I. Darius</td><td>I. Darius, “Sivri Başlıklı Sakalar”ı yenmiştir; Tomris Kirus’u yenmiştir, karışıklık olmasın.</td></tr>
+        <tr><td>41</td><td>b) Reflex yay</td><td>Hunların reflex yayı “mucize silah” olarak adlandırılır.</td></tr>
+        <tr><td>42</td><td>d) İlk İskitler</td><td>İlk İskitler Massagetlerle savaşta yenilmiştir.</td></tr>
+        <tr><td>43</td><td>a) İlek</td><td>İlek, Gepid Kralı Ardarik tarafından yenilmiştir.</td></tr>
+        <tr><td>44</td><td>b) Hazar Denizi’nden Tuna’ya</td><td>İskitler Hazar Denizi’nden Tuna’ya kadar yaşamıştır.</td></tr>
+        <tr><td>45</td><td>d) Attila</td><td>Attila, İstanbul’u ele geçirmeye çalışmıştır.</td></tr>
+        <tr><td>46</td><td>c) Tomris</td><td>Tomris, Kirus’un ölümüne sebep olmuştur.</td></tr>
+        <tr><td>47</td><td>d) Attila</td><td>Attila, Panonya’yı Batı Roma’dan almıştır.</td></tr>
+        <tr><td>48</td><td>c) Deniz ticareti</td><td>İskitler ve Türkler deniz ticaretiyle öne çıkmaz.</td></tr>
+        <tr><td>49</td><td>b) Dietrich Destanı</td><td>Dietrich Destanı, Ostrogot Kralı Ermanarik’ten ilham almıştır.</td></tr>
+        <tr><td>50</td><td>b) Madyes</td><td>Madyes, Sakız’ı başkent yapmayı planlamıştır.</td></tr>
+    </table>
+
+    <script>
+        function calculateScore(event) {
+            event.preventDefault();
+            let score = 0;
+            const answers = {
+                q1: 'c', q2: 'c', q3: 'd', q4: 'b', q5: 'd', q6: 'a', q7: 'b', q8: 'b', q9: 'b', q10: 'b',
+                q11: 'b', q12: 'c', q13: 'b', q14: 'a', q15: 'b', q16: 'a', q17: 'b', q18: 'c', q19: 'b', q20: 'a',
+                q21: 'b', q22: 'b', q23: 'a', q24: 'a', q25: 'a', q26: 'a', q27: 'b', q28: 'a', q29: 'c', q30: 'b',
+                q31: 'b', q32: 'c', q33: 'a', q34: 'c', q35: 'a', q36: 'b', q37: 'a', q38: 'c', q39: 'a', q40: 'c',
+                q41: 'b', q42: 'd', q43: 'a', q44: 'b', q45: 'd', q46: 'c', q47: 'd', q48: 'c', q49: 'b', q50: 'b'
+            };
+
+            for (let i = 1; i <= 50; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === answers[`q${i}`]) {
+                    score += 2;
+                }
+            }
+
+            document.getElementById('result').innerHTML = `Toplam Puanınız: ${score} / 100`;
+        }
+    </script>
+</body>
+</html>

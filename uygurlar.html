@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uygur Tarihi Flash Kart Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        #quizContainer {
+            width: 700px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #welcomeScreen, #startScreen, #quizScreen {
+            text-align: center;
+        }
+        #welcomeScreen {
+            display: block;
+        }
+        #startScreen, #quizScreen {
+            display: none;
+        }
+        #timer {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #d9534f;
+        }
+        .flashcard {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: none;
+        }
+        .flashcard.active {
+            display: block;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .options label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        #result h2 {
+            color: #333;
+        }
+        #result p {
+            font-size: 16px;
+        }
+        #answerKey {
+            margin-top: 20px;
+            text-align: left;
+        }
+        #answerKey table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #answerKey th, #answerKey td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #answerKey th {
+            background-color: #f2f2f2;
+        }
+        .correct {
+            color: #28a745;
+        }
+        .incorrect {
+            color: #d9534f;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+        input[type="text"], input[type="email"] {
+            padding: 8px;
+            margin: 10px 0;
+            width: 80%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="quizContainer">
+        <h1>Uygur Tarihi Testi</h1>
+        <div id="welcomeScreen">
+            <p>Hoş Geldiniz! Lütfen teste başlamadan önce bilgilerinizi girin.</p>
+            <input type="text" id="userName" placeholder="Adınız" required><br>
+            <input type="email" id="userEmail" placeholder="E-posta adresiniz" required><br>
+            <button id="submitInfo">Bilgileri Gönder</button>
+        </div>
+        <div id="startScreen">
+            <p>Testi başlatmak için aşağıdaki butona tıklayın.</p>
+            <button id="startBtn">Testi Başlat</button>
+        </div>
+        <div id="quizScreen">
+            <div id="timer">Kalan Süre: 20:00</div>
+            <div id="flashcards"></div>
+            <div class="navigation">
+                <button id="prevBtn" disabled>Önceki</button>
+                <button id="nextBtn">Sonraki</button>
+                <button id="endBtn">Testi Bitir</button>
+            </div>
+            <div id="result"></div>
+            <div id="answerKey"></div>
+        </div>
+    </div>
+    <footer>Telif Hakkı © OZZASCİ'ye aittir.</footer>
+
+    <script>
+        const questions = [
+            // 1. Kaynaklar, Uygur Edebiyatı ve Yazıtları (10 soru)
+            { category: "Kaynaklar, Uygur Edebiyatı ve Yazıtları", question: "Hangisi Uygur Türeyiş Efsaneleri hakkında bilgi sahibi olmamızı sağlayan kaynaklardan biridir?", options: ["Tarih-i Cihan Güşa", "Divanü Lügatit Türk", "Kutadgu Bilig", "Orhun Yazıtları"], answer: "a" },
+            { category: "Kaynaklar, Uygur Edebiyatı ve Yazıtları", question: "Hangisi Uygur Yazıtlarından biri değildir?", options: ["Şine-Usu Yazıtı", "Karabalgasun Yazıtı", "Bilge Kagan Yazıtı", "Moyen-çor Yazıtı"], answer: "c" },
+            { category: "Kaynaklar, Uygur Edebiyatı ve Yazıtları", question: "İslam Dini Çevresinde Gelişen Uygur Edebiyatı şairleri arasında hangisi sayılabilir?", options: ["Yusuf Has Hacib", "Mehmet Ali Tevfik", "Kaşgarlı Mahmud", "Ahmet Yesevi"], answer: "b" },
+            { category: "Kaynaklar, Uygur Edebiyatı ve Yazıtları", question: "Karabalsagun Yazıtı’nın kaleme alındığı diller hangisinde doğru verilmiştir?", options: ["Türkçe, Çince, Arapça", "Türkçe, Sogdça, Çince", "Türkçe, Farsça, Çince", "Türkçe, Moğolca, Sogdça"], answer: "b" },
+            { category: "Kaynaklar, Uygur Edebiyatı ve Yazıtları", question: "I. Şine-Usu Yazıtı, II. Karabalgasun Yazıtı, III. Orhun Abideleri. Yukarıda verilen yazıtların hangisi Uygurlara aittir?", options: ["Yalnız I", "I ve II", "II ve III", "I, II ve III"], answer: "b" },
+            { category: "Kaynaklar, Uygur Edebiyatı ve Yazıtları", question: "Şine-Usu ve Karabalgasun Yazıtları’nın ortak özelliği hangisidir?", options: ["Çince yazılmış olmaları", "Uygurlara ait olmaları", "Göktürklere ait olmaları", "Mani dinine dair bilgiler içermeleri"], answer: "b" },
+            { category: "Kaynaklar, Uygur Edebiyatı ve Yazıtları", question: "Şine-Usu Yazıtı nerede bulunmuştur?", options: ["Orhun Vadisi", "Mogoitu Irmağı ve Çevresi", "Karabalgasun", "Beşbalık"], answer: "b" },
+            { category: "Kaynaklar, Uygur Edebiyatı ve Yazıtları", question: "Aşağıdaki motiflerden hangisi Mani Dininin etkisinden başka, eski Türklerde çok yaygın olup Oğuz Kagan Destanı ve Dede Korkut Hikâyeleri’nde sıkça rastlanmaktadır?", options: ["Kurt", "Ağaç", "Güneş", "Ay"], answer: "b" },
+            { category: "Kaynaklar, Uygur Edebiyatı ve Yazıtları", question: "Mevcut kaynaklara ve kesin bilgilere göre Türk Tarihi devlet olarak hangi imparatorluk ile başlamaktadır?", options: ["Göktürkler", "Asya Hun İmparatorluğu", "Uygur Kağanlığı", "Kök Türkler"], answer: "b" },
+            { category: "Kaynaklar, Uygur Edebiyatı ve Yazıtları", question: "İslamiyet öncesi Türk tarihçiliğinin problemlerinden hangisi Türk tarihinin yapısından kaynaklanan beş temel üzerine bina edilmez?", options: ["Göçebelik", "Sözlü gelenek", "Kurucu aile birliği", "Yazılı kaynak eksikliği"], answer: "c" },
+
+            // 2. Uygurların Menşei, Uygur Adı ve Uygurların Tarih Sahnesine Çıkışı (10 soru)
+            { category: "Uygurların Menşei, Uygur Adı ve Tarih Sahnesine Çıkışı", question: "Çin kaynaklarına göre Uygurların menşei hangisine dayanmaktadır?", options: ["Tölesler", "Hunlar", "Göktürkler", "Kırgızlar"], answer: "b" },
+            { category: "Uygurların Menşei, Uygur Adı ve Tarih Sahnesine Çıkışı", question: "Uygur Kağanlığı hangi tarihler arasında hüküm sürmüştür?", options: ["744-840", "627-744", "840-1000", "696-779"], answer: "a" },
+            { category: "Uygurların Menşei, Uygur Adı ve Tarih Sahnesine Çıkışı", question: "Uygurların teşekkül ettiği aile sayısı hangisinde doğru olarak verilmiştir?", options: ["7", "9", "11", "15"], answer: "b" },
+            { category: "Uygurların Menşei, Uygur Adı ve Tarih Sahnesine Çıkışı", question: "Uygur Kağanlığı’nın kurucusu hangisidir?", options: ["Bögü Kagan", "Kutluk Bilge Kagan", "Moyen-çor", "Tun Baga Tarkan"], answer: "b" },
+            { category: "Uygurların Menşei, Uygur Adı ve Tarih Sahnesine Çıkışı", question: "Kaşgârlı Mahmud’a göre Uygur adının manasını hangi bilgi ifade etmektedir?", options: ["Şahin gibi hızlı hücum eden", "Kendi kendine yeten", "Çukur", "Güçlü savaşçı"], answer: "b" },
+            { category: "Uygurların Menşei, Uygur Adı ve Tarih Sahnesine Çıkışı", question: "Uygurlar 627-628 yılında kaç kişilik Göktürk ordusunu mağlup etmiştir?", options: ["50.000", "100.000", "150.000", "200.000"], answer: "b" },
+            { category: "Uygurların Menşei, Uygur Adı ve Tarih Sahnesine Çıkışı", question: "627-628 yılında Uygurların başında bulunan reis hangisidir?", options: ["Tu-chie-chih", "Kutluk Bilge", "Moyen-çor", "Bögü Kagan"], answer: "a" },
+            { category: "Uygurların Menşei, Uygur Adı ve Tarih Sahnesine Çıkışı", question: "Hangisi Kırgızların Çin kaynaklarında geçen isimlerinden biri değildir?", options: ["Chien-k’un", "Ch’i-kua", "Ha-chia-ssu", "Hsia-chia-ssu"], answer: "b" },
+            { category: "Uygurların Menşei, Uygur Adı ve Tarih Sahnesine Çıkışı", question: "Hangisi Karacuk Dağları’ndan Hazar’a uzanan Oğuz Bozkırı denen yarı çölde yaşayan Oğuz şehirlerinden biri değildir?", options: ["Balasagun", "Usrûşana", "Kaşgar", "Taraz"], answer: "b" },
+            { category: "Uygurların Menşei, Uygur Adı ve Tarih Sahnesine Çıkışı", question: "Tölesler, IV.-V. yüzyıllarda Çin kaynaklarında hangi isimle bahsedilmektedir?", options: ["Yüksek arabalı", "Hızlı savaşçılar", "Çöldeki halk", "Dağ insanları"], answer: "a" },
+
+            // 3. Devletin Teşekkülü ve Güçlenmesi (10 soru)
+            { category: "Devletin Teşekkülü ve Güçlenmesi", question: "Bozkır coğrafyasının ve hayat tarzlarının icabı Türk ekonomisinin temelini ne oluşturmuştur?", options: ["Tarım", "Hayvancılık", "Ticaret", "Madencilik"], answer: "b" },
+            { category: "Devletin Teşekkülü ve Güçlenmesi", question: "I. Karluk Seferleri, II. Çin Seferleri, III. Kırgız Seferleri. Yukarıda verilen seferlerden hangilerini Moyen-çor’un Kuzey Seferleri olarak adlandırabiliriz?", options: ["I", "II", "III", "I ve II"], answer: "c" },
+            { category: "Devletin Teşekkülü ve Güçlenmesi", question: "Batı seferleri hangi boylara karşı yapılmıştır?", options: ["Kırgızlar ve Tibetliler", "Karluklar ve Türgeşler", "Çinliler ve Tölesler", "Oğuzlar ve Kıpçaklar"], answer: "b" },
+            { category: "Devletin Teşekkülü ve Güçlenmesi", question: "Uygurların güçlü olduğu ve Çin’e tepeden baktıkları dönem hangi Kagan zamanındadır?", options: ["Kutluk Bilge Kagan", "Moyen-çor", "Bögü Kagan", "Tun Baga Tarkan"], answer: "b" },
+            { category: "Devletin Teşekkülü ve Güçlenmesi", question: "Sekiz Oğuz ve Dokuz Tatarlardan bahseden yazıt hangisidir?", options: ["Şine-Usu Yazıtı", "Karabalgasun Yazıtı", "Moyen-çor Yazıtı", "Orhun Yazıtları"], answer: "c" },
+            { category: "Devletin Teşekkülü ve Güçlenmesi", question: "Adının akıl ve feraset sahibi anlamlarına geldiği dönemde Çin’deki Uygur nüfusu artmış, Uygurlar Çin’de serbestçe ticaret yapma imkânı bulmuşlardır. Yukarıda bahsedilen Uygur Kağanı hangisidir?", options: ["Kutluk Bilge Kagan", "Moyen-çor", "Bögü Kagan", "Tun Baga Tarkan"], answer: "c" },
+            { category: "Devletin Teşekkülü ve Güçlenmesi", question: "Göktürk Kağanı Kapgan’ın yaptığı Çin’in Göktürklere 3000 ziraat aleti ile yaklaşık 1250 ton tohumluk darı vermesi hükmünü getirdiği anlaşma hangi tarihte yapılmıştır?", options: ["696", "744", "779", "840"], answer: "a" },
+            { category: "Devletin Teşekkülü ve Güçlenmesi", question: "Uygur Kağanı Bögü’nün Çin için esas politikası hangisidir?", options: ["Çin ile barış yapmak", "Çin’e otorite bakımından sahip olmak", "Çin’den uzak durmak", "Çin ile ticaret yapmak"], answer: "b" },
+            { category: "Devletin Teşekkülü ve Güçlenmesi", question: "759 yılında gerçekleştirilen Lo-yang Seferi’nin sonucu hangisidir?", options: ["Çin’i tamamen fethetmek", "Çin’i istila eden Tibetlilerden kurtarmak", "Kırgızları yenmek", "Karlukları bastırmak"], answer: "b" },
+            { category: "Devletin Teşekkülü ve Güçlenmesi", question: "Bögü Kağan’a kaç yılında ve kim tarafından suikast yapılmıştır?", options: ["744’te Moyen-çor tarafından", "779 yılında Tun Baga Tarkan tarafından", "840’ta Kırgızlar tarafından", "696’da Karluklar tarafından"], answer: "b" },
+
+            // 4. Uygurlarda Hanedan Değişikliği ve Devletin Zayıflaması (10 soru)
+            { category: "Uygurlarda Hanedan Değişikliği ve Devletin Zayıflaması", question: "Uygurlar Beşbalık Bölgesi için hangi topluluklarla mücadele etmiştir?", options: ["Kırgızlar", "Tibet", "Çinliler", "Karluklar"], answer: "b" },
+            { category: "Uygurlarda Hanedan Değişikliği ve Devletin Zayıflaması", question: "744 yılında tahta çıkan Kagan hangisidir?", options: ["Kutluk Bilge Kagan", "Moyen-çor", "Bögü Kagan", "Tun Baga Tarkan"], answer: "a" },
+            { category: "Uygurlarda Hanedan Değişikliği ve Devletin Zayıflaması", question: "To-lo-ssu Kagan devrinin en önemli meselesi hangisidir?", options: ["Çin ile savaş", "Beşbalık", "Kırgız baskınları", "Karluk isyanları"], answer: "b" },
+            { category: "Uygurlarda Hanedan Değişikliği ve Devletin Zayıflaması", question: "Kutluk Bilge Kagan zamanında verilen boylardan hangisinin isyanları bastırılmıştır?", options: ["Tibetliler", "Karluklar", "Kırgızlar", "Tölesler"], answer: "b" },
+            { category: "Uygurlarda Hanedan Değişikliği ve Devletin Zayıflaması", question: "Feng-Ch’eng (A-Ch’o) Kagan’ın tahta geçmesinin nedeni hangisidir?", options: ["Babası savaşta öldü", "Amcasının Uygur ileri gelenleri tarafından öldürülmesi", "Kendi darbesiyle", "Kırgız baskını sonrası"], answer: "b" },
+            { category: "Uygurlarda Hanedan Değişikliği ve Devletin Zayıflaması", question: "Tun Baga Tarkan’ın T’ang Hanedanı’na karşı yumuşak politika izlemesinin sebebi hangisidir?", options: ["T’ang Hanedanı’nın güçlenmesi", "Ekonomik zayıflık", "Kırgız tehdidi", "İç isyanlar"], answer: "a" },
+            { category: "Uygurlarda Hanedan Değişikliği ve Devletin Zayıflaması", question: "Yukarıda verilenlerden hangileri Uygurların yıkılış sebebi olarak gösterilebilir? I. Çinlilerin iç karışıklıkları körükleme siyaseti, II. Yönetici devlet adamları arasındaki sürtüşmeler, III. Çetin coğrafi koşullar", options: ["Yalnız I", "I ve II", "II ve III", "I, II ve III"], answer: "d" },
+            { category: "Uygurlarda Hanedan Değişikliği ve Devletin Zayıflaması", question: "Kırgız baskınından sonra hangisi Uygurların göç ettiği sahalardan değildir?", options: ["Turfan", "Kan-chou (Kansu)", "Kaşgar", "Beşbalık"], answer: "b" },
+            { category: "Uygurlarda Hanedan Değişikliği ve Devletin Zayıflaması", question: "780 yılında Alp Bilge Kagan’ın ölümünden sonra Uygur tahtına kağanlardan hangisi geçmiştir?", options: ["Alp Küçlüg Bilge Kagan", "Tun Baga Tarkan", "Bögü Kagan", "Kutluk Bilge Kagan"], answer: "a" },
+            { category: "Uygurlarda Hanedan Değişikliği ve Devletin Zayıflaması", question: "Hu-Tegin’in ölümü hakkındaki görüşler hangisinde doğru olarak verilmiştir?", options: ["Savaşta öldü", "İntihar etmiş veya Kürebir tarafından öldürülmüştür", "Hastalıktan öldü", "Çinliler tarafından esir alındı"], answer: "b" }
+        ];
+
+        let currentCard = 0;
+        const userAnswers = new Array(questions.length).fill(null);
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const startScreen = document.getElementById('startScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const flashcardsDiv = document.getElementById('flashcards');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const endBtn = document.getElementById('endBtn');
+        const resultDiv = document.getElementById('result');
+        const answerKeyDiv = document.getElementById('answerKey');
+        const timerDiv = document.getElementById('timer');
+        let timeLeft = 20 * 60; // 20 dakika (saniye cinsinden)
+        let timerInterval;
+        let userName, userEmail;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const shuffledQuestions = shuffle([...questions]);
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDiv.textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitQuiz();
+            } else {
+                timeLeft--;
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function renderCard(index) {
+            flashcardsDiv.innerHTML = '';
+            const question = shuffledQuestions[index];
+            const card = document.createElement('div');
+            card.classList.add('flashcard', 'active');
+            card.innerHTML = `
+                <p class="question">${index + 1}. (${question.category}) ${question.question}</p>
+                <div class="options">
+                    ${question.options.map((opt, i) => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${String.fromCharCode(97 + i)}" ${userAnswers[index] === String.fromCharCode(97 + i) ? 'checked' : ''}>
+                            ${opt}
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+            flashcardsDiv.appendChild(card);
+
+            prevBtn.disabled = index === 0;
+            nextBtn.style.display = index === shuffledQuestions.length - 1 ? 'none' : 'inline-block';
+        }
+
+        function saveAnswer(index) {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            userAnswers[index] = selected ? selected.value : null;
+        }
+
+        function submitQuiz() {
+            saveAnswer(currentCard);
+            clearInterval(timerInterval);
+            let score = 0;
+            const categoryScores = {};
+            questions.forEach(q => categoryScores[q.category] = { correct: 0, total: 0 });
+
+            userAnswers.forEach((answer, i) => {
+                const question = shuffledQuestions[i];
+                if (answer === question.answer) {
+                    score++;
+                    categoryScores[question.category].correct++;
+                }
+                categoryScores[question.category].total++;
+            });
+
+            const percentage = (score / questions.length) * 100;
+            let resultHTML = `
+                <h2>Test Sonuçları</h2>
+                <p>Ad: ${userName}</p>
+                <p>E-posta: ${userEmail}</p>
+                <p>Toplam Doğru: ${score}/${questions.length}</p>
+                <p>Yüzde: %${percentage.toFixed(2)}</p>
+                <h3>Konulara Göre Performans:</h3>
+                <ul>
+                    ${Object.entries(categoryScores).map(([cat, { correct, total }]) => `
+                        <li>${cat}: ${correct}/${total} (%${((correct / total) * 100).toFixed(2)})</li>
+                    `).join('')}
+                </ul>
+            `;
+            resultDiv.innerHTML = resultHTML;
+            resultDiv.style.display = 'block';
+
+            let answerKeyHTML = `
+                <h3>Cevap Anahtarı</h3>
+                <table>
+                    <tr>
+                        <th>Soru No</th>
+                        <th>Soru</th>
+                        <th>Doğru Cevap</th>
+                        <th>Senin Cevabın</th>
+                        <th>Durum</th>
+                    </tr>
+                    ${shuffledQuestions.map((q, i) => `
+                        <tr>
+                            <td>${i + 1}</td>
+                            <td>${q.question}</td>
+                            <td>${q.options[q.answer.charCodeAt(0) - 97]}</td>
+                            <td>${userAnswers[i] ? q.options[userAnswers[i].charCodeAt(0) - 97] : 'Cevap verilmedi'}</td>
+                            <td class="${userAnswers[i] === q.answer ? 'correct' : 'incorrect'}">${userAnswers[i] === q.answer ? 'Doğru' : 'Yanlış'}</td>
+                        </tr>
+                    `).join('')}
+                </table>
+            `;
+            answerKeyDiv.innerHTML = answerKeyHTML;
+
+            // Sonuçları ozzasci@gmail.com adresine gönder (simülasyon)
+            const emailContent = {
+                to: "ozzasci@gmail.com",
+                subject: `Uygur Tarihi Test Sonuçları - ${userName}`,
+                body: `
+                    Ad: ${userName}
+                    E-posta: ${userEmail}
+                    Toplam Doğru: ${score}/${questions.length}
+                    Yüzde: %${percentage.toFixed(2)}
+                    Konulara Göre Performans:
+                    ${Object.entries(categoryScores).map(([cat, { correct, total }]) => `${cat}: ${correct}/${total} (%${((correct / total) * 100).toFixed(2)})`).join('\n')}
+                `
+            };
+            console.log("E-posta gönderiliyor:", emailContent); // Gerçek gönderim için backend gerekir
+
+            flashcardsDiv.style.display = 'none';
+            timerDiv.style.display = 'none';
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            endBtn.style.display = 'none';
+        }
+
+        document.getElementById('submitInfo').addEventListener('click', () => {
+            userName = document.getElementById('userName').value.trim();
+            userEmail = document.getElementById('userEmail').value.trim();
+            if (userName && userEmail) {
+                welcomeScreen.style.display = 'none';
+                startScreen.style.display = 'block';
+            } else {
+                alert("Lütfen adınızı ve e-posta adresinizi girin!");
+            }
+        });
+
+        document.getElementById('startBtn').addEventListener('click', () => {
+            startScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+            renderCard(currentCard);
+            startTimer();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            saveAnswer(currentCard);
+            currentCard--;
+            renderCard(currentCard);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            saveAnswer(currentCard);
+            currentCard++;
+            renderCard(currentCard);
+        });
+
+        endBtn.addEventListener('click', submitQuiz);
+    </script>
+</body>
+</html>

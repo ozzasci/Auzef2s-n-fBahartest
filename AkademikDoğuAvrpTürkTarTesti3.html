@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Büyük Bulgar Kağanlığı ve Tuna Bulgar Kağanlığı Testi</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        #timer {
+            text-align: center;
+            font-size: 1.2em;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .question label {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .submit-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 30px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #2c3e50;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Büyük Bulgar Kağanlığı ve Tuna Bulgar Kağanlığı Testi</h1>
+        <div id="timer">Kalan Süre: 30:00</div>
+        <form id="quizForm" onsubmit="submitQuiz(event)">
+            <div class="question">
+                <p>1. Altınoba Beyliği’ni kurduğu ileri sürülen Attila’nın oğlu kimdir?</p>
+                <input type="radio" name="q1" value="a"> a) İrnek<br>
+                <input type="radio" name="q1" value="b"> b) Dengizik<br>
+                <input type="radio" name="q1" value="c"> c) İlek<br>
+                <input type="radio" name="q1" value="d"> d) Kubrat<br>
+            </div>
+            <div class="question">
+                <p>2. Büyük Bulgar Kağanlığı ile ilgili ilk derli toplu çalışmayı hangi bilim insanı yapmıştır?</p>
+                <input type="radio" name="q2" value="a"> a) Gy. Nemeth<br>
+                <input type="radio" name="q2" value="b"> b) Gy. Moravcsik<br>
+                <input type="radio" name="q2" value="c"> c) A. H. Halikov<br>
+                <input type="radio" name="q2" value="d"> d) İbn Rüsteh<br>
+            </div>
+            <div class="question">
+                <p>3. Kubrat’a “Patrikios” unvanını veren Doğu Roma imparatoru kimdir?</p>
+                <input type="radio" name="q3" value="a"> a) Herakleos<br>
+                <input type="radio" name="q3" value="b"> b) IV. Konstantinos<br>
+                <input type="radio" name="q3" value="c"> c) II. Justinianos<br>
+                <input type="radio" name="q3" value="d"> d) Konstas Pogonatos<br>
+            </div>
+            <div class="question">
+                <p>4. Kubrat’ın kağanlığını kurduğu bölge olarak Özi bölgesi hangi nehirleri kapsar?</p>
+                <input type="radio" name="q4" value="a"> a) Ten ve Aksu<br>
+                <input type="radio" name="q4" value="b"> b) Kuban ve Ten<br>
+                <input type="radio" name="q4" value="c"> c) İtil ve Kama<br>
+                <input type="radio" name="q4" value="d"> d) Tuna ve Tisa<br>
+            </div>
+            <div class="question">
+                <p>5. Büyük Bulgar Kağanlığı’nın kuruluş yılları hangi aralıktadır?</p>
+                <input type="radio" name="q5" value="a"> a) 630-632<br>
+                <input type="radio" name="q5" value="b"> b) 620-625<br>
+                <input type="radio" name="q5" value="c"> c) 640-645<br>
+                <input type="radio" name="q5" value="d"> d) 610-615<br>
+            </div>
+            <div class="question">
+                <p>6. Kubrat’ın ölümünden sonra kağanlığı dağıtan temel faktör nedir?</p>
+                <input type="radio" name="q6" value="a"> a) Hazar saldırıları<br>
+                <input type="radio" name="q6" value="b"> b) Doğu Roma baskısı<br>
+                <input type="radio" name="q6" value="c"> c) Slav isyanları<br>
+                <input type="radio" name="q6" value="d"> d) Avar müdahalesi<br>
+            </div>
+            <div class="question">
+                <p>7. Kubrat’ın oğullarından hangisi Hazar hâkimiyetinde Büyük Bulgarya topraklarında kaldı?</p>
+                <input type="radio" name="q7" value="a"> a) Batbayan<br>
+                <input type="radio" name="q7" value="b"> b) Asparuh<br>
+                <input type="radio" name="q7" value="c"> c) Kotrag<br>
+                <input type="radio" name="q7" value="d"> d) Altsek<br>
+            </div>
+            <div class="question">
+                <p>8. Tuna Bulgar Kağanlığı’nı kuran lider kimdir?</p>
+                <input type="radio" name="q8" value="a"> a) Asparuh<br>
+                <input type="radio" name="q8" value="b"> b) Kubrat<br>
+                <input type="radio" name="q8" value="c"> c) Tervel<br>
+                <input type="radio" name="q8" value="d"> d) Batbayan<br>
+            </div>
+            <div class="question">
+                <p>9. Asparuh’un 681’de imzaladığı barış anlaşmasının en önemli sonucu nedir?</p>
+                <input type="radio" name="q9" value="a"> a) Doğu Roma’nın bağımsız bir Bulgar Kağanlığı’nı tanıması<br>
+                <input type="radio" name="q9" value="b"> b) Slavların Bulgarlara katılması<br>
+                <input type="radio" name="q9" value="c"> c) Hazarların geri çekilmesi<br>
+                <input type="radio" name="q9" value="d"> d) Avarların zayıflaması<br>
+            </div>
+            <div class="question">
+                <p>10. Tuna Bulgar Kağanlığı’nın ilk başkenti neresidir?</p>
+                <input type="radio" name="q10" value="a"> a) Pliska<br>
+                <input type="radio" name="q10" value="b"> b) Preslav<br>
+                <input type="radio" name="q10" value="c"> c) Sofya<br>
+                <input type="radio" name="q10" value="d"> d) Serdika<br>
+            </div>
+            <div class="question">
+                <p>11. Tervel’e “Caesar” unvanını veren Doğu Roma imparatoru kimdir?</p>
+                <input type="radio" name="q11" value="a"> a) II. Justinianos<br>
+                <input type="radio" name="q11" value="b"> b) IV. Konstantinos<br>
+                <input type="radio" name="q11" value="c"> c) III. Theodosios<br>
+                <input type="radio" name="q11" value="d"> d) Herakleos<br>
+            </div>
+            <div class="question">
+                <p>12. Tervel’in “Avrupa’nın kurtarıcısı” unvanını almasının nedeni nedir?</p>
+                <input type="radio" name="q12" value="a"> a) Araplara karşı Doğu Roma’ya yardım etmesi<br>
+                <input type="radio" name="q12" value="b"> b) Avarları yenmesi<br>
+                <input type="radio" name="q12" value="c"> c) Slavları birleştirmesi<br>
+                <input type="radio" name="q12" value="d"> d) Hazarları durdurması<br>
+            </div>
+            <div class="question">
+                <p>13. Kormisoş Han ile hangi hanedan sona ermiştir?</p>
+                <input type="radio" name="q13" value="a"> a) Dulo<br>
+                <input type="radio" name="q13" value="b"> b) Vokil<br>
+                <input type="radio" name="q13" value="c"> c) Ugayin<br>
+                <input type="radio" name="q13" value="d"> d) Onogur<br>
+            </div>
+            <div class="question">
+                <p>14. Kardam Han döneminde ne güçlenmiştir?</p>
+                <input type="radio" name="q14" value="a"> a) Merkezi otorite<br>
+                <input type="radio" name="q14" value="b"> b) Slav etkisi<br>
+                <input type="radio" name="q14" value="c"> c) Avar ittifakı<br>
+                <input type="radio" name="q14" value="d"> d) Hazar ilişkileri<br>
+            </div>
+            <div class="question">
+                <p>15. Kurum Han’ın temel politikası nedir?</p>
+                <input type="radio" name="q15" value="a"> a) Tuna bölgesindeki Bulgarları birleştirmek<br>
+                <input type="radio" name="q15" value="b"> b) Doğu Roma ile barış yapmak<br>
+                <input type="radio" name="q15" value="c"> c) Avarları ortadan kaldırmak<br>
+                <input type="radio" name="q15" value="d"> d) Slavları asimile etmek<br>
+            </div>
+            <div class="question">
+                <p>16. Kurum Han hangi Doğu Roma imparatorunu yenerek kafatasını kupa yapmıştır?</p>
+                <input type="radio" name="q16" value="a"> a) I. Nikephoros<br>
+                <input type="radio" name="q16" value="b"> b) II. Justinianos<br>
+                <input type="radio" name="q16" value="c"> c) IV. Konstantinos<br>
+                <input type="radio" name="q16" value="d"> d) Herakleos<br>
+            </div>
+            <div class="question">
+                <p>17. Omurtag Han’ın Doğu Roma ile imzaladığı anlaşma kaç yıllıktır?</p>
+                <input type="radio" name="q17" value="a"> a) 30<br>
+                <input type="radio" name="q17" value="b"> b) 20<br>
+                <input type="radio" name="q17" value="c"> c) 40<br>
+                <input type="radio" name="q17" value="d"> d) 10<br>
+            </div>
+            <div class="question">
+                <p>18. Omurtag Han hangi toplulukla savaşmak zorunda kalmıştır?</p>
+                <input type="radio" name="q18" value="a"> a) Macarlar<br>
+                <input type="radio" name="q18" value="b"> b) Peçenekler<br>
+                <input type="radio" name="q18" value="c"> c) Hazarlar<br>
+                <input type="radio" name="q18" value="d"> d) Slavlar<br>
+            </div>
+            <div class="question">
+                <p>19. Presyan Han döneminde Bulgarlar ilk kez hangi toplulukla dostane ilişkiler kurmaya çalışmıştır?</p>
+                <input type="radio" name="q19" value="a"> a) Macarlar<br>
+                <input type="radio" name="q19" value="b"> b) Sırplar<br>
+                <input type="radio" name="q19" value="c"> c) Franklar<br>
+                <input type="radio" name="q19" value="d"> d) Avarlar<br>
+            </div>
+            <div class="question">
+                <p>20. Bulgarların Hristiyanlığı kabul ettiği yıl hangisidir?</p>
+                <input type="radio" name="q20" value="a"> a) 865<br>
+                <input type="radio" name="q20" value="b"> b) 855<br>
+                <input type="radio" name="q20" value="c"> c) 863<br>
+                <input type="radio" name="q20" value="d"> d) 870<br>
+            </div>
+            <div class="question">
+                <p>21. Knyaz Boris-Mihail’in Hristiyanlığı kabul etme amacı nedir?</p>
+                <input type="radio" name="q21" value="a"> a) Merkezi güçlendirmek ve etnik farklılığa son vermek<br>
+                <input type="radio" name="q21" value="b"> b) Doğu Roma’yı yenmek<br>
+                <input type="radio" name="q21" value="c"> c) Avarlarla ittifak kurmak<br>
+                <input type="radio" name="q21" value="d"> d) Hazar tehdidini ortadan kaldırmak<br>
+            </div>
+            <div class="question">
+                <p>22. Kiril alfabesini geliştiren kardeşler kimlerdir?</p>
+                <input type="radio" name="q22" value="a"> a) Kiril ve Methodius<br>
+                <input type="radio" name="q22" value="b"> b) Boris ve Simeon<br>
+                <input type="radio" name="q22" value="c"> c) Kurum ve Omurtag<br>
+                <input type="radio" name="q22" value="d"> d) Asparuh ve Tervel<br>
+            </div>
+            <div class="question">
+                <p>23. Simeon döneminde başkent nereye taşınmıştır?</p>
+                <input type="radio" name="q23" value="a"> a) Preslav<br>
+                <input type="radio" name="q23" value="b"> b) Pliska<br>
+                <input type="radio" name="q23" value="c"> c) Sofya<br>
+                <input type="radio" name="q23" value="d"> d) Serdika<br>
+            </div>
+            <div class="question">
+                <p>24. Simeon’a “Bulgarların Basileos’u” unvanını veren Doğu Roma imparatoru kimdir?</p>
+                <input type="radio" name="q24" value="a"> a) VI. Leon<br>
+                <input type="radio" name="q24" value="b"> b) Romanos Lekapenos<br>
+                <input type="radio" name="q24" value="c"> c) III. Theodosios<br>
+                <input type="radio" name="q24" value="d"> d) I. Nikephoros<br>
+            </div>
+            <div class="question">
+                <p>25. Bulgar toplumunda üst asalet sınıfı hangi isimle anılır?</p>
+                <input type="radio" name="q25" value="a"> a) Boyarlar<br>
+                <input type="radio" name="q25" value="b"> b) Bagayinler<br>
+                <input type="radio" name="q25" value="c"> c) Tudunlar<br>
+                <input type="radio" name="q25" value="d"> d) Baltavarlar<br>
+            </div>
+            <div class="question">
+                <p>26. Bogomillik hareketi hangi sınıftan ortaya çıkmıştır?</p>
+                <input type="radio" name="q26" value="a"> a) Köylüler<br>
+                <input type="radio" name="q26" value="b"> b) Boyarlar<br>
+                <input type="radio" name="q26" value="c"> c) Tüccarlar<br>
+                <input type="radio" name="q26" value="d"> d) Din adamları<br>
+            </div>
+            <div class="question">
+                <p>27. Büyük Bulgar Kağanlığı hangi etnik unsurlara dayanır?</p>
+                <input type="radio" name="q27" value="a"> a) Onogundur, Bulgar, Kutrigur<br>
+                <input type="radio" name="q27" value="b"> b) Slavlar, Avarlar, Hunlar<br>
+                <input type="radio" name="q27" value="c"> c) Hazarlar, Peçenekler, Macarlar<br>
+                <input type="radio" name="q27" value="d"> d) Gotlar, Franklar, Alanlar<br>
+            </div>
+            <div class="question">
+                <p>28. Asparuh’un Doğu Roma ile ittifak yaptığı topluluk hangisidir?</p>
+                <input type="radio" name="q28" value="a"> a) Slavlar<br>
+                <input type="radio" name="q28" value="b"> b) Avarlar<br>
+                <input type="radio" name="q28" value="c"> c) Hazarlar<br>
+                <input type="radio" name="q28" value="d"> d) Macarlar<br>
+            </div>
+            <div class="question">
+                <p>29. Kurum Han’ın ölüm nedeni nedir?</p>
+                <input type="radio" name="q29" value="a"> a) Burun kanaması<br>
+                <input type="radio" name="q29" value="b"> b) Savaş yarası<br>
+                <input type="radio" name="q29" value="c"> c) Zehirlenme<br>
+                <input type="radio" name="q29" value="d"> d) Hastalık<br>
+            </div>
+            <div class="question">
+                <p>30. I. Bulgar Kağanlığı’nın Hristiyanlık öncesi dönemi hangi han ile kapanmıştır?</p>
+                <input type="radio" name="q30" value="a"> a) Presyan<br>
+                <input type="radio" name="q30" value="b"> b) Omurtag<br>
+                <input type="radio" name="q30" value="c"> c) Kurum<br>
+                <input type="radio" name="q30" value="d"> d) Kardam<br>
+            </div>
+            <button type="submit" class="submit-btn">Testi Bitir</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let timeLeft = 30 * 60; // 30 dakika (saniye cinsinden)
+        const timerElement = document.getElementById('timer');
+        const quizForm = document.getElementById('quizForm');
+
+        const timer = setInterval(() => {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            timeLeft--;
+
+            if (timeLeft < 0) {
+                clearInterval(timer);
+                timerElement.textContent = 'Süre Doldu!';
+                submitQuiz(new Event('submit'));
+            }
+        }, 1000);
+
+        function submitQuiz(event) {
+            event.preventDefault();
+            clearInterval(timer);
+            let correctAnswers = 0;
+            let wrongAnswers = 0;
+            const answers = {
+                q1: 'a', q2: 'b', q3: 'a', q4: 'a', q5: 'a', q6: 'a', q7: 'a', q8: 'a', q9: 'a', q10: 'a',
+                q11: 'a', q12: 'a', q13: 'a', q14: 'a', q15: 'a', q16: 'a', q17: 'a', q18: 'a', q19: 'a', q20: 'a',
+                q21: 'a', q22: 'a', q23: 'a', q24: 'a', q25: 'a', q26: 'a', q27: 'a', q28: 'a', q29: 'a', q30: 'a'
+            };
+
+            const explanations = {
+                q1: 'İrnek, Altınoba Beyliği’ni kurduğu ileri sürülen Attila’nın oğludur.',
+                q2: 'Gy. Moravcsik, Büyük Bulgar Kağanlığı ile ilgili ilk derli toplu çalışmayı yapmıştır.',
+                q3: 'Herakleos, Kubrat’a Patrikios unvanını vermiştir.',
+                q4: 'Özi bölgesi, Ten ve Aksu nehirlerini kapsar.',
+                q5: 'Büyük Bulgar Kağanlığı, 630-632 yıllarında kurulmuştur.',
+                q6: 'Kubrat’ın ölümünden sonra kağanlık, Hazar saldırılarıyla dağılmıştır.',
+                q7: 'Batbayan, Hazar hâkimiyetinde Büyük Bulgarya topraklarında kalmıştır.',
+                q8: 'Asparuh, Tuna Bulgar Kağanlığı’nı kuran liderdir.',
+                q9: '681 barış anlaşması, Doğu Roma’nın bağımsız bir Bulgar Kağanlığı’nı tanımasını sağlamıştır.',
+                q10: 'Tuna Bulgar Kağanlığı’nın ilk başkenti Pliska’dır.',
+                q11: 'II. Justinianos, Tervel’e Caesar unvanını vermiştir.',
+                q12: 'Tervel, Araplara karşı Doğu Roma’ya yardım ederek “Avrupa’nın kurtarıcısı” unvanını almıştır.',
+                q13: 'Kormisoş Han ile Dulo hanedanı sona ermiştir.',
+                q14: 'Kardam Han döneminde merkezi otorite güçlenmiştir.',
+                q15: 'Kurum Han’ın temel politikası, Tuna bölgesindeki Bulgarları birleştirmektir.',
+                q16: 'Kurum Han, I. Nikephoros’u yenerek kafatasını kupa yapmıştır.',
+                q17: 'Omurtag Han, Doğu Roma ile 30 yıllık bir anlaşma imzalamıştır.',
+                q18: 'Omurtag Han, Macarlarla savaşmak zorunda kalmıştır.',
+                q19: 'Presyan Han döneminde Bulgarlar, Macarlarla dostane ilişkiler kurmaya çalışmıştır.',
+                q20: 'Bulgarlar, 865 yılında Hristiyanlığı kabul etmiştir.',
+                q21: 'Knyaz Boris-Mihail, Hristiyanlığı merkezi güçlendirmek ve etnik farklılığa son vermek için kabul etmiştir.',
+                q22: 'Kiril ve Methodius, Kiril alfabesini geliştiren kardeşlerdir.',
+                q23: 'Simeon döneminde başkent Preslav’a taşınmıştır.',
+                q24: 'VI. Leon, Simeon’a “Bulgarların Basileos’u” unvanını vermeyi kabul etmiştir.',
+                q25: 'Bulgar toplumunda üst asalet sınıfı boyarlar olarak anılır.',
+                q26: 'Bogomillik hareketi, köylü sınıfından ortaya çıkmıştır.',
+                q27: 'Büyük Bulgar Kağanlığı, Onogundur, Bulgar ve Kutrigur etnik unsurlarına dayanır.',
+                q28: 'Asparuh, Doğu Roma’ya karşı Slavlarla ittifak yapmıştır.',
+                q29: 'Kurum Han, burun kanaması sonucu hayatını kaybetmiştir.',
+                q30: 'I. Bulgar Kağanlığı’nın Hristiyanlık öncesi dönemi Presyan ile kapanmıştır.'
+            };
+
+            let resultHTML = '<h2>Sonuçlar</h2><table><tr><th>Soru</th><th>Seçtiğiniz</th><th>Doğru Cevap</th><th>Açıklama</th></tr>';
+            for (let i = 1; i <= 30; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const userAnswer = selected ? selected.value : '-';
+                const correctAnswer = answers[`q${i}`];
+                if (userAnswer === correctAnswer) {
+                    correctAnswers++;
+                } else if (userAnswer !== '-') {
+                    wrongAnswers++;
+                }
+                resultHTML += `<tr><td>${i}</td><td>${userAnswer}</td><td>${correctAnswer}</td><td>${explanations[`q${i}`]}</td></tr>`;
+            }
+
+            const totalScore = Math.max(0, (correctAnswers * 5) - Math.floor(wrongAnswers / 3) * 5);
+            resultHTML += '</table>';
+            resultHTML += `<p>Toplam Puanınız: ${totalScore} / 100 (Doğru: ${correctAnswers}, Yanlış: ${wrongAnswers})</p>`;
+            document.getElementById('result').innerHTML = resultHTML;
+            quizForm.style.display = 'none';
+            timerElement.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İleri Düzey Ogurlar, Sabarlar ve Avarlar Testi</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        #timer {
+            text-align: center;
+            font-size: 1.2em;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .question label {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .submit-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 30px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #2c3e50;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>İleri Düzey Ogurlar, Sabarlar ve Avarlar Testi</h1>
+        <div id="timer">Kalan Süre: 30:00</div>
+        <form id="quizForm" onsubmit="submitQuiz(event)">
+            <div class="question">
+                <p>1. Ogur Türklerinin federasyon yapısında “bodun” kavramı hangi esasa dayanır?</p>
+                <input type="radio" name="q1" value="a"> a) Coğrafi birlik<br>
+                <input type="radio" name="q1" value="b"> b) Boy birliği<br>
+                <input type="radio" name="q1" value="c"> c) Dil birliği<br>
+                <input type="radio" name="q1" value="d"> d) Din birliği<br>
+            </div>
+            <div class="question">
+                <p>2. Kutrigur adının “Tukurgur” olarak da anılması hangi anlama işaret eder?</p>
+                <input type="radio" name="q2" value="a"> a) 30 Ogur<br>
+                <input type="radio" name="q2" value="b"> b) 9 Ogur<br>
+                <input type="radio" name="q2" value="c"> c) 6 Ogur<br>
+                <input type="radio" name="q2" value="d"> d) 5 Ogur<br>
+            </div>
+            <div class="question">
+                <p>3. Ogur boylarının Kafkaslar’daki yerleşiminde Onogurlar hangi toplulukla birlikte anılır?</p>
+                <input type="radio" name="q3" value="a"> a) Macarlar<br>
+                <input type="radio" name="q3" value="b"> b) Alanlar<br>
+                <input type="radio" name="q3" value="c"> c) Slavlar<br>
+                <input type="radio" name="q3" value="d"> d) Gotlar<br>
+            </div>
+            <div class="question">
+                <p>4. Ogurların dilinde “Z” sesinin “R”ye dönüşmesi hangi toplulukla kardeşliklerini etkilemiştir?</p>
+                <input type="radio" name="q4" value="a"> a) Hunlar<br>
+                <input type="radio" name="q4" value="b"> b) Oğuzlar<br>
+                <input type="radio" name="q4" value="c"> c) Sabarlar<br>
+                <input type="radio" name="q4" value="d"> d) Avarlar<br>
+            </div>
+            <div class="question">
+                <p>5. Ogurların batıya göçünü tetikleyen ana faktör hangisidir?</p>
+                <input type="radio" name="q5" value="a"> a) Sabar baskısı<br>
+                <input type="radio" name="q5" value="b"> b) Avar yayılması<br>
+                <input type="radio" name="q5" value="c"> c) Hun çöküşü<br>
+                <input type="radio" name="q5" value="d"> d) Köktürk tehdidi<br>
+            </div>
+            <div class="question">
+                <p>6. Priskos’un eserinde Ogurların Doğu Roma’ya elçi gönderdiği yıl hangisidir?</p>
+                <input type="radio" name="q6" value="a"> a) 463<br>
+                <input type="radio" name="q6" value="b"> b) 555<br>
+                <input type="radio" name="q6" value="c"> c) 474<br>
+                <input type="radio" name="q6" value="d"> d) 491<br>
+            </div>
+            <div class="question">
+                <p>7. Sarogurların Hırvat etnosunun temelini oluşturduğu bölge hangisidir?</p>
+                <input type="radio" name="q7" value="a"> a) Kafkasya<br>
+                <input type="radio" name="q7" value="b"> b) Slovakya ve Güney Polonya<br>
+                <input type="radio" name="q7" value="c"> c) Panonya<br>
+                <input type="radio" name="q7" value="d"> d) Trakya<br>
+            </div>
+            <div class="question">
+                <p>8. Kutrigurların Doğu Roma’yı korkutması hangi savunma yapısının inşasına yol açmıştır?</p>
+                <input type="radio" name="q8" value="a"> a) Margus Surları<br>
+                <input type="radio" name="q8" value="b"> b) Anastasius Surları<br>
+                <input type="radio" name="q8" value="c"> c) Justinianos Kalesi<br>
+                <input type="radio" name="q8" value="d"> d) Tuna Duvarı<br>
+            </div>
+            <div class="question">
+                <p>9. I. Justinianos döneminde Kutrigurlarla ittifak yapan Germen boyu hangisidir?</p>
+                <input type="radio" name="q9" value="a"> a) Langobardlar<br>
+                <input type="radio" name="q9" value="b"> b) Gepidler<br>
+                <input type="radio" name="q9" value="c"> c) Franklar<br>
+                <input type="radio" name="q9" value="d"> d) Ostrogotlar<br>
+            </div>
+            <div class="question">
+                <p>10. Utigurların lideri Sandilkh hangi Türk boyunu yenmiştir?</p>
+                <input type="radio" name="q10" value="a"> a) Kutrigurlar<br>
+                <input type="radio" name="q10" value="b"> b) Sabarlar<br>
+                <input type="radio" name="q10" value="c"> c) Onogurlar<br>
+                <input type="radio" name="q10" value="d"> d) Avarlar<br>
+            </div>
+            <div class="question">
+                <p>11. Sabar isminin Gy. Nemeth tarafından önerilen anlamı nedir?</p>
+                <input type="radio" name="q11" value="a"> a) Su halkı<br>
+                <input type="radio" name="q11" value="b"> b) Kutlu insanlar<br>
+                <input type="radio" name="q11" value="c"> c) Yol değiştiren<br>
+                <input type="radio" name="q11" value="d"> d) Dağ kurdu<br>
+            </div>
+            <div class="question">
+                <p>12. Sabarların ana yurtları hangi coğrafi bölgede kabul edilir?</p>
+                <input type="radio" name="q12" value="a"> a) Batı Sibirya ve Kafkaslar<br>
+                <input type="radio" name="q12" value="b"> b) Orta Asya<br>
+                <input type="radio" name="q12" value="c"> c) Karadeniz kıyıları<br>
+                <input type="radio" name="q12" value="d"> d) Tuna Havzası<br>
+            </div>
+            <div class="question">
+                <p>13. Sabar Kağanı Balak’tan sonra tahta geçen hatun kimdir?</p>
+                <input type="radio" name="q13" value="a"> a) Tomris<br>
+                <input type="radio" name="q13" value="b"> b) Boğarık<br>
+                <input type="radio" name="q13" value="c"> c) Arıkan<br>
+                <input type="radio" name="q13" value="d"> d) Honoria<br>
+            </div>
+            <div class="question">
+                <p>14. Sabarların 558 yılında hangi kağanlığın hâkimiyetine girdiği belirtilir?</p>
+                <input type="radio" name="q14" value="a"> a) Köktürkler<br>
+                <input type="radio" name="q14" value="b"> b) Avarlar<br>
+                <input type="radio" name="q14" value="c"> c) Hunlar<br>
+                <input type="radio" name="q14" value="d"> d) Bulgarlar<br>
+            </div>
+            <div class="question">
+                <p>15. Avarların kökenine dair Çin kaynaklarında hangi isimle anıldıkları iddia edilir?</p>
+                <input type="radio" name="q15" value="a"> a) A-pa<br>
+                <input type="radio" name="q15" value="b"> b) Juan-Juan<br>
+                <input type="radio" name="q15" value="c"> c) Var-Hun<br>
+                <input type="radio" name="q15" value="d"> d) Chunni<br>
+            </div>
+            <div class="question">
+                <p>16. Avarların batıya göçünü tetikleyen Köktürk kağanı kimdir?</p>
+                <input type="radio" name="q16" value="a"> a) Bumin<br>
+                <input type="radio" name="q16" value="b"> b) İstemi<br>
+                <input type="radio" name="q16" value="c"> c) Kapgan<br>
+                <input type="radio" name="q16" value="d"> d) Tonyukuk<br>
+            </div>
+            <div class="question">
+                <p>17. Avar kağanı Bayan’ın merkezini taşıdığı stratejik bölge neresidir?</p>
+                <input type="radio" name="q17" value="a"> a) Tuna ve Tisa ırmakları arası<br>
+                <input type="radio" name="q17" value="b"> b) Karadeniz kıyıları<br>
+                <input type="radio" name="q17" value="c"> c) Kafkaslar<br>
+                <input type="radio" name="q17" value="d"> d) Özi Nehri<br>
+            </div>
+            <div class="question">
+                <p>18. Avarlarla ittifak yapan Langobard kralı kimdir?</p>
+                <input type="radio" name="q18" value="a"> a) Alboin<br>
+                <input type="radio" name="q18" value="b"> b) Sigibert<br>
+                <input type="radio" name="q18" value="c"> c) Theodebert<br>
+                <input type="radio" name="q18" value="d"> d) Gisulf<br>
+            </div>
+            <div class="question">
+                <p>19. Avarların 601 yılında büyük bir yenilgiye uğratan Doğu Roma komutanı kimdir?</p>
+                <input type="radio" name="q19" value="a"> a) Priscus<br>
+                <input type="radio" name="q19" value="b"> b) Mavrikios<br>
+                <input type="radio" name="q19" value="c"> c) Komentiolus<br>
+                <input type="radio" name="q19" value="d"> d) Zemarkhos<br>
+            </div>
+            <div class="question">
+                <p>20. Avarların İstanbul’u kuşatması hangi yılda Sâsânîlerle ortaklaşa gerçekleşmiştir?</p>
+                <input type="radio" name="q20" value="a"> a) 617<br>
+                <input type="radio" name="q20" value="b"> b) 626<br>
+                <input type="radio" name="q20" value="c"> c) 619<br>
+                <input type="radio" name="q20" value="d"> d) 623<br>
+            </div>
+            <div class="question">
+                <p>21. Avarların Frank kralı Sigibert’i mağlup ettiği yıl hangisidir?</p>
+                <input type="radio" name="q21" value="a"> a) 562<br>
+                <input type="radio" name="q21" value="b"> b) 566<br>
+                <input type="radio" name="q21" value="c"> c) 571<br>
+                <input type="radio" name="q21" value="d"> d) 582<br>
+            </div>
+            <div class="question">
+                <p>22. Avar dönemi kemer süslemelerinde hangi motif Türkistan kökenlidir?</p>
+                <input type="radio" name="q22" value="a"> a) Hayvan figürleri<br>
+                <input type="radio" name="q22" value="b"> b) Nokta-çizgi<br>
+                <input type="radio" name="q22" value="c"> c) Akantus yaprakları<br>
+                <input type="radio" name="q22" value="d"> d) Çentikleme<br>
+            </div>
+            <div class="question">
+                <p>23. Bulgarların Slav kökenli olduğuna dair görüşün siyasi kökeni hangi yüzyılda ortaya çıkmıştır?</p>
+                <input type="radio" name="q23" value="a"> a) 11. yüzyıl<br>
+                <input type="radio" name="q23" value="b"> b) 13. yüzyıl<br>
+                <input type="radio" name="q23" value="c"> c) 17. yüzyıl<br>
+                <input type="radio" name="q23" value="d"> d) 9. yüzyıl<br>
+            </div>
+            <div class="question">
+                <p>24. Bulgarcada görülen “-miş” kipi hangi dil ailesinde bulunmaz?</p>
+                <input type="radio" name="q24" value="a"> a) Ural-Altay<br>
+                <input type="radio" name="q24" value="b"> b) Hint-Avrupa<br>
+                <input type="radio" name="q24" value="c"> c) Hint-İran<br>
+                <input type="radio" name="q24" value="d"> d) Çuvaşça<br>
+            </div>
+            <div class="question">
+                <p>25. Büyük Bulgar Kağanlığı’nın kağanı Kubrat’ın ölümünden sonra hangi kağanlık ortaya çıkmamıştır?</p>
+                <input type="radio" name="q25" value="a"> a) Tuna Bulgar Kağanlığı<br>
+                <input type="radio" name="q25" value="b"> b) İtil Bulgar Hanlığı<br>
+                <input type="radio" name="q25" value="c"> c) Panonya Bulgar Kağanlığı<br>
+                <input type="radio" name="q25" value="d"> d) Karadeniz Bulgar Toprakları<br>
+            </div>
+            <div class="question">
+                <p>26. Bulgarların ilk kez tarihî belgelerde geçtiği olay hangi imparatorla ilişkilidir?</p>
+                <input type="radio" name="q26" value="a"> a) Zenon<br>
+                <input type="radio" name="q26" value="b"> b) Justinianos<br>
+                <input type="radio" name="q26" value="c"> c) Anastasius<br>
+                <input type="radio" name="q26" value="d"> d) Tiberios<br>
+            </div>
+            <div class="question">
+                <p>27. Bulgar Hanlar Listesi’nde ilk hükümdar olarak kim anılır?</p>
+                <input type="radio" name="q27" value="a"> a) İrnek<br>
+                <input type="radio" name="q27" value="b"> b) Avitokhol<br>
+                <input type="radio" name="q27" value="c"> c) Kubrat<br>
+                <input type="radio" name="q27" value="d"> d) Asparuh<br>
+            </div>
+            <div class="question">
+                <p>28. Bulgarların Doğu Roma ile ilk savaşı hangi nehir kıyısında gerçekleşmiştir?</p>
+                <input type="radio" name="q28" value="a"> a) Tuna<br>
+                <input type="radio" name="q28" value="b"> b) Sava<br>
+                <input type="radio" name="q28" value="c"> c) Özi<br>
+                <input type="radio" name="q28" value="d"> d) Tisa<br>
+            </div>
+            <div class="question">
+                <p>29. Avarların Selanik’i ikinci kez kuşatmasında Bulgarlar hangi yılda yer almıştır?</p>
+                <input type="radio" name="q29" value="a"> a) 617<br>
+                <input type="radio" name="q29" value="b"> b) 619<br>
+                <input type="radio" name="q29" value="c"> c) 618<br>
+                <input type="radio" name="q29" value="d"> d) 626<br>
+            </div>
+            <div class="question">
+                <p>30. Bulgarların Tuna Bulgar Kağanlığı’nı kurmasında hangi liderin ölümü etkili olmuştur?</p>
+                <input type="radio" name="q30" value="a"> a) Kubrat<br>
+                <input type="radio" name="q30" value="b"> b) Batbayan<br>
+                <input type="radio" name="q30" value="c"> c) Asparuh<br>
+                <input type="radio" name="q30" value="d"> d) Avitokhol<br>
+            </div>
+            <button type="submit" class="submit-btn">Testi Bitir</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let timeLeft = 30 * 60; // 30 dakika (saniye cinsinden)
+        const timerElement = document.getElementById('timer');
+        const quizForm = document.getElementById('quizForm');
+
+        const timer = setInterval(() => {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            timeLeft--;
+
+            if (timeLeft < 0) {
+                clearInterval(timer);
+                timerElement.textContent = 'Süre Doldu!';
+                submitQuiz(new Event('submit'));
+            }
+        }, 1000);
+
+        function submitQuiz(event) {
+            event.preventDefault();
+            clearInterval(timer);
+            let score = 0;
+            const answers = {
+                q1: 'b', q2: 'b', q3: 'a', q4: 'b', q5: 'a', q6: 'a', q7: 'b', q8: 'b', q9: 'b', q10: 'a',
+                q11: 'c', q12: 'a', q13: 'b', q14: 'b', q15: 'a', q16: 'b', q17: 'a', q18: 'a', q19: 'a', q20: 'b',
+                q21: 'b', q22: 'a', q23: 'c', q24: 'b', q25: 'c', q26: 'a', q27: 'b', q28: 'b', q29: 'c', q30: 'a'
+            };
+
+            const explanations = {
+                q1: 'Ogur Türkleri, boy birliği esasına dayalı bir federasyon (bodun) oluşturmuştur.',
+                q2: 'Kutrigur, “Tukurgur” olarak 9 Ogur anlamına gelir.',
+                q3: 'Onogurlar, Kafkaslar’da Macarlarla birlikte yerleşmiştir.',
+                q4: 'Ogurların dilinde Z’nin R’ye dönüşmesi, Oğuzlarla kardeşliklerini etkilemiştir.',
+                q5: 'Ogurların batıya göçü, Sabar baskısı ile tetiklenmiştir.',
+                q6: 'Priskos, Ogurların 463’te Doğu Roma’ya elçi gönderdiğini belirtir.',
+                q7: 'Sarogurlar, Slovakya ve Güney Polonya’da Hırvat etnosunun temelini atmıştır.',
+                q8: 'Kutrigurların saldırıları, Anastasius Surları’nın (Uzun Duvar) inşasına neden olmuştur.',
+                q9: 'I. Justinianos döneminde Gepidler, Kutrigurlarla ittifak yapmıştır.',
+                q10: 'Sandilkh liderliğindeki Utigurlar, Kutrigurları yenmiştir.',
+                q11: 'Gy. Nemeth, Sabar ismini “yol değiştiren” olarak tanımlamıştır.',
+                q12: 'Sabarların ana yurdu Batı Sibirya ve Kafkaslar’dır.',
+                q13: 'Balak’tan sonra tahta Boğarık geçmiştir.',
+                q14: 'Sabarlar, 558’de Avarların hâkimiyetine girmiştir.',
+                q15: 'Çin kaynaklarında Avarlar “A-pa” olarak anılır.',
+                q16: 'Avarların batıya göçü, İstemi Kağan’ın baskısıyla başlamıştır.',
+                q17: 'Bayan, kağanlık merkezini Tuna ve Tisa ırmakları arasına taşımıştır.',
+                q18: 'Langobard kralı Alboin, Avarlarla ittifak yapmıştır.',
+                q19: 'Priscus, 601’de Avarları büyük bir yenilgiye uğratmıştır.',
+                q20: 'Avarlar, 626’da Sâsânîlerle birlikte İstanbul’u kuşatmıştır.',
+                q21: 'Avarlar, 566’da Frank kralı Sigibert’i mağlup etmiştir.',
+                q22: 'Avar kemer süslemelerinde Türkistan kökenli hayvan figürleri kullanılmıştır.',
+                q23: 'Bulgarların Slav kökenli olduğu görüşü, 17. yüzyılda siyasi bir iddia olarak ortaya çıkmıştır.',
+                q24: 'Bulgarcadaki “-miş” kipi, Hint-Avrupa dillerinde bulunmaz.',
+                q25: 'Kubrat’ın ölümünden sonra Panonya Bulgar Kağanlığı diye bir oluşum ortaya çıkmamıştır.',
+                q26: 'Bulgarlar, ilk kez Zenon döneminde tarihî belgelerde geçer (482).',
+                q27: 'Bulgar Hanlar Listesi’nde ilk hükümdar Avitokhol’dur.',
+                q28: 'Bulgarların Doğu Roma ile ilk savaşı Sava Nehri kıyısında olmuştur (488).',
+                q29: 'Bulgarlar, Avarların 618’de Selanik’i ikinci kez kuşatmasında yer almıştır.',
+                q30: 'Tuna Bulgar Kağanlığı, Kubrat’ın ölümünden sonra kurulmuştur.'
+            };
+
+            let resultHTML = '<h2>Sonuçlar</h2><table><tr><th>Soru</th><th>Seçtiğiniz</th><th>Doğru Cevap</th><th>Açıklama</th></tr>';
+            for (let i = 1; i <= 30; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const userAnswer = selected ? selected.value : '-';
+                const correctAnswer = answers[`q${i}`];
+                if (userAnswer === correctAnswer) score += 2;
+                resultHTML += `<tr><td>${i}</td><td>${userAnswer}</td><td>${correctAnswer}</td><td>${explanations[`q${i}`]}</td></tr>`;
+            }
+            resultHTML += '</table>';
+            resultHTML += `<p>Toplam Puanınız: ${score} / 60</p>`;
+            document.getElementById('result').innerHTML = resultHTML;
+            quizForm.style.display = 'none';
+            timerElement.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

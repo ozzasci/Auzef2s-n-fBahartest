@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roma Tarihi Flash Kart Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        #quizContainer {
+            width: 700px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #welcomeScreen, #startScreen, #quizScreen {
+            text-align: center;
+        }
+        #welcomeScreen {
+            display: block;
+        }
+        #startScreen, #quizScreen {
+            display: none;
+        }
+        #timer {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #d9534f;
+        }
+        .flashcard {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: none;
+        }
+        .flashcard.active {
+            display: block;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .options label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        #result h2 {
+            color: #333;
+        }
+        #result p {
+            font-size: 16px;
+        }
+        #answerKey {
+            margin-top: 20px;
+            text-align: left;
+        }
+        #answerKey table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #answerKey th, #answerKey td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #answerKey th {
+            background-color: #f2f2f2;
+        }
+        .correct {
+            color: #28a745;
+        }
+        .incorrect {
+            color: #d9534f;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+        input[type="text"], input[type="email"] {
+            padding: 8px;
+            margin: 10px 0;
+            width: 80%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="quizContainer">
+        <h1>Roma Tarihi Testi</h1>
+        <div id="welcomeScreen">
+            <p>Hoş Geldiniz! Lütfen teste başlamadan önce bilgilerinizi girin.</p>
+            <input type="text" id="userName" placeholder="Adınız" required><br>
+            <input type="email" id="userEmail" placeholder="E-posta adresiniz" required><br>
+            <button id="submitInfo">Bilgileri Gönder</button>
+        </div>
+        <div id="startScreen">
+            <p>Testi başlatmak için aşağıdaki butona tıklayın.</p>
+            <button id="startBtn">Testi Başlat</button>
+        </div>
+        <div id="quizScreen">
+            <div id="timer">Kalan Süre: 30:00</div>
+            <div id="flashcards"></div>
+            <div class="navigation">
+                <button id="prevBtn" disabled>Önceki</button>
+                <button id="nextBtn">Sonraki</button>
+                <button id="endBtn">Testi Bitir</button>
+            </div>
+            <div id="result"></div>
+            <div id="answerKey"></div>
+        </div>
+    </div>
+    <footer>Telif Hakkı © OZZASCİ'ye aittir.</footer>
+
+    <script>
+        const questions = [
+            // 1. Coğrafi Kavram Olarak İtalya (10 soru)
+            { category: "Coğrafi Kavram Olarak İtalya", question: "Hangisi İtalya sözcüğünün anlamını içermektedir?", options: ["Genç boğa insanları", "Deniz kavimleri", "Dağ halkı", "Orman insanları"], answer: "a" },
+            { category: "Coğrafi Kavram Olarak İtalya", question: "Hangisi İtalya yarımadasında konuşulan dillerden biri değildir?", options: ["Latince", "Oskça", "İllyri", "Etrüskçe"], answer: "c" },
+            { category: "Coğrafi Kavram Olarak İtalya", question: "Etrüsklerin yaşadığı Etruria bölgesi bugün İtalya’nın hangi bölgesindedir?", options: ["Lombardia", "Toscana", "Campania", "Sicilya"], answer: "b" },
+            { category: "Coğrafi Kavram Olarak İtalya", question: "Etrüskleri İtalya yarımadasındaki diğer kavimlerden ayıran özellik?", options: ["Göçebe yaşam", "Yerleşik düzende şehirlerde yaşamaları", "Denizcilikle uğraşmaları", "Tarım yapmamaları"], answer: "b" },
+            { category: "Coğrafi Kavram Olarak İtalya", question: "İtalya’nın kuzeybatısında yaşayan kavim hangisidir?", options: ["Liguri", "Venetii", "Samnitler", "Grekler"], answer: "a" },
+            { category: "Coğrafi Kavram Olarak İtalya", question: "MÖ 5 ve 4 yy.’a kadar İtalya yarımadasında kendi hâlinde yaşayan insanların hayatını değiştiren istilâ, kavimlerin hangisi tarafından gerçekleştirildi?", options: ["Grekler", "Keltler", "Kartacalılar", "Etrüskler"], answer: "b" },
+            { category: "Coğrafi Kavram Olarak İtalya", question: "İtalya’da M.Ö. 1. bin başlarında Arno nehri havzasında oluştuğu saptanan kültüre verilen ad hangisidir?", options: ["Villanova", "Etruria", "Latium", "Samnium"], answer: "a" },
+            { category: "Coğrafi Kavram Olarak İtalya", question: "Etrüsklerin kutsal alanı hangisidir?", options: ["Po nehri", "Trasimeno gölü", "Tiber nehri", "Arno nehri"], answer: "b" },
+            { category: "Coğrafi Kavram Olarak İtalya", question: "İtalya yarımadasının güneyinde şehir devletleri kuranlar hangisiydi?", options: ["Etrüskler", "Keltler", "Grekler", "Venetii"], answer: "c" },
+            { category: "Coğrafi Kavram Olarak İtalya", question: "İtalya yarımadasının kuzeyinde yaşayanlar kimlerdir?", options: ["Samnitler", "Venetii", "Liguri", "Grekler"], answer: "b" },
+
+            // 2. Roma’nın Kuruluşu ve Krallık Dönemi (10 soru)
+            { category: "Roma’nın Kuruluşu ve Krallık Dönemi", question: "Roma’yı kurduğuna inanılan efsanevi kahraman hangisidir?", options: ["Romulus", "Aeneas", "Numa Pompilius", "Hercules"], answer: "b" },
+            { category: "Roma’nın Kuruluşu ve Krallık Dönemi", question: "Roma’nın kurulduğu yerdeki nehrin adı hangisidir?", options: ["Po", "Arno", "Tiber", "Rubicon"], answer: "c" },
+            { category: "Roma’nın Kuruluşu ve Krallık Dönemi", question: "Sella Curulis'in anlamı ve işlevi, seçeneklerin hangisinde doğru olarak verilmiştir?", options: ["Taht, kraliyet simgesi", "Katlanabilen sandalye, memuriyet işaretlerinden biridir", "Savaş arabası, askeri liderlik", "Tapınak koltuğu, dini görev"], answer: "b" },
+            { category: "Roma’nın Kuruluşu ve Krallık Dönemi", question: "Hangisi Roma'nın en eski dört Tribus'u arasında yer almaz?", options: ["Ramnes", "Tities", "Luceres", "Tempesta"], answer: "d" },
+            { category: "Roma’nın Kuruluşu ve Krallık Dönemi", question: "Senato kelimesinin türetildiği Latince kelime hangisidir?", options: ["Senex", "Rex", "Populus", "Civitas"], answer: "a" },
+            { category: "Roma’nın Kuruluşu ve Krallık Dönemi", question: "Roma şehri nasıl oluşmuştur?", options: ["Grek kolonisi olarak", "Etrüsklerin fethiyle", "Tiber nehri kenarında yerleşen yerel kabilelerin köylerinin birleşmesinden", "Kelt istilası sonrası"], answer: "c" },
+            { category: "Roma’nın Kuruluşu ve Krallık Dönemi", question: "İtalya yarımadasının güneyinde şehir devletleri kuranlar, hangi dili konuşuyorlardı?", options: ["Latince", "Grekçe", "Etrüskçe", "Oskça"], answer: "b" },
+            { category: "Roma’nın Kuruluşu ve Krallık Dönemi", question: "Eskiçağ mitolojisinde anlatılan öykülere göre, Anadolu’daki hangi eskiçağ şehri Roma’nın kuruluşunda rol oynamıştır?", options: ["Efes", "Troia", "Miletos", "Pergamon"], answer: "b" },
+            { category: "Roma’nın Kuruluşu ve Krallık Dönemi", question: "Roma’nın kaç tepe üzerinde kurulduğuna inanılmaktadır?", options: ["5", "6", "7", "8"], answer: "c" },
+            { category: "Roma’nın Kuruluşu ve Krallık Dönemi", question: "Eskiçağda Roma’nın en yakın komşusu olan şehir hangisidir?", options: ["Vei", "Tarentum", "Capua", "Pompeii"], answer: "a" },
+
+            // 3. Yeni Bir Rejimin Başlangıcı (10 soru)
+            { category: "Yeni Bir Rejimin Başlangıcı", question: "Magistratus’un anlamı hangisidir?", options: ["Maliye memuru", "Askeri komutan", "Dini lider", "Halk temsilcisi"], answer: "a" },
+            { category: "Yeni Bir Rejimin Başlangıcı", question: "Tribunus plebis'in anlamı hangisidir?", options: ["Askeri lider", "Pleblerin Lideri", "Senato üyesi", "Kral yardımcısı"], answer: "b" },
+            { category: "Yeni Bir Rejimin Başlangıcı", question: "Auspicium'un anlamı?", options: ["Vergi toplama sistemi", "Roma kralları ve yüksek memurlarının görev başı yapmalarıyla ilgili bir dini ayin", "Halk oylaması", "Savaş ilanı"], answer: "b" },
+            { category: "Yeni Bir Rejimin Başlangıcı", question: "Hangisi 12 Levha Kanunlarının ortaya çıkmasında rol oynayan kurumlardan biridir?", options: ["Senatus", "Triumviri", "Comitia", "Plebs"], answer: "b" },
+            { category: "Yeni Bir Rejimin Başlangıcı", question: "Romalı tarihçilere göre 12 Levha Kanunlarının amacı hangisidir?", options: ["Orduyu güçlendirmek", "Consul’lerin güçlerini kısıtlamak ve yasaları ilk kez yazılı hale getirerek bunların herkes tarafından bilinmesini sağlamak", "Ticaret yollarını düzenlemek", "Dini kuralları yazıya dökmek"], answer: "b" },
+            { category: "Yeni Bir Rejimin Başlangıcı", question: "Roma’da savaş dönemlerinde tüm yetkiyi elinde toplayan yetkili hangisidir?", options: ["Consul", "Dictator", "Praetor", "Censor"], answer: "b" },
+            { category: "Yeni Bir Rejimin Başlangıcı", question: "Cliens olarak tanımlanan kişiler kimlerin himayesindeydiler?", options: ["Güçlü ailelerin", "Senatonun", "Askeri liderlerin", "Tapınakların"], answer: "a" },
+            { category: "Yeni Bir Rejimin Başlangıcı", question: "En yüksek rütbeli memurların atanmasından sorumlu meclis hangisidir?", options: ["Comitia tributa", "Comitia centuriata", "Senatus", "Plebs meclisi"], answer: "b" },
+            { category: "Yeni Bir Rejimin Başlangıcı", question: "Roma’nın en yüksek rütbeli askerî görevlisinin unvanı hangisidir?", options: ["Tribunus militum", "Consul", "Praetor", "Legatus"], answer: "a" },
+            { category: "Yeni Bir Rejimin Başlangıcı", question: "Pleblerin kurduğu Bereket tanrısı tapınağı Roma’nın hangi tepesinin üzerindeydi ve bu tapınağın adı neydi?", options: ["Capitolinus tepesi - Jupiter tapınağı", "Aventinus tepesi - Ceres tapınağı", "Palatinus tepesi - Apollo tapınağı", "Quirinalis tepesi - Mars tapınağı"], answer: "b" },
+
+            // 4. Roma’da Cumhuriyet Dönemi (10 soru)
+            { category: "Roma’da Cumhuriyet Dönemi", question: "Roma şehri kuruluşundan sonra ilk kez hangi kavim tarafından, ne zaman istilâ edilmiştir?", options: ["M.Ö. 387 yılında Gallia’lılar tarafından", "M.Ö. 275’te Kartacalılar tarafından", "M.Ö. 410’da Vizigotlar tarafından", "M.Ö. 216’da Hannibal tarafından"], answer: "a" },
+            { category: "Roma’da Cumhuriyet Dönemi", question: "M.Ö. 275’te Beneventum'da yapılan savaşta Roma'nın rakibi hangisidir?", options: ["Hannibal", "Epeiros kralı Pyrrhos", "Samnitler", "Keltler"], answer: "b" },
+            { category: "Roma’da Cumhuriyet Dönemi", question: "387 yılı civarında Tiber vadisini yağmalayarak nehir boyunca ilerleyen ve Roma'ya kadar uzanan Gallia’lıları yenilgiye uğrattığı Romalı tarihçilerce söylenen ünlü komutan hangisidir?", options: ["Scipio Africanus", "Marcus Furius Camillus", "Julius Caesar", "Pompeius"], answer: "b" },
+            { category: "Roma’da Cumhuriyet Dönemi", question: "Hangisi M.Ö. V. yüzyılda Roma'nın diğer Latin şehirlerinin egemenliği için rekabet ettiği şehirdir?", options: ["Tarentum", "Veii", "Capua", "Syracuse"], answer: "b" },
+            { category: "Roma’da Cumhuriyet Dönemi", question: "Censor'lar, hangi yüksek memurluğu yapmış vatandaşlar arasından seçilirdi?", options: ["Praetor", "Consul", "Tribunus", "Quaestor"], answer: "b" },
+            { category: "Roma’da Cumhuriyet Dönemi", question: "Roma Cumhuriyet Döneminde en yetkili yönetim kurumu hangisidir?", options: ["Senatus", "Comitia", "Plebs meclisi", "Dictator"], answer: "a" },
+            { category: "Roma’da Cumhuriyet Dönemi", question: "Roma Cumhuriyet Döneminde dini görevlilerden hangisi memurlar göreve başlayınca tanrıların görüşüne başvurmaktadır?", options: ["Pontifex", "Augur", "Flamen", "Vestalis"], answer: "b" },
+            { category: "Roma’da Cumhuriyet Dönemi", question: "M.Ö. 4. yy.’ın ikinci yarısı başlarında Roma’nın egemenlik alanını İtalya yarımadasındaki diğer bölgelere doğru genişletmesi sırasında denetimi altına aldığı şehirler için uyguladığı yerel yönetim biçimine ne ad verilir?", options: ["Colonia", "Municipium", "Provincia", "Foederati"], answer: "b" },
+            { category: "Roma’da Cumhuriyet Dönemi", question: "M.Ö. 4. yy.’ın ikinci yarısında İtalya’daki en güçlü siyasi birlik, hangisidir?", options: ["Etrüsk Birliği", "Samnit Birliği", "Latin Birliği", "Grek Birliği"], answer: "b" },
+            { category: "Roma’da Cumhuriyet Dönemi", question: "M.Ö. 3. yy. başında Roma’nın Güney İtalya’daki şehir devletlerine uyguladığı baskıya dayanamayarak savaşa başlayan şehir hangisidir?", options: ["Capua", "Tarentum", "Syracuse", "Neapolis"], answer: "b" },
+
+            // 5. Roma Devleti’nin Akdeniz’e Hâkim Oluşu (10 soru)
+            { category: "Roma Devleti’nin Akdeniz’e Hâkim Oluşu", question: "Roma devleti Kartaca ile savaşmaya ne zaman, hangi olaydan sonra başlamıştır?", options: ["M.Ö. 264’te Messina kriziyle", "M.Ö. 240’ta Drepana bölgesinin Roma’nın eline geçmesiyle", "M.Ö. 218’de Hannibal’in saldırısıyla", "M.Ö. 202’de Zama savaşıyla"], answer: "b" },
+            { category: "Roma Devleti’nin Akdeniz’e Hâkim Oluşu", question: "Hangisi Roma devletinin Kartacalılarla verdikleri savaşların en önemli komutanlarından biridir?", options: ["Julius Caesar", "Publius Cornelius Scipio Africanus", "Marius", "Sulla"], answer: "b" },
+            { category: "Roma Devleti’nin Akdeniz’e Hâkim Oluşu", question: "Birinci Kartaca Savaşı nerede, ne zaman sonuçlanmıştır?", options: ["Sicilya adasında M.Ö. 241 yılında", "Kuzey Afrika’da M.Ö. 202’de", "İspanya’da M.Ö. 218’de", "Roma’da M.Ö. 264’te"], answer: "a" },
+            { category: "Roma Devleti’nin Akdeniz’e Hâkim Oluşu", question: "Roma Balkanlarda kiminle, ne zamandan başlayarak savaşmıştır?", options: ["Makedonya ile M.Ö. 215 yılında", "Kartaca ile M.Ö. 264’te", "Epir ile M.Ö. 275’te", "Trakya ile M.Ö. 197’de"], answer: "a" },
+            { category: "Roma Devleti’nin Akdeniz’e Hâkim Oluşu", question: "Roma devleti İspanya’da ne zaman, hangi eyaletleri kurmuştur?", options: ["M.Ö. 197 yılında Hispania Citerior ve Hispania Ulterior", "M.Ö. 240’ta Gallia Cisalpina", "M.Ö. 129’da Provincia Asia", "M.Ö. 91’de Sicilia"], answer: "a" },
+            { category: "Roma Devleti’nin Akdeniz’e Hâkim Oluşu", question: "Hangi Kartaca kralı, ne zaman Roma şehrine yaklaşmıştır ve Romalıları nerede yenmiştir?", options: ["Hamilcar M.Ö. 241’de Sicilya’da", "Hannibal M.Ö. 216 yılında Cannae’da", "Hasdrubal M.Ö. 202’de Zama’da", "Mago M.Ö. 218’de Alpler’de"], answer: "b" },
+            { category: "Roma Devleti’nin Akdeniz’e Hâkim Oluşu", question: "Roma, hangi Makedonya kralının başında olduğu dönemde Balkanlara saldırmıştır?", options: ["IV. Filip", "V. Filip", "Perseus", "Antigonus"], answer: "b" },
+            { category: "Roma Devleti’nin Akdeniz’e Hâkim Oluşu", question: "Roma Kartaca’lıları Kuzey Afrika’da ilk kez hangi yıl, hangi savaşta yenmiştir?", options: ["M.Ö. 241 Sicilya’da", "M.Ö. 202 Zama’da", "M.Ö. 216 Cannae’da", "M.Ö. 197 Kynoskefalai’da"], answer: "b" },
+            { category: "Roma Devleti’nin Akdeniz’e Hâkim Oluşu", question: "Roma 2. Makedonya savaşını nerede ve hangi yıl yapılan savaşla kazanmıştır?", options: ["Pydna’da M.Ö. 168", "Kynoskefalai’da M.Ö. 197", "Cannae’da M.Ö. 216", "Zama’da M.Ö. 202"], answer: "b" },
+            { category: "Roma Devleti’nin Akdeniz’e Hâkim Oluşu", question: "Makedonya krallığı, hangi kral döneminde, nerede, ne zaman yapılan hangi savaşla sona ermiştir?", options: ["V. Filip M.Ö. 197 Kynoskefalai’da", "Perseus M.Ö. 168 Pydna’da", "Antigonus M.Ö. 215’te", "IV. Filip M.Ö. 202’de"], answer: "b" },
+
+            // 6. Roma Cumhuriyet Yönetiminin Sarsılması ve Çöküşü (10 soru)
+            { category: "Roma Cumhuriyet Yönetiminin Sarsılması ve Çöküşü", question: "Scipio Aemilianus'un lâkabı, hangisidir?", options: ["Africanus", "Asiaticus", "Hispanicus", "Germanicus"], answer: "a" },
+            { category: "Roma Cumhuriyet Yönetiminin Sarsılması ve Çöküşü", question: "Lex Provinciae’nin anlamı hangisidir?", options: ["Halk yasası", "Eyalet yasası", "Askeri yasa", "Senato kararnamesi"], answer: "b" },
+            { category: "Roma Cumhuriyet Yönetiminin Sarsılması ve Çöküşü", question: "M.Ö. 102 yılında Aquae Sextiae’da Teutones’leri ve bir sonraki yıl da Kuzey İtalya’daki Vercellae’da Cimbri’leri yenilgiye uğratan ünlü Romalı komutan, hangisidir?", options: ["Sulla", "Marius", "Pompeius", "Crassus"], answer: "b" },
+            { category: "Roma Cumhuriyet Yönetiminin Sarsılması ve Çöküşü", question: "Anadolu'da meydana getirilen ilk Roma eyaleti Provincia Asia'nın kuruluş yılı, hangisidir?", options: ["M.Ö. 197", "M.Ö. 129", "M.Ö. 91", "M.Ö. 74"], answer: "b" },
+            { category: "Roma Cumhuriyet Yönetiminin Sarsılması ve Çöküşü", question: "Ölümünden sonra topraklarını Roma devletine miras bıraktığı ifade edilen Attalos hanedanı üyesi hangisidir?", options: ["I. Attalos", "II. Attalos", "III. Attalos", "IV. Attalos"], answer: "c" },
+            { category: "Roma Cumhuriyet Yönetiminin Sarsılması ve Çöküşü", question: "Müttefikler Savaşı olarak adlandırılan mücadele hangi yıllar arasını kapsar?", options: ["M.Ö. 91-88", "M.Ö. 102-100", "M.Ö. 74-71", "M.Ö. 129-126"], answer: "a" },
+            { category: "Roma Cumhuriyet Yönetiminin Sarsılması ve Çöküşü", question: "M.Ö. 74’te tıpkı Attalos'lar gibi topraklarını vasiyetle Roma'ya bırakan Anadolu krallığı hangisidir?", options: ["Pontus", "Bithynia", "Pergamon", "Galatia"], answer: "b" },
+            { category: "Roma Cumhuriyet Yönetiminin Sarsılması ve Çöküşü", question: "Spartacus isyanı olarak bilinen köle isyanını komutan ikililerinden hangileri bastırmıştır?", options: ["Marius-Sulla", "Crassus-Pompeius", "Caesar-Cicero", "Scipio-Cato"], answer: "b" },
+            { category: "Roma Cumhuriyet Yönetiminin Sarsılması ve Çöküşü", question: "Sulla'nın düzenlemesine göre birinin consul olabilmesi için en az kaç yaşında olması gerekir?", options: ["36", "40", "42", "45"], answer: "c" },
+            { category: "Roma Cumhuriyet Yönetiminin Sarsılması ve Çöküşü", question: "Üç yıllık bir mücadele sonunda Pontus’ta ve Anadolu genelinde idari yapıyı yeniden şekillendirerek Anadolu’daki Roma hâkimiyetini genişleten ve Roma’nın doğu sınırını Euphrates nehri olarak belirleyen ünlü Romalı komutan, hangisidir?", options: ["Marius", "Sulla", "Pompeius", "Crassus"], answer: "c" },
+
+            // 7. Roma İmparatorluk Dönemi (10 soru)
+            { category: "Roma İmparatorluk Dönemi", question: "Hangisi II. Triumvir'liğin taraflarından biri değildir?", options: ["Octavianus", "Antonius", "Lepidus", "Pompeius"], answer: "d" },
+            { category: "Roma İmparatorluk Dönemi", question: "Roma şehrini kendi adıyla kurulmuş bir koloni olarak yeniden adlandırma planları kurarken 31 Aralık 192 tarihinde bir suikasta uğrayan ve ardından Senato tarafından derhal anısı lânetlenen imparator, hangisidir?", options: ["Nero", "Commodus", "Caligula", "Domitian"], answer: "b" },
+            { category: "Roma İmparatorluk Dönemi", question: "Roma imparatorluğunu M.S. 161-169 yılları arasında Lucius Verus'la birlikte yöneten ve onun ölümünün ardından tahtta tek başına oturan imparator hangisidir?", options: ["Traianus", "Hadrianus", "Marcus Aurelius", "Antoninus Pius"], answer: "c" },
+            { category: "Roma İmparatorluk Dönemi", question: "M.S. 117-138 arasındaki 21 yıllık hükümdarlığının yarısından fazlasını imparatorluğun dört bir yanına düzenlediği çeşitli seyahatlerle geçirmiş Roma imparatoru hangisidir?", options: ["Hadrianus", "Augustus", "Tiberius", "Nerva"], answer: "a" },
+            { category: "Roma İmparatorluk Dönemi", question: "Parthlara karşı tertiplenen doğu seferini yöneten Roma imparatoru hangisidir?", options: ["Traianus", "Lucius Verus", "Septimius Severus", "Caracalla"], answer: "b" },
+            { category: "Roma İmparatorluk Dönemi", question: "Artık savunulamayacağını düşündüğü Dacia eyaletinin elden çıkarılmasına karar veren ve 271 yılında Roma şehri etrafında bir sur inşa edilmesini emreden imparator hangisidir?", options: ["Aurelianus", "Diocletianus", "Constantinus", "Gallienus"], answer: "a" },
+            { category: "Roma İmparatorluk Dönemi", question: "Severus Alexander’ın yerine imparator ilan edilerek asker imparatorlar denilen dönemin ilk temsilcisi olan imparator hangisidir?", options: ["Maximinus Thrax", "Philip the Arab", "Decius", "Gordian III"], answer: "a" },
+            { category: "Roma İmparatorluk Dönemi", question: "Roma imparatorluğunun batı topraklarında 260-268 yılları arasında merkezi otoriteden tamamen bağımsız yeni bir Roma devleti kuran ve sarayını Augusta Treviorum'da konuşlandıran isim hangisidir?", options: ["Postumus", "Odenathus", "Tetricus", "Victorinus"], answer: "a" },
+            { category: "Roma İmparatorluk Dönemi", question: "İç savaş sırasında Pescennius Niger’in yanında yer aldığı için Severus’un emriyle polis statüsünü kaybetmiş ve yerle bir edilmiş olan şehir hangisidir?", options: ["Antiochia", "Byzantion", "Alexandria", "Ephesus"], answer: "b" },
+            { category: "Roma İmparatorluk Dönemi", question: "Constitutio Antoniniana adlı hukukî reformla birlikte Roma egemenliği altında yaşayan tüm özgür insanlara Roma vatandaşı statüsünü kazandıran imparator, hangisidir?", options: ["Augustus", "Marcus Aurelius Antoninus (Caracalla)", "Hadrianus", "Traianus"], answer: "b" }
+        ];
+
+        let currentCard = 0;
+        const userAnswers = new Array(questions.length).fill(null);
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const startScreen = document.getElementById('startScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const flashcardsDiv = document.getElementById('flashcards');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const endBtn = document.getElementById('endBtn');
+        const resultDiv = document.getElementById('result');
+        const answerKeyDiv = document.getElementById('answerKey');
+        const timerDiv = document.getElementById('timer');
+        let timeLeft = 30 * 60; // 30 dakika (saniye cinsinden)
+        let timerInterval;
+        let userName, userEmail;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        const shuffledQuestions = shuffle([...questions]);
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDiv.textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitQuiz();
+            } else {
+                timeLeft--;
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function renderCard(index) {
+            flashcardsDiv.innerHTML = '';
+            const question = shuffledQuestions[index];
+            const card = document.createElement('div');
+            card.classList.add('flashcard', 'active');
+            card.innerHTML = `
+                <p class="question">${index + 1}. (${question.category}) ${question.question}</p>
+                <div class="options">
+                    ${question.options.map((opt, i) => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${String.fromCharCode(97 + i)}" ${userAnswers[index] === String.fromCharCode(97 + i) ? 'checked' : ''}>
+                            ${opt}
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+            flashcardsDiv.appendChild(card);
+
+            prevBtn.disabled = index === 0;
+            nextBtn.style.display = index === shuffledQuestions.length - 1 ? 'none' : 'inline-block';
+        }
+
+        function saveAnswer(index) {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            userAnswers[index] = selected ? selected.value : null;
+        }
+
+        function submitQuiz() {
+            saveAnswer(currentCard);
+            clearInterval(timerInterval);
+            let score = 0;
+            const categoryScores = {};
+            questions.forEach(q => categoryScores[q.category] = { correct: 0, total: 0 });
+
+            userAnswers.forEach((answer, i) => {
+                const question = shuffledQuestions[i];
+                if (answer === question.answer) {
+                    score++;
+                    categoryScores[question.category].correct++;
+                }
+                categoryScores[question.category].total++;
+            });
+
+            const percentage = (score / questions.length) * 100;
+            let resultHTML = `
+                <h2>Test Sonuçları</h2>
+                <p>Ad: ${userName}</p>
+                <p>E-posta: ${userEmail}</p>
+                <p>Toplam Doğru: ${score}/${questions.length}</p>
+                <p>Yüzde: %${percentage.toFixed(2)}</p>
+                <h3>Konulara Göre Performans:</h3>
+                <ul>
+                    ${Object.entries(categoryScores).map(([cat, { correct, total }]) => `
+                        <li>${cat}: ${correct}/${total} (%${((correct / total) * 100).toFixed(2)})</li>
+                    `).join('')}
+                </ul>
+            `;
+            resultDiv.innerHTML = resultHTML;
+            resultDiv.style.display = 'block';
+
+            let answerKeyHTML = `
+                <h3>Cevap Anahtarı</h3>
+                <table>
+                    <tr>
+                        <th>Soru No</th>
+                        <th>Soru</th>
+                        <th>Doğru Cevap</th>
+                        <th>Senin Cevabın</th>
+                        <th>Durum</th>
+                    </tr>
+                    ${shuffledQuestions.map((q, i) => `
+                        <tr>
+                            <td>${i + 1}</td>
+                            <td>${q.question}</td>
+                            <td>${q.options[q.answer.charCodeAt(0) - 97]}</td>
+                            <td>${userAnswers[i] ? q.options[userAnswers[i].charCodeAt(0) - 97] : 'Cevap verilmedi'}</td>
+                            <td class="${userAnswers[i] === q.answer ? 'correct' : 'incorrect'}">${userAnswers[i] === q.answer ? 'Doğru' : 'Yanlış'}</td>
+                        </tr>
+                    `).join('')}
+                </table>
+            `;
+            answerKeyDiv.innerHTML = answerKeyHTML;
+
+            flashcardsDiv.style.display = 'none';
+            timerDiv.style.display = 'none';
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            endBtn.style.display = 'none';
+        }
+
+        document.getElementById('submitInfo').addEventListener('click', () => {
+            userName = document.getElementById('userName').value.trim();
+            userEmail = document.getElementById('userEmail').value.trim();
+            if (userName && userEmail) {
+                welcomeScreen.style.display = 'none';
+                startScreen.style.display = 'block';
+            } else {
+                alert("Lütfen adınızı ve e-posta adresinizi girin!");
+            }
+        });
+
+        document.getElementById('startBtn').addEventListener('click', () => {
+            startScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+            renderCard(currentCard);
+            startTimer();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            saveAnswer(currentCard);
+            currentCard--;
+            renderCard(currentCard);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            saveAnswer(currentCard);
+            currentCard++;
+            renderCard(currentCard);
+        });
+
+        endBtn.addEventListener('click', submitQuiz);
+    </script>
+</body>
+</html>

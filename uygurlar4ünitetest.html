@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uygurlar - İlk 4 Ünite Testi</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        h1 { text-align: center; color: #333; }
+        .timer { text-align: center; font-size: 1.2em; margin-bottom: 20px; color: #d9534f; }
+        .question { background-color: #fff; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .question p { margin: 0 0 10px 0; font-weight: bold; }
+        .options label { display: inline-block; margin-right: 20px; cursor: pointer; }
+        .options input[type="radio"] { margin-right: 5px; }
+        .submit-btn, .show-answers-btn { display: block; width: 200px; margin: 20px auto; padding: 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        .submit-btn { background-color: #5cb85c; color: white; }
+        .submit-btn:hover { background-color: #4cae4c; }
+        .show-answers-btn { background-color: #0275d8; color: white; }
+        .show-answers-btn:hover { background-color: #025aa5; }
+        #answers, #result { display: none; background-color: #fff; padding: 20px; margin-top: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        #answers h2, #result h2 { color: #333; }
+        #answers p, #result p { margin: 10px 0; }
+        #answers .correct { color: #5cb85c; font-weight: bold; }
+        #answers .explanation { color: #555; }
+        #wrongAnswers { color: #d9534f; }
+    </style>
+</head>
+<body>
+    <h1>Uygurlar - İlk 4 Ünite Testi (30 Dakika)</h1>
+    <div class="timer" id="timer">Kalan Süre: 30:00</div>
+    <form id="testForm">
+        <!-- Soru 1 -->
+        <div class="question">
+            <p>1. İslamiyet öncesi Türk tarihinin kaynakları arasında en önemli bilgi kaynağı hangisidir?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="A"> A) Latin kaynakları</label>
+                <label><input type="radio" name="q1" value="B"> B) Çin kaynakları</label>
+                <label><input type="radio" name="q1" value="C"> C) Bizans kaynakları</label>
+                <label><input type="radio" name="q1" value="D"> D) Arap kaynakları</label>
+                <label><input type="radio" name="q1" value="E"> E) Rus yıllıkları</label>
+            </div>
+        </div>
+
+        <!-- Soru 3 -->
+        <div class="question">
+            <p>3. İslamiyet öncesi Türk tarihçiliğinin temel problemlerinden biri aşağıdakilerden hangisidir?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="A"> A) Zaman birliği</label>
+                <label><input type="radio" name="q3" value="B"> B) Mekân birliği</label>
+                <label><input type="radio" name="q3" value="C"> C) Siyasi birlik</label>
+                <label><input type="radio" name="q3" value="D"> D) Kaynak yeterliliği ve yetersizliği</label>
+                <label><input type="radio" name="q3" value="E"> E) Devlet görüşündeki köklülük</label>
+            </div>
+        </div>
+
+        <!-- Soru 4 -->
+        <div class="question">
+            <p>4. Tez Yazıtı hangi kağan adına dikilmiştir?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="A"> A) Moyen-çor</label>
+                <label><input type="radio" name="q4" value="B"> B) Tengride Bolmış İl İtmiş Bilge Kağan</label>
+                <label><input type="radio" name="q4" value="C"> C) Ay Tengride Kut Bulmuş Alp Bilge Tengri</label>
+                <label><input type="radio" name="q4" value="D"> D) Bögü Kağan</label>
+                <label><input type="radio" name="q4" value="E"> E) Kutlug Bilge Kül Kağan</label>
+            </div>
+        </div>
+
+        <!-- Soru 5 -->
+        <div class="question">
+            <p>5. Terhin (Taryat) Yazıtı hangi konuda bilgi verir?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="A"> A) Uygur siyasi tarihi</label>
+                <label><input type="radio" name="q5" value="B"> B) Uygur ülkesinin coğrafyası ve askeri teşkilatı</label>
+                <label><input type="radio" name="q5" value="C"> C) Mani dinine geçiş</label>
+                <label><input type="radio" name="q5" value="D"> D) Göç destanı</label>
+                <label><input type="radio" name="q5" value="E"> E) Ekonomik yapılar</label>
+            </div>
+        </div>
+
+        <!-- Soru 6 -->
+        <div class="question">
+            <p>6. Şine-usu Yazıtı hangi kağanla ilgilidir?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="A"> A) Moyen-çor</label>
+                <label><input type="radio" name="q6" value="B"> B) Bögü Kağan</label>
+                <label><input type="radio" name="q6" value="C"> C) Tun Baga Tarkan</label>
+                <label><input type="radio" name="q6" value="D"> D) Kutlug Bilge Kağan</label>
+                <label><input type="radio" name="q6" value="E"> E) Ay Tengride Kut Bulmuş Alp Bilge Kağan</label>
+            </div>
+        </div>
+
+        <!-- Soru 7 -->
+        <div class="question">
+            <p>7. Karabalsagun Yazıtı hangi dillerde yazılmıştır?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="A"> A) Türkçe ve Çince</label>
+                <label><input type="radio" name="q7" value="B"> B) Türkçe, Çince ve Soğdca</label>
+                <label><input type="radio" name="q7" value="C"> C) Türkçe ve Göktürkçe</label>
+                <label><input type="radio" name="q7" value="D"> D) Çince ve Soğdca</label>
+                <label><input type="radio" name="q7" value="E"> E) Türkçe ve Arapça</label>
+            </div>
+        </div>
+
+        <!-- Soru 8 -->
+        <div class="question">
+            <p>8. Maniheist Uygur Edebiyatı’nın nazım şekilleri arasında hangisi yer almaz?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="A"> A) Mani’ye ithaf olunan ilahiler</label>
+                <label><input type="radio" name="q8" value="B"> B) Dünyevî aşk şiirleri</label>
+                <label><input type="radio" name="q8" value="C"> C) Cehennem tasvirleri</label>
+                <label><input type="radio" name="q8" value="D"> D) Destanlar</label>
+                <label><input type="radio" name="q8" value="E"> E) İlahiler</label>
+            </div>
+        </div>
+
+        <!-- Soru 9 -->
+        <div class="question">
+            <p>9. Budist Uygur Edebiyatı’nın en önemli eseri hangisidir?</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="A"> A) Irg Bitig</label>
+                <label><input type="radio" name="q9" value="B"> B) Altun Yaruk</label>
+                <label><input type="radio" name="q9" value="C"> C) Kutadgu Bilig</label>
+                <label><input type="radio" name="q9" value="D"> D) Divanü Lugati’t-Türk</label>
+                <label><input type="radio" name="q9" value="E"> E) Hüen-Tsang Seyahatnamesi</label>
+            </div>
+        </div>
+
+        <!-- Soru 10 -->
+        <div class="question">
+            <p>10. Uygurların destanlardaki inanışlarına göre ilk türedikleri yer neresidir?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="A"> A) Orhun Nehri</label>
+                <label><input type="radio" name="q10" value="B"> B) Beşbalık</label>
+                <label><input type="radio" name="q10" value="C"> C) Tarım Havzası</label>
+                <label><input type="radio" name="q10" value="D"> D) Altay Dağları</label>
+                <label><input type="radio" name="q10" value="E"> E) Tanrı Dağları</label>
+            </div>
+        </div>
+
+        <!-- Soru 11 -->
+        <div class="question">
+            <p>11. Oğuz Kağan Destanı’nda dikkati çeken üç temel unsur nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="A"> A) Bozkurt, geyik ve ışık</label>
+                <label><input type="radio" name="q11" value="B"> B) Kurt, ağaç ve su</label>
+                <label><input type="radio" name="q11" value="C"> C) Gün, ay ve yıldız</label>
+                <label><input type="radio" name="q11" value="D"> D) Dağ, nehir ve gök</label>
+                <label><input type="radio" name="q11" value="E"> E) Ateş, su ve toprak</label>
+            </div>
+        </div>
+
+        <!-- Soru 12 -->
+        <div class="question">
+            <p>12. Kutadgu Bilig hangi şehirde tamamlanmıştır?</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="A"> A) Balasagun</label>
+                <label><input type="radio" name="q12" value="B"> B) Kaşgar</label>
+                <label><input type="radio" name="q12" value="C"> C) Ordubalık</label>
+                <label><input type="radio" name="q12" value="D"> D) Karabalsagun</label>
+                <label><input type="radio" name="q12" value="E"> E) Turfan</label>
+            </div>
+        </div>
+
+        <!-- Soru 13 -->
+        <div class="question">
+            <p>13. Divanü Lugati’t-Türk’ün yazılma amacı nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="A"> A) Türk tarihini belgelemek</label>
+                <label><input type="radio" name="q13" value="B"> B) Araplara Türkçeyi öğretmek</label>
+                <label><input type="radio" name="q13" value="C"> C) Türk destanlarını toplamak</label>
+                <label><input type="radio" name="q13" value="D"> D) Devlet yönetimini açıklamak</label>
+                <label><input type="radio" name="q13" value="E"> E) Türk edebiyatını geliştirmek</label>
+            </div>
+        </div>
+
+        <!-- Soru 14 -->
+        <div class="question">
+            <p>14. Uygurların soyu hangi topluluklara dayanır?</p>
+            <div class="options">
+                <label><input type="radio" name="q14" value="A"> A) Sakalar, Hunlar, Kanglılar ve Göktürkler</label>
+                <label><input type="radio" name="q14" value="B"> B) Moğollar ve Kitanlar</label>
+                <label><input type="radio" name="q14" value="C"> C) Araplar ve Sogdlular</label>
+                <label><input type="radio" name="q14" value="D"> D) Tibetliler ve Çinliler</label>
+                <label><input type="radio" name="q14" value="E"> E) Ruslar ve Bizanslılar</label>
+            </div>
+        </div>
+
+        <!-- Soru 15 -->
+        <div class="question">
+            <p>15. Büyük Hun Devleti’nin kurulduğu dönemde Baykal Gölü civarında hangi hanlık vardı?</p>
+            <div class="options">
+                <label><input type="radio" name="q15" value="A"> A) Kırgız Hanlığı</label>
+                <label><input type="radio" name="q15" value="B"> B) Oğuz Hanlığı</label>
+                <label><input type="radio" name="q15" value="C"> C) Doğu Uygur Hanlığı</label>
+                <label><input type="radio" name="q15" value="D"> D) Fergana Hanlığı</label>
+                <label><input type="radio" name="q15" value="E"> E) Kanglı Hanlığı</label>
+            </div>
+        </div>
+
+        <!-- Soru 16 -->
+        <div class="question">
+            <p>16. Ebulgazi Bahadır Han’a göre “Uygur” isminin anlamı nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q16" value="A"> A) Şahin gibi hızla hücum eden</label>
+                <label><input type="radio" name="q16" value="B"> B) Kendi kendine yeter</label>
+                <label><input type="radio" name="q16" value="C"> C) Uymak, yapışmak</label>
+                <label><input type="radio" name="q16" value="D"> D) Orman halkı</label>
+                <label><input type="radio" name="q16" value="E"> E) Akraba, müttefik</label>
+            </div>
+        </div>
+
+        <!-- Soru 17 -->
+        <div class="question">
+            <p>17. Uygur Devleti kurulmadan önce Uygurların şöhretinin artmasına neden olan olay nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q17" value="A"> A) P’usa önderliğinde Göktürk ordusunu yenmeleri</label>
+                <label><input type="radio" name="q17" value="B"> B) Çin’e sefer düzenlemeleri</label>
+                <label><input type="radio" name="q17" value="C"> C) Kırgızlarla ittifak kurmaları</label>
+                <label><input type="radio" name="q17" value="D"> D) Talas Savaşı’nda Çin’i yenmeleri</label>
+                <label><input type="radio" name="q17" value="E"> E) Basmillerle savaşmaları</label>
+            </div>
+        </div>
+
+        <!-- Soru 18 -->
+        <div class="question">
+            <p>18. Uygur Devleti’nin kurucusu kimdir?</p>
+            <div class="options">
+                <label><input type="radio" name="q18" value="A"> A) Moyen-çor</label>
+                <label><input type="radio" name="q18" value="B"> B) Bögü Kağan</label>
+                <label><input type="radio" name="q18" value="C"> C) Kutlug Bilge Kül Kağan</label>
+                <label><input type="radio" name="q18" value="D"> D) Tun Baga Tarkan</label>
+                <label><input type="radio" name="q18" value="E"> E) P’usa</label>
+            </div>
+        </div>
+
+        <!-- Soru 19 -->
+        <div class="question">
+            <p>19. Talas Savaşı’nın Uygurlar açısından önemi nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q19" value="A"> A) Çin’in yenilerek Tarım Havzası’nın Uygurlara geçmesi</label>
+                <label><input type="radio" name="q19" value="B"> B) Göktürklerin yıkılması</label>
+                <label><input type="radio" name="q19" value="C"> C) Kırgızların güçlenmesi</label>
+                <label><input type="radio" name="q19" value="D"> D) Tibetlilerin Çin’e saldırması</label>
+                <label><input type="radio" name="q19" value="E"> E) Araplarla ittifak kurulması</label>
+            </div>
+        </div>
+
+        <!-- Soru 20 -->
+        <div class="question">
+            <p>20. Moyen-çor Kağan’ın yaptığı seferler arasında hangisi yer almaz?</p>
+            <div class="options">
+                <label><input type="radio" name="q20" value="A"> A) Batı Seferleri</label>
+                <label><input type="radio" name="q20" value="B"> B) Kuzey Seferleri</label>
+                <label><input type="radio" name="q20" value="C"> C) Oğuz Seferleri</label>
+                <label><input type="radio" name="q20" value="D"> D) Hindistan Seferleri</label>
+                <label><input type="radio" name="q20" value="E"> E) Çin Seferleri</label>
+            </div>
+        </div>
+
+        <!-- Soru 21 -->
+        <div class="question">
+            <p>21. Bögü Kağan’ın isminin anlamı nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q21" value="A"> A) Âlim ve sihirbaz</label>
+                <label><input type="radio" name="q21" value="B"> B) Güçlü ve cesur</label>
+                <label><input type="radio" name="q21" value="C"> C) Bilge ve hükümdar</label>
+                <label><input type="radio" name="q21" value="D"> D) Savaşçı ve lider</label>
+                <label><input type="radio" name="q21" value="E"> E) Hızlı ve çevik</label>
+            </div>
+        </div>
+
+        <!-- Soru 22 -->
+        <div class="question">
+            <p>22. Lo-yang Seferi’nin sebebi nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q22" value="A"> A) Çin’in Uygurlara saldırması</label>
+                <label><input type="radio" name="q22" value="B"> B) Tibetlilerin Çin’e hücum etmesi</label>
+                <label><input type="radio" name="q22" value="C"> C) Kırgızların isyanı</label>
+                <label><input type="radio" name="q22" value="D"> D) Karluklarla ittifak</label>
+                <label><input type="radio" name="q22" value="E"> E) Mani dininin yayılması</label>
+            </div>
+        </div>
+
+        <!-- Soru 23 -->
+        <div class="question">
+            <p>23. Uygurlarda vergi toplayan devlet hazinedarına ne ad verilir?</p>
+            <div class="options">
+                <label><input type="radio" name="q23" value="A"> A) Tudun</label>
+                <label><input type="radio" name="q23" value="B"> B) Ağıcı</label>
+                <label><input type="radio" name="q23" value="C"> C) Amga</label>
+                <label><input type="radio" name="q23" value="D"> D) Imga</label>
+                <label><input type="radio" name="q23" value="E"> E) Satıkçı</label>
+            </div>
+        </div>
+
+        <!-- Soru 24 -->
+        <div class="question">
+            <p>24. İpek Yolu’nun Çin’den başlayarak Turfan ve Kaşgar’dan geçen güzergâhı hangisidir?</p>
+            <div class="options">
+                <label><input type="radio" name="q24" value="A"> A) Kuzey Yolu</label>
+                <label><input type="radio" name="q24" value="B"> B) Orta Yol</label>
+                <label><input type="radio" name="q24" value="C"> C) Güney Yolu</label>
+                <label><input type="radio" name="q;y24" value="D"> D) Batı Yolu</label>
+                <label><input type="radio" name="q24" value="E"> E) Doğu Yolu</label>
+            </div>
+        </div>
+
+        <!-- Soru 25 -->
+        <div class="question">
+            <p>25. Uygur Devleti hangi boylar üzerinde gelişmeye başlamıştır?</p>
+            <div class="options">
+                <label><input type="radio" name="q25" value="A"> A) Dokuz Oğuz</label>
+                <label><input type="radio" name="q25" value="B"> B) Karluklar</label>
+                <label><input type="radio" name="q25" value="C"> C) Kırgızlar</label>
+                <label><input type="radio" name="q25" value="D"> D) Tölesler</label>
+                <label><input type="radio" name="q25" value="E"> E) On-Oklar</label>
+            </div>
+        </div>
+
+        <!-- Soru 26 -->
+        <div class="question">
+            <p>26. Uygurların yerleşik hayata geçen ilk Türk devleti olmasının bir göstergesi nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q26" value="A"> A) Ordubalık şehrinin kurulması</label>
+                <label><input type="radio" name="q26" value="B"> B) Mani dininin kabulü</label>
+                <label><input type="radio" name="q26" value="C"> C) Çin ile ticaret</label>
+                <label><input type="radio" name="q26" value="D"> D) Göç destanları</label>
+                <label><input type="radio" name="q26" value="E"> E) Kırgızlarla savaş</label>
+            </div>
+        </div>
+
+        <!-- Soru 27 -->
+        <div class="question">
+            <p>27. Tun Baga Tarkan’ın unvanı nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q27" value="A"> A) Alp Kutlug Bilge Kağan</label>
+                <label><input type="radio" name="q27" value="B"> B) Tengride Bolmış İl İtmiş Bilge Kağan</label>
+                <label><input type="radio" name="q27" value="C"> C) Ay Tengride Kut Bulmuş Alp Bilge Tengri</label>
+                <label><input type="radio" name="q27" value="D"> D) Kün Tengri’de Ülüg Bulmış Alp Küçlüg Bilge Kağan</label>
+                <label><input type="radio" name="q27" value="E"> E) Ay Tengride Ülüg Bulmuş Alp Ulug Bilge Kağan</label>
+            </div>
+        </div>
+
+        <!-- Soru 28 -->
+        <div class="question">
+            <p>28. Kutlug Bilge Kağan hangi sorunlarla uğraşmıştır?</p>
+            <div class="options">
+                <label><input type="radio" name="q28" value="A"> A) Çin’e sefer düzenlemiştir</label>
+                <label><input type="radio" name="q28" value="B"> B) Karluk isyanını bastırmış ve Tibetlileri uzaklaştırmıştır</label>
+                <label><input type="radio" name="q28" value="C"> C) Kırgızlarla ittifak kurmuştur</label>
+                <label><input type="radio" name="q28" value="D"> D) Mani dinini yaymıştır</label>
+                <label><input type="radio" name="q28" value="E"> E) Tarım Havzası’nı kaybetmiştir</label>
+            </ semantically>
+        </div>
+
+        <!-- Soru 29 -->
+        <div class="question">
+            <p>29. Uygurların yıkılış sebepleri arasında hangisi yer almaz?</p>
+            <div class="options">
+                <label><input type="radio" name="q29" value="A"> A) Çinlilerin entrikaları</label>
+                <label><input type="radio" name="q29" value="B"> B) Yönetici sürtüşmeleri</label>
+                <label><input type="radio" name="q29" value="C"> C) Arapların teşvikiyle Türk boylarının isyanı</label>
+                <label><input type="radio" name="q29" value="D"> D) Maniheizm’in kökleşmesi</label>
+                <label><input type="radio" name="q29" value="E"> E) Zor coğrafi koşullar</label>
+            </div>
+        </div>
+
+        <!-- Soru 30 -->
+        <div class="question">
+            <p>30. Kan-chou Uygurları hangi bölgede kurulmuştur?</p>
+            <div class="options">
+                <label><input type="radio" name="q30" value="A"> A) Turfan</label>
+                <label><input type="radio" name="q30" value="B"> B) Kansu</label>
+                <label><input type="radio" name="q30" value="C"> C) Sha-chou</label>
+                <label><input type="radio" name="q30" value="D"> D) Beşbalık</label>
+                <label><input type="radio" name="q30" value="E"> E) Ötüken</label>
+            </div>
+        </div>
+
+        <!-- Soru 31 -->
+        <div class="question">
+            <p>31. Çin kaynaklarında Uygurların ataları hangi isimle anılır?</p>
+            <div class="options">
+                <label><input type="radio" name="q31" value="A"> A) Ting-ling</label>
+                <label><input type="radio" name="q31" value="B"> B) Töles</label>
+                <label><input type="radio" name="q31" value="C"> C) Karluk</label>
+                <label><input type="radio" name="q31" value="D"> D) On-Ok</label>
+                <label><input type="radio" name="q31" value="E"> E) Basmıl</label>
+            </div>
+        </div>
+
+        <!-- Soru 32 -->
+        <div class="question">
+            <p>32. Uygur Kaganlığı’nın başkenti neresidir?</p>
+            <div class="options">
+                <label><input type="radio" name="q32" value="A"> A) Beşbalık</label>
+                <label><input type="radio" name="q32" value="B"> B) Ordubalık</label>
+                <label><input type="radio" name="q32" value="C"> C) Turfan</label>
+                <label><input type="radio" name="q32" value="D"> D) Kaşgar</label>
+                <label><input type="radio" name="q32" value="E"> E) Karabalsagun</label>
+            </div>
+        </div>
+
+        <!-- Soru 33 -->
+        <div class="question">
+            <p>33. Moyen-çor’un edebi yönü hangi yazıtla ön plana çıkar?</p>
+            <div class="options">
+                <label><input type="radio" name="q33" value="A"> A) Tez Yazıtı</label>
+                <label><input type="radio" name="q33" value="B"> B) Terhin Yazıtı</label>
+                <label><input type="radio" name="q33" value="C"> C) Şine-usu Yazıtı</label>
+                <label><input type="radio" name="q33" value="D"> D) Karabalsagun Yazıtı</label>
+                <label><input type="radio" name="q33" value="E"> E) Suci Yazıtı</label>
+            </div>
+        </div>
+
+        <!-- Soru 34 -->
+        <div class="question">
+            <p>34. Maniheizm’in Uygurlara etkisi nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q34" value="A"> A) Savaşçılığı artırmıştır</label>
+                <label><input type="radio" name="q34" value="B"> B) Yerleşik hayata geçmeyi teşvik etmiştir</label>
+                <label><input type="radio" name="q34" value="C"> C) Ticaret yollarını kapatmıştır</label>
+                <label><input type="radio" name="q34" value="D"> D) Göçleri hızlandırmıştır</label>
+                <label><input type="radio" name="q34" value="E"> E) Çin ile ilişkileri kesmiştir</label>
+            </div>
+        </div>
+
+        <!-- Soru 35 -->
+        <div class="question">
+            <p>35. Uygurların ekonomisinin temelini ne oluşturur?</p>
+            <div class="options">
+                <label><input type="radio" name="q35" value="A"> A) Ticaret</label>
+                <label><input type="radio" name="q35" value="B"> B) Hayvancılık</label>
+                <label><input type="radio" name="q35" value="C"> C) Ziraat</label>
+                <label><input type="radio" name="q35" value="D"> D) Madencilik</label>
+                <label><input type="radio" name="q35" value="E"> E) El sanatları</label>
+            </div>
+        </div>
+
+        <!-- Soru 36 -->
+        <div class="question">
+            <p>36. Uygurların İpek Yolu’ndan elde ettiği gelir kaynaklarından biri nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q36" value="A"> A) Ganimetler</label>
+                <label><input type="radio" name="q36" value="B"> B) Geçiş vergisi</label>
+                <label><input type="radio" name="q36" value="C"> C) Hayvancılık</label>
+                <label><input type="radio" name="q36" value="D"> D) Maden ticareti</label>
+                <label><input type="radio" name="q36" value="E"> E) Ziraat ürünleri</label>
+            </div>
+        </div>
+
+        <!-- Soru 37 -->
+        <div class="question">
+            <p>37. Uygur şehirlerinden “Balık” ne anlama gelir?</p>
+            <div class="options">
+                <label><input type="radio" name="q37" value="A"> A) Köy</label>
+                <label><input type="radio" name="q37" value="B"> B) Surlarla çevrili kale-şehir</label>
+                <label><input type="radio" name="q37" value="C"> C) Kule-tapınak</label>
+                <label><input type="radio" name="q37" value="D"> D) Budist türbe</label>
+                <label><input type="radio" name="q37" value="E"> E) Hükümdar sarayı</label>
+            </div>
+        </div>
+
+        <!-- Soru 38 -->
+        <div class="question">
+            <p>38. Tun Baga Tarkan döneminde Uygurların Çin’e karşı politikası nasıldır?</p>
+            <div class="options">
+                <label><input type="radio" name="q38" value="A"> A) Hâkimane davranışlar</label>
+                <label><input type="radio" name="q38" value="B"> B) Barış yanlısı</label>
+                <label><input type="radio" name="q38" value="C"> C) Saldırgan</label>
+                <label><input type="radio" name="q38" value="D"> D) Ticaret odaklı</label>
+                <label><input type="radio" name="q38" value="E"> E) İttifak arayışı</label>
+            </div>
+        </div>
+
+        <!-- Soru 39 -->
+        <div class="question">
+            <p>39. 795 senesinde tahta geçen Uygur kağanı kimdir?</p>
+            <div class="options">
+                <label><input type="radio" name="q39" value="A"> A) Tun Baga Tarkan</label>
+                <label><input type="radio" name="q39" value="B"> B) Kutlug Bilge Kağan</label>
+                <label><input type="radio" name="q39" value="C"> C) Ay Tengride Kut Bulmuş Alp Bilge Kağan</label>
+                <label><input type="radio" name="q39" value="D"> D) Bögü Kağan</label>
+                <label><input type="radio" name="q39" value="E"> E) Moyen-çor</label>
+            </div>
+        </div>
+
+        <!-- Soru 40 -->
+        <div class="question">
+            <p>40. Uygurların yıkılışında Kırgızların rolü nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q40" value="A"> A) Çin ile ittifak kurmuşlardır</label>
+                <label><input type="radio" name="q40" value="B"> B) Başkenti basarak hâkimiyeti ele geçirmişlerdir</label>
+                <label><input type="radio" name="q40" value="C"> C) Ticaret yollarını kesmişlerdir</label>
+                <label><input type="radio" name="q40" value="D"> D) Mani dinini yaymışlardır</label>
+                <label><input type="radio" name="q40" value="E"> E) Karluklarla savaşmışlardır</label>
+            </div>
+        </div>
+
+        <!-- Soru 41 -->
+        <div class="question">
+            <p>41. Kan-chou Uygurlarının göç ettiği bölgenin önemli özelliği nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q41" value="A"> A) Budistlerin az olması</label>
+                <label><input type="radio" name="q41" value="B"> B) Ticaret yollarının kapalı olması</label>
+                <label><input type="radio" name="q41" value="C"> C) Kırgızların hâkimiyeti</label>
+                <label><input type="radio" name="q41" value="D"> D) Mani dininin yaygınlığı</label>
+                <label><input type="radio" name="q41" value="E"> E) Çin’in askeri üssü olması</label>
+            </div>
+        </div>
+
+        <!-- Soru 42 -->
+        <div class="question">
+            <p>42. Çin İmparatoru’nun “Medeniyetler Şekil Veren Kağan” unvanını verdiği kağan kimdir?</p>
+            <div class="options">
+                <label><input type="radio" name="q42" value="A"> A) Jen-yü Kağan</label>
+                <label><input type="radio" name="q42" value="B"> B) Bögü Kağan</label>
+                <label><input type="radio" name="q42" value="C"> C) Moyen-çor</label>
+                <label><input type="radio" name="q42" value="D"> D) Kutlug Bilge Kağan</label>
+                <label><input type="radio" name="q42" value="E"> E) Tun Baga Tarkan</label>
+            </div>
+        </div>
+
+        <!-- Soru 43 -->
+        <div class="question">
+            <p>43. Uygurların hangi dönemde zayıflama süreci başlamıştır?</p>
+            <div class="options">
+                <label><input type="radio" name="q43" value="A"> A) 744-747</label>
+                <label><input type="radio" name="q43" value="B"> B) 779-808</label>
+                <label><input type="radio" name="q43" value="C"> C) 821’den itibaren</label>
+                <label><input type="radio" name="q43" value="D"> D) 840’tan sonra</label>
+                <label><input type="radio" name="q43" value="E"> E) 911’den sonra</label>
+            </div>
+        </div>
+
+        <!-- Soru 44 -->
+        <div class="question">
+            <p>44. Uygur Kaganlığı’nın çöküşünde hangi olay kırılma noktasıdır?</p>
+            <div class="options">
+                <label><input type="radio" name="q44" value="A"> A) Tun Baga Tarkan’ın ölümü</label>
+                <label><input type="radio" name="q44" value="B"> B) Kırgızların başkenti basması</label>
+                <label><input type="radio" name="q44" value="C"> C) Çinli prensesle evlilik</label>
+                <label><input type="radio" name="q44" value="D"> D) Karluk isyanı</label>
+                <label><input type="radio" name="q44" value="E"> E) Tibetlilerin saldırısı</label>
+            </div>
+        </div>
+
+        <!-- Soru 45 -->
+        <div class="question">
+            <p>45. Uygurların Göç Destanı’nda son durakları neresidir?</p>
+            <div class="options">
+                <label><input type="radio" name="q45" value="A"> A) Ordubalık</label>
+                <label><input type="radio" name="q45" value="B"> B) Beşbalık</label>
+                <label><input type="radio" name="q45" value="C"> C) Karabalsagun</label>
+                <label><input type="radio" name="q45" value="D"> D) Turfan</label>
+                <label><input type="radio" name="q45" value="E"> E) Kansu</label>
+            </div>
+        </div>
+
+        <!-- Soru 46 -->
+        <div class="question">
+            <p>46. Uygurların türeyiş efsanesinde hangi motifler öne çıkar?</p>
+            <div class="options">
+                <label><input type="radio" name="q46" value="A"> A) Kurt ve ağaç</label>
+                <label><input type="radio" name="q46" value="B"> B) Işık ve ağaç</label>
+                <label><input type="radio" name="q46" value="C"> C) Su ve dağ</label>
+                <label><input type="radio" name="q46" value="D"> D) Ateş ve gök</label>
+                <label><input type="radio" name="q46" value="E"> E) Geyik ve bozkurt</label>
+            </div>
+        </div>
+
+        <!-- Soru 47 -->
+        <div class="question">
+            <p>47. Kutlug Bilge Kül Kağan’ın tahta çıkış yılı nedir?</p>
+            <div class="options">
+                <label><input type="radio" name="q47" value="A"> A) 742</label>
+                <label><input type="radio" name="q47" value="B"> B) 744</label>
+                <label><input type="radio" name="q47" value="C"> C) 751</label>
+                <label><input type="radio" name="q47" value="D"> D) 759</label>
+                <label><input type="radio" name="q47" value="E"> E) 763</label>
+            </div>
+        </div>
+
+        <!-- Soru 48 -->
+        <div class="question">
+            <p>48. Moyen-çor’un altın çağ dönemi kaç yıl sürmüştür?</p>
+            <div class="options">
+                <label><input type="radio" name="q48" value="A"> A) 8 yıl</label>
+                <label><input type="radio" name="q48" value="B"> B) 10 yıl</label>
+                <label><input type="radio" name="q48" value="C"> C) 12 yıl</label>
+                <label><input type="radio" name="q48" value="D"> D) 15 yıl</label>
+                <label><input type="radio" name="q48" value="E"> E) 20 yıl</label>
+            </div>
+        </div>
+
+        <!-- Soru 49 -->
+        <div class="question">
+            <p>49. Uygurların Mani dinine geçişi hangi kağan döneminde olmuştur?</p>
+            <div class="options">
+                <label><input type="radio" name="q49" value="A"> A) Kutlug Bilge Kül Kağan</label>
+                <label><input type="radio" name="q49" value="B"> B) Moyen-çor</label>
+                <label><input type="radio" name="q49" value="C"> C) Bögü Kağan</label>
+                <label><input type="radio" name="q49" value="D"> D) Tun Baga Tarkan</label>
+                <label><input type="radio" name="q49" value="E"> E) Ay Tengride Kut Bulmuş Alp Bilge Kağan</label>
+            </div>
+        </div>
+
+        <!-- Soru 50 -->
+        <div class="question">
+            <p>50. Uygurların yıkılışından sonra hangi topluluklara katılmışlardır?</p>
+            <div class="options">
+                <label><input type="radio" name="q50" value="A"> A) Karluklar, Tibetliler, Moğollar</label>
+                <label><input type="radio" name="q50" value="B"> B) Çinliler ve Araplar</label>
+                <label><input type="radio" name="q50" value="C"> C) Sogdlular ve Ruslar</label>
+                <label><input type="radio" name="q50" value="D"> D) Bizanslılar ve Hintliler</label>
+                <label><input type="radio" name="q50" value="E"> E) Kırgızlar ve Oğuzlar</label>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Testi Bitir</button>
+    </form>
+    <button class="show-answers-btn" onclick="showAnswers()">Cevapları Göster</button>
+
+    <!-- Sonuç Ekranı -->
+    <div id="result">
+        <h2>Test Sonuçları</h2>
+        <p id="score"></p>
+        <p id="correctCount"></p>
+        <p id="wrongCount"></p>
+        <div id="wrongAnswers"></div>
+    </div>
+
+    <!-- Cevap Anahtarı -->
+    <div id="answers">
+        <h2>Cevap Anahtarı ve Açıklamalar</h2>
+        <p><span class="correct">1. B) Çin kaynakları</span><br><span class="explanation">Açıklama: Ünite 1.1’e göre, İslamiyet öncesi Türk tarihi için en önemli bilgi kaynağı Çin kaynaklarıdır, çünkü Türk boylarıyla komşu olan Çinliler detaylı kayıtlar tutmuştur.</span></p>
+        <p><span class="correct">3. D) Kaynak yeterliliği ve yetersizliği</span><br><span class="explanation">Açıklama: Ünite 1.2’de, Türk tarihçiliğinin temel problemlerinden biri olarak kaynakların eksikliği ve güvenilirliği vurgulanır.</span></p>
+        <p><span class="correct">4. B) Tengride Bolmış İl İtmiş Bilge Kağan</span><br><span class="explanation">Açıklama: Ünite 1.3.1’de Tez Yazıtı’nın bu kağan adına dikildiği belirtilir.</span></p>
+        <p><span class="correct">5. B) Uygur ülkesinin coğrafyası ve askeri teşkilatı</span><br><span class="explanation">Açıklama: Ünite 1.3.2’de Terhin Yazıtı’nın bu konuları içerdiği ifade edilir.</span></p>
+        <p><span class="correct">6. A) Moyen-çor</span><br><span class="explanation">Açıklama: Ünite 1.3.3’te Şine-usu Yazıtı’nın Moyen-çor ile ilgili olduğu açıklanır.</span></p>
+        <p><span class="correct">7. B) Türkçe, Çince ve Soğdca</span><br><span class="explanation">Açıklama: Ünite 1.3.4’te Karabalsagun Yazıtı’nın üç dilde yazıldığı belirtilir.</span></p>
+        <p><span class="correct">8. D) Destanlar</span><br><span class="explanation">Açıklama: Ünite 1.4.1’de Maniheist Uygur Edebiyatı’nda destanların yer almadığı vurgulanır.</span></p>
+        <p><span class="correct">9. B) Altun Yaruk</span><br><span class="explanation">Açıklama: Ünite 1.4.3’te Budist Uygur Edebiyatı’nın en önemli eseri olarak Altun Yaruk gösterilir.</span></p>
+        <p><span class="correct">10. A) Orhun Nehri</span><br><span class="explanation">Açıklama: Ünite 1.5.1’de destanlara göre Uygurların ilk türedikleri yerin Orhun Nehri olduğu belirtilir.</span></p>
+        <p><span class="correct">11. A) Bozkurt, geyik ve ışık</span><br><span class="explanation">Açıklama: Ünite 1.5.5’te Oğuz Kağan Destanı’nda bu unsurların öne çıktığı ifade edilir.</span></p>
+        <p><span class="correct">12. B) Kaşgar</span><br><span class="explanation">Açıklama: Ünite 1.5.6’da Kutadgu Bilig’in Kaşgar’da tamamlandığı belirtilir.</span></p>
+        <p><span class="correct">13. B) Araplara Türkçeyi öğretmek</span><br><span class="explanation">Açıklama: Ünite 1.5.8’de Divanü Lugati’t-Türk’ün bu amaçla yazıldığı açıklanır.</span></p>
+        <p><span class="correct">14. A) Sakalar, Hunlar, Kanglılar ve Göktürkler</span><br><span class="explanation">Açıklama: Ünite 2.1’de Uygurların soyunun bu topluluklara dayandığı belirtilir.</span></p>
+        <p><span class="correct">15. C) Doğu Uygur Hanlığı</span><br><span class="explanation">Açıklama: Ünite 2.1’de Büyük Hun Devleti döneminde Baykal Gölü civarında bu hanlığın var olduğu söylenir.</span></p>
+        <p><span class="correct">16. C) Uymak, yapışmak</span><br><span class="explanation">Açıklama: Ünite 2.2’de Ebulgazi Bahadır Han’a göre “Uygur” isminin bu anlama geldiği belirtilir.</span></p>
+        <p><span class="correct">17. A) P’usa önderliğinde Göktürk ordusunu yenmeleri</span><br><span class="explanation">Açıklama: Ünite 2.3’te bu olayın Uygurların şöhretini artırdığı ifade edilir.</span></p>
+        <p><span class="correct">18. C) Kutlug Bilge Kül Kağan</span><br><span class="explanation">Açıklama: Ünite 3.1’de Uygur Devleti’nin kurucusu olarak bu kağan gösterilir.</span></p>
+        <p><span class="correct">19. A) Çin’in yenilerek Tarım Havzası’nın Uygurlara geçmesi</span><br><span class="explanation">Açıklama: Ünite 3.2’de Talas Savaşı’nın bu sonucu doğurduğu belirtilir.</span></p>
+        <p><span class="correct">20. D) Hindistan Seferleri</span><br><span class="explanation">Açıklama: Ünite 3.2’de Moyen-çor’un seferleri arasında Hindistan Seferleri yer almaz.</span></p>
+        <p><span class="correct">21. A) Âlim ve sihirbaz</span><br><span class="explanation">Açıklama: Ünite 3.3’te Bögü Kağan’ın isminin bu anlama geldiği açıklanır.</span></p>
+        <p><span class="correct">22. B) Tibetlilerin Çin’e hücum etmesi</span><br><span class="explanation">Açıklama: Ünite 3.3’te Lo-yang Seferi’nin bu nedenle gerçekleştiği belirtilir.</span></p>
+        <p><span class="correct">23. B) Ağıcı</span><br><span class="explanation">Açıklama: Ünite 3.5’te vergi toplayanlara “Ağıcı” denildiği ifade edilir.</span></p>
+        <p><span class="correct">24. B) Orta Yol</span><br><span class="explanation">Açıklama: Ünite 3.6’da Turfan ve Kaşgar’dan geçen güzergâhın Orta Yol olduğu belirtilir.</span></p>
+        <p><span class="correct">25. A) Dokuz Oğuz</span><br><span class="explanation">Açıklama: Ünite 3.7’de Uygur Devleti’nin bu boylar üzerinde geliştiği açıklanır.</span></p>
+        <p><span class="correct">26. A) Ordubalık şehrinin kurulması</span><br><span class="explanation">Açıklama: Ünite 3.8’de bu olayın yerleşik hayatın göstergesi olduğu belirtilir.</span></p>
+        <p><span class="correct">27. A) Alp Kutlug Bilge Kağan</span><br><span class="explanation">Açıklama: Ünite 4.1’de Tun Baga Tarkan’ın unvanı budur.</span></p>
+        <p><span class="correct">28. B) Karluk isyanını bastırmış ve Tibetlileri uzaklaştırmıştır</span><br><span class="explanation">Açıklama: Ünite 4.1’de Kutlug Bilge Kağan’ın bu sorunlarla uğraştığı belirtilir.</span></p>
+        <p><span class="correct">29. C) Arapların teşvikiyle Türk boylarının isyanı</span><br><span class="explanation">Açıklama: Ünite 4.2’de bu durumun yıkılış sebepleri arasında yer almadığı ifade edilir.</span></p>
+        <p><span class="correct">30. B) Kansu</span><br><span class="explanation">Açıklama: Ünite 4.3’te Kan-chou Uygurlarının Kansu’da kurulduğu belirtilir.</span></p>
+        <p><span class="correct">31. A) Ting-ling</span><br><span class="explanation">Açıklama: Ünite 2.2’de Çin kaynaklarında Uygurların atalarının bu isimle anıldığı açıklanır.</span></p>
+        <p><span class="correct">32. B) Ordubalık</span><br><span class="explanation">Açıklama: Ünite 3.1’de Uygur Kaganlığı’nın başkenti olarak Ordubalık gösterilir.</span></p>
+        <p><span class="correct">33. C) Şine-usu Yazıtı</span><br><span class="explanation">Açıklama: Ünite 3.2’de Moyen-çor’un edebi yönünün bu yazıtla ön plana çıktığı belirtilir.</span></p>
+        <p><span class="correct">34. B) Yerleşik hayata geçmeyi teşvik etmiştir</span><br><span class="explanation">Açıklama: Ünite 3.3’te Maniheizm’in bu etkisi olduğu ifade edilir.</span></p>
+        <p><span class="correct">35. B) Hayvancılık</span><br><span class="explanation">Açıklama: Ünite 3.4’te ekonominin temelinin hayvancılık olduğu belirtilir.</span></p>
+        <p><span class="correct">36. B) Geçiş vergisi</span><br><span class="explanation">Açıklama: Ünite 3.6’da İpek Yolu’ndan elde edilen gelirlerden birinin bu olduğu açıklanır.</span></p>
+        <p><span class="correct">37. B) Surlarla çevrili kale-şehir</span><br><span class="explanation">Açıklama: Ünite 3.8’de “Balık” kelimesinin bu anlama geldiği belirtilir.</span></p>
+        <p><span class="correct">38. B) Barış yanlısı</span><br><span class="explanation">Açıklama: Ünite 4.1’de Tun Baga Tarkan döneminde bu politikanın izlendiği ifade edilir.</span></p>
+        <p><span class="correct">39. B) Kutlug Bilge Kağan</span><br><span class="explanation">Açıklama: Ünite 4.1’de 795’te tahta geçen kağan olarak bu isim verilir.</span></p>
+        <p><span class="correct">40. B) Başkenti basarak hâkimiyeti ele geçirmişlerdir</span><br><span class="explanation">Açıklama: Ünite 4.2’de Kırgızların bu rolü oynadığı belirtilir.</span></p>
+        <p><span class="correct">41. A) Budistlerin az olması</span><br><span class="explanation">Açıklama: Ünite 4.3’te Kan-chou bölgesinin bu özelliği olduğu açıklanır.</span></p>
+        <p><span class="correct">42. A) Jen-yü Kağan</span><br><span class="explanation">Açıklama: Ünite 4.3’te Çin İmparatoru’nun bu unvanı Jen-yü Kağan’a verdiği belirtilir.</span></p>
+        <p><span class="correct">43. C) 821’den itibaren</span><br><span class="explanation">Açıklama: Ünite 4.2’de zayıflama sürecinin bu tarihten başladığı ifade edilir.</span></p>
+        <p><span class="correct">44. B) Kırgızların başkenti basması</span><br><span class="explanation">Açıklama: Ünite 4.2’de bu olayın çöküşün kırılma noktası olduğu açıklanır.</span></p>
+        <p><span class="correct">45. B) Beşbalık</span><br><span class="explanation">Açıklama: Ünite 1.5.4’te Göç Destanı’nda son durak olarak Beşbalık gösterilir.</span></p>
+        <p><span class="correct">46. B) Işık ve ağaç</span><br><span class="explanation">Açıklama: Ünite 1.5.2’de türeyiş efsanesinde bu motiflerin öne çıktığı belirtilir.</span></p>
+        <p><span class="correct">47. B) 744</span><br><span class="explanation">Açıklama: Ünite 3.1’de Kutlug Bilge Kül Kağan’ın tahta çıkış yılı 744’tür.</span></p>
+        <p><span class="correct">48. A) 8 yıl</span><br><span class="explanation">Açıklama: Ünite 3.2’de Moyen-çor’un altın çağ döneminin 8 yıl sürdüğü ifade edilir.</span></p>
+        <p><span class="correct">49. C) Bögü Kağan</span><br><span class="explanation">Açıklama: Ünite 3.3’te Mani dinine geçişin Bögü Kağan döneminde olduğu belirtilir.</span></p>
+        <p><span class="correct">50. A) Karluklar, Tibetliler, Moğollar</span><br><span class="explanation">Açıklama: Ünite 4.2’de yıkılıştan sonra Uygurların bu topluluklara katıldığı açıklanır.</span></p>
+    </div>
+
+    <script>
+        let timeLeft = 30 * 60;
+        const timerElement = document.getElementById('timer');
+        const correctAnswers = {
+            q1: "B", q3: "D", q4: "B", q5: "B", q6: "A", q7: "B", q8: "D", q9: "B", q10: "A",
+            q11: "A", q12: "B", q13: "B", q14: "A", q15: "C", q16: "C", q17: "A", q18: "C", q19: "A", q20: "D",
+            q21: "A", q22: "B", q23: "B", q24: "B", q25: "A", q26: "A", q27: "A", q28: "B", q29: "C", q30: "B",
+            q31: "A", q32: "B", q33: "C", q34: "B", q35: "B", q36: "B", q37: "B", q38: "B", q39: "B", q40: "B",
+            q41: "A", q42: "A", q43: "C", q44: "B", q45: "B", q46: "B", q47: "B", q48: "A", q49: "C", q50: "A"
+        };
+
+        function updateTimer() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            timerElement.textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            if (timeLeft > 0) timeLeft--;
+            else {
+                timerElement.textContent = "Süre Bitti!";
+                document.getElementById('testForm').querySelector('button').disabled = true;
+                evaluateTest();
+            }
+        }
+        setInterval(updateTimer, 1000);
+
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            evaluateTest();
+        });
+
+        function evaluateTest() {
+            let score = 0;
+            let correctCount = 0;
+            let wrongCount = 0;
+            let wrongAnswers = [];
+
+            for (let i = 1; i <= 50; i++) {
+                if (i === 2) continue; // Soru 2 eksik
+                const userAnswer = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAnswer = correctAnswers[`q${i}`];
+                if (userAnswer && userAnswer.value === correctAnswer) {
+                    score += 2;
+                    correctCount++;
+                } else {
+                    wrongCount++;
+                    wrongAnswers.push(`Soru ${i}: Kullanıcının cevabı: ${userAnswer ? userAnswer.value : 'Boş'}, Doğru cevap: ${correctAnswer}`);
+                }
+            }
+
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('score').textContent = `Toplam Puan: ${score} / 98`; // 49 soru x 2 puan
+            document.getElementById('correctCount').textContent = `Doğru Sayısı: ${correctCount}`;
+            document.getElementById('wrongCount').textContent = `Yanlış Sayısı: ${wrongCount}`;
+            document.getElementById('wrongAnswers').innerHTML = wrongAnswers.length > 0 ? `<h3>Yanlış Yanıtlanan Sorular:</h3><p>${wrongAnswers.join('<br>')}</p>` : "Tüm sorular doğru!";
+            document.querySelector('.submit-btn').style.display = 'none';
+        }
+
+        function showAnswers() {
+            document.getElementById('answers').style.display = 'block';
+            document.querySelector('.show-answers-btn').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

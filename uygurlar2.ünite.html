@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uygurlar Tarihi Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #result h2 {
+            color: #27ae60;
+        }
+        .explanation {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <h1>Uygurlar Tarihi Testi</h1>
+    <form id="quizForm">
+        <!-- Soru 1 -->
+        <div class="question">
+            <h3>1. Uygurların soyları hangi Türk boylarına dayanmaktadır?</h3>
+            <label><input type="radio" name="q1" value="A"> A) Sakalar, Hunlar, Kanglılar, Göktürkler</label>
+            <label><input type="radio" name="q1" value="B"> B) Karluklar, Basmiller, Kırgızlar</label>
+            <label><input type="radio" name="q1" value="C"> C) Oğuzlar, Peçenekler, Kumanlar</label>
+            <label><input type="radio" name="q1" value="D"> D) Tölesler, Kitanlar, Tatabılar</label>
+        </div>
+
+        <!-- Soru 2 -->
+        <div class="question">
+            <h3>2. Büyük Hun Devleti’nin kurulduğu dönemde Çin kaynaklarına göre M.Ö. III. yüzyılda hangi hanlıklar vardı?</h3>
+            <label><input type="radio" name="q2" value="A"> A) Yenisey’de Kırgız Hanlığı, Altaylarda Oğuz Hanlığı, Baykal Gölü civarında Doğu Uygur Hanlığı</label>
+            <label><input type="radio" name="q2" value="B"> B) Tarım Havzası’nda Moğol şehir devletleri, Fergana Hanlığı</label>
+            <label><input type="radio" name="q2" value="C"> C) Baykal Gölü civarında Moğol Hanlığı, Yenisey’de Oğuz Hanlığı</label>
+            <label><input type="radio" name="q2" value="D"> D) Altaylarda Kırgız Hanlığı, Tarım Havzası’nda Uygur Hanlığı</label>
+        </div>
+
+        <!-- Soru 3 -->
+        <div class="question">
+            <h3>3. Göktürk Devleti kurulduktan sonra Uygurların durumu ile ilgili hangi bilgiler doğrudur?</h3>
+            <label><input type="radio" name="q3" value="A"> A) Doğu Uygurları Orhun civarında yaşadı, Mukan Kagan tarafından itaat altına alındı, Batı Uygurları İstemi Yabgu tarafından hâkimiyet altına alındı</label>
+            <label><input type="radio" name="q3" value="B"> B) Batı Uygurları İstemi Yabgu tarafından hâkimiyet altına alındı, Tarım Vadisi’ndeki Uygurlar Mukan Kagan’a itaat etti</label>
+            <label><input type="radio" name="q3" value="C"> C) Doğu ve Batı Uygurları Mukan Kagan tarafından itaat altına alındı</label>
+            <label><input type="radio" name="q3" value="D"> D) Doğu Uygurları Orhun civarında yaşadı, İstemi Yabgu tarafından itaat altına alındı</label>
+        </div>
+
+        <!-- Soru 4 -->
+        <div class="question">
+            <h3>4. Ebulgazi Bahadır Han’a göre Uygur isminin manası nedir?</h3>
+            <label><input type="radio" name="q4" value="A"> A) Kendi kendine yeter</label>
+            <label><input type="radio" name="q4" value="B"> B) Uymak, yapışmak</label>
+            <label><input type="radio" name="q4" value="C"> C) Şahin gibi hızla hücum eden</label>
+            <label><input type="radio" name="q4" value="D"> D) Akraba, müttefik</label>
+        </div>
+
+        <!-- Soru 5 -->
+        <div class="question">
+            <h3>5. Uygur Devleti kurulmadan önce Uygurların şöhretinin artmasına neden olan hadise nedir?</h3>
+            <label><input type="radio" name="q5" value="A"> A) P’u-sa önderliğinde 627’de Göktürk ordusunu yenmeleri</label>
+            <label><input type="radio" name="q5" value="B"> B) Ay Ucru’nun Juan-juan’ları yenmesi</label>
+            <label><input type="radio" name="q5" value="C"> C) Tu-mi-tu’nun Çinlilere karşı zaferi</label>
+            <label><input type="radio" name="q5" value="D"> D) Kutlug Bilge Kagan’ın Göktürkleri yıkması</label>
+        </div>
+
+        <!-- Soru 6 -->
+        <div class="question">
+            <h3>6. Uygurların tarih sahnesine çıkışında P’u-sa hangi unvanı almıştır?</h3>
+            <label><input type="radio" name="q6" value="A"> A) Ulu Tanrıkut</label>
+            <label><input type="radio" name="q6" value="B"> B) Alp İlteber</label>
+            <label><input type="radio" name="q6" value="C"> C) Kutlug Bilge Kagan</label>
+            <label><input type="radio" name="q6" value="D"> D) İl Kagan</label>
+        </div>
+
+        <!-- Soru 7 -->
+        <div class="question">
+            <h3>7. Kutluk Bilge Kagan’ın faaliyetlerinden biri olmayan hangisidir?</h3>
+            <label><input type="radio" name="q7" value="A"> A) Çin’e sefer düzenleyip mağlup etmesi</label>
+            <label><input type="radio" name="q7" value="B"> B) Karabalsagun’u başkent yapması</label>
+            <label><input type="radio" name="q7" value="C"> C) Doğu Göktürklerine karşı ittifak kurması</label>
+            <label><input type="radio" name="q7" value="D"> D) Uygurları On Uygur ve Dokuz Uygur olarak ikiye ayırması</label>
+        </div>
+
+        <!-- Soru 8 -->
+        <div class="question">
+            <h3>8. Uygurların ilk hükümdarı Kutlug Bilge Kül Kagan dönemi ile ilgili hangi bilgi yanlıştır?</h3>
+            <label><input type="radio" name="q8" value="A"> A) Her tarafa elçilerle fetihnameler gönderildi</label>
+            <label><input type="radio" name="q8" value="B"> B) Şine-Usu Yazıtı diktirildi</label>
+            <label><input type="radio" name="q8" value="C"> C) Doğu Göktürk Devleti’nin eski toprakları hâkimiyet altına alındı</label>
+            <label><input type="radio" name="q8" value="D"> D) Batıda Altay Dağları ile doğuda Mançurya arasındaki saha faaliyet alanı oldu</label>
+        </div>
+
+        <!-- Soru 9 -->
+        <div class="question">
+            <h3>9. Uygur Devleti’nin ilk döneminde Karluklar ile ilgili hangi bilgi yanlıştır?</h3>
+            <label><input type="radio" name="q9" value="A"> A) Karluklar devlette sol yabguluk mevkiini elde etmişlerdir</label>
+            <label><input type="radio" name="q9" value="B"> B) Uygur Devleti’nin öncü kuvvetlerini oluşturmuşlardır</label>
+            <label><input type="radio" name="q9" value="C"> C) Dokuz boy halinde yaşamaktaydılar</label>
+            <label><input type="radio" name="q9" value="D"> D) Doğu Göktürklerine karşı ittifak kurmuşlardır</label>
+        </div>
+
+        <!-- Soru 10 -->
+        <div class="question">
+            <h3>10. Uygurlar ile ilgili akademik çalışma yapan ilim adamları arasında hangisi yer almaz?</h3>
+            <label><input type="radio" name="q10" value="A"> A) Haneda Toru</label>
+            <label><input type="radio" name="q10" value="B"> B) Bahattin Ögel</label>
+            <label><input type="radio" name="q10" value="C"> C) Mustafa Kafalı</label>
+            <label><input type="radio" name="q10" value="D"> D) Turgun Almas</label>
+        </div>
+
+        <!-- Soru 11 -->
+        <div class="question">
+            <h3>11. Kırgızlar ile ilgili hangi bilgiler doğrudur?</h3>
+            <label><input type="radio" name="q11" value="A"> A) 839’da Uygur kağanını öldürerek Türk devletinin başına geçtiler, VI. yüzyılda Yenisey Nehri civarında yaşadılar</label>
+            <label><input type="radio" name="q11" value="B"> B) 752’de Tokuz Oğuz ve Çiklerle ittifak kurdular, Çin kaynaklarında mavi gözlü olarak tanımlanmazlar</label>
+            <label><input type="radio" name="q11" value="C"> C) VI. yüzyılda Sayan Dağları’nda yaşamadılar, 839’da Uygurları yendiler</label>
+            <label><input type="radio" name="q11" value="D"> D) 752’de Üç Karluk boyu ile ittifak kurmadılar, mavi gözlü olarak tanımlanmazlar</label>
+        </div>
+
+        <!-- Soru 12 -->
+        <div class="question">
+            <h3>12. Uygur hâkimiyetine son veren Türk boyu hangisidir?</h3>
+            <label><input type="radio" name="q12" value="A"> A) Kırgızlar</label>
+            <label><input type="radio" name="q12" value="B"> B) Karluklar</label>
+            <label><input type="radio" name="q12" value="C"> C) Oğuzlar</label>
+            <label><input type="radio" name="q12" value="D"> D) Kitanlar</label>
+        </div>
+
+        <!-- Soru 13 -->
+        <div class="question">
+            <h3>13. Uygurların menşei ile ilgili hangi boy Hunlar tarafından M.Ö. 177’de itaat altına alınmıştır?</h3>
+            <label><input type="radio" name="q13" value="A"> A) Baykal Gölü civarındaki Doğu Uygurlar</label>
+            <label><input type="radio" name="q13" value="B"> B) Türkistan’daki Uygurlar ve Batı Asya’daki Uygur beylikleri</label>
+            <label><input type="radio" name="q13" value="C"> C) Yenisey’deki Kırgız Hanlığı</label>
+            <label><input type="radio" name="q13" value="D"> D) Altaylardaki Oğuz Hanlığı</label>
+        </div>
+
+        <!-- Soru 14 -->
+        <div class="question">
+            <h3>14. Ay Ucru’nun kurduğu Uygur Hanlığı hangi bölgede tesis edilmiştir?</h3>
+            <label><input type="radio" name="q14" value="A"> A) Manas civarında</label>
+            <label><input type="radio" name="q14" value="B"> B) Kansu-Ordos bölgesinde</label>
+            <label><input type="radio" name="q14" value="C"> C) Beşbalık bölgesinde</label>
+            <label><input type="radio" name="q14" value="D"> D) Ötüken’de</label>
+        </div>
+
+        <!-- Soru 15 -->
+        <div class="question">
+            <h3>15. Uygur Kaganlığı’nın en güçlü dönemi hangi kagan ile başlamıştır?</h3>
+            <label><input type="radio" name="q15" value="A"> A) Ay Ucru</label>
+            <label><input type="radio" name="q15" value="B"> B) Kutluk Bilge Kagan</label>
+            <label><input type="radio" name="q15" value="C"> C) P’u-sa</label>
+            <label><input type="radio" name="q15" value="D"> D) Tu-mi-tu</label>
+        </div>
+
+        <!-- Soru 16 -->
+        <div class="question">
+            <h3>16. Uygur Kaganlığı’nın zayıflama döneminde başkent nereye taşınmıştır?</h3>
+            <label><input type="radio" name="q16" value="A"> A) Karabalsagun</label>
+            <label><input type="radio" name="q16" value="B"> B) Ötüken</label>
+            <label><input type="radio" name="q16" value="C"> C) Tanrı Dağları etekleri</label>
+            <label><input type="radio" name="q16" value="D"> D) Ordubalık</label>
+        </div>
+
+        <!-- Soru 17 -->
+        <div class="question">
+            <h3>17. Kırgızların VI. yüzyılda kurduğu devlet hangi bölgededir?</h3>
+            <label><input type="radio" name="q17" value="A"> A) Sayan Dağları’nın kuzeyi ve Yenisey Nehri</label>
+            <label><input type="radio" name="q17" value="B"> B) Tarım Havzası</label>
+            <label><input type="radio" name="q17" value="C"> C) Altay Dağları</label>
+            <label><input type="radio" name="q17" value="D"> D) Fergana Vadisi</label>
+        </div>
+
+        <!-- Soru 18 -->
+        <div class="question">
+            <h3>18. Oğuz kelimesinin Gy.Németh’e göre anlamı nedir?</h3>
+            <label><input type="radio" name="q18" value="A"> A) Boylar birliği</label>
+            <label><input type="radio" name="q18" value="B"> B) Kutsal savaşçılar</label>
+            <label><input type="radio" name="q18" value="C"> C) Göçebe halk</label>
+            <label><input type="radio" name="q18" value="D"> D) Bağımsız kabileler</label>
+        </div>
+
+        <!-- Soru 19 -->
+        <div class="question">
+            <h3>19. Oğuz Yabgu Devleti’nin kışlık merkezi neresidir?</h3>
+            <label><input type="radio" name="q19" value="A"> A) Yeni-kent</label>
+            <label><input type="radio" name="q19" value="B"> B) Cend</label>
+            <label><input type="radio" name="q19" value="C"> C) Suğnak</label>
+            <label><input type="radio" name="q19" value="D"> D) Karacuk</label>
+        </div>
+
+        <!-- Soru 20 -->
+        <div class="question">
+            <h3>20. Oğuz Yabgu Devleti ile ilgili hangi bilgi yanlıştır?</h3>
+            <label><input type="radio" name="q20" value="A"> A) Devletin en tepesinde Kül-Erkin bulunmaktaydı</label>
+            <label><input type="radio" name="q20" value="B"> B) Kuzeyde Kimekler ile mücadele etmişlerdir</label>
+            <label><input type="radio" name="q20" value="C"> C) Doğuda Karluklar ile mücadele etmişlerdir</label>
+            <label><input type="radio" name="q20" value="D"> D) Çiğilleri düşman görmüşlerdir</label>
+        </div>
+
+        <!-- Soru 21 -->
+        <div class="question">
+            <h3>21. Uygur Kaganlığı kurulduktan sonra Oğuzlarla ilgili hangi bilgi yanlıştır?</h3>
+            <label><input type="radio" name="q21" value="A"> A) VIII. yüzyıl sonlarında Oğuz Yabgu Devleti’ni kurmuşlardır</label>
+            <label><input type="radio" name="q21" value="B"> B) Bayan Çor tarafından Selenge kıyısında mağlup edildiler</label>
+            <label><input type="radio" name="q21" value="C"> C) Otuz Tatarlarla ittifak kurdular</label>
+            <label><input type="radio" name="q21" value="D"> D) Talas havalisine göçtüler</label>
+        </div>
+
+        <!-- Soru 22 -->
+        <div class="question">
+            <h3>22. Ogurların isimlendirmesinde hangi boy 10 Ogur anlamına gelir?</h3>
+            <label><input type="radio" name="q22" value="A"> A) Onogur</label>
+            <label><input type="radio" name="q22" value="B"> B) Bittigur</label>
+            <label><input type="radio" name="q22" value="C"> C) Kutrigur</label>
+            <label><input type="radio" name="q22" value="D"> D) Utigur</label>
+        </div>
+
+        <!-- Soru 23 -->
+        <div class="question">
+            <h3>23. Tölesler hangi Çin kaynağıyla “Yüksek Arabalı” olarak kaydedilmiştir?</h3>
+            <label><input type="radio" name="q23" value="A"> A) Sui Shu</label>
+            <label><input type="radio" name="q23" value="B"> B) Han Sülalesi Yıllığı</label>
+            <label><input type="radio" name="q23" value="C"> C) T’ang Hanedanı Kayıtları</label>
+            <label><input type="radio" name="q23" value="D"> D) Chien-k’un</label>
+        </div>
+
+        <!-- Soru 24 -->
+        <div class="question">
+            <h3>24. Türkistan sahasında yayılan kalabalık Türk boyları ve topluluklarına verilen isim nedir?</h3>
+            <label><input type="radio" name="q24" value="A"> A) Tölesler</label>
+            <label><input type="radio" name="q24" value="B"> B) Ogurlar</label>
+            <label><input type="radio" name="q24" value="C"> C) Oğuzlar</label>
+            <label><input type="radio" name="q24" value="D"> D) Kırgızlar</label>
+        </div>
+
+        <!-- Soru 25 -->
+        <div class="question">
+            <h3>25. Kırgızların 752’de hangi boylarla ittifak kurduğu Şine Usu Yazıtı’nda belirtilmiştir?</h3>
+            <label><input type="radio" name="q25" value="A"> A) Tokuz Oğuz, Çikler, Üç Karluk</label>
+            <label><input type="radio" name="q25" value="B"> B) Karluklar, Basmiller, Oğuzlar</label>
+            <label><input type="radio" name="q25" value="C"> C) On Uygur, Dokuz Oğuz</label>
+            <label><input type="radio" name="q25" value="D"> D) Tölesler, Kitanlar</label>
+        </div>
+
+        <!-- Soru 26 -->
+        <div class="question">
+            <h3>26. Uygurların bağımsızlığını kazandığı tarih nedir?</h3>
+            <label><input type="radio" name="q26" value="A"> A) 744-745</label>
+            <label><input type="radio" name="q26" value="B"> B) 627-628</label>
+            <label><input type="radio" name="q26" value="C"> C) 839</label>
+            <label><input type="radio" name="q26" value="D"> D) 682</label>
+        </div>
+
+        <!-- Soru 27 -->
+        <div class="question">
+            <h3>27. Oğuzların Göktürk fetret devrinde kurduğu kaganlık nerede yer alır?</h3>
+            <label><input type="radio" name="q27" value="A"> A) Tola-Selenga Irmakları havalisinde</label>
+            <label><input type="radio" name="q27" value="B"> B) Tarım Havzası’nda</label>
+            <label><input type="radio" name="q27" value="C"> C) Fergana Vadisi’nde</label>
+            <label><input type="radio" name="q27" value="D"> D) Tanrı Dağları eteklerinde</label>
+        </div>
+
+        <!-- Soru 28 -->
+        <div class="question">
+            <h3>28. Kırgızların Cengiz Han’a karşı isyanı hangi olayla tetiklenmiştir?</h3>
+            <label><input type="radio" name="q28" value="A"> A) Moğolların Tumat kızlarına sarkıntılık etmesi</label>
+            <label><input type="radio" name="q28" value="B"> B) Uygurların Kuzey Çin’e akınları</label>
+            <label><input type="radio" name="q28" value="C"> C) Kitanların saldırıları</label>
+            <label><input type="radio" name="q28" value="D"> D) Ötüken’in kaybı</label>
+        </div>
+
+        <!-- Soru 29 -->
+        <div class="question">
+            <h3>29. Uygur Kaganlığı’nın üç döneminden hangisi 100 yıl sürmüştür?</h3>
+            <label><input type="radio" name="q29" value="A"> A) Bağımsız oluşma evresi</label>
+            <label><input type="radio" name="q29" value="B"> B) Toprakların genişlemesi ve güçlenme dönemi</label>
+            <label><input type="radio" name="q29" value="C"> C) Zayıflama dönemi</label>
+            <label><input type="radio" name="q29" value="D"> D) Kırgız hakimiyeti dönemi</label>
+        </div>
+
+        <!-- Soru 30 -->
+        <div class="question">
+            <h3>30. Töleslerin en zengin ve kuvvetli boyu hangisidir?</h3>
+            <label><input type="radio" name="q30" value="A"> A) Tarduşlar</label>
+            <label><input type="radio" name="q30" value="B"> B) Uygurlar</label>
+            <label><input type="radio" name="q30" value="C"> C) On-Ok’lar</label>
+            <label><input type="radio" name="q30" value="D"> D) Karluklar</label>
+        </div>
+
+        <button type="button" onclick="calculateScore()">Sonuçları Göster</button>
+    </form>
+
+    <div id="result">
+        <h2>Puanınız: <span id="score"></span> / 100</h2>
+        <div id="explanations"></div>
+    </div>
+
+    <script>
+        function calculateScore() {
+            const form = document.getElementById('quizForm');
+            const correctAnswers = {
+                q1: 'A', q2: 'A', q3: 'A', q4: 'B', q5: 'A', q6: 'B', q7: 'A', q8: 'B', q9: 'C', q10: 'C',
+                q11: 'A', q12: 'A', q13: 'B', q14: 'A', q15: 'B', q16: 'C', q17: 'A', q18: 'A', q19: 'A', q20: 'A',
+                q21: 'A', q22: 'A', q23: 'A', q24: 'A', q25: 'A', q26: 'A', q27: 'A', q28: 'A', q29: 'A', q30: 'A'
+            };
+            const explanations = {
+                q1: 'Doğru cevap A: Uygurların soyları Sakalar, Hunlar, Kanglılar ve Göktürklere dayanır.',
+                q2: 'Doğru cevap A: Çin kaynaklarına göre M.Ö. III. yüzyılda Yenisey’de Kırgız Hanlığı, Altaylarda Oğuz Hanlığı ve Baykal Gölü civarında Doğu Uygur Hanlığı vardı.',
+                q3: 'Doğru cevap A: Doğu Uygurları Orhun civarında yaşadı ve Mukan Kagan tarafından, Batı Uygurları ise İstemi Yabgu tarafından itaat altına alındı.',
+                q4: 'Doğru cevap B: Ebulgazi Bahadır Han’a göre Uygur ismi “uymak, yapışmak” anlamına gelir.',
+                q5: 'Doğru cevap A: P’u-sa önderliğinde 627’de Göktürk ordusunu yenmeleri Uygurların şöhretini artırmıştır.',
+                q6: 'Doğru cevap B: P’u-sa, Göktürk ordusunu yendikten sonra Alp İlteber unvanını almıştır.',
+                q7: 'Doğru cevap A: Kutluk Bilge Kagan’ın Çin’e sefer düzenleyip mağlup ettiği metinde belirtilmemiştir.',
+                q8: 'Doğru cevap B: Şine-Usu Yazıtı, Kutlug Bilge Kagan dönemiyle değil, daha sonraki dönemlerle ilişkilidir.',
+                q9: 'Doğru cevap C: Karlukların dokuz boy halinde yaşadıklarına dair metinde bilgi yoktur.',
+                q10: 'Doğru cevap C: Mustafa Kafalı, metinde Uygurlarla ilgili çalışma yapan ilim adamları arasında yer almaz.',
+                q11: 'Doğru cevap A: Kırgızlar 839’da Uygur kağanını öldürdü, VI. yüzyılda Yenisey’de yaşadılar, 752’de ittifak kurdular ve mavi gözlü olarak tanımlandılar.',
+                q12: 'Doğru cevap A: Uygur hâkimiyetine Kırgızlar son vermiştir.',
+                q13: 'Doğru cevap B: Türkistan’daki Uygurlar ve Batı Asya’daki Uygur beylikleri M.Ö. 177’de Hunlar tarafından itaat altına alındı.',
+                q14: 'Doğru cevap A: Ay Ucru, Manas civarında Uygur Hanlığı’nı kurmuştur.',
+                q15: 'Doğru cevap B: Uygur Kaganlığı’nın en güçlü dönemi Kutluk Bilge Kagan ile başlamıştır.',
+                q16: 'Doğru cevap C: Zayıflama döneminde başkent Tanrı Dağları eteklerine taşınmıştır.',
+                q17: 'Doğru cevap A: Kırgızlar VI. yüzyılda Sayan Dağları’nın kuzeyi ve Yenisey Nehri’nde devlet kurmuştur.',
+                q18: 'Doğru cevap A: Gy.Németh’e göre Oğuz, “boylar birliği” anlamına gelir.',
+                q19: 'Doğru cevap A: Oğuz Yabgu Devleti’nin kışlık merkezi Yeni-kent’tir.',
+                q20: 'Doğru cevap A: Devletin en tepesinde Kül-Erkin değil, Yabgu bulunmaktaydı.',
+                q21: 'Doğru cevap A: Oğuz Yabgu Devleti VIII. yüzyıl sonlarında değil, X. yüzyılda kurulmuştur.',
+                q22: 'Doğru cevap A: Onogur, 10 Ogur anlamına gelir.',
+                q23: 'Doğru cevap A: Tölesler, Sui Shu’da “Yüksek Arabalı” olarak kaydedilmiştir.',
+                q24: 'Doğru cevap A: Türkistan sahasındaki kalabalık Türk boylarına Tölesler denir.',
+                q25: 'Doğru cevap A: Şine Usu Yazıtı’nda Kırgızların Tokuz Oğuz, Çikler ve Üç Karluk ile ittifak kurduğu belirtilir.',
+                q26: 'Doğru cevap A: Uygurlar 744-745’te bağımsızlığını kazanmıştır.',
+                q27: 'Doğru cevap A: Oğuzlar Göktürk fetret devrinde Tola-Selenga Irmakları havalisinde kaganlık kurmuştur.',
+                q28: 'Doğru cevap A: Kırgızların Cengiz Han’a isyanı, Moğolların Tumat kızlarına sarkıntılık etmesiyle tetiklenmiştir.',
+                q29: 'Doğru cevap A: Uygur Kaganlığı’nın bağımsız oluşma evresi 100 yıl sürmüştür.',
+                q30: 'Doğru cevap A: Töleslerin en zengin ve kuvvetli boyu Tarduşlar’dır.'
+            };
+
+            let score = 0;
+            for (let i = 1; i <= 30; i++) {
+                const userAnswer = form.querySelector(`input[name="q${i}"]:checked`);
+                if (userAnswer && userAnswer.value === correctAnswers[`q${i}`]) {
+                    score += 3.33; // Her doğru cevap 3.33 puan (100/30)
+                }
+            }
+
+            document.getElementById('score').textContent = Math.round(score);
+            document.getElementById('result').style.display = 'block';
+
+            const explanationsDiv = document.getElementById('explanations');
+            explanationsDiv.innerHTML = '';
+            for (let i = 1; i <= 30; i++) {
+                const explanation = document.createElement('div');
+                explanation.className = 'explanation';
+                explanation.textContent = `${i}. Soru: ${explanations[`q${i}`]}`;
+                explanationsDiv.appendChild(explanation);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğu Avrupa Türk Tarihi Vize Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .welcome, .test-form, .result {
+            display: none;
+        }
+        .welcome.active, .test-form.active, .result.active {
+            display: block;
+        }
+        .welcome {
+            text-align: center;
+            padding: 20px;
+        }
+        .welcome button {
+            background-color: #3498db;
+        }
+        .welcome button:hover {
+            background-color: #2980b9;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .question label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #timer {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #e74c3c;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            height: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .result {
+            padding: 20px;
+        }
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .result-table th, .result-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .result-table th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .correct {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .unit-stats {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #ecf0f1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .unit-stats h3 {
+            margin: 0 0 10px;
+            color: #34495e;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            button {
+                padding: 10px;
+            }
+            .result-table th, .result-table td {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Doğu Avrupa Türk Tarihi Vize Testi</h1>
+
+        <!-- Karşılama Ekranı -->
+        <div class="welcome active" id="welcome">
+            <p>Hoş geldiniz! Bu test, Doğu Avrupa Türk Tarihi vize sorularından oluşmaktadır. Toplam 60 soru, 30 dakikalık süre. Başarılar!</p>
+            <button onclick="startTest()">Teste Başla</button>
+        </div>
+
+        <!-- Test Formu -->
+        <div class="test-form" id="testForm">
+            <div id="timer">Kalan Süre: 30:00</div>
+            <div class="progress-bar"><div class="progress" id="progress"></div></div>
+            <form id="quizForm">
+                <h2>Doğu Avrupa Türk Tarihi Soruları</h2>
+                <div class="question">
+                    <p>1. Eşi Balak’ın ölümünden sonra tahta geçen Sabar hatunu aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q1" value="a"> Kabac</label>
+                    <label><input type="radio" name="q1" value="b"> Boğarık</label>
+                    <label><input type="radio" name="q1" value="c"> İlbilge</label>
+                    <label><input type="radio" name="q1" value="d"> Asena</label>
+                    <label><input type="radio" name="q1" value="e"> Tomris</label>
+                </div>
+                <div class="question">
+                    <p>2. Aşağıdakilerden hangisi 1180 yıllarında yazılan ve Ostrogot Kralı Ermanarik’in siyasi hayatından ilham alan destandır?</p>
+                    <label><input type="radio" name="q2" value="a"> St. Ursula Efsanesi</label>
+                    <label><input type="radio" name="q2" value="b"> Nibelungen Destanı</label>
+                    <label><input type="radio" name="q2" value="c"> Dietrich Destanı</label>
+                    <label><input type="radio" name="q2" value="d"> St. Memorius Menkıbesi</label>
+                    <label><input type="radio" name="q2" value="e"> Süryani Büyük İskender Hristiyan Efsanesi</label>
+                </div>
+                <div class="question">
+                    <p>3. Aşağıdaki hangi seçenekte Hazar-Kazar kelimesinin anlamı doğru olarak verilmiştir?</p>
+                    <label><input type="radio" name="q3" value="a"> Savaşçı</label>
+                    <label><input type="radio" name="q3" value="b"> Gezen, bir yere bağlı olmayan</label>
+                    <label><input type="radio" name="q3" value="c"> Tüccar</label>
+                    <label><input type="radio" name="q3" value="d"> Yerleşik halk</label>
+                    <label><input type="radio" name="q3" value="e"> Denizci</label>
+                </div>
+                <div class="question">
+                    <p>4. İtil Bulgarları arasında İslamiyeti kabul etmelerinden sonra sufilik geleneğinin hanlığın topraklarında ve Türkistan’da yerleşmesini sağlayan kişi aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q4" value="a"> Süleyman Bakırgani</label>
+                    <label><input type="radio" name="q4" value="b"> Kaşgarlı Mahmut</label>
+                    <label><input type="radio" name="q4" value="c"> Ahmet Yesevi</label>
+                    <label><input type="radio" name="q4" value="d"> Hacı Bektaş Veli</label>
+                    <label><input type="radio" name="q4" value="e"> Ali Şir Nevai</label>
+                </div>
+                <div class="question">
+                    <p>5. Aşağıdakilerden hangisi İskit Kağanlığı’nın siyasi ilişki kurduğu devletlerden biri değildir?</p>
+                    <label><input type="radio" name="q5" value="a"> Kimmerler</label>
+                    <label><input type="radio" name="q5" value="b"> Urartular</label>
+                    <label><input type="radio" name="q5" value="c"> Asurlar</label>
+                    <label><input type="radio" name="q5" value="d"> Persler</label>
+                    <label><input type="radio" name="q5" value="e"> Gotlar</label>
+                </div>
+                <div class="question">
+                    <p>6. İtil Bulgar Hanlığı’nın Kiev Knyazı Vladimir ile antlaşma imzalayarak Ruslar tarafından resmen tanınma tarihi aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q6" value="a"> 965</label>
+                    <label><input type="radio" name="q6" value="b"> 975</label>
+                    <label><input type="radio" name="q6" value="c"> 985</label>
+                    <label><input type="radio" name="q6" value="d"> 995</label>
+                    <label><input type="radio" name="q6" value="e"> 1005</label>
+                </div>
+                <div class="question">
+                    <p>7. Hazarların tam bağımsız bir kağanlık haline gelmeleri hangi yıl olmuştur?</p>
+                    <label><input type="radio" name="q7" value="a"> 610</label>
+                    <label><input type="radio" name="q7" value="b"> 620</label>
+                    <label><input type="radio" name="q7" value="c"> 630</label>
+                    <label><input type="radio" name="q7" value="d"> 640</label>
+                    <label><input type="radio" name="q7" value="e"> 650</label>
+                </div>
+                <div class="question">
+                    <p>8. Aşağıdakilerden hangisi İtil Bulgar Hanlığı’nın komşularından biri değildir?</p>
+                    <label><input type="radio" name="q8" value="a"> Fin-Ugor boyları</label>
+                    <label><input type="radio" name="q8" value="b"> Slavlar</label>
+                    <label><input type="radio" name="q8" value="c"> Oğuzlar</label>
+                    <label><input type="radio" name="q8" value="d"> Peçenekler</label>
+                    <label><input type="radio" name="q8" value="e"> Franklar</label>
+                </div>
+                <div class="question">
+                    <p>9. Büyük Bulgar Kağanlığı’nın uzun süre yaşayamamasının sebebi aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q9" value="a"> Topraklarının geniş olması</label>
+                    <label><input type="radio" name="q9" value="b"> Askeri gücünün zayıf olması</label>
+                    <label><input type="radio" name="q9" value="c"> İç anlaşmazlık ve Hazar baskısı</label>
+                    <label><input type="radio" name="q9" value="d"> Otlak kıtlığı</label>
+                    <label><input type="radio" name="q9" value="e"> Silah yetersizliği</label>
+                </div>
+                <div class="question">
+                    <p>10. Aşağıdaki seçeneklerden hangisinde Atila’nın eşinin adı doğru verilmiştir?</p>
+                    <label><input type="radio" name="q10" value="a"> Kabac</label>
+                    <label><input type="radio" name="q10" value="b"> Arikan</label>
+                    <label><input type="radio" name="q10" value="c"> Tomris</label>
+                    <label><input type="radio" name="q10" value="d"> Boğarık</label>
+                    <label><input type="radio" name="q10" value="e"> İlbilge</label>
+                </div>
+                <div class="question">
+                    <p>11. Avarlar en güçlü ve bilinen kağanı aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q11" value="a"> Kubrat</label>
+                    <label><input type="radio" name="q11" value="b"> Bayan</label>
+                    <label><input type="radio" name="q11" value="c"> Organas</label>
+                    <label><input type="radio" name="q11" value="d"> Gostun</label>
+                    <label><input type="radio" name="q11" value="e"> Irnek</label>
+                </div>
+                <div class="question">
+                    <p>12. Avar Kağanlığı aşağıdaki milletlerden hangisi ile siyasi bir ilişki kurmamıştır?</p>
+                    <label><input type="radio" name="q12" value="a"> Slavlar</label>
+                    <label><input type="radio" name="q12" value="b"> Sasaniler</label>
+                    <label><input type="radio" name="q12" value="c"> Franklar</label>
+                    <label><input type="radio" name="q12" value="d"> Bizans</label>
+                    <label><input type="radio" name="q12" value="e"> Bulgarlar</label>
+                </div>
+                <div class="question">
+                    <p>13. Aşağıdakilerden hangisi Hunlardan önce Doğu Avrupa’da yaşayan milletlerden biri değildir?</p>
+                    <label><input type="radio" name="q13" value="a"> Fin-Ugorlar</label>
+                    <label><input type="radio" name="q13" value="b"> Gotlar</label>
+                    <label><input type="radio" name="q13" value="c"> Slavlar</label>
+                    <label><input type="radio" name="q13" value="d"> Normallar</label>
+                    <label><input type="radio" name="q13" value="e"> Franklar</label>
+                </div>
+                <div class="question">
+                    <p>14. Avarlar, Sasaniler ile yaptıkları anlaşma çerçevesinde İstanbul’a kuşatmak üzere kaç defa gelmişlerdir?</p>
+                    <label><input type="radio" name="q14" value="a"> 1</label>
+                    <label><input type="radio" name="q14" value="b"> 2</label>
+                    <label><input type="radio" name="q14" value="c"> 3</label>
+                    <label><input type="radio" name="q14" value="d"> 4</label>
+                    <label><input type="radio" name="q14" value="e"> 6</label>
+                </div>
+                <div class="question">
+                    <p>15. Avarlar hakkında “Onlar kuş değil ki Türklerin kılıçlarından kaçabilmek için gökyüzüne uçabilsinler...” diyen Köktürk Kağanı aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q15" value="a"> Bumin Kağan</label>
+                    <label><input type="radio" name="q15" value="b"> İstemi Kağan</label>
+                    <label><input type="radio" name="q15" value="c"> Tardu Kağan</label>
+                    <label><input type="radio" name="q15" value="d"> Tonyukuk</label>
+                    <label><input type="radio" name="q15" value="e"> Bilge Kağan</label>
+                </div>
+                <div class="question">
+                    <p>16. Aşağıdakilerden hangisi 429-430 yılları arasında Avrupa Hun Kağanlığı’nın batı kanadı komutanı ve Kağan Rua’nın kardeşidir?</p>
+                    <label><input type="radio" name="q16" value="a"> Aybars</label>
+                    <label><input type="radio" name="q16" value="b"> Muncuk</label>
+                    <label><input type="radio" name="q16" value="c"> Oktar</label>
+                    <label><input type="radio" name="q16" value="d"> Karaton</label>
+                    <label><input type="radio" name="q16" value="e"> Uldız</label>
+                </div>
+                <div class="question">
+                    <p>17. Doğu Roma’yı saldırıları ile oldukça korkutan ve İmparator I. Anastasius’un sur inşa ettirmesini sağlayan Türk boyu aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q17" value="a"> Sabarlar</label>
+                    <label><input type="radio" name="q17" value="b"> Hunlar</label>
+                    <label><input type="radio" name="q17" value="c"> Kutrigurlar</label>
+                    <label><input type="radio" name="q17" value="d"> Hazarlar</label>
+                    <label><input type="radio" name="q17" value="e"> Avarlar</label>
+                </div>
+                <div class="question">
+                    <p>18. Aşağıdakilerden hangisi İtil Bulgar Hanlığı’nın Türk tarihine en büyük katkısıdır?</p>
+                    <label><input type="radio" name="q18" value="a"> Orta İtil bölgesinin Türkleşmesi ve İslamlaşması</label>
+                    <label><input type="radio" name="q18" value="b"> Askeri teknolojilerin gelişmesi</label>
+                    <label><input type="radio" name="q18" value="c"> Yazılı edebiyatın ortaya çıkması</label>
+                    <label><input type="radio" name="q18" value="d"> Ticaret yollarının güvenliği</label>
+                    <label><input type="radio" name="q18" value="e"> Merkezi devlet yapısının kurulması</label>
+                </div>
+                <div class="question">
+                    <p>19. Aşağıdaki imparatorluklardan hangisi Kubrat’a Doğu Roma ile iyi ilişkiler kurması üzerine Patrikios unvanı vermiştir?</p>
+                    <label><input type="radio" name="q19" value="a"> Mavrikos</label>
+                    <label><input type="radio" name="q19" value="b"> Heraklios</label>
+                    <label><input type="radio" name="q19" value="c"> Justinianos</label>
+                    <label><input type="radio" name="q19" value="d"> Tiberios</label>
+                    <label><input type="radio" name="q19" value="e"> Romanos Lekapanos</label>
+                </div>
+                <div class="question">
+                    <p>20. Kurum Han Doğu Roma’ya karşı nasıl bir siyaset izlemiştir?</p>
+                    <label><input type="radio" name="q20" value="a"> Dostane bir siyaset</label>
+                    <label><input type="radio" name="q20" value="b"> Saldırgan bir siyaset</label>
+                    <label><input type="radio" name="q20" value="c"> Tarafsız bir siyaset</label>
+                    <label><input type="radio" name="q20" value="d"> İttifak arayan bir siyaset</label>
+                    <label><input type="radio" name="q20" value="e"> Ticaret odaklı bir siyaset</label>
+                </div>
+                <div class="question">
+                    <p>21. Altınoba Beyliği adında bir beylik kurduğu ileri sürülen Atila’nın oğlu aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q21" value="a"> Ilek</label>
+                    <label><input type="radio" name="q21" value="b"> Dengizik</label>
+                    <label><input type="radio" name="q21" value="c"> Irnek</label>
+                    <label><input type="radio" name="q21" value="d"> Rua</label>
+                    <label><input type="radio" name="q21" value="e"> Bayan</label>
+                </div>
+                <div class="question">
+                    <p>22. Aşağıdakilerden hangisi Hunların hakimiyet altına aldıkları boylara uyguladıkları politikalardan biri değildir?</p>
+                    <label><input type="radio" name="q22" value="a"> İç işlerinde serbest bırakılmaları</label>
+                    <label><input type="radio" name="q22" value="b"> Kendi kralları tarafından yönetilmeleri</label>
+                    <label><input type="radio" name="q22" value="c"> Vergiden muaf tutulmaları</label>
+                    <label><input type="radio" name="q22" value="d"> İsyan teşebbüsünde özerkliklerinin kaldırılması</label>
+                    <label><input type="radio" name="q22" value="e"> Dış münasebetlerde Hunların izni olmadan hareket edememeleri</label>
+                </div>
+                <div class="question">
+                    <p>23. Hazarlar hangi tarihten itibaren Doğu Roma tarafından oldukça iyi bilinerek “Türk” ismi ile anılmışlardır?</p>
+                    <label><input type="radio" name="q23" value="a"> 576</label>
+                    <label><input type="radio" name="q23" value="b"> 586</label>
+                    <label><input type="radio" name="q23" value="c"> 596</label>
+                    <label><input type="radio" name="q23" value="d"> 606</label>
+                    <label><input type="radio" name="q23" value="e"> 616</label>
+                </div>
+                <div class="question">
+                    <p>24. Aşağıdakilerden hangisi Avarların 626 yılındaki İstanbul kuşatmasının sonuçlarından biri değildir?</p>
+                    <label><input type="radio" name="q24" value="a"> Avar hakimiyetinin gerilemeye başlaması</label>
+                    <label><input type="radio" name="q24" value="b"> Slav-Gepit-Bulgar kavimlerinin ayrılması</label>
+                    <label><input type="radio" name="q24" value="c"> Avar devletinin gücünün zayıflaması</label>
+                    <label><input type="radio" name="q24" value="d"> Avarların yenilgisiyle sonuçlanması</label>
+                    <label><input type="radio" name="q24" value="e"> Tuna havzasında Avar hakimiyetinin güçlenmesi</label>
+                </div>
+                <div class="question">
+                    <p>25. İskit Hükümdarı Bartatua ile anlaşarak kızını ona veren Asur kralı aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q25" value="a"> Kral Psametikos</label>
+                    <label><input type="radio" name="q25" value="b"> Kral Asarhaddon</label>
+                    <label><input type="radio" name="q25" value="c"> Darius</label>
+                    <label><input type="radio" name="q25" value="d"> Büyük Kiros</label>
+                    <label><input type="radio" name="q25" value="e"> Scylurus</label>
+                </div>
+                <div class="question">
+                    <p>26. Aşağıdakilerden hangisi Pripet havzasından doğu ve kuzey-doğu istikametinde ilerleyen Slavların karşılaştığı Fin kavimlerinden biri değildir?</p>
+                    <label><input type="radio" name="q26" value="a"> Vodler</label>
+                    <label><input type="radio" name="q26" value="b"> Melankhlenter</label>
+                    <label><input type="radio" name="q26" value="c"> Muroma</label>
+                    <label><input type="radio" name="q26" value="d"> Suomalar</label>
+                    <label><input type="radio" name="q26" value="e"> Estler</label>
+                </div>
+                <div class="question">
+                    <p>27. İtil Bulgar Hanlığı’nın İslamiyeti kabul etme sebepleri arasında aşağıdakilerden hangisi yoktur?</p>
+                    <label><input type="radio" name="q27" value="a"> İslamiyet’in içerdiği mükemmel esaslar</label>
+                    <label><input type="radio" name="q27" value="b"> Arap saldırılarına karşı tedbir almak</label>
+                    <label><input type="radio" name="q27" value="c"> Harzemli Türklerin Müslümanlaşmaya katkısı</label>
+                    <label><input type="radio" name="q27" value="d"> İtil-Baltık ticari yolunun canlanması</label>
+                    <label><input type="radio" name="q27" value="e"> VII. yüzyılın sonlarında doğu ülkeleriyle düzenli ticari temaslar</label>
+                </div>
+                <div class="question">
+                    <p>28. Aşağıdakilerden hangisi Hazar-Müslüman münasebetlerinin detaylarının öğrenilebildiği İslam tarihçilerinden biri değildir?</p>
+                    <label><input type="radio" name="q28" value="a"> Taberi</label>
+                    <label><input type="radio" name="q28" value="b"> Mesudi</label>
+                    <label><input type="radio" name="q28" value="c"> İbnü’l-Esir</label>
+                    <label><input type="radio" name="q28" value="d"> İbn Cafer</label>
+                    <label><input type="radio" name="q28" value="e"> Yakubi</label>
+                </div>
+                <div class="question">
+                    <p>29. Hunlarda hükümdar ailelerinden gelen ve merkez dışında en yüksek makamda bulunan görevliler aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q29" value="a"> Komutanlar</label>
+                    <label><input type="radio" name="q29" value="b"> Saray muhafız komutanları</label>
+                    <label><input type="radio" name="q29" value="c"> Müşavirler</label>
+                    <label><input type="radio" name="q29" value="d"> Kanat yöneticileri</label>
+                    <label><input type="radio" name="q29" value="e"> Katipler</label>
+                </div>
+                <div class="question">
+                    <p>30. Avrupa Hunları ile ilgili verilen aşağıdaki ifadelerden hangisi yanlıştır?</p>
+                    <label><input type="radio" name="q30" value="a"> Dengizik’in ölümü ile devlet tamamen dağılmıştır</label>
+                    <label><input type="radio" name="q30" value="b"> I. Balkan seferinde Margus Barışı imzalanmıştır</label>
+                    <label><input type="radio" name="q30" value="c"> Attila’nın ölümünden sonra Dengizik ile Irnek Karadeniz’in kuzeyine çekilmiştir</label>
+                    <label><input type="radio" name="q30" value="d"> Attila döneminde Doğu Roma baskı altına alınmıştır</label>
+                    <label><input type="radio" name="q30" value="e"> Attila’nın ölümüyle çöküş süreci başlamıştır</label>
+                </div>
+                <div class="question">
+                    <p>31. Azerbaycan valisi Mesleme’nin Hazarlar karşısında başarısız olması sonrası bu görevi aşağıdakilerden hangisi üstlenmiştir?</p>
+                    <label><input type="radio" name="q31" value="a"> İbn Resad</label>
+                    <label><input type="radio" name="q31" value="b"> Mervan b. Muhammed</label>
+                    <label><input type="radio" name="q31" value="c"> Halid b. Velid</label>
+                    <label><input type="radio" name="q31" value="d"> Kuteybe b. Müslim</label>
+                    <label><input type="radio" name="q31" value="e"> Hişam b. Abdülmelik</label>
+                </div>
+                <div class="question">
+                    <p>32. Bulgar hanları listesinde yer alan adlar arasında tarihî bakımdan doğrulanabilen ilk isim aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q32" value="a"> Irnek</label>
+                    <label><input type="radio" name="q32" value="b"> Gostun</label>
+                    <label><input type="radio" name="q32" value="c"> Bayan</label>
+                    <label><input type="radio" name="q32" value="d"> Kubrat</label>
+                    <label><input type="radio" name="q32" value="e"> Organas</label>
+                </div>
+                <div class="question">
+                    <p>33. Hun devlet teşkilatı ile ilgili aşağıda verilen ifadelerden hangisi yanlıştır?</p>
+                    <label><input type="radio" name="q33" value="a"> Kanat yöneticileri merkeze bağlıydı</label>
+                    <label><input type="radio" name="q33" value="b"> Devlet ikili teşkilat şeklinde idare edilmiştir</label>
+                    <label><input type="radio" name="q33" value="c"> Hükümdarın yanında baş vezir bulunurdu</label>
+                    <label><input type="radio" name="q33" value="d"> Merkez ve merkez dışında düzenli teşkilatlanma vardı</label>
+                    <label><input type="radio" name="q33" value="e"> Batı teşkilatlanması doğudan önde olmuştur</label>
+                </div>
+                <div class="question">
+                    <p>34. M.Ö. 529’da Pers Kralı Kiros’un ölümüne sebep olan Pers-Saka savaşında Saka ordusuna komutanlık eden kişi aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q34" value="a"> Altheas</label>
+                    <label><input type="radio" name="q34" value="b"> Bartatua</label>
+                    <label><input type="radio" name="q34" value="c"> Asarhaddon</label>
+                    <label><input type="radio" name="q34" value="d"> Madyes</label>
+                    <label><input type="radio" name="q34" value="e"> Tomris</label>
+                </div>
+                <div class="question">
+                    <p>35. X. yüzyıl İslam tarihçisi Mes’ûdî’ye göre İranlıların Hazar adını verdikleri kavme Türkler ne demektedir?</p>
+                    <label><input type="radio" name="q35" value="a"> Belencer</label>
+                    <label><input type="radio" name="q35" value="b"> Uygur</label>
+                    <label><input type="radio" name="q35" value="c"> Bulgar</label>
+                    <label><input type="radio" name="q35" value="d"> Fin</label>
+                    <label><input type="radio" name="q35" value="e"> Sabar</label>
+                </div>
+                <div class="question">
+                    <p>36. Kubrat Han’ın oğulları hakkında aşağıdakilerden hangisi söylenemez?</p>
+                    <label><input type="radio" name="q36" value="a"> Beşinci oğlu ata yurdunda kalmıştır</label>
+                    <label><input type="radio" name="q36" value="b"> Asparuh Özi, Turla’yı geçip yerleşmiştir</label>
+                    <label><input type="radio" name="q36" value="c"> Kotrag Tin’i geçerek oraya yerleşmiştir</label>
+                    <label><input type="radio" name="q36" value="d"> En büyükleri Bayan ata yurdunda kalmıştır</label>
+                    <label><input type="radio" name="q36" value="e"> Altsek Panonya’ya göç etmiştir</label>
+                </div>
+                <div class="question">
+                    <p>37. Attila’nın ölümünden sonra devletin çökme sürecine girmesinin sebebi aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q37" value="a"> Doğu Roma’nın saldırıları</label>
+                    <label><input type="radio" name="q37" value="b"> Hun ordusunun dağılması</label>
+                    <label><input type="radio" name="q37" value="c"> Attila’nın yerinin doldurulamaması</label>
+                    <label><input type="radio" name="q37" value="d"> Vergilerin geri çekilmesi</label>
+                    <label><input type="radio" name="q37" value="e"> Taht mücadelesi</label>
+                </div>
+                <div class="question">
+                    <p>38. 557-558 kışı sonlarında Bizans üzerine harekete geçen Kutrigur ordusunun komutanı aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q38" value="a"> Bushan</label>
+                    <label><input type="radio" name="q38" value="b"> Zenon</label>
+                    <label><input type="radio" name="q38" value="c"> Sandilk</label>
+                    <label><input type="radio" name="q38" value="d"> Zabergan</label>
+                    <label><input type="radio" name="q38" value="e"> Khinialon</label>
+                </div>
+                <div class="question">
+                    <p>39. Bulgarlara karşı vahşet sergileyen ve Bulgaroktonos lakabını alan Bizans imparatoru aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q39" value="a"> Constantin</label>
+                    <label><input type="radio" name="q39" value="b"> II. Leon</label>
+                    <label><input type="radio" name="q39" value="c"> II. Basileios</label>
+                    <label><input type="radio" name="q39" value="d"> I. Basileios</label>
+                    <label><input type="radio" name="q39" value="e"> I. Leon</label>
+                </div>
+                <div class="question">
+                    <p>40. Avarlar aşağıdaki hangi devlet ile anlaşma yaparak İstanbul’u kuşatmışlardır?</p>
+                    <label><input type="radio" name="q40" value="a"> Köktürk</label>
+                    <label><input type="radio" name="q40" value="b"> Batı Roma İmparatorluğu</label>
+                    <label><input type="radio" name="q40" value="c"> İberya Krallığı</label>
+                    <label><input type="radio" name="q40" value="d"> Kiev Knezliği</label>
+                    <label><input type="radio" name="q40" value="e"> Sasani</label>
+                </div>
+                <div class="question">
+                    <p>41. İtil Bulgar Hanlığı’nın yayıldığı coğrafya hakkında aşağıdakilerden hangisi söylenemez?</p>
+                    <label><input type="radio" name="q41" value="a"> Toprakları zamanla değişikliğe uğramıştır</label>
+                    <label><input type="radio" name="q41" value="b"> Kesin sınırları tayin etmek mümkün değildir</label>
+                    <label><input type="radio" name="q41" value="c"> Sınırlı coğrafya nedeniyle ekonomik sıkıntılar çekmişlerdir</label>
+                    <label><input type="radio" name="q41" value="d"> Arap ve İran coğrafyacılar yedi iklimde göstermişlerdir</label>
+                    <label><input type="radio" name="q41" value="e"> İtil ve Kama nehirleri üzerinde geniş bir alana yayılmıştır</label>
+                </div>
+                <div class="question">
+                    <p>42. Attila dönemine kadar Hunların Roma’ya karşı uyguladıkları siyaset aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q42" value="a"> Doğu ve Batı Roma ile dostluk</label>
+                    <label><input type="radio" name="q42" value="b"> Doğu Roma ile dostluk, Batı Roma ile mücadele</label>
+                    <label><input type="radio" name="q42" value="c"> Doğu ve Batı Roma ile ittifak</label>
+                    <label><input type="radio" name="q42" value="d"> Doğu Roma ile mücadele, Batı Roma ile dostluk</label>
+                    <label><input type="radio" name="q42" value="e"> Doğu ve Batı Roma ile mücadele</label>
+                </div>
+                <div class="question">
+                    <p>43. “Bulgar toprakları Burtaslarla sınırlıdır...” diyerek İtil Bulgar Hanlığı’nın sınırlarını çizen Arap seyyah aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q43" value="a"> İbn Rüste</label>
+                    <label><input type="radio" name="q43" value="b"> İbn Fadlan</label>
+                    <label><input type="radio" name="q43" value="c"> Gerdizi</label>
+                    <label><input type="radio" name="q43" value="d"> Biruni</label>
+                    <label><input type="radio" name="q43" value="e"> Kazvini</label>
+                </div>
+                <div class="question">
+                    <p>44. Çin kaynaklarında “A-pa” şeklinde geçen boyun aşağıdakilerden hangisi olabileceği iddia edilmektedir?</p>
+                    <label><input type="radio" name="q44" value="a"> Avarlar</label>
+                    <label><input type="radio" name="q44" value="b"> Sabarlar</label>
+                    <label><input type="radio" name="q44" value="c"> Oğurlar</label>
+                    <label><input type="radio" name="q44" value="d"> Oğuzlar</label>
+                    <label><input type="radio" name="q44" value="e"> Sakalar</label>
+                </div>
+                <div class="question">
+                    <p>45. Frank Kralı Sigibert hakkında aşağıda verilen bilgilerden hangisi yanlıştır?</p>
+                    <label><input type="radio" name="q45" value="a"> Avar kağanı ile bir daha savaşmamak üzere anlaşmıştır</label>
+                    <label><input type="radio" name="q45" value="b"> Avarlara hediye vermiştir</label>
+                    <label><input type="radio" name="q45" value="c"> Avarlar ile anlaşmıştır</label>
+                    <label><input type="radio" name="q45" value="d"> Avarlara tutsak düşmüştür</label>
+                    <label><input type="radio" name="q45" value="e"> Avarlar tarafından öldürülmüştür</label>
+                </div>
+                <div class="question">
+                    <p>46. Aşağıdakilerden hangisi 652 yılında yapılan Belencer Savaşı’nın sonuçlarından biri değildir?</p>
+                    <label><input type="radio" name="q46" value="a"> Hazarlar Bizans tahtındaki değişikliklerde rol oynamıştır</label>
+                    <label><input type="radio" name="q46" value="b"> Hazarlar güneye inerek Ermenistan’a girmiştir</label>
+                    <label><input type="radio" name="q46" value="c"> Müslümanlar iç karışıklıklarla uğraşmak zorunda kalmıştır</label>
+                    <label><input type="radio" name="q46" value="d"> Hazarlar Müslümanlara saldırmaya cesaret eder duruma gelmiştir</label>
+                    <label><input type="radio" name="q46" value="e"> Hazar-İslam münasebetleri çarpışmalar şeklinde devam etmiştir</label>
+                </div>
+                <div class="question">
+                    <p>47. Hunların devlet yapısında “ikili teşkilat” neyi ifade eder?</p>
+                    <label><input type="radio" name="q47" value="a"> Merkezi ve yerel yönetim</label>
+                    <label><input type="radio" name="q47" value="b"> Doğu ve batı kanatları</label>
+                    <label><input type="radio" name="q47" value="c"> Askeri ve sivil yönetim</label>
+                    <label><input type="radio" name="q47" value="d"> Hükümdar ve vezir yönetimi</label>
+                    <label><input type="radio" name="q47" value="e"> İç ve dış işler ayrımı</label>
+                </div>
+                <div class="question">
+                    <p>48. Hazarların İslam dünyası ile ilişkileri hangi dönemde yoğunlaşmıştır?</p>
+                    <label><input type="radio" name="q48" value="a"> 6. yüzyıl</label>
+                    <label><input type="radio" name="q48" value="b"> 7. yüzyıl</label>
+                    <label><input type="radio" name="q48" value="c"> 8. yüzyıl</label>
+                    <label><input type="radio" name="q48" value="d"> 9. yüzyıl</label>
+                    <label><input type="radio" name="q48" value="e"> 10. yüzyıl</label>
+                </div>
+                <div class="question">
+                    <p>49. İskitlerin en önemli ekonomik faaliyetlerinden biri aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q49" value="a"> Tarım</label>
+                    <label><input type="radio" name="q49" value="b"> Hayvancılık</label>
+                    <label><input type="radio" name="q49" value="c"> Balıkçılık</label>
+                    <label><input type="radio" name="q49" value="d"> Madencilik</label>
+                    <label><input type="radio" name="q49" value="e"> Ticaret</label>
+                </div>
+                <div class="question">
+                    <p>50. Avarların Bizans ile ilişkileri hangi olayla başlamıştır?</p>
+                    <label><input type="radio" name="q50" value="a"> İstanbul kuşatması</label>
+                    <label><input type="radio" name="q50" value="b"> Sasanilerle ittifak</label>
+                    <label><input type="radio" name="q50" value="c"> Göç hareketleri</label>
+                    <label><input type="radio" name="q50" value="d"> Ticaret anlaşmaları</label>
+                    <label><input type="radio" name="q50" value="e"> Diplomatik temaslar</label>
+                </div>
+                <div class="question">
+                    <p>51. Hunların Avrupa’daki hakimiyetinin sona ermesi hangi olayla ilişkilidir?</p>
+                    <label><input type="radio" name="q51" value="a"> Attila’nın ölümü</label>
+                    <label><input type="radio" name="q51" value="b"> Dengizik’in ölümü</label>
+                    <label><input type="radio" name="q51" value="c"> Nedao Savaşı</label>
+                    <label><input type="radio" name="q51" value="d"> Margus Barışı</label>
+                    <label><input type="radio" name="q51" value="e"> I. Balkan seferi</label>
+                </div>
+                <div class="question">
+                    <p>52. Hazarların bağımsız bir kağanlık haline gelmesinde hangi devletin zayıflaması etkili olmuştur?</p>
+                    <label><input type="radio" name="q52" value="a"> Göktürkler</label>
+                    <label><input type="radio" name="q52" value="b"> Sasaniler</label>
+                    <label><input type="radio" name="q52" value="c"> Bizans</label>
+                    <label><input type="radio" name="q52" value="d"> Eftalitler</label>
+                    <label><input type="radio" name="q52" value="e"> Hunlar</label>
+                </div>
+                <div class="question">
+                    <p>53. İtil Bulgar Hanlığı’nın ekonomik gücünün temel kaynağı nedir?</p>
+                    <label><input type="radio" name="q53" value="a"> Tarım</label>
+                    <label><input type="radio" name="q53" value="b"> Hayvancılık</label>
+                    <label><input type="radio" name="q53" value="c"> Ticaret</label>
+                    <label><input type="radio" name="q53" value="d"> Madencilik</label>
+                    <label><input type="radio" name="q53" value="e"> Balıkçılık</label>
+                </div>
+                <div class="question">
+                    <p>54. Avarların Franklarla ilişkileri hangi olayla kesilmiştir?</p>
+                    <label><input type="radio" name="q54" value="a"> Bayan’ın yenilgisi</label>
+                    <label><input type="radio" name="q54" value="b"> İstanbul kuşatması</label>
+                    <label><input type="radio" name="q54" value="c"> Sigibert’in ölümü</label>
+                    <label><input type="radio" name="q54" value="d"> Slav ayaklanmaları</label>
+                    <label><input type="radio" name="q54" value="e"> Bizans ittifakı</label>
+                </div>
+                <div class="question">
+                    <p>55. Hunların Roma ile ilişkilerinde hangi strateji ön plandadır?</p>
+                    <label><input type="radio" name="q55" value="a"> Diplomasi</label>
+                    <label><input type="radio" name="q55" value="b"> Askeri baskı</label>
+                    <label><input type="radio" name="q55" value="c"> Ticaret</label>
+                    <label><input type="radio" name="q55" value="d"> İttifak</label>
+                    <label><input type="radio" name="q55" value="e"> Göç</label>
+                </div>
+                <div class="question">
+                    <p>56. İskitlerin hangi özelliği onları diğer Türk boylarından ayırır?</p>
+                    <label><input type="radio" name="q56" value="a"> Göçebe yaşam</label>
+                    <label><input type="radio" name="q56" value="b"> Okçuluk becerisi</label>
+                    <label><input type="radio" name="q56" value="c"> Erken dönemde yazıya sahip olmaları</label>
+                    <label><input type="radio" name="q56" value="d"> Merkezi yönetim</label>
+                    <label><input type="radio" name="q56" value="e"> Ticaret yollarındaki hakimiyet</label>
+                </div>
+                <div class="question">
+                    <p>57. Hazarların dini yapısı hangi özelliğiyle dikkat çeker?</p>
+                    <label><input type="radio" name="q57" value="a"> Tek tanrılı din</label>
+                    <label><input type="radio" name="q57" value="b"> Çok dinli yapı</label>
+                    <label><input type="radio" name="q57" value="c"> Şamanizm</label>
+                    <label><input type="radio" name="q57" value="d"> Hristiyanlık</label>
+                    <label><input type="radio" name="q57" value="e"> İslamiyet</label>
+                </div>
+                <div class="question">
+                    <p>58. Avarların en önemli askeri başarısı nedir?</p>
+                    <label><input type="radio" name="q58" value="a"> İstanbul’un kuşatılması</label>
+                    <label><input type="radio" name="q58" value="b"> Frankların yenilgisi</label>
+                    <label><input type="radio" name="q58" value="c"> Slavların hakimiyeti</label>
+                    <label><input type="radio" name="q58" value="d"> Bizans’a karşı zafer</label>
+                    <label><input type="radio" name="q58" value="e"> Göktürklerle ittifak</label>
+                </div>
+                <div class="question">
+                    <p>59. İtil Bulgar Hanlığı’nın İslamlaşmasında hangi faktör etkili değildir?</p>
+                    <label><input type="radio" name="q59" value="a"> Araplarla ticaret</label>
+                    <label><input type="radio" name="q59" value="b"> Sufi etkileri</label>
+                    <label><input type="radio" name="q59" value="c"> Bizans baskısı</label>
+                    <label><input type="radio" name="q59" value="d"> Harzemli Türklerin etkisi</label>
+                    <label><input type="radio" name="q59" value="e"> İtil-Baltık yolunun canlanması</label>
+                </div>
+                <div class="question">
+                    <p>60. Hunların Avrupa’daki en büyük askeri seferi hangisidir?</p>
+                    <label><input type="radio" name="q60" value="a"> I. Balkan seferi</label>
+                    <label><input type="radio" name="q60" value="b"> Katalaun Savaşı</label>
+                    <label><input type="radio" name="q60" value="c"> Margus Barışı</label>
+                    <label><input type="radio" name="q60" value="d"> Nedao Savaşı</label>
+                    <label><input type="radio" name="q60" value="e"> Doğu Roma seferi</label>
+                </div>
+                <button type="button" onclick="submitTest()">Testi Gönder</button>
+            </form>
+        </div>
+
+        <!-- Sonuç Ekranı -->
+        <div class="result" id="result">
+            <h2>Test Sonuçları</h2>
+            <p id="score" style="text-align: center; font-size: 24px; color: #2c3e50;"></p>
+            <table class="result-table">
+                <thead>
+                    <tr>
+                        <th>Soru No</th>
+                        <th>Soru</th>
+                        <th>Sizin Cevabınız</th>
+                        <th>Doğru Cevap</th>
+                        <th>Sonuç</th>
+                    </tr>
+                </thead>
+                <tbody id="resultDetails"></tbody>
+            </table>
+            <div class="stats-container" id="statsContainer"></div>
+            <button onclick="restart()">Testi Yeniden Başlat</button>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "b", q2: "c", q3: "b", q4: "c", q5: "e", q6: "c", q7: "c", q8: "e", q9: "c", q10: "b",
+            q11: "b", q12: "c", q13: "e", q14: "b", q15: "b", q16: "c", q17: "c", q18: "a", q19: "b", q20: "b",
+            q21: "c", q22: "c", q23: "b", q24: "e", q25: "b", q26: "e", q27: "e", q28: "d", q29: "d", q30: "c",
+            q31: "b", q32: "d", q33: "c", q34: "e", q35: "e", q36: "e", q37: "c", q38: "d", q39: "c", q40: "e",
+            q41: "c", q42: "e", q43: "a", q44: "a", q45: "e", q46: "d", q47: "b", q48: "c", q49: "b", q50: "c",
+            q51: "b", q52: "a", q53: "c", q54: "c", q55: "b", q56: "b", q57: "b", q58: "a", q59: "c", q60: "b"
+        };
+
+        const unitRanges = [
+            { name: "Hunlar ve Avarlar", start: 1, end: 30 },
+            { name: "Hazarlar ve Bulgarlar", start: 31, end: 60 }
+        ];
+
+        let timeLeft = 1800; // 30 dakika (saniye cinsinden)
+        let timerInterval;
+        let answeredQuestions = 0;
+
+        function startTest() {
+            document.getElementById("welcome").classList.remove("active");
+            document.getElementById("testForm").classList.add("active");
+            startTimer();
+            updateProgress();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById("timer").textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const totalQuestions = 60;
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById("progress").style.width = `${progress}%`;
+        }
+
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener("change", () => {
+                const questionName = input.name;
+                if (!document.querySelectorAll(`input[name="${questionName}"]:checked`).length > 1) {
+                    answeredQuestions++;
+                    updateProgress();
+                }
+            });
+        });
+
+        function submitTest() {
+            clearInterval(timerInterval);
+            const form = document.getElementById("quizForm");
+            const userAnswers = {};
+            for (let i = 1; i <= 60; i++) {
+                userAnswers[`q${i}`] = form.elements[`q${i}`]?.value || "Cevaplanmadı";
+            }
+
+            let totalScore = 0;
+            let details = "";
+            const unitStats = unitRanges.map(unit => ({
+                name: unit.name,
+                correct: 0,
+                incorrect: 0
+            }));
+
+            for (let i = 1; i <= 60; i++) {
+                const q = `q${i}`;
+                const questionText = document.querySelector(`input[name="q${i}"]`).closest(".question").querySelector("p").textContent;
+                const userAnswer = userAnswers[q];
+                const correctAnswer = correctAnswers[q];
+                const correctText = document.querySelector(`input[name="q${i}"][value="${correctAnswer}"]`).nextSibling.textContent.trim();
+                const userText = userAnswer === "Cevaplanmadı" ? "Cevaplanmadı" : document.querySelector(`input[name="q${i}"][value="${userAnswer}"]`)?.nextSibling.textContent.trim() || "Cevaplanmadı";
+
+                let unitIndex = unitRanges.findIndex(unit => i >= unit.start && i <= unit.end);
+                if (userAnswer === correctAnswer) {
+                    totalScore++;
+                    unitStats[unitIndex].correct++;
+                    details += `<tr><td>${i}</td><td>${questionText}</td><td>${userText}</td><td>${correctText}</td><td class="correct">Doğru</td></tr>`;
+                } else {
+                    unitStats[unitIndex].incorrect++;
+                    details += `<tr><td>${i}</td><td>${questionText}</td><td>${userText}</td><td>${correctText}</td><td class="incorrect">Yanlış</td></tr>`;
+                }
+            }
+
+            let statsHtml = "";
+            unitStats.forEach(unit => {
+                const total = unit.correct + unit.incorrect;
+                const percentage = total > 0 ? Math.round((unit.correct / total) * 100) : 0;
+                statsHtml += `<div class="unit-stats">` +
+                             `<h3>${unit.name}</h3>` +
+                             `<p>Doğru: ${unit.correct}</p>` +
+                             `<p>Yanlış: ${unit.incorrect}</p>` +
+                             `<p>Başarı: %${percentage}</p>` +
+                             `</div>`;
+            });
+
+            document.getElementById("testForm").classList.remove("active");
+            document.getElementById("result").classList.add("active");
+            document.getElementById("score").innerHTML = `Toplam Puanınız: ${totalScore} / 60 (%${Math.round((totalScore / 60) * 100)})`;
+            document.getElementById("resultDetails").innerHTML = details;
+            document.getElementById("statsContainer").innerHTML = statsHtml;
+        }
+
+        function restart() {
+            document.getElementById("result").classList.remove("active");
+            document.getElementById("welcome").classList.add("active");
+            document.getElementById("quizForm").reset();
+            timeLeft = 1800;
+            answeredQuestions = 0;
+            document.getElementById("progress").style.width = "0%";
+        }
+    </script>
+</body>
+</html>

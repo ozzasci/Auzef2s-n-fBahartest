@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğu Avrupa Türk Tarihi Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .login-form, .test-form, .result {
+            display: none;
+        }
+        .login-form.active, .test-form.active, .result.active {
+            display: block;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .question label {
+            display: block;
+            margin: 5px 0;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #timer {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            height: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .progress {
+            height: 100%;
+            background-color: #28a745;
+            width: 0%;
+            border-radius: 5px;
+        }
+        .result-details {
+            margin-top: 20px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .unit-stats {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            button {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Doğu Avrupa Türk Tarihi Testi</h1>
+
+        <!-- Kullanıcı Giriş Formu -->
+        <div class="login-form active" id="loginForm">
+            <h2>Kullanıcı Girişi</h2>
+            <label for="username">Kullanıcı Adı:</label>
+            <input type="text" id="username" required>
+            <label for="password">Şifre:</label>
+            <input type="password" id="password" required>
+            <button onclick="login()">Giriş Yap</button>
+        </div>
+
+        <!-- Test Formu -->
+        <div class="test-form" id="testForm">
+            <div id="timer">Kalan Süre: 30:00</div>
+            <div class="progress-bar"><div class="progress" id="progress"></div></div>
+            <form id="quizForm">
+                <!-- Ünite 1: İskitler ve Hunlardan Önce Doğu Avrupa’nın Sakinleri -->
+                <h2>Ünite 1: İskitler ve Hunlardan Önce Doğu Avrupa’nın Sakinleri</h2>
+                <div class="question">
+                    <p>1. Yerli Slavların ücretli askeri birliklere verdikleri isim hangisidir?</p>
+                    <label><input type="radio" name="q1" value="a"> Vareg</label>
+                    <label><input type="radio" name="q1" value="b"> Rus</label>
+                    <label><input type="radio" name="q1" value="c"> Got</label>
+                    <label><input type="radio" name="q1" value="d"> Alan</label>
+                </div>
+                <div class="question">
+                    <p>2. Gotlarla ilgili verilen bilgilerden doğru olan hangisidir?</p>
+                    <label><input type="radio" name="q2" value="a"> Vizigotlar daha teşkilatlı bir yapı ile Karadeniz’in kuzeyinde devlet kurmuşlardır.</label>
+                    <label><input type="radio" name="q2" value="b"> Doğuda olanlarına Ostrogot, batıda olanlarına Vizigot denir.</label>
+                    <label><input type="radio" name="q2" value="c"> Ermanarik batı Got kralıdır.</label>
+                    <label><input type="radio" name="q2" value="d"> 4. yüzyılın başında Vizigotlar siyasî hâkimiyet kurmuşlardır.</label>
+                </div>
+                <div class="question">
+                    <p>3. Tarihte ilk defa İskit adına hangi kaynaklarda rastlamaktayız?</p>
+                    <label><input type="radio" name="q3" value="a"> Roma</label>
+                    <label><input type="radio" name="q3" value="b"> Asur</label>
+                    <label><input type="radio" name="q3" value="c"> Çin</label>
+                    <label><input type="radio" name="q3" value="d"> Bizans</label>
+                </div>
+                <div class="question">
+                    <p>4. İskitlerin Türk olduklarını iddia eden tarihçilerin ortaya koyduğu kanıtlardan hangisi doğru değildir?</p>
+                    <label><input type="radio" name="q4" value="a"> Herodot ve Strabon’un belirttiği gibi, İskitlerle Türklerin anayurdunun aynı olması.</label>
+                    <label><input type="radio" name="q4" value="b"> İskit boy isimlerinin Türkçe olması.</label>
+                    <label><input type="radio" name="q4" value="c"> İskit dilinin Türk dili ile benzerlikler göstermesi.</label>
+                    <label><input type="radio" name="q4" value="d"> Türklerdeki hayvan uslûbunun İskitlere özgü bir sanat olarak ortaya konması.</label>
+                </div>
+                <div class="question">
+                    <p>5. Doğuda Çin Seddi’nden başlayarak batıda Tuna Nehri’ne kadar uzanan yaklaşık 7000 km²’lik bir coğrafyada, 1000 yıla yakın varlıklarını hissettiren ilk atlı konargöçer boy hangisidir?</p>
+                    <label><input type="radio" name="q5" value="a"> Hunlar</label>
+                    <label><input type="radio" name="q5" value="b"> İskitler</label>
+                    <label><input type="radio" name="q5" value="c"> Avarlar</label>
+                    <label><input type="radio" name="q5" value="d"> Bulgarlar</label>
+                </div>
+                <div class="question">
+                    <p>6. Hangisi Türk göçlerinin sebeplerinden biri değildir?</p>
+                    <label><input type="radio" name="q6" value="a"> Doğal afetler</label>
+                    <label><input type="radio" name="q6" value="b"> Cihan hâkimiyeti düşüncesi</label>
+                    <label><input type="radio" name="q6" value="c"> Nüfus yetersizliği</label>
+                    <label><input type="radio" name="q6" value="d"> Otlak yetersizliği</label>
+                </div>
+                <div class="question">
+                    <p>7. Hunların kökeni ile ilgili öne sürülen görüşlerden hangisi doğru değildir?</p>
+                    <label><input type="radio" name="q7" value="a"> Moğoldurlar</label>
+                    <label><input type="radio" name="q7" value="b"> Türk-Moğol karışımıdırlar</label>
+                    <label><input type="radio" name="q7" value="c"> Germen-Türk karışımıdırlar</label>
+                    <label><input type="radio" name="q7" value="d"> Fin-Ogurdurlar</label>
+                </div>
+                <div class="question">
+                    <p>8. Karadeniz’in kuzeyinden Doğu Avrupa’ya göç eden Türk boylarından hangisi yoktur?</p>
+                    <label><input type="radio" name="q8" value="a"> Hunlar</label>
+                    <label><input type="radio" name="q8" value="b"> Sabarlar</label>
+                    <label><input type="radio" name="q8" value="c"> Türgişler</label>
+                    <label><input type="radio" name="q8" value="d"> Bulgarlar</label>
+                </div>
+                <div class="question">
+                    <p>9. Cura Palatii unvanının anlamı aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q9" value="a"> Ordu komutanı</label>
+                    <label><input type="radio" name="q9" value="b"> Saray işlerinden sorumlu kişi</label>
+                    <label><input type="radio" name="q9" value="c"> Vergi toplayıcısı</label>
+                    <label><input type="radio" name="q9" value="d"> Elçi</label>
+                </div>
+                <div class="question">
+                    <p>10. Hunların 422’li yıllarda tam bir Kağanlık olmaya başladıkları ve teşkilatlandıkları dönemde hangi kağan hüküm sürmekteydi?</p>
+                    <label><input type="radio" name="q10" value="a"> Rua</label>
+                    <label><input type="radio" name="q10" value="b"> Bleda</label>
+                    <label><input type="radio" name="q10" value="c"> Attila</label>
+                    <label><input type="radio" name="q10" value="d"> Oktar</label>
+                </div>
+
+                <!-- Ünite 2: Hun Kağanlığı’nın Yükselişi, Bleda ve Attila Dönemleri -->
+                <h2>Ünite 2: Hun Kağanlığı’nın Yükselişi, Bleda ve Attila Dönemleri</h2>
+                <div class="question">
+                    <p>11. II. Balkan Seferi’nin tarihi aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q11" value="a"> 441</label>
+                    <label><input type="radio" name="q11" value="b"> 447</label>
+                    <label><input type="radio" name="q11" value="c"> 451</label>
+                    <label><input type="radio" name="q11" value="d"> 434</label>
+                </div>
+                <div class="question">
+                    <p>12. II. Balkan Seferi sonunda ele geçirilen yerlerden biri değildir?</p>
+                    <label><input type="radio" name="q12" value="a"> Sofya</label>
+                    <label><input type="radio" name="q12" value="b"> Preslav</label>
+                    <label><input type="radio" name="q12" value="c"> Kiyev</label>
+                    <label><input type="radio" name="q12" value="d"> Filibe</label>
+                </div>
+                <div class="question">
+                    <p>13. Margus Barışı’nın maddelerinden hangisi doğru değildir?</p>
+                    <label><input type="radio" name="q13" value="a"> Romalı mülteciler ve esirler için 8 altın fidye ödenecek.</label>
+                    <label><input type="radio" name="q13" value="b"> Romalılar, Hunların hâkimiyetindeki boylarla ortaklık yapmayacak.</label>
+                    <label><input type="radio" name="q13" value="c"> Ticarette Hunlar üstün olacak.</label>
+                    <label><input type="radio" name="q13" value="d"> Anlaşma devamlı olacak ve riayet edilecek.</label>
+                </div>
+                <div class="question">
+                    <p>14. Attila’nın Kağanlığı’nın ilk yıllarında kağanlık işlerini birlikte yürüttüğü ağabeyi kimdir?</p>
+                    <label><input type="radio" name="q14" value="a"> Oktar</label>
+                    <label><input type="radio" name="q14" value="b"> Bleda</label>
+                    <label><input type="radio" name="q14" value="c"> Rua</label>
+                    <label><input type="radio" name="q14" value="d"> Dengizik</label>
+                </div>
+                <div class="question">
+                    <p>15. II. Balkan Seferi sonunda imzalanan antlaşma hangisidir?</p>
+                    <label><input type="radio" name="q15" value="a"> Margus</label>
+                    <label><input type="radio" name="q15" value="b"> Anatolius</label>
+                    <label><input type="radio" name="q15" value="c"> Konstantinopolis</label>
+                    <label><input type="radio" name="q15" value="d"> Ravenna</label>
+                </div>
+                <div class="question">
+                    <p>16. VIII. yüzyıl sonlarında ve IX. yüzyıl başlarında yazıldığı tahmin edilen, Germen-Attila ilişkilerini konu edinen Alman yiğitlik destanı hangisidir?</p>
+                    <label><input type="radio" name="q16" value="a"> Nibelungen</label>
+                    <label><input type="radio" name="q16" value="b"> Hildebrand</label>
+                    <label><input type="radio" name="q16" value="c"> Beowulf</label>
+                    <label><input type="radio" name="q16" value="d"> Roland</label>
+                </div>
+                <div class="question">
+                    <p>17. Hunlarda merkez idarecileri dışında en yüksek makamda bulunan ve kağanlık ailesinden olan görevliler hangileridir?</p>
+                    <label><input type="radio" name="q17" value="a"> Kanat idarecileri</label>
+                    <label><input type="radio" name="q17" value="b"> Boy beyleri</label>
+                    <label><input type="radio" name="q17" value="c"> Tümenbaşılar</label>
+                    <label><input type="radio" name="q17" value="d"> Elçiler</label>
+                </div>
+                <div class="question">
+                    <p>18. Avrupa Hun Kağanlığı’nın arkeolojik buluntularından hangisi yoktur?</p>
+                    <label><input type="radio" name="q18" value="a"> At koşum takımları</label>
+                    <label><input type="radio" name="q18" value="b"> Gem kayışları</label>
+                    <label><input type="radio" name="q18" value="c"> Tarım aletleri</label>
+                    <label><input type="radio" name="q18" value="d"> Kemer uçları</label>
+                </div>
+                <div class="question">
+                    <p>19. Avrupa Hun süvarisinin silahları arasında hangisi yoktur?</p>
+                    <label><input type="radio" name="q19" value="a"> Kılıç</label>
+                    <label><input type="radio" name="q19" value="b"> Ok</label>
+                    <label><input type="radio" name="q19" value="c"> Kalkan</label>
+                    <label><input type="radio" name="q19" value="d"> Yay</label>
+                </div>
+                <div class="question">
+                    <p>20. Avrupa Hunlarının kültürleri ile ilgili doğru bilgilerden hangisi yanlıştır?</p>
+                    <label><input type="radio" name="q20" value="a"> En önemli giyecekleri pantolon ve çizmedir.</label>
+                    <label><input type="radio" name="q20" value="b"> Hun hanımları entari şeklinde elbise, manto, kuşak ve başlıklarında süs eşyası kullanmamışlardır.</label>
+                    <label><input type="radio" name="q20" value="c"> Savaş ve göç sırasında sabit çadırlarını arabalarında taşımışlardır.</label>
+                    <label><input type="radio" name="q20" value="d"> Hun erkekleri maddi durumlarına göre kemerlerini süslemişlerdir.</label>
+                </div>
+
+                <!-- Ünite 3: Ogurlar, Sabarlar ve Avarlar -->
+                <h2>Ünite 3: Ogurlar, Sabarlar ve Avarlar</h2>
+                <div class="question">
+                    <p>21. Ogur boylarından hangisi yoktur?</p>
+                    <label><input type="radio" name="q21" value="a"> Saragur</label>
+                    <label><input type="radio" name="q21" value="b"> Onogur</label>
+                    <label><input type="radio" name="q21" value="c"> İki Ogur</label>
+                    <label><input type="radio" name="q21" value="d"> Kutrigur</label>
+                </div>
+                <div class="question">
+                    <p>22. Ogur boyları ile ilgili ilk bilgileri veren Doğu Roma kaynağı hangisidir?</p>
+                    <label><input type="radio" name="q22" value="a"> Priskos</label>
+                    <label><input type="radio" name="q22" value="b"> Jordanes</label>
+                    <label><input type="radio" name="q22" value="c"> Prokopius</label>
+                    <label><input type="radio" name="q22" value="d"> Theophanes</label>
+                </div>
+                <div class="question">
+                    <p>23. Sabar kelimesinin anlamlarından hangisi doğru değildir?</p>
+                    <label><input type="radio" name="q23" value="a"> Sapan</label>
+                    <label><input type="radio" name="q23" value="b"> Yol değiştiren</label>
+                    <label><input type="radio" name="q23" value="c"> Yön bilmeyen</label>
+                    <label><input type="radio" name="q23" value="d"> Başıboş kalan</label>
+                </div>
+                <div class="question">
+                    <p>24. Sabarların Türk olduklarını kesin delillerle ortaya koyan Türkolog hangisidir?</p>
+                    <label><input type="radio" name="q24" value="a"> Gy. Nemeth</label>
+                    <label><input type="radio" name="q24" value="b"> A. Rona-Tas</label>
+                    <label><input type="radio" name="q24" value="c"> L. Ligeti</label>
+                    <label><input type="radio" name="q24" value="d"> O. Pritsak</label>
+                </div>
+                <div class="question">
+                    <p>25. Doğu Avrupa’da Sabarların görülebileceği dönem hangisidir?</p>
+                    <label><input type="radio" name="q25" value="a"> 3. yüzyıl</label>
+                    <label><input type="radio" name="q25" value="b"> 5. yüzyıl</label>
+                    <label><input type="radio" name="q25" value="c"> 7. yüzyıl</label>
+                    <label><input type="radio" name="q25" value="d"> 9. yüzyıl</label>
+                </div>
+                <div class="question">
+                    <p>26. Avarlara Moravya ve Karpatlar’a, sonra da Büyük Düzlük’ten Tuna kıvrımına kadar kılavuzluk eden boy hangisidir?</p>
+                    <label><input type="radio" name="q26" value="a"> Langobardlar</label>
+                    <label><input type="radio" name="q26" value="b"> Franklar</label>
+                    <label><input type="radio" name="q26" value="c"> Bulgarlar</label>
+                    <label><input type="radio" name="q26" value="d"> Slavlar</label>
+                </div>
+                <div class="question">
+                    <p>27. Justinianos döneminde Doğu Roma’ya akın eden boylar hangileridir?</p>
+                    <label><input type="radio" name="q27" value="a"> Bulgar-Slav-Kutrigur</label>
+                    <label><input type="radio" name="q27" value="b"> Hun-Avar-Ogur</label>
+                    <label><input type="radio" name="q27" value="c"> Sabar-Slav-Hun</label>
+                    <label><input type="radio" name="q27" value="d"> Avar-Bulgar-Hun</label>
+                </div>
+                <div class="question">
+                    <p>28. Batılı araştırmacılar Avarların kökenini hangi Türk boyuna bağlamıştır?</p>
+                    <label><input type="radio" name="q28" value="a"> Hunlar</label>
+                    <label><input type="radio" name="q28" value="b"> Ogurlar</label>
+                    <label><input type="radio" name="q28" value="c"> Bulgarlar</label>
+                    <label><input type="radio" name="q28" value="d"> Sabarlar</label>
+                </div>
+                <div class="question">
+                    <p>29. Avarlardan önce Kafkaslara yerleşen Ogur boylarından en önemlisi hangisidir?</p>
+                    <label><input type="radio" name="q29" value="a"> Saragur</label>
+                    <label><input type="radio" name="q29" value="b"> Onogurlar</label>
+                    <label><input type="radio" name="q29" value="c"> Kutrigur</label>
+                    <label><input type="radio" name="q29" value="d"> Utigur</label>
+                </div>
+                <div class="question">
+                    <p>30. Avarların 461-65 yılları arasında hangi boya saldırmaları ile siyasî tarihleri başlamıştır?</p>
+                    <label><input type="radio" name="q30" value="a"> Hunlar</label>
+                    <label><input type="radio" name="q30" value="b"> Sabarlar</label>
+                    <label><input type="radio" name="q30" value="c"> Bulgarlar</label>
+                    <label><input type="radio" name="q30" value="d"> Ogurlar</label>
+                </div>
+
+                <!-- Ünite 4: Avar Kağanlığı’nın Yıkılışı ve Bulgarların Kökeni -->
+                <h2>Ünite 4: Avar Kağanlığı’nın Yıkılışı ve Bulgarların Kökeni</h2>
+                <div class="question">
+                    <p>31. Avar ordusu İstanbul kuşatmasını tam olarak hangi tarihte kaldırmıştır?</p>
+                    <label><input type="radio" name="q31" value="a"> 8 Ağustos 626</label>
+                    <label><input type="radio" name="q31" value="b"> 15 Temmuz 619</label>
+                    <label><input type="radio" name="q31" value="c"> 23 Nisan 630</label>
+                    <label><input type="radio" name="q31" value="d"> 12 Ekim 634</label>
+                </div>
+                <div class="question">
+                    <p>32. Avar sanatının gelişmesinde hangi devlete mensup ustalar etkili olmuştur?</p>
+                    <label><input type="radio" name="q32" value="a"> Franklar</label>
+                    <label><input type="radio" name="q32" value="b"> Doğu Roma</label>
+                    <label><input type="radio" name="q32" value="c"> Sasani</label>
+                    <label><input type="radio" name="q32" value="d"> Hunlar</label>
+                </div>
+                <div class="question">
+                    <p>33. Avarlar genç erkeklere olgunluğa ulaştıkları kabul edildiğinde neyi takma izni verirlerdi?</p>
+                    <label><input type="radio" name="q33" value="a"> Kemer</label>
+                    <label><input type="radio" name="q33" value="b"> Kılıç</label>
+                    <label><input type="radio" name="q33" value="c"> Zırh</label>
+                    <label><input type="radio" name="q33" value="d"> Ok</label>
+                </div>
+                <div class="question">
+                    <p>34. Bayan Kağan’ın unvanını eserinde Kağan/Hakan olarak veren hangisidir?</p>
+                    <label><input type="radio" name="q34" value="a"> Menandros</label>
+                    <label><input type="radio" name="q34" value="b"> Priskos</label>
+                    <label><input type="radio" name="q34" value="c"> Jordanes</label>
+                    <label><input type="radio" name="q34" value="d"> Theophanes</label>
+                </div>
+                <div class="question">
+                    <p>35. Avar savaşçısının silahları arasında hangisi yoktur?</p>
+                    <label><input type="radio" name="q35" value="a"> Ok</label>
+                    <label><input type="radio" name="q35" value="b"> Yay</label>
+                    <label><input type="radio" name="q35" value="c"> Hançer</label>
+                    <label><input type="radio" name="q35" value="d"> Kılıç</label>
+                </div>
+                <div class="question">
+                    <p>36. Mauro Orbini’nin tek ve aynı milletten kabul ettiği topluluklardan hangisi yoktur?</p>
+                    <label><input type="radio" name="q36" value="a"> Rus</label>
+                    <label><input type="radio" name="q36" value="b"> Leh</label>
+                    <label><input type="radio" name="q36" value="c"> Moğol</label>
+                    <label><input type="radio" name="q36" value="d"> Hırvat</label>
+                </div>
+                <div class="question">
+                    <p>37. 6. yüzyıl başından itibaren Doğu Roma imparatoru Slavları hangi bölgelere yerleştirmiştir?</p>
+                    <label><input type="radio" name="q37" value="a"> Bosna</label>
+                    <label><input type="radio" name="q37" value="b"> Bağdat</label>
+                    <label><input type="radio" name="q37" value="c"> Anadolu</label>
+                    <label><input type="radio" name="q37" value="d"> Mısır</label>
+                </div>
+                <div class="question">
+                    <p>38. 11. yüzyıl sonlarında bir Bulgar yazar, Bulgarlar ile Kumanlar arasındaki tek farkın ne olduğunu belirtmiştir?</p>
+                    <label><input type="radio" name="q38" value="a"> Dil farkı</label>
+                    <label><input type="radio" name="q38" value="b"> Bulgarların Hristiyan, Kumanların Gök-Tanrı dinine inanması</label>
+                    <label><input type="radio" name="q38" value="c"> Giyim tarzı</label>
+                    <label><input type="radio" name="q38" value="d"> Coğrafi konum</label>
+                </div>
+                <div class="question">
+                    <p>39. Trakya’ya karşı bir gece vakti gerçekleşen ve Doğu Roma komutanının hayatına mal olan ilk başarılı Bulgar saldırısı hangi tarihte yaşanmıştır?</p>
+                    <label><input type="radio" name="q39" value="a"> 488</label>
+                    <label><input type="radio" name="q39" value="b"> 493</label>
+                    <label><input type="radio" name="q39" value="c"> 499</label>
+                    <label><input type="radio" name="q39" value="d"> 505</label>
+                </div>
+                <div class="question">
+                    <p>40. 5. ve 6. yüzyıllarda Avrasya bozkırlarında ortaya çıkan ve Türkçe konuştukları kesin olarak bilinen boylardan hangisi yoktur?</p>
+                    <label><input type="radio" name="q40" value="a"> Saragur</label>
+                    <label><input type="radio" name="q40" value="b"> Ogur</label>
+                    <label><input type="radio" name="q40" value="c"> Slav</label>
+                    <label><input type="radio" name="q40" value="d"> Utigur</label>
+                </div>
+
+                <!-- Ünite 5: Büyük Bulgar Kağanlığı (Magna Bulgaria) ve Tuna Bulgar Kağanlığı -->
+                <h2>Ünite 5: Büyük Bulgar Kağanlığı (Magna Bulgaria) ve Tuna Bulgar Kağanlığı</h2>
+                <div class="question">
+                    <p>41. Bulgar boyları Attila’nın ölümünden sonra onun hangi oğlu ile birlikte hareket etmişlerdir?</p>
+                    <label><input type="radio" name="q41" value="a"> Dengizik</label>
+                    <label><input type="radio" name="q41" value="b"> İrnek</label>
+                    <label><input type="radio" name="q41" value="c"> Ellak</label>
+                    <label><input type="radio" name="q41" value="d"> Ernak</label>
+                </div>
+                <div class="question">
+                    <p>42. 630 yılında tarihe Büyük Bulgaristan olarak geçen Kağanlık hangisinin önderliğinde kurulmuştur?</p>
+                    <label><input type="radio" name="q42" value="a"> Asparuh</label>
+                    <label><input type="radio" name="q42" value="b"> Kubrat</label>
+                    <label><input type="radio" name="q42" value="c"> Krum</label>
+                    <label><input type="radio" name="q42" value="d"> Omurtag</label>
+                </div>
+                <div class="question">
+                    <p>43. Kubrat’ın kurduğu Kağanlığın içinde yer alan boylardan hangisi yoktur?</p>
+                    <label><input type="radio" name="q43" value="a"> Onogur</label>
+                    <label><input type="radio" name="q43" value="b"> Bulgar</label>
+                    <label><input type="radio" name="q43" value="c"> Kutrigur</label>
+                    <label><input type="radio" name="q43" value="d"> Avar</label>
+                </div>
+                <div class="question">
+                    <p>44. Kubrat Han’ın kurduğu Büyük Bulgar Kağanlığı’nın yerini belirlerken hangi boyla mücadelesini dikkate almıştır?</p>
+                    <label><input type="radio" name="q44" value="a"> Hunlar</label>
+                    <label><input type="radio" name="q44" value="b"> Avarlar</label>
+                    <label><input type="radio" name="q44" value="c"> Slavlar</label>
+                    <label><input type="radio" name="q44" value="d"> Ogurlar</label>
+                </div>
+                <div class="question">
+                    <p>45. Kubrat Han’ın 5 oğlu ile ilgili hangisi yanlıştır?</p>
+                    <label><input type="radio" name="q45" value="a"> En büyükleri yurtta kaldı.</label>
+                    <label><input type="radio" name="q45" value="b"> İkincisi yurtta kaldı.</label>
+                    <label><input type="radio" name="q45" value="c"> Dördüncü oğul Panonya’ya göç etti.</label>
+                    <label><input type="radio" name="q45" value="d"> Beşinci oğul İtalya’ya yerleşti.</label>
+                </div>
+                <div class="question">
+                    <p>46. Asparuh’un önderliğindeki Bulgarların Oglos bölgesine gelişini tarif eden Doğu Roma tarihçisi hangisidir?</p>
+                    <label><input type="radio" name="q46" value="a"> Priskos</label>
+                    <label><input type="radio" name="q46" value="b"> Theophanes</label>
+                    <label><input type="radio" name="q46" value="c"> Jordanes</label>
+                    <label><input type="radio" name="q46" value="d"> Menandros</label>
+                </div>
+                <div class="question">
+                    <p>47. Tuna Bulgar Kağanlığı’nda Bulgarlardan sonra gelen ikinci etnik unsur hangisidir?</p>
+                    <label><input type="radio" name="q47" value="a"> Avarlar</label>
+                    <label><input type="radio" name="q47" value="b"> Slavlar</label>
+                    <label><input type="radio" name="q47" value="c"> Hunlar</label>
+                    <label><input type="radio" name="q47" value="d"> Kumanlar</label>
+                </div>
+                <div class="question">
+                    <p>48. I. Bulgar Kağanlığı’nın Hristiyanlık dönemi kağanlarından hangisi yoktur?</p>
+                    <label><input type="radio" name="q48" value="a"> Simeon</label>
+                    <label><input type="radio" name="q48" value="b"> Petro</label>
+                    <label><input type="radio" name="q48" value="c"> Krum Han</label>
+                    <label><input type="radio" name="q48" value="d"> Samuil</label>
+                </div>
+                <div class="question">
+                    <p>49. Kurum Han tahta geçtikten sonra hangi Kağanlığın tebaa ve topraklarını hâkimiyet altına almıştır?</p>
+                    <label><input type="radio" name="q49" value="a"> Avar</label>
+                    <label><input type="radio" name="q49" value="b"> Hun</label>
+                    <label><input type="radio" name="q49" value="c"> Ogur</label>
+                    <label><input type="radio" name="q49" value="d"> Hazar</label>
+                </div>
+                <div class="question">
+                    <p>50. Tuna Bulgarlarında Hıristiyanlığa karşı ilk hareketlenmeleri başlatan ve Kurum Han’ın oğlu olan kağan hangisidir?</p>
+                    <label><input type="radio" name="q50" value="a"> Asparuh</label>
+                    <label><input type="radio" name="q50" value="b"> Omurtag</label>
+                    <label><input type="radio" name="q50" value="c"> Simeon</label>
+                    <label><input type="radio" name="q50" value="d"> Boris</label>
+                </div>
+
+                <!-- Ünite 6: İtil Bulgar Hanlığı ve Moğol İstilası -->
+                <h2>Ünite 6: İtil Bulgar Hanlığı ve Moğol İstilası</h2>
+                <div class="question">
+                    <p>51. İtil Bulgar Hanlığı’nın kurucusu aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q51" value="a"> Almus bin Şilki</label>
+                    <label><input type="radio" name="q51" value="b"> Kubrat</label>
+                    <label><input type="radio" name="q51" value="c"> Asparuh</label>
+                    <label><input type="radio" name="q51" value="d"> Omurtag</label>
+                </div>
+                <div class="question">
+                    <p>52. İslâmiyet’in Bulgarlar arasında yayılmasını belgeleyen en önemli arkeolojik kaynak hangisidir?</p>
+                    <label><input type="radio" name="q52" value="a"> Yazıtlar</label>
+                    <label><input type="radio" name="q52" value="b"> Paralar</label>
+                    <label><input type="radio" name="q52" value="c"> Tapınaklar</label>
+                    <label><input type="radio" name="q52" value="d"> Silahlar</label>
+                </div>
+                <div class="question">
+                    <p>53. 10. yüzyıl Arap coğrafyacılarından hangisi İtil’de otuz cami olduğunu yazmıştır?</p>
+                    <label><input type="radio" name="q53" value="a"> İbn Fadlan</label>
+                    <label><input type="radio" name="q53" value="b"> İbn Havkal</label>
+                    <label><input type="radio" name="q53" value="c"> El-Mesudi</label>
+                    <label><input type="radio" name="q53" value="d"> El-Biruni</label>
+                </div>
+                <div class="question">
+                    <p>54. İtil Bulgar Hanlığı konfederasyonuna dâhil gruplardan hangisi yoktur?</p>
+                    <label><input type="radio" name="q54" value="a"> Suvarlar</label>
+                    <label><input type="radio" name="q54" value="b"> Barancarlar</label>
+                    <label><input type="radio" name="q54" value="c"> Moğollar</label>
+                    <label><input type="radio" name="q54" value="d"> Bersula</label>
+                </div>
+                <div class="question">
+                    <p>55. İtil Bulgarları için söylenenlerden hangisi yanlıştır?</p>
+                    <label><input type="radio" name="q55" value="a"> İslâm’ın kabulü eğitim ve kültürde gelişmeyi getirdi.</label>
+                    <label><input type="radio" name="q55" value="b"> Arap yazısıyla tanıştılar.</label>
+                    <label><input type="radio" name="q55" value="c"> Ticarete önem vermediler.</label>
+                    <label><input type="radio" name="q55" value="d"> Resmî bir Müslüman devlet statüsü kazandılar.</label>
+                </div>
+                <div class="question">
+                    <p>56. Bulgarlar hangi iki Türk boyunun birleşmesinden meydana gelmiştir?</p>
+                    <label><input type="radio" name="q56" value="a"> Hun-Ogur</label>
+                    <label><input type="radio" name="q56" value="b"> Avar-Sabar</label>
+                    <label><input type="radio" name="q56" value="c"> Hun-Avar</label>
+                    <label><input type="radio" name="q56" value="d"> Ogur-Slav</label>
+                </div>
+                <div class="question">
+                    <p>57. İtil Bulgar ve Rus ilişkilerinin oluşumunda en etkili rolü hangisi oynamıştır?</p>
+                    <label><input type="radio" name="q57" value="a"> Savaş</label>
+                    <label><input type="radio" name="q57" value="b"> Ticaret</label>
+                    <label><input type="radio" name="q57" value="c"> Din</label>
+                    <label><input type="radio" name="q57" value="d"> Göç</label>
+                </div>
+                <div class="question">
+                    <p>58. Moğol istilasından sonra Bulgar toprakları da dâhil bütün Deşt-i Kıpçak bozkırları üzerinde hangi hanlık kurulmuştur?</p>
+                    <label><input type="radio" name="q58" value="a"> Altın Orda Hanlığı</label>
+                    <label><input type="radio" name="q58" value="b"> Hazar Kağanlığı</label>
+                    <label><input type="radio" name="q58" value="c"> Timur İmparatorluğu</label>
+                    <label><input type="radio" name="q58" value="d"> Çagatay Hanlığı</label>
+                </div>
+                <div class="question">
+                    <p>59. Kiyev halkının putlaştırdığı ağaçlardan hangisi yoktur?</p>
+                    <label><input type="radio" name="q59" value="a"> Peruna</label>
+                    <label><input type="radio" name="q59" value="b"> Horsa</label>
+                    <label><input type="radio" name="q59" value="c"> Semarra</label>
+                    <label><input type="radio" name="q59" value="d"> Mokoşi</label>
+                </div>
+                <div class="question">
+                    <p>60. İbn Fadlan’ın belirttiğine göre İtil Bulgar Hanlığı hangi Türk Kağanlığı’nın himayesi altında bulunmaktaydı?</p>
+                    <label><input type="radio" name="q60" value="a"> Hun</label>
+                    <label><input type="radio" name="q60" value="b"> Hazar</label>
+                    <label><input type="radio" name="q60" value="c"> Avar</label>
+                    <label><input type="radio" name="q60" value="d"> Ogur</label>
+                </div>
+
+                <!-- Ünite 7: Hazar Kağanlığı -->
+                <h2>Ünite 7: Hazar Kağanlığı</h2>
+                <div class="question">
+                    <p>61. Hazar kelimesinin anlamı aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q61" value="a"> Serbest dolaşan, bir yere bağlı olmayan</label>
+                    <label><input type="radio" name="q61" value="b"> Savaşçı</label>
+                    <label><input type="radio" name="q61" value="c"> Tüccar</label>
+                    <label><input type="radio" name="q61" value="d"> Göçebe</label>
+                </div>
+                <div class="question">
+                    <p>62. Tanrı Dağları ile İli Irmağı bölgesinde oturan Sabarlar, batı yönünde ilerleyerek hangi Türk boyunu yerlerinden çıkarmıştır?</p>
+                    <label><input type="radio" name="q62" value="a"> Hunlar</label>
+                    <label><input type="radio" name="q62" value="b"> Oğurlar</label>
+                    <label><input type="radio" name="q62" value="c"> Bulgarlar</label>
+                    <label><input type="radio" name="q62" value="d"> Avarlar</label>
+                </div>
+                <div class="question">
+                    <p>63. Hazar topraklarından geçen nehirlerden hangisi yoktur?</p>
+                    <label><input type="radio" name="q63" value="a"> Özi</label>
+                    <label><input type="radio" name="q63" value="b"> Ten</label>
+                    <label><input type="radio" name="q63" value="c"> Seyhun</label>
+                    <label><input type="radio" name="q63" value="d"> Kama</label>
+                </div>
+                <div class="question">
+                    <p>64. Hazarlara karşı savaşarak ülkesini korumak için Daryal Geçidi’nde istihkâmlar inşa ettiren hükümdar hangisidir?</p>
+                    <label><input type="radio" name="q64" value="a"> Mirvan (Mervan)</label>
+                    <label><input type="radio" name="q64" value="b"> Anuşirvan</label>
+                    <label><input type="radio" name="q64" value="c"> Justinianos</label>
+                    <label><input type="radio" name="q64" value="d"> Kubrat</label>
+                </div>
+                <div class="question">
+                    <p>65. Hazarlarla savaşarak Derbend’i yaptıran Sasani hükümdarı hangisidir?</p>
+                    <label><input type="radio" name="q65" value="a"> Mirvan</label>
+                    <label><input type="radio" name="q65" value="b"> Anuşirvan</label>
+                    <label><input type="radio" name="q65" value="c"> Hüsrev</label>
+                    <label><input type="radio" name="q65" value="d"> Yezdigerd</label>
+                </div>
+                <div class="question">
+                    <p>66. Arap-Hazar mücadelesi hangi coğrafyada gerçekleşmiştir?</p>
+                    <label><input type="radio" name="q66" value="a"> Anadolu</label>
+                    <label><input type="radio" name="q66" value="b"> Kafkaslar</label>
+                    <label><input type="radio" name="q66" value="c"> Mezopotamya</label>
+                    <label><input type="radio" name="q66" value="d"> Balkanlar</label>
+                </div>
+                <div class="question">
+                    <p>67. Hazarlar ile İslâm orduları komutanı Mervan arasındaki mücadele ile ilgili bilgilerden hangisi yanlıştır?</p>
+                    <label><input type="radio" name="q67" value="a"> Mervan, Hazar kağanının barış isteği ile gönderdiği elçiyi oyaladı.</label>
+                    <label><input type="radio" name="q67" value="b"> Hazarlar aldıkları yenilgi sonucu kerhen İslâmiyet’i kabul ettiler.</label>
+                    <label><input type="radio" name="q67" value="c"> Mervan bu galibiyetten bir yıl sonra Hazarlarla yeniden savaşa girdi.</label>
+                    <label><input type="radio" name="q67" value="d"> Hazarlar bu yenilgiyle 10.000 kayıp verdiler.</label>
+                </div>
+                <div class="question">
+                    <p>68. Hazarların dini hoşgörüye sahip olmaları tarihte nasıl adlandırılmıştır?</p>
+                    <label><input type="radio" name="q68" value="a"> Hazar Barışı</label>
+                    <label><input type="radio" name="q68" value="b"> Hazar Birliği</label>
+                    <label><input type="radio" name="q68" value="c"> Hazar Anlaşması</label>
+                    <label><input type="radio" name="q68" value="d"> Hazar Düzeni</label>
+                </div>
+                <div class="question">
+                    <p>69. Harezim’den gelen ve Hazar ülkesinin hâkim sınıfı arasında yer alan Müslüman askerlere ne denir?</p>
+                    <label><input type="radio" name="q69" value="a"> Erissiye</label>
+                    <label><input type="radio" name="q69" value="b"> Alpler</label>
+                    <label><input type="radio" name="q69" value="c"> Bahadırlar</label>
+                    <label><input type="radio" name="q69" value="d"> Tarkanlar</label>
+                </div>
+                <div class="question">
+                    <p>70. Hazarlar ile Müslümanlar arasında 799’dan sonra Güney Kafkasya’da meydana gelen savaşların asıl sebebi nedir?</p>
+                    <label><input type="radio" name="q70" value="a"> Müslüman idareciler arasındaki anlaşmazlıklar ve Hazarların dâhil edilmesi</label>
+                    <label><input type="radio" name="q70" value="b"> Hazarların toprak talepleri</label>
+                    <label><input type="radio" name="q70" value="c"> Ticaret yolları üzerindeki rekabet</label>
+                    <label><input type="radio" name="q70" value="d"> Dini çatışmalar</label>
+                </div>
+
+                <button type="button" onclick="submitTest()">Testi Gönder</button>
+            </form>
+        </div>
+
+        <!-- Sonuç Ekranı -->
+        <div class="result" id="result">
+            <h2>Sonuçlar</h2>
+            <p id="score"></p>
+            <div class="result-details" id="resultDetails"></div>
+            <button onclick="restart()">Yeni Test</button>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "a", q2: "b", q3: "b", q4: "d", q5: "b", q6: "c", q7: "c", q8: "c", q9: "b", q10: "a",
+            q11: "b", q12: "c", q13: "c", q14: "b", q15: "b", q16: "b", q17: "a", q18: "c", q19: "c", q20: "b",
+            q21: "c", q22: "a", q23: "c", q24: "a", q25: "b", q26: "a", q27: "a", q28: "a", q29: "b", q30: "b",
+            q31: "a", q32: "b", q33: "a", q34: "a", q35: "c", q36: "c", q37: "a", q38: "b", q39: "b", q40: "c",
+            q41: "b", q42: "b", q43: "d", q44: "b", q45: "b", q46: "b", q47: "b", q48: "c", q49: "a", q50: "b",
+            q51: "a", q52: "b", q53: "b", q54: "c", q55: "c", q56: "a", q57: "b", q58: "a", q59: "c", q60: "b",
+            q61: "a", q62: "b", q63: "c", q64: "a", q65: "b", q66: "b", q67: "c", q68: "a", q69: "a", q70: "a"
+        };
+
+        const unitRanges = [
+            { name: "Ünite 1: İskitler ve Hunlardan Önce Doğu Avrupa’nın Sakinleri", start: 1, end: 10 },
+            { name: "Ünite 2: Hun Kağanlığı’nın Yükselişi, Bleda ve Attila Dönemleri", start: 11, end: 20 },
+            { name: "Ünite 3: Ogurlar, Sabarlar ve Avarlar", start: 21, end: 30 },
+            { name: "Ünite 4: Avar Kağanlığı’nın Yıkılışı ve Bulgarların Kökeni", start: 31, end: 40 },
+            { name: "Ünite 5: Büyük Bulgar Kağanlığı ve Tuna Bulgar Kağanlığı", start: 41, end: 50 },
+            { name: "Ünite 6: İtil Bulgar Hanlığı ve Moğol İstilası", start: 51, end: 60 },
+            { name: "Ünite 7: Hazar Kağanlığı", start: 61, end: 70 }
+        ];
+
+        let timeLeft = 1800; // 30 dakika (saniye cinsinden)
+        let timerInterval;
+        let answeredQuestions = 0;
+
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            if (username && password) {
+                document.getElementById("loginForm").classList.remove("active");
+                document.getElementById("testForm").classList.add("active");
+                startTimer();
+                updateProgress();
+            } else {
+                alert("Lütfen kullanıcı adı ve şifreyi doldurun!");
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById("timer").textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const totalQuestions = 70;
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById("progress").style.width = `${progress}%`;
+        }
+
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener("change", () => {
+                const questionName = input.name;
+                if (!document.querySelectorAll(`input[name="${questionName}"]:checked`).length > 1) {
+                    answeredQuestions++;
+                    updateProgress();
+                }
+            });
+        });
+
+        function submitTest() {
+            clearInterval(timerInterval);
+            const form = document.getElementById("quizForm");
+            const userAnswers = {};
+            for (let i = 1; i <= 70; i++) {
+                userAnswers[`q${i}`] = form.elements[`q${i}`]?.value || "Cevaplanmadı";
+            }
+
+            let totalScore = 0;
+            let details = "";
+            const unitStats = unitRanges.map(unit => ({
+                name: unit.name,
+                correct: 0,
+                incorrect: 0
+            }));
+
+            for (let i = 1; i <= 70; i++) {
+                const q = `q${i}`;
+                const questionText = document.querySelector(`input[name="q${i}"]`).closest(".question").querySelector("p").textContent;
+                const userAnswer = userAnswers[q];
+                const correctAnswer = correctAnswers[q];
+                const correctText = document.querySelector(`input[name="q${i}"][value="${correctAnswer}"]`).nextSibling.textContent.trim();
+
+                let unitIndex = unitRanges.findIndex(unit => i >= unit.start && i <= unit.end);
+                if (userAnswer === correctAnswer) {
+                    totalScore++;
+                    unitStats[unitIndex].correct++;
+                    details += `<p class="correct">Soru ${i}: ${questionText}<br>` +
+                              `Sizin cevabınız: ${userAnswer} (${document.querySelector(`input[name="q${i}"][value="${userAnswer}"]`).nextSibling.textContent.trim()})<br>` +
+                              `Doğru cevap: ${correctAnswer} (${correctText})<br>` +
+                              `Sonuç: Doğru</p>`;
+                } else {
+                    unitStats[unitIndex].incorrect++;
+                    details += `<p class="incorrect">Soru ${i}: ${questionText}<br>` +
+                              `Sizin cevabınız: ${userAnswer} (${userAnswer === "Cevaplanmadı" ? "Cevaplanmadı" : document.querySelector(`input[name="q${i}"][value="${userAnswer}"]`).nextSibling.textContent.trim()})<br>` +
+                              `Doğru cevap: ${correctAnswer} (${correctText})<br>` +
+                              `Sonuç: Yanlış</p>`;
+                }
+            }
+
+            let statsHtml = "<h3>Ünite Bazında Performans</h3>";
+            unitStats.forEach(unit => {
+                const total = unit.correct + unit.incorrect;
+                const percentage = total > 0 ? Math.round((unit.correct / total) * 100) : 0;
+                statsHtml += `<div class="unit-stats">` +
+                             `<strong>${unit.name}</strong><br>` +
+                             `Doğru: ${unit.correct}, Yanlış: ${unit.incorrect}, Başarı: %${percentage}` +
+                             `</div>`;
+            });
+
+            document.getElementById("testForm").classList.remove("active");
+            document.getElementById("result").classList.add("active");
+            document.getElementById("score").innerHTML = `Toplam Puanınız: ${totalScore} / 70 (%${Math.round((totalScore / 70) * 100)})`;
+            document.getElementById("resultDetails").innerHTML = details + statsHtml;
+        }
+
+        function restart() {
+            document.getElementById("result").classList.remove("active");
+            document.getElementById("loginForm").classList.add("active");
+            document.getElementById("quizForm").reset();
+            timeLeft = 1800;
+            answeredQuestions = 0;
+            document.getElementById("progress").style.width = "0%";
+        }
+    </script>
+</body>
+</html>

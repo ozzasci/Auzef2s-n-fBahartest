@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antik Yunan Sosyal Tarihi Vize Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .welcome, .test-form, .result {
+            display: none;
+        }
+        .welcome.active, .test-form.active, .result.active {
+            display: block;
+        }
+        .welcome {
+            text-align: center;
+            padding: 20px;
+        }
+        .welcome button {
+            background-color: #3498db;
+        }
+        .welcome button:hover {
+            background-color: #2980b9;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .question label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #timer {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #e74c3c;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            height: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .result {
+            padding: 20px;
+        }
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .result-table th, .result-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .result-table th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .correct {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .unit-stats {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #ecf0f1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .unit-stats h3 {
+            margin: 0 0 10px;
+            color: #34495e;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            button {
+                padding: 10px;
+            }
+            .result-table th, .result-table td {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Antik Yunan Sosyal Tarihi Vize Testi</h1>
+
+        <!-- Karşılama Ekranı -->
+        <div class="welcome active" id="welcome">
+            <p>Hoş geldiniz! Bu test, Antik Yunan Sosyal Tarihi vize sorularından oluşmaktadır. Toplam 60 soru, 30 dakikalık süre. Başarılar!</p>
+            <button onclick="startTest()">Teste Başla</button>
+        </div>
+
+        <!-- Test Formu -->
+        <div class="test-form" id="testForm">
+            <div id="timer">Kalan Süre: 30:00</div>
+            <div class="progress-bar"><div class="progress" id="progress"></div></div>
+            <form id="quizForm">
+                <h2>Antik Yunan Sosyal Tarihi Soruları</h2>
+                <div class="question">
+                    <p>1. Antik Yunan hakkında "epikleros" terimi kadının hangi statüsünü tanımlamaktadır?</p>
+                    <label><input type="radio" name="q1" value="a"> Evli kadınların miras hakkı</label>
+                    <label><input type="radio" name="q1" value="b"> Erkek mirasçı bırakmadan ölmüş babaların kızları</label>
+                    <label><input type="radio" name="q1" value="c"> Boşanmış kadınlar</label>
+                    <label><input type="radio" name="q1" value="d"> Köle statüsündeki kadınlar</label>
+                    <label><input type="radio" name="q1" value="e"> Siyasi haklara sahip kadınlar</label>
+                </div>
+                <div class="question">
+                    <p>2. Yunanistan’da tarımın yağışa bağlı gelişmesinin sebebi aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q2" value="a"> Büyük nehirlerin yokluğu</label>
+                    <label><input type="radio" name="q2" value="b"> Yer altı sularının azlığı</label>
+                    <label><input type="radio" name="q2" value="c"> Sulama teknolojisinin az gelişmişliği</label>
+                    <label><input type="radio" name="q2" value="d"> Kuraklık</label>
+                    <label><input type="radio" name="q2" value="e"> Teraslamanın yapılmaması</label>
+                </div>
+                <div class="question">
+                    <p>3. Prostas ve pastas tipi ev planları sırasıyla aşağıdaki şehirlerden hangilerinde en iyi şekilde izlenir?</p>
+                    <label><input type="radio" name="q3" value="a"> Delos-Argos</label>
+                    <label><input type="radio" name="q3" value="b"> Pella-Syrakusai</label>
+                    <label><input type="radio" name="q3" value="c"> Atina-Sparta</label>
+                    <label><input type="radio" name="q3" value="d"> Priene-Olynthos</label>
+                    <label><input type="radio" name="q3" value="e"> Ephesos-Iasos</label>
+                </div>
+                <div class="question">
+                    <p>4. Yunanlar ilk koloniyi nerede ve hangi tarihte kurmuşlardır?</p>
+                    <label><input type="radio" name="q4" value="a"> Pithekoussai, M.Ö. 750</label>
+                    <label><input type="radio" name="q4" value="b"> Sybaris, M.Ö. 708</label>
+                    <label><input type="radio" name="q4" value="c"> Syrakusai, M.Ö. 732</label>
+                    <label><input type="radio" name="q4" value="d"> Kroton, M.Ö. 810</label>
+                    <label><input type="radio" name="q4" value="e"> Gela, M.Ö. 745</label>
+                </div>
+                <div class="question">
+                    <p>5. Aşağıdaki Hellenistik başkentlerden hangisi Atina modelini örnek alarak kurulmuştur?</p>
+                    <label><input type="radio" name="q5" value="a"> İskenderiye</label>
+                    <label><input type="radio" name="q5" value="b"> Lysimakheia</label>
+                    <label><input type="radio" name="q5" value="c"> Antiokheia</label>
+                    <label><input type="radio" name="q5" value="d"> Pergamon</label>
+                    <label><input type="radio" name="q5" value="e"> Pella</label>
+                </div>
+                <div class="question">
+                    <p>6. Antik Yunan evleri erkeklere özgü hangi faaliyetin ana mekanıdır?</p>
+                    <label><input type="radio" name="q6" value="a"> Ticaret</label>
+                    <label><input type="radio" name="q6" value="b"> Eğitim</label>
+                    <label><input type="radio" name="q6" value="c"> Felsefi tartışmalar</label>
+                    <label><input type="radio" name="q6" value="d"> Siyaset</label>
+                    <label><input type="radio" name="q6" value="e"> Şölen (symposion)</label>
+                </div>
+                <div class="question">
+                    <p>7. Troia’nın düşüş tarihini M.Ö. 1183 kabul ederek bir tarihleme sistemi geliştiren kişi aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q7" value="a"> Aratos</label>
+                    <label><input type="radio" name="q7" value="b"> Eratosthenes</label>
+                    <label><input type="radio" name="q7" value="c"> Menon</label>
+                    <label><input type="radio" name="q7" value="d"> Ptolemaios</label>
+                    <label><input type="radio" name="q7" value="e"> Arkhimedes</label>
+                </div>
+                <div class="question">
+                    <p>8. Atina ve Attika’da nüfus ve yerleşim artışı hangi yüzyılda belirginleşir?</p>
+                    <label><input type="radio" name="q8" value="a"> M.Ö. 6. yüzyıl</label>
+                    <label><input type="radio" name="q8" value="b"> M.Ö. 9. yüzyılın son çeyreği</label>
+                    <label><input type="radio" name="q8" value="c"> M.Ö. 8. yüzyıl</label>
+                    <label><input type="radio" name="q8" value="d"> M.Ö. 7. yüzyıl</label>
+                    <label><input type="radio" name="q8" value="e"> M.Ö. 10. yüzyılın ilk yarısı</label>
+                </div>
+                <div class="question">
+                    <p>9. Aşağıdakilerden hangisi Atina’da eşcinselliği yasakladığı söylenen siyasi figürdür?</p>
+                    <label><input type="radio" name="q9" value="a"> Solon</label>
+                    <label><input type="radio" name="q9" value="b"> Perikles</label>
+                    <label><input type="radio" name="q9" value="c"> Kleisthenes</label>
+                    <label><input type="radio" name="q9" value="d"> Drakon</label>
+                    <label><input type="radio" name="q9" value="e"> Themistokles</label>
+                </div>
+                <div class="question">
+                    <p>10. Platon’a göre arkadaşlık, acı, haz gibi duyguları akıllarıyla kavrayamayacak yaştaki ilkokul öğrencileri bunun için hangi eğitimden geçmelidir?</p>
+                    <label><input type="radio" name="q10" value="a"> Matematik</label>
+                    <label><input type="radio" name="q10" value="b"> Müzik</label>
+                    <label><input type="radio" name="q10" value="c"> Spor</label>
+                    <label><input type="radio" name="q10" value="d"> Felsefe</label>
+                    <label><input type="radio" name="q10" value="e"> Yazı</label>
+                </div>
+                <div class="question">
+                    <p>11. Yunan toplumunda kabul edilebilir eşcinsel ilişkinin özelliklerinden biri aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q11" value="a"> Erkeklerin evli olmaması</label>
+                    <label><input type="radio" name="q11" value="b"> Olgun erkekler arasında olması</label>
+                    <label><input type="radio" name="q11" value="c"> Kölelerle gerçekleşmesi</label>
+                    <label><input type="radio" name="q11" value="d"> Partnerlerin eşit sosyal konumda olması</label>
+                    <label><input type="radio" name="q11" value="e"> Cinsel ilişkinin yaşanması</label>
+                </div>
+                <div class="question">
+                    <p>12. "Syssitia" aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q12" value="a"> Atina’da halk meclisi toplantıları</label>
+                    <label><input type="radio" name="q12" value="b"> Sparta’da erkeklerin katıldığı komünal yemekler</label>
+                    <label><input type="radio" name="q12" value="c"> Kadınların dini ritüelleri</label>
+                    <label><input type="radio" name="q12" value="d"> Hellenistik dönemde pazar yerleri</label>
+                    <label><input type="radio" name="q12" value="e"> Gençlerin eğitim kampı</label>
+                </div>
+                <div class="question">
+                    <p>13. Aşağıdakilerden hangisi bir Yunan şehir devletine atfedilen özelliklerden biri değildir?</p>
+                    <label><input type="radio" name="q13" value="a"> Sikke basmak</label>
+                    <label><input type="radio" name="q13" value="b"> Proksenos atamak</label>
+                    <label><input type="radio" name="q13" value="c"> Savaşa ve barışa karar vermek</label>
+                    <label><input type="radio" name="q13" value="d"> Demokratik kurumlarla yönetilmek</label>
+                    <label><input type="radio" name="q13" value="e"> Panhellen oyunlarında şampiyon çıkarmak</label>
+                </div>
+                <div class="question">
+                    <p>14. Tiranlığın yükselişinin nedenlerinden biri olarak aşağıdakilerden hangisi sayılamaz?</p>
+                    <label><input type="radio" name="q14" value="a"> Hoplit ordusunun kuruluşu</label>
+                    <label><input type="radio" name="q14" value="b"> Aristokrasinin zayıflaması</label>
+                    <label><input type="radio" name="q14" value="c"> Ekonomik eşitsizlik</label>
+                    <label><input type="radio" name="q14" value="d"> Ticaretin artması</label>
+                    <label><input type="radio" name="q14" value="e"> Halk desteğinin kazanılması</label>
+                </div>
+                <div class="question">
+                    <p>15. Homoerotik imgeler hangi tarihlerden itibaren Antik Yunan dünyasında artar?</p>
+                    <label><input type="radio" name="q15" value="a"> M.Ö. 10. yüzyıl</label>
+                    <label><input type="radio" name="q15" value="b"> M.Ö. 7. yüzyıl sonu - 6. yüzyıl başı</label>
+                    <label><input type="radio" name="q15" value="c"> M.Ö. 6. yüzyıl ikinci yarısı</label>
+                    <label><input type="radio" name="q15" value="d"> M.Ö. 8. yüzyıl sonu - 7. yüzyıl başı</label>
+                    <label><input type="radio" name="q15" value="e"> M.Ö. 6. yüzyıl ilk çeyreği</label>
+                </div>
+                <div class="question">
+                    <p>16. Aşağıdakilerden hangisi Atina’nın kuruluş tarihini belgeleyen yazıtlarından biridir?</p>
+                    <label><input type="radio" name="q16" value="a"> Parion Mermeri</label>
+                    <label><input type="radio" name="q16" value="b"> Delos Kararnamesi</label>
+                    <label><input type="radio" name="q16" value="c"> Akropolis inşaat yazıtları</label>
+                    <label><input type="radio" name="q16" value="d"> Stoa Poikile yazıtı</label>
+                    <label><input type="radio" name="q16" value="e"> Diocletianus Kararnamesi</label>
+                </div>
+                <div class="question">
+                    <p>17. Aşağıdaki antik filozoflardan hangisi kızların erkeklerle aynı eğitimi almasını savunmuştur?</p>
+                    <label><input type="radio" name="q17" value="a"> Aristoteles</label>
+                    <label><input type="radio" name="q17" value="b"> Platon</label>
+                    <label><input type="radio" name="q17" value="c"> Protagoras</label>
+                    <label><input type="radio" name="q17" value="d"> Speusippos</label>
+                    <label><input type="radio" name="q17" value="e"> Lukianos</label>
+                </div>
+                <div class="question">
+                    <p>18. Aşağıdakilerden hangisi Attika bölgesinde kazılmış önemli çiftliklerden biridir?</p>
+                    <label><input type="radio" name="q18" value="a"> Sounion Evi</label>
+                    <label><input type="radio" name="q18" value="b"> Eleusis</label>
+                    <label><input type="radio" name="q18" value="c"> Delos Evi</label>
+                    <label><input type="radio" name="q18" value="d"> Olbia</label>
+                    <label><input type="radio" name="q18" value="e"> Vari Evi</label>
+                </div>
+                <div class="question">
+                    <p>19. Hiçbir erkeğin kadınlar hakkında olumlu ya da olumsuz konuşmamasını erdem saymış Atinalı siyasetçi aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q19" value="a"> Solon</label>
+                    <label><input type="radio" name="q19" value="b"> Perikles</label>
+                    <label><input type="radio" name="q19" value="c"> Kleisthenes</label>
+                    <label><input type="radio" name="q19" value="d"> Drakon</label>
+                    <label><input type="radio" name="q19" value="e"> Themistokles</label>
+                </div>
+                <div class="question">
+                    <p>20. Yıl Atina’da hangi ayda başlıyordu?</p>
+                    <label><input type="radio" name="q20" value="a"> Hekatombaion</label>
+                    <label><input type="radio" name="q20" value="b"> Mounikhion</label>
+                    <label><input type="radio" name="q20" value="c"> Skirophorion</label>
+                    <label><input type="radio" name="q20" value="d"> Gamelion</label>
+                    <label><input type="radio" name="q20" value="e"> Pyanopsion</label>
+                </div>
+                <div class="question">
+                    <p>21. "Polis"in "siyasi anlamda erkek vatandaşlardan meydana gelen topluluk" tanımını aşağıdaki hangi terim verir?</p>
+                    <label><input type="radio" name="q21" value="a"> Kyrios</label>
+                    <label><input type="radio" name="q21" value="b"> Idiotes</label>
+                    <label><input type="radio" name="q21" value="c"> Prytaneis</label>
+                    <label><input type="radio" name="q21" value="d"> Domoioi</label>
+                    <label><input type="radio" name="q21" value="e"> Politai</label>
+                </div>
+                <div class="question">
+                    <p>22. Antik Yunanistan’da uzun mesafeli yaylacılığı engelleyen başlıca sorun aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q22" value="a"> Elverişli otlakların azlığı</label>
+                    <label><input type="radio" name="q22" value="b"> Haydutluk faaliyetleri</label>
+                    <label><input type="radio" name="q22" value="c"> Şehirlerin bölgeciliği ve sınırlı egemenlik alanları</label>
+                    <label><input type="radio" name="q22" value="d"> Kuraklık</label>
+                    <label><input type="radio" name="q22" value="e"> Büyük şehirlerin hegemonyası</label>
+                </div>
+                <div class="question">
+                    <p>23. Yunan şehirleri hangi tarih aralığı içinde kurulmuşlardır?</p>
+                    <label><input type="radio" name="q23" value="a"> M.Ö. 750-200</label>
+                    <label><input type="radio" name="q23" value="b"> M.Ö. 900-200</label>
+                    <label><input type="radio" name="q23" value="c"> M.Ö. 750-100</label>
+                    <label><input type="radio" name="q23" value="d"> M.Ö. 800-300</label>
+                    <label><input type="radio" name="q23" value="e"> M.Ö. 850-500</label>
+                </div>
+                <div class="question">
+                    <p>24. Antik Yunan toplumunda evlilik kurumuyla ilgili aşağıdakilerden hangisi doğrudur?</p>
+                    <label><input type="radio" name="q24" value="a"> Asimetrik bir ilişkiydi</label>
+                    <label><input type="radio" name="q24" value="b"> Boşandıktan sonra drahoma kadına geri veriliyordu</label>
+                    <label><input type="radio" name="q24" value="c"> Kızlar ortalama 14, erkekler 30 yaşlarında evlenebilmekteydi</label>
+                    <label><input type="radio" name="q24" value="d"> Resmi evliliğe "molkheia" olarak adlandırılıyordu</label>
+                    <label><input type="radio" name="q24" value="e"> Çocukken ayarlanmış evlilikler bir gelenekti</label>
+                </div>
+                <div class="question">
+                    <p>25. Aşağıdakilerden hangisi Sofistler için söylenemez?</p>
+                    <label><input type="radio" name="q25" value="a"> Resmi tedrisatı geliştirmişlerdi</label>
+                    <label><input type="radio" name="q25" value="b"> Felsefe eğitimine ağırlık vermişlerdi</label>
+                    <label><input type="radio" name="q25" value="c"> Yunan eğitim sisteminin özgürlükçü yüzünü temsil ediyorlardı</label>
+                    <label><input type="radio" name="q25" value="d"> Siyasi erdemi (arete) öğrettiklerini öne sürüyorlardı</label>
+                    <label><input type="radio" name="q25" value="e"> Başlıca öğretim yöntemleri diyalektikti</label>
+                </div>
+                <div class="question">
+                    <p>26. Yunanlıların tarım aletleri hangi malzemeden yapılmıştır?</p>
+                    <label><input type="radio" name="q26" value="a"> Tunç</label>
+                    <label><input type="radio" name="q26" value="b"> Demir ve ahşap</label>
+                    <label><input type="radio" name="q26" value="c"> Demir</label>
+                    <label><input type="radio" name="q26" value="d"> Bakır</label>
+                    <label><input type="radio" name="q26" value="e"> Obsidyen ve ahşap</label>
+                </div>
+                <div class="question">
+                    <p>27. Homeros destanlarında zamanın geçişi neye dayandırılır?</p>
+                    <label><input type="radio" name="q27" value="a"> Hiçbiri</label>
+                    <label><input type="radio" name="q27" value="b"> Ay</label>
+                    <label><input type="radio" name="q27" value="c"> Evrenin doğuşu</label>
+                    <label><input type="radio" name="q27" value="d"> Güneş</label>
+                    <label><input type="radio" name="q27" value="e"> Tarımsal faaliyetler</label>
+                </div>
+                <div class="question">
+                    <p>28. Yunan dünyasının en önemli tarım ürünü (tahıl) aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q28" value="a"> Kepek</label>
+                    <label><input type="radio" name="q28" value="b"> Zeytin</label>
+                    <label><input type="radio" name="q28" value="c"> Pirinç</label>
+                    <label><input type="radio" name="q28" value="d"> Buğday</label>
+                    <label><input type="radio" name="q28" value="e"> Arpa</label>
+                </div>
+                <div class="question">
+                    <p>29. Eski Yunancada "zanaat" aşağıdaki kelimelerden hangisiyle karşılanmaktadır?</p>
+                    <label><input type="radio" name="q29" value="a"> Iatros</label>
+                    <label><input type="radio" name="q29" value="b"> Polites</label>
+                    <label><input type="radio" name="q29" value="c"> Demiurgos</label>
+                    <label><input type="radio" name="q29" value="d"> Tekhne</label>
+                    <label><input type="radio" name="q29" value="e"> Mantis</label>
+                </div>
+                <div class="question">
+                    <p>30. Aşağıdaki filozoflardan hangisi eğitim üzerine eser vermiştir?</p>
+                    <label><input type="radio" name="q30" value="a"> Kratippos</label>
+                    <label><input type="radio" name="q30" value="b"> Kleanthes</label>
+                    <label><input type="radio" name="q30" value="c"> Ksenokrates</label>
+                    <label><input type="radio" name="q30" value="d"> Andronikos</label>
+                    <label><input type="radio" name="q30" value="e"> Antisthenes</label>
+                </div>
+                <div class="question">
+                    <p>31. Yunanlıların sulu tarıma ilgi duyması nasıl olmuştur?</p>
+                    <label><input type="radio" name="q31" value="a"> Makedonya krallığından alınan teknolojiyle</label>
+                    <label><input type="radio" name="q31" value="b"> Babil sulama tekniklerinin batıya geçmesiyle</label>
+                    <label><input type="radio" name="q31" value="c"> M.Ö. 4. yüzyılda Mısır’da kalıcı olarak yerleştikleri zaman</label>
+                    <label><input type="radio" name="q31" value="d"> Batı Anadolu’daki şehirlerden</label>
+                    <label><input type="radio" name="q31" value="e"> M.Ö. 4. yüzyılda Pers İmparatorluğundan</label>
+                </div>
+                <div class="question">
+                    <p>32. Antik Yunan kültürünün sınırlarını belirleyen başlıca ağaç hangisidir?</p>
+                    <label><input type="radio" name="q32" value="a"> Limon</label>
+                    <label><input type="radio" name="q32" value="b"> Defne</label>
+                    <label><input type="radio" name="q32" value="c"> Meşe</label>
+                    <label><input type="radio" name="q32" value="d"> Portakal</label>
+                    <label><input type="radio" name="q32" value="e"> Zeytin</label>
+                </div>
+                <div class="question">
+                    <p>33. Batıdaki ilk Yunan kolonisi Pithekoussai’ın kuruluş tarihi nedir?</p>
+                    <label><input type="radio" name="q33" value="a"> M.Ö. 700</label>
+                    <label><input type="radio" name="q33" value="b"> M.Ö. 800</label>
+                    <label><input type="radio" name="q33" value="c"> M.Ö. 550</label>
+                    <label><input type="radio" name="q33" value="d"> M.Ö. 675</label>
+                    <label><input type="radio" name="q33" value="e"> M.Ö. 750</label>
+                </div>
+                <div class="question">
+                    <p>34. Yunan bir erkeğin toplumda üç kadınla ilişki sürdürebileceğini söyleyen hatip kimdir?</p>
+                    <label><input type="radio" name="q34" value="a"> Sokrates</label>
+                    <label><input type="radio" name="q34" value="b"> Isokrates</label>
+                    <label><input type="radio" name="q34" value="c"> Isaios</label>
+                    <label><input type="radio" name="q34" value="d"> Demosthenes</label>
+                    <label><input type="radio" name="q34" value="e"> Aiskhines</label>
+                </div>
+                <div class="question">
+                    <p>35. Aşağıdakilerden hangisi Yunan evlerinde erkeklere ayrılmış mekânların arkeolojik ölçütlerinden biri değildir?</p>
+                    <label><input type="radio" name="q35" value="a"> Pis su boruları</label>
+                    <label><input type="radio" name="q35" value="b"> Kandil buluntuları</label>
+                    <label><input type="radio" name="q35" value="c"> Sekiler için yükseltilmiş kenarlar</label>
+                    <label><input type="radio" name="q35" value="d"> Merkez dışı kapı açıklıkları</label>
+                    <label><input type="radio" name="q35" value="e"> Kaliteli süslemeler</label>
+                </div>
+                <div class="question">
+                    <p>36. Hippodamos’tan önce aşağıdaki şehirlerden hangisinde ızgara planı görülür?</p>
+                    <label><input type="radio" name="q36" value="a"> Byzantion</label>
+                    <label><input type="radio" name="q36" value="b"> Pella</label>
+                    <label><input type="radio" name="q36" value="c"> Thebai</label>
+                    <label><input type="radio" name="q36" value="d"> Sparta</label>
+                    <label><input type="radio" name="q36" value="e"> Akragas</label>
+                </div>
+                <div class="question">
+                    <p>37. Polis’in aşağıdaki anlamlarından hangisi yanlış tanımlanmıştır?</p>
+                    <label><input type="radio" name="q37" value="a"> Asty - kasaba</label>
+                    <label><input type="radio" name="q37" value="b"> Deme - polis ve hinterlandı</label>
+                    <label><input type="radio" name="q37" value="c"> Kolonia - siyasi topluluk</label>
+                    <label><input type="radio" name="q37" value="d"> Ekklesia demos - siyasi kurumlar</label>
+                    <label><input type="radio" name="q37" value="e"> Akropolis - yerleşme</label>
+                </div>
+                <div class="question">
+                    <p>38. Polis kelimesi hangi dil ailesine aittir?</p>
+                    <label><input type="radio" name="q38" value="a"> Semitik</label>
+                    <label><input type="radio" name="q38" value="b"> Luvi</label>
+                    <label><input type="radio" name="q38" value="c"> Hint-Avrupa</label>
+                    <label><input type="radio" name="q38" value="d"> Kartvelyen</label>
+                    <label><input type="radio" name="q38" value="e"> Kelt</label>
+                </div>
+                <div class="question">
+                    <p>39. Sparta eğitim sisteminin benimsenmesini isteyen Atinalı filozof kimdir?</p>
+                    <label><input type="radio" name="q39" value="a"> Platon</label>
+                    <label><input type="radio" name="q39" value="b"> Ksenophon</label>
+                    <label><input type="radio" name="q39" value="c"> Aristoteles</label>
+                    <label><input type="radio" name="q39" value="d"> Diogenes</label>
+                    <label><input type="radio" name="q39" value="e"> Antisthenes</label>
+                </div>
+                <div class="question">
+                    <p>40. Eretria ve Thasos’ta yaygın görülen ev planı aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q40" value="a"> Prostas</label>
+                    <label><input type="radio" name="q40" value="b"> Andron</label>
+                    <label><input type="radio" name="q40" value="c"> Portiko</label>
+                    <label><input type="radio" name="q40" value="d"> Atrium</label>
+                    <label><input type="radio" name="q40" value="e"> Pastas</label>
+                </div>
+                <div class="question">
+                    <p>41. Geometrik Dönem’in (M.Ö. 900-700) Yunanistan’da antik şehircilik açısından önemi nedir?</p>
+                    <label><input type="radio" name="q41" value="a"> Şehir surlarının standart hale gelmesi</label>
+                    <label><input type="radio" name="q41" value="b"> Izgara planının uygulanışı</label>
+                    <label><input type="radio" name="q41" value="c"> Tiranların yükselişi</label>
+                    <label><input type="radio" name="q41" value="d"> Demokrasinin doğuşu</label>
+                    <label><input type="radio" name="q41" value="e"> Şehir devletlerinin ortaya çıkışı</label>
+                </div>
+                <div class="question">
+                    <p>42. Yunanistan’ın bilinen en büyük sulama projesi nerede gerçekleştirilmiştir?</p>
+                    <label><input type="radio" name="q42" value="a"> Boiotia</label>
+                    <label><input type="radio" name="q42" value="b"> Atina</label>
+                    <label><input type="radio" name="q42" value="c"> Eretria</label>
+                    <label><input type="radio" name="q42" value="d"> Megara</label>
+                    <label><input type="radio" name="q42" value="e"> Miletos</label>
+                </div>
+                <div class="question">
+                    <p>43. Aşağıdakilerden hangisi Yunanistan’a gelen kalayın muhtemel kaynaklarından biridir?</p>
+                    <label><input type="radio" name="q43" value="a"> Kolkhis</label>
+                    <label><input type="radio" name="q43" value="b"> Kuzey Suriye</label>
+                    <label><input type="radio" name="q43" value="c"> Toroslar</label>
+                    <label><input type="radio" name="q43" value="d"> Batı Karadeniz</label>
+                    <label><input type="radio" name="q43" value="e"> Kıbrıs</label>
+                </div>
+                <div class="question">
+                    <p>44. Eski Yunan eğitiminin M.Ö. 5. yüzyılın ikinci yarısında gözlem ve pratikten ayrılmasının sebebi aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q44" value="a"> Aristoteles’in öğretileri</label>
+                    <label><input type="radio" name="q44" value="b"> Sofistlerin ortaya çıkışı</label>
+                    <label><input type="radio" name="q44" value="c"> Sokrates ve Platon’un çalışmaları</label>
+                    <label><input type="radio" name="q44" value="d"> Yakındoğu kültürel etkisi</label>
+                    <label><input type="radio" name="q44" value="e"> Demokrasinin kurumlaşması</label>
+                </div>
+                <div class="question">
+                    <p>45. Antik Yunan evleri hakkında en kapsamlı arkeolojik veri sağlayan yerleşim aşağıdakilerden hangisidir?</p>
+                    <label><input type="radio" name="q45" value="a"> Olynthos</label>
+                    <label><input type="radio" name="q45" value="b"> Korinthos</label>
+                    <label><input type="radio" name="q45" value="c"> Olbia</label>
+                    <label><input type="radio" name="q45" value="d"> Miletos</label>
+                    <label><input type="radio" name="q45" value="e"> Atina</label>
+                </div>
+                <div class="question">
+                    <p>46. Antik Yunan’da eşcinselliğin gençlerin eğitimi ve ergenlik ritüellerindeki rolü hangi dönemde belirginleşir?</p>
+                    <label><input type="radio" name="q46" value="a"> M.Ö. 8. yüzyıl</label>
+                    <label><input type="radio" name="q46" value="b"> M.Ö. 9. yüzyılın son çeyreği</label>
+                    <label><input type="radio" name="q46" value="c"> M.Ö. 7. yüzyıl</label>
+                    <label><input type="radio" name="q46" value="d"> M.Ö. 10. yüzyılın ilk yarısı</label>
+                    <label><input type="radio" name="q46" value="e"> M.Ö. 6. yüzyıl</label>
+                </div>
+                <div class="question">
+                    <p>47. Aşağıdakilerden hangisi Antik Yunan’da eşcinselliği ele alan bir şair değildir?</p>
+                    <label><input type="radio" name="q47" value="a"> Alkman</label>
+                    <label><input type="radio" name="q47" value="b"> Bakkhylides</label>
+                    <label><input type="radio" name="q47" value="c"> Hesiodos</label>
+                    <label><input type="radio" name="q47" value="d"> Kallimakhos</label>
+                    <label><input type="radio" name="q47" value="e"> Pindaros</label>
+                </div>
+                <div class="question">
+                    <p>48. Antik Yunan’da tarımın gelişimi hangi coğrafi özellikle sınırlanmıştır?</p>
+                    <label><input type="radio" name="q48" value="a"> Dağlık arazi yapısı</label>
+                    <label><input type="radio" name="q48" value="b"> Büyük nehirlerin varlığı</label>
+                    <label><input type="radio" name="q48" value="c"> Geniş ovalar</label>
+                    <label><input type="radio" name="q48" value="d"> Verimli topraklar</label>
+                    <label><input type="radio" name="q48" value="e"> Deniz kıyıları</label>
+                </div>
+                <div class="question">
+                    <p>49. Antik Yunan’da şehir planlamasında ızgara sisteminin öncüsü kimdir?</p>
+                    <label><input type="radio" name="q49" value="a"> Hippodamos</label>
+                    <label><input type="radio" name="q49" value="b"> Perikles</label>
+                    <label><input type="radio" name="q49" value="c"> Solon</label>
+                    <label><input type="radio" name="q49" value="d"> Kleisthenes</label>
+                    <label><input type="radio" name="q49" value="e"> Themistokles</label>
+                </div>
+                <div class="question">
+                    <p>50. Antik Yunan’da kadınların sosyal statüsü genelde nasıl tanımlanır?</p>
+                    <label><input type="radio" name="q50" value="a"> Erkeklerle eşit haklara sahipti</label>
+                    <label><input type="radio" name="q50" value="b"> Siyasi haklardan yoksundu</label>
+                    <label><input type="radio" name="q50" value="c"> Kölelerle aynı statüdeydi</label>
+                    <label><input type="radio" name="q50" value="d"> Sadece dini görevlerde yer alırdı</label>
+                    <label><input type="radio" name="q50" value="e"> Ekonomik bağımsızlığa sahipti</label>
+                </div>
+                <div class="question">
+                    <p>51. Antik Yunan’da "demos" terimi neyi ifade eder?</p>
+                    <label><input type="radio" name="q51" value="a"> Aristokrat sınıf</label>
+                    <label><input type="radio" name="q51" value="b"> Halk topluluğu</label>
+                    <label><input type="radio" name="q51" value="c"> Köleler</label>
+                    <label><input type="radio" name="q51" value="d"> Yabancı tüccarlar</label>
+                    <label><input type="radio" name="q51" value="e"> Askeri birlik</label>
+                </div>
+                <div class="question">
+                    <p>52. Antik Yunan’da evlerin genellikle açık avlulu olmasının sebebi nedir?</p>
+                    <label><input type="radio" name="q52" value="a"> Savunma ihtiyacı</label>
+                    <label><input type="radio" name="q52" value="b"> İklim koşulları</label>
+                    <label><input type="radio" name="q52" value="c"> Dini ritüeller</label>
+                    <label><input type="radio" name="q52" value="d"> Ticaret faaliyetleri</label>
+                    <label><input type="radio" name="q52" value="e"> Toplumsal statü göstergesi</label>
+                </div>
+                <div class="question">
+                    <p>53. Antik Yunan’da ziraat hangi mevsimde yoğunlaşırdı?</p>
+                    <label><input type="radio" name="q53" value="a"> İlkbahar</label>
+                    <label><input type="radio" name="q53" value="b"> Yaz</label>
+                    <label><input type="radio" name="q53" value="c"> Sonbahar</label>
+                    <label><input type="radio" name="q53" value="d"> Kış</label>
+                    <label><input type="radio" name="q53" value="e"> Yıl boyunca</label>
+                </div>
+                <div class="question">
+                    <p>54. Antik Yunan’da "kyrios" terimi neyi ifade eder?</p>
+                    <label><input type="radio" name="q54" value="a"> Köle sahibi</label>
+                    <label><input type="radio" name="q54" value="b"> Aile reisi</label>
+                    <label><input type="radio" name="q54" value="c"> Şehir yöneticisi</label>
+                    <label><input type="radio" name="q54" value="d"> Askeri lider</label>
+                    <label><input type="radio" name="q54" value="e"> Tüccar</label>
+                </div>
+                <div class="question">
+                    <p>55. Antik Yunan’da tiyatronun kökeni hangi ritüellere dayanır?</p>
+                    <label><input type="radio" name="q55" value="a"> Dionysos kültü</label>
+                    <label><input type="radio" name="q55" value="b"> Zeus tapımı</label>
+                    <label><input type="radio" name="q55" value="c"> Athena festivalleri</label>
+                    <label><input type="radio" name="q55" value="d"> Poseidon onurlandırmaları</label>
+                    <label><input type="radio" name="q55" value="e"> Apollon törenleri</label>
+                </div>
+                <div class="question">
+                    <p>56. Antik Yunan’da "oikos" neyi temsil eder?</p>
+                    <label><input type="radio" name="q56" value="a"> Şehir devleti</label>
+                    <label><input type="radio" name="q56" value="b"> Aile ve ev halkı</label>
+                    <label><input type="radio" name="q56" value="c"> Tapınak</label>
+                    <label><input type="radio" name="q56" value="d"> Ordu</label>
+                    <label><input type="radio" name="q56" value="e"> Ticaret merkezi</label>
+                </div>
+                <div class="question">
+                    <p>57. Antik Yunan’da kolonileşme hangi temel ihtiyaçtan doğmuştur?</p>
+                    <label><input type="radio" name="q57" value="a"> Askeri güç artırma</label>
+                    <label><input type="radio" name="q57" value="b"> Toprak ve kaynak ihtiyacı</label>
+                    <label><input type="radio" name="q57" value="c"> Dini yayılma</label>
+                    <label><input type="radio" name="q57" value="d"> Siyasi birlik</label>
+                    <label><input type="radio" name="q57" value="e"> Kültürel etkileşim</label>
+                </div>
+                <div class="question">
+                    <p>58. Antik Yunan’da "agora" neyi ifade eder?</p>
+                    <label><input type="radio" name="q58" value="a"> Tapınak alanı</label>
+                    <label><input type="radio" name="q58" value="b"> Pazar yeri ve toplanma alanı</label>
+                    <label><input type="radio" name="q58" value="c"> Askeri kamp</label>
+                    <label><input type="radio" name="q58" value="d"> Eğitim merkezi</label>
+                    <label><input type="radio" name="q58" value="e"> Konut bölgesi</label>
+                </div>
+                <div class="question">
+                    <p>59. Antik Yunan’da hangi ürünün ticareti şehirlerin ekonomisinde önemliydi?</p>
+                    <label><input type="radio" name="q59" value="a"> Zeytinyağı</label>
+                    <label><input type="radio" name="q59" value="b"> Pamuk</label>
+                    <label><input type="radio" name="q59" value="c"> İpek</label>
+                    <label><input type="radio" name="q59" value="d"> Baharat</label>
+                    <label><input type="radio" name="q59" value="e"> Tuz</label>
+                </div>
+                <div class="question">
+                    <p>60. Antik Yunan’da "hoplit" kimdir?</p>
+                    <label><input type="radio" name="q60" value="a"> Köle asker</label>
+                    <label><input type="radio" name="q60" value="b"> Zırhlı piyade savaşçısı</label>
+                    <label><input type="radio" name="q60" value="c"> Denizci</label>
+                    <label><input type="radio" name="q60" value="d"> Tüccar</label>
+                    <label><input type="radio" name="q60" value="e"> Rahip</label>
+                </div>
+                <button type="button" onclick="submitTest()">Testi Gönder</button>
+            </form>
+        </div>
+
+        <!-- Sonuç Ekranı -->
+        <div class="result" id="result">
+            <h2>Test Sonuçları</h2>
+            <p id="score" style="text-align: center; font-size: 24px; color: #2c3e50;"></p>
+            <table class="result-table">
+                <thead>
+                    <tr>
+                        <th>Soru No</th>
+                        <th>Soru</th>
+                        <th>Sizin Cevabınız</th>
+                        <th>Doğru Cevap</th>
+                        <th>Sonuç</th>
+                    </tr>
+                </thead>
+                <tbody id="resultDetails"></tbody>
+            </table>
+            <div class="stats-container" id="statsContainer"></div>
+            <button onclick="restart()">Testi Yeniden Başlat</button>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "b", q2: "a", q3: "d", q4: "a", q5: "a", q6: "e", q7: "b", q8: "c", q9: "a", q10: "b",
+            q11: "d", q12: "b", q13: "d", q14: "a", q15: "d", q16: "a", q17: "b", q18: "e", q19: "b", q20: "a",
+            q21: "e", q22: "c", q23: "a", q24: "d", q25: "b", q26: "b", q27: "a", q28: "d", q29: "d", q30: "c",
+            q31: "b", q32: "e", q33: "e", q34: "c", q35: "e", q36: "e", q37: "c", q38: "c", q39: "b", q40: "e",
+            q41: "e", q42: "a", q43: "a", q44: "b", q45: "a", q46: "a", q47: "c", q48: "a", q49: "a", q50: "b",
+            q51: "b", q52: "b", q53: "c", q54: "b", q55: "a", q56: "b", q57: "b", q58: "b", q59: "a", q60: "b"
+        };
+
+        const unitRanges = [
+            { name: "Antik Yunan Toplumu ve Kurumları", start: 1, end: 30 },
+            { name: "Antik Yunan Ekonomisi ve Kültürü", start: 31, end: 60 }
+        ];
+
+        let timeLeft = 1800; // 30 dakika (saniye cinsinden)
+        let timerInterval;
+        let answeredQuestions = 0;
+
+        function startTest() {
+            document.getElementById("welcome").classList.remove("active");
+            document.getElementById("testForm").classList.add("active");
+            startTimer();
+            updateProgress();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById("timer").textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const totalQuestions = 60;
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById("progress").style.width = `${progress}%`;
+        }
+
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener("change", () => {
+                const questionName = input.name;
+                if (!document.querySelectorAll(`input[name="${questionName}"]:checked`).length > 1) {
+                    answeredQuestions++;
+                    updateProgress();
+                }
+            });
+        });
+
+        function submitTest() {
+            clearInterval(timerInterval);
+            const form = document.getElementById("quizForm");
+            const userAnswers = {};
+            for (let i = 1; i <= 60; i++) {
+                userAnswers[`q${i}`] = form.elements[`q${i}`]?.value || "Cevaplanmadı";
+            }
+
+            let totalScore = 0;
+            let details = "";
+            const unitStats = unitRanges.map(unit => ({
+                name: unit.name,
+                correct: 0,
+                incorrect: 0
+            }));
+
+            for (let i = 1; i <= 60; i++) {
+                const q = `q${i}`;
+                const questionText = document.querySelector(`input[name="q${i}"]`).closest(".question").querySelector("p").textContent;
+                const userAnswer = userAnswers[q];
+                const correctAnswer = correctAnswers[q];
+                const correctText = document.querySelector(`input[name="q${i}"][value="${correctAnswer}"]`).nextSibling.textContent.trim();
+                const userText = userAnswer === "Cevaplanmadı" ? "Cevaplanmadı" : document.querySelector(`input[name="q${i}"][value="${userAnswer}"]`)?.nextSibling.textContent.trim() || "Cevaplanmadı";
+
+                let unitIndex = unitRanges.findIndex(unit => i >= unit.start && i <= unit.end);
+                if (userAnswer === correctAnswer) {
+                    totalScore++;
+                    unitStats[unitIndex].correct++;
+                    details += `<tr><td>${i}</td><td>${questionText}</td><td>${userText}</td><td>${correctText}</td><td class="correct">Doğru</td></tr>`;
+                } else {
+                    unitStats[unitIndex].incorrect++;
+                    details += `<tr><td>${i}</td><td>${questionText}</td><td>${userText}</td><td>${correctText}</td><td class="incorrect">Yanlış</td></tr>`;
+                }
+            }
+
+            let statsHtml = "";
+            unitStats.forEach(unit => {
+                const total = unit.correct + unit.incorrect;
+                const percentage = total > 0 ? Math.round((unit.correct / total) * 100) : 0;
+                statsHtml += `<div class="unit-stats">` +
+                             `<h3>${unit.name}</h3>` +
+                             `<p>Doğru: ${unit.correct}</p>` +
+                             `<p>Yanlış: ${unit.incorrect}</p>` +
+                             `<p>Başarı: %${percentage}</p>` +
+                             `</div>`;
+            });
+
+            document.getElementById("testForm").classList.remove("active");
+            document.getElementById("result").classList.add("active");
+            document.getElementById("score").innerHTML = `Toplam Puanınız: ${totalScore} / 60 (%${Math.round((totalScore / 60) * 100)})`;
+            document.getElementById("resultDetails").innerHTML = details;
+            document.getElementById("statsContainer").innerHTML = statsHtml;
+        }
+
+        function restart() {
+            document.getElementById("result").classList.remove("active");
+            document.getElementById("welcome").classList.add("active");
+            document.getElementById("quizForm").reset();
+            timeLeft = 1800;
+            answeredQuestions = 0;
+            document.getElementById("progress").style.width = "0%";
+        }
+    </script>
+</body>
+</html>
